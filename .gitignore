@@ -1,0 +1,53 @@
+# Data (too large for repo)
+data/raw/
+data/external/
+data/interim/
+data/processed/*.parquet
+*.xpt
+*.pkl
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+.npm/
+node_modules/
+
+# Logs
+outputs/logs/*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NLTK data
+nltk_data/
+
+# Large HTML (regenerable)
+outputs/dashboards/the_frequency_visual_v*.html
+outputs/dashboards/_g*.html
+outputs/dashboards/chart_*.html
+
+# Temp
+*.tmp
+*.bak
+
+# Large data files (reproducible via scripts)
+data/processed/frequencia_feature_matrix_v1.csv
+data/processed/*.csv
+
+# Dashboards non-PT (reproducible)
+outputs/dashboards/the_frequency_v4_en.html
+outputs/dashboards/the_frequency_v4_es.html
+outputs/dashboards/the_frequency_v4_de.html
+outputs/dashboards/the_frequency_v4_fr.html
+
+# Git architecture doc (internal)
+GIT_ARCHITECTURE.md
+MAPA_CARREIRA.md
+VALIDACAO_LINGUISTICA.md
+RELATORIO_PROCESSO_COMPLETO.md

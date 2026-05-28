@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+title: "The Frequency ML"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - given-names: Gabriel
+    family-names: Nascimento
+    email: gabrielviniciusnascimento345@gmail.com
+    affiliation: "Independent Researcher"
+repository-code: "https://github.com/gabrielviniciusnascimento/the_frequency_ml"
+url: "https://github.com/gabrielviniciusnascimento/the_frequency_ml"
+license: MIT
+version: "1.1.0"
+date-released: "2026-05-26"
+keywords:
+  - audiometry
+  - machine-learning
+  - hearing-loss
+  - hdbscan
+  - nhanes
+  - computational-audiology
+  - accessibility
+  - unsupervised-learning
+abstract: >
+  Data-driven audiometric phenotyping using HDBSCAN on NHANES data.
+  An unsupervised machine learning pipeline that discovers real patterns
+  of hearing loss in 26,583 people from the US National Health and
+  Nutrition Examination Survey, without imposing clinical labels. Motivated by the author's personal experience as a childhood cisplatin ototoxicity survivor.
+references:
+  - type: article
+    title: "Data-driven segmentation of audiometric phenotypes across a large clinical cohort"
+    authors:
+      - family-names: Parthasarathy
+        given-names: A.
+    journal: "Scientific Reports"
+    year: 2020
+    volume: 10
+    doi: "10.1038/s41598-020-63515-5"
+  - type: article
+    title: "The Oldenburg Hearing Health Record (OHHR)"
+    authors:
+      - family-names: Jafri
+        given-names: S.
+    journal: "Scientific Data"
+    year: 2025
+    volume: 12
+    doi: "10.1038/s41597-025-05884-y"
