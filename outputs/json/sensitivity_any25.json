@@ -1,0 +1,10 @@
+{
+  "analysis": "sensitivity_any25",
+  "n_with_any25": 7695,
+  "n_without_any25": 13433,
+  "ari_between": 0.8454,
+  "clusters_with_any25": 2,
+  "clusters_without_any25": 2,
+  "noise_with_any25": 585,
+  "noise_without_any25": 597
+}

@@ -1,0 +1,284 @@
+{
+  "script": "21_session5_rf_surrogate_v2.py",
+  "random_state": 42,
+  "n_samples": 7110,
+  "n_class0": 7098,
+  "n_class1": 12,
+  "class_weight": "balanced",
+  "n_estimators": 500,
+  "stratified_kfold": {
+    "n_splits": 5,
+    "mean_auc_roc": 1.0,
+    "mean_avg_precision": 1.0,
+    "per_fold": [
+      {
+        "fold": 0,
+        "auc": 1.0,
+        "avg_precision": 1.0,
+        "n_test": 1422,
+        "n_class1_test": 2
+      },
+      {
+        "fold": 1,
+        "auc": 1.0,
+        "avg_precision": 1.0,
+        "n_test": 1422,
+        "n_class1_test": 2
+      },
+      {
+        "fold": 2,
+        "auc": 1.0,
+        "avg_precision": 1.0,
+        "n_test": 1422,
+        "n_class1_test": 2
+      },
+      {
+        "fold": 3,
+        "auc": 1.0,
+        "avg_precision": 1.0,
+        "n_test": 1422,
+        "n_class1_test": 3
+      },
+      {
+        "fold": 4,
+        "auc": 1.0,
+        "avg_precision": 1.0,
+        "n_test": 1422,
+        "n_class1_test": 3
+      }
+    ]
+  },
+  "train_accuracy": 1.0,
+  "gini_importance_top14": [
+    {
+      "feature": "thr_R_1000",
+      "importance": 0.22478952788824869
+    },
+    {
+      "feature": "thr_R_500",
+      "importance": 0.2202930920773178
+    },
+    {
+      "feature": "thr_R_2000",
+      "importance": 0.14528320914749215
+    },
+    {
+      "feature": "thr_R_4000",
+      "importance": 0.117493644696314
+    },
+    {
+      "feature": "thr_R_3000",
+      "importance": 0.11743017394452805
+    },
+    {
+      "feature": "thr_R_6000",
+      "importance": 0.07107506946108229
+    },
+    {
+      "feature": "thr_R_8000",
+      "importance": 0.042650520807512235
+    },
+    {
+      "feature": "thr_L_6000",
+      "importance": 0.02015495310058988
+    },
+    {
+      "feature": "thr_L_8000",
+      "importance": 0.01733305643132876
+    },
+    {
+      "feature": "thr_L_4000",
+      "importance": 0.011396168342110142
+    },
+    {
+      "feature": "thr_L_3000",
+      "importance": 0.0050927356472235405
+    },
+    {
+      "feature": "thr_L_1000",
+      "importance": 0.0026302572804768535
+    },
+    {
+      "feature": "thr_L_2000",
+      "importance": 0.002573652955761544
+    },
+    {
+      "feature": "thr_L_500",
+      "importance": 0.0018039382200142327
+    }
+  ],
+  "permutation_importance_top14": [
+    {
+      "feature": "thr_R_4000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_500",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_3000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_4000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_1000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_1000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_6000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_3000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_2000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_R_8000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_6000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_500",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_8000",
+      "perm_mean": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "thr_L_2000",
+      "perm_mean": -0.0,
+      "perm_std": 0.0
+    }
+  ],
+  "top_split_features": [
+    {
+      "feature": "thr_R_500",
+      "split_count": 250,
+      "threshold_median_scaled": 3.1667,
+      "threshold_p25_scaled": 3.1667,
+      "threshold_p75_scaled": 3.5
+    },
+    {
+      "feature": "thr_R_1000",
+      "split_count": 236,
+      "threshold_median_scaled": 2.8333,
+      "threshold_p25_scaled": 2.8333,
+      "threshold_p75_scaled": 2.8333
+    },
+    {
+      "feature": "thr_R_4000",
+      "split_count": 193,
+      "threshold_median_scaled": 2.125,
+      "threshold_p25_scaled": 2.0,
+      "threshold_p75_scaled": 2.375
+    },
+    {
+      "feature": "thr_L_4000",
+      "split_count": 191,
+      "threshold_median_scaled": 0.1,
+      "threshold_p25_scaled": 0.1,
+      "threshold_p75_scaled": 0.7
+    },
+    {
+      "feature": "thr_L_6000",
+      "split_count": 191,
+      "threshold_median_scaled": 0.2,
+      "threshold_p25_scaled": -0.1,
+      "threshold_p75_scaled": 0.7
+    },
+    {
+      "feature": "thr_R_3000",
+      "split_count": 190,
+      "threshold_median_scaled": 2.125,
+      "threshold_p25_scaled": 2.125,
+      "threshold_p75_scaled": 2.375
+    },
+    {
+      "feature": "thr_L_500",
+      "split_count": 181,
+      "threshold_median_scaled": 1.1667,
+      "threshold_p25_scaled": 0.8333,
+      "threshold_p75_scaled": 1.1667
+    },
+    {
+      "feature": "thr_R_2000",
+      "split_count": 173,
+      "threshold_median_scaled": 2.5,
+      "threshold_p25_scaled": 2.5,
+      "threshold_p75_scaled": 2.8333
+    },
+    {
+      "feature": "thr_L_8000",
+      "split_count": 172,
+      "threshold_median_scaled": 0.0833,
+      "threshold_p25_scaled": -0.1667,
+      "threshold_p75_scaled": 0.25
+    },
+    {
+      "feature": "thr_L_1000",
+      "split_count": 163,
+      "threshold_median_scaled": 1.1667,
+      "threshold_p25_scaled": 0.8333,
+      "threshold_p75_scaled": 1.1667
+    },
+    {
+      "feature": "thr_L_3000",
+      "split_count": 158,
+      "threshold_median_scaled": 0.375,
+      "threshold_p25_scaled": 0.1875,
+      "threshold_p75_scaled": 0.625
+    },
+    {
+      "feature": "thr_R_6000",
+      "split_count": 142,
+      "threshold_median_scaled": 1.5789,
+      "threshold_p25_scaled": 1.4737,
+      "threshold_p75_scaled": 1.5789
+    },
+    {
+      "feature": "thr_L_2000",
+      "split_count": 142,
+      "threshold_median_scaled": 0.6667,
+      "threshold_p25_scaled": 0.5,
+      "threshold_p75_scaled": 1.1667
+    },
+    {
+      "feature": "thr_R_8000",
+      "split_count": 109,
+      "threshold_median_scaled": 1.0833,
+      "threshold_p25_scaled": 1.0833,
+      "threshold_p75_scaled": 1.3333
+    }
+  ],
+  "note": "Classes desbalanceadas (7098 vs 12). AUC/AP são métricas principais, não acurácia.",
+  "status": "EXECUTED — sem rótulo clínico"
+}

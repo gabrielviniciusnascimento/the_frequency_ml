@@ -1,0 +1,30 @@
+{
+  "script": "bootstrap_stability",
+  "n_bootstrap": 100,
+  "subsample_fraction": 0.8,
+  "n_total": 7695,
+  "n_subsample": 6156,
+  "elapsed_seconds": 34.4,
+  "reference_hdbscan": {
+    "n_clusters": 2,
+    "n_noise": 585,
+    "noise_fraction": 0.076
+  },
+  "bootstrap_stats": {
+    "ari_mean": 0.475251,
+    "ari_std": 0.403867,
+    "ari_median": 0.682993,
+    "ari_p05": -0.033514,
+    "ari_p25": 0.0,
+    "ari_p75": 0.833832,
+    "ari_p95": 0.915613,
+    "ari_min": -0.075671,
+    "ari_max": 0.928515,
+    "n_clusters_mean": 1.75,
+    "n_clusters_std": 0.77,
+    "noise_fraction_mean": 0.4181,
+    "noise_fraction_std": 0.4492
+  },
+  "interpretation": "FRACO — alguma consistência, mas sensível à subamostragem",
+  "status": "EXECUTED"
+}

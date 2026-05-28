@@ -1,0 +1,24 @@
+{
+  "analysis": "bootstrap_4d",
+  "pca_components": 4,
+  "pca_variance": 1.0,
+  "reference": {
+    "n_clusters": 256,
+    "n_noise": 2897,
+    "noise_fraction": 0.3765
+  },
+  "bootstrap": {
+    "ari_mean": 0.7353,
+    "ari_std": 0.0161,
+    "ari_median": 0.7355,
+    "ari_p05": 0.7101,
+    "ari_p95": 0.7611,
+    "runs_with_clusters": 100,
+    "pct_with_clusters": 1.0
+  },
+  "comparison_14d": {
+    "ari_median": 0.68,
+    "pct_with_clusters": 0.85
+  },
+  "note": "4D space (binaural mean of 500/1k/2k/4k Hz) is MORE stable than 14D. HDBSCAN finds micro-clusters in 4D (256) but they are highly reproducible."
+}

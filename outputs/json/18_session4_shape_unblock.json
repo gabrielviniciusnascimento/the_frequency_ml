@@ -1,0 +1,205 @@
+{
+  "script": "18_session4_shape_unblock.py",
+  "random_state": 42,
+  "filters": {
+    "age_range": [
+      20,
+      69
+    ],
+    "min_completeness": 10,
+    "any25_threshold_db": 25.0
+  },
+  "sizes": {
+    "original": 26583,
+    "after_filters": 7695,
+    "n_any25": 7695
+  },
+  "pca": {
+    "n_components": 10,
+    "variance_explained": 0.9561
+  },
+  "hdbscan": {
+    "min_cluster_size": 10,
+    "min_samples": 5,
+    "n_clusters": 2,
+    "n_noise": 585,
+    "noise_fraction": 0.076
+  },
+  "cluster_profiles": {
+    "-1": {
+      "n": 585,
+      "is_noise": "True",
+      "age_median": 57.0,
+      "age_mean": 53.5,
+      "pta_low_R_mean": 26.9,
+      "pta_low_L_mean": 27.9,
+      "pta_high_R_mean": 53.2,
+      "pta_high_L_mean": 56.0,
+      "hf_lf_contrast_R": 26.4,
+      "hf_lf_contrast_L": 28.2,
+      "tinnitus_rate": 0.2,
+      "cycle_distribution": {
+        "1999-2000": 88,
+        "2001-2002": 83,
+        "2003-2004": 106,
+        "2011-2012": 134,
+        "2015-2016": 174
+      }
+    },
+    "0": {
+      "n": 7098,
+      "is_noise": "False",
+      "age_median": 52.0,
+      "age_mean": 50.1,
+      "pta_low_R_mean": 14.5,
+      "pta_low_L_mean": 14.6,
+      "pta_high_R_mean": 29.1,
+      "pta_high_L_mean": 30.6,
+      "hf_lf_contrast_R": 14.6,
+      "hf_lf_contrast_L": 16.0,
+      "tinnitus_rate": 0.1134,
+      "cycle_distribution": {
+        "1999-2000": 861,
+        "2001-2002": 946,
+        "2003-2004": 892,
+        "2011-2012": 2098,
+        "2015-2016": 2301
+      }
+    },
+    "1": {
+      "n": 12,
+      "is_noise": "False",
+      "age_median": 46.5,
+      "age_mean": 45.5,
+      "pta_low_R_mean": 68.6,
+      "pta_low_L_mean": 11.2,
+      "pta_high_R_mean": 78.6,
+      "pta_high_L_mean": 15.8,
+      "hf_lf_contrast_R": 10.0,
+      "hf_lf_contrast_L": 4.6,
+      "tinnitus_rate": 0.3333,
+      "cycle_distribution": {
+        "2001-2002": 2,
+        "2003-2004": 2,
+        "2011-2012": 6,
+        "2015-2016": 2
+      }
+    }
+  },
+  "centroids": {
+    "0": {
+      "centroid_pca": [
+        0.12182444334030151,
+        -0.006007099058479071,
+        -0.022996071726083755,
+        -0.005763257388025522,
+        -0.0008378868806175888,
+        -0.013475609011948109,
+        -0.004124254919588566,
+        0.00021670741261914372,
+        -4.929822534904815e-05,
+        0.004258329514414072
+      ],
+      "centroid_thresholds_db": {
+        "thr_R_500": -9.1,
+        "thr_R_1000": -9.32,
+        "thr_R_2000": -7.87,
+        "thr_R_3000": -2.02,
+        "thr_R_4000": 2.57,
+        "thr_R_6000": 9.64,
+        "thr_R_8000": 13.02,
+        "thr_L_500": -9.28,
+        "thr_L_1000": -9.45,
+        "thr_L_2000": -7.38,
+        "thr_L_3000": -0.59,
+        "thr_L_4000": 4.37,
+        "thr_L_6000": 11.55,
+        "thr_L_8000": 13.85
+      },
+      "n": 7098
+    },
+    "1": {
+      "centroid_pca": [
+        1.352713704109192,
+        8.310389518737793,
+        0.4151269495487213,
+        -0.3075104355812073,
+        -0.8453125953674316,
+        -0.01943659968674183,
+        0.5783871412277222,
+        -0.05934486165642738,
+        -0.01303234975785017,
+        -0.28133389353752136
+      ],
+      "centroid_thresholds_db": {
+        "thr_R_500": 23.08,
+        "thr_R_1000": 24.36,
+        "thr_R_2000": 25.8,
+        "thr_R_3000": 34.09,
+        "thr_R_4000": 32.03,
+        "thr_R_6000": 36.64,
+        "thr_R_8000": 34.74,
+        "thr_L_500": -31.32,
+        "thr_L_1000": -33.88,
+        "thr_L_2000": -33.16,
+        "thr_L_3000": -30.37,
+        "thr_L_4000": -29.94,
+        "thr_L_6000": -27.6,
+        "thr_L_8000": -24.48
+      },
+      "n": 12
+    }
+  },
+  "cross_cycle_validation": {
+    "method": "approximate_predict vs independent HDBSCAN",
+    "mean_ari": 0.267754,
+    "per_cycle": [
+      {
+        "cycle": "1999-2000",
+        "n_test": 949,
+        "ari": 0.0,
+        "n_pred_clusters": 1,
+        "n_ref_clusters": 0,
+        "n_pred_noise": 100,
+        "n_ref_noise": 949
+      },
+      {
+        "cycle": "2001-2002",
+        "n_test": 1031,
+        "ari": 0.0,
+        "n_pred_clusters": 2,
+        "n_ref_clusters": 0,
+        "n_pred_noise": 1024,
+        "n_ref_noise": 1031
+      },
+      {
+        "cycle": "2003-2004",
+        "n_test": 1000,
+        "ari": 1.0,
+        "n_pred_clusters": 0,
+        "n_ref_clusters": 0,
+        "n_pred_noise": 1000,
+        "n_ref_noise": 1000
+      },
+      {
+        "cycle": "2011-2012",
+        "n_test": 2238,
+        "ari": -0.022501,
+        "n_pred_clusters": 2,
+        "n_ref_clusters": 2,
+        "n_pred_noise": 96,
+        "n_ref_noise": 2203
+      },
+      {
+        "cycle": "2015-2016",
+        "n_test": 2477,
+        "ari": 0.36127,
+        "n_pred_clusters": 2,
+        "n_ref_clusters": 2,
+        "n_pred_noise": 2230,
+        "n_ref_noise": 2402
+      }
+    ]
+  },
+  "status": "EXECUTED — sem rótulo clínico"
+}

@@ -1,0 +1,13 @@
+{
+  "analysis": "ohhr_with_any25",
+  "ohhr_n_total": 581,
+  "ohhr_n_any25": 537,
+  "noise_fraction": 0.54,
+  "pta_srt_pearson_r": 0.018441,
+  "pta_srt_spearman_r": 0.007959,
+  "pta_srt_n": 537,
+  "comparison_without_any25": {
+    "noise_fraction": 0.53,
+    "pearson_r": 0.015
+  }
+}

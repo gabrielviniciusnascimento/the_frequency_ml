@@ -1,0 +1,60 @@
+{
+  "script": "23_session5_tinnitus_clusters.py",
+  "random_state": 42,
+  "tinnitus_column_used": "AUQ191",
+  "group_stats": {
+    "outliers": {
+      "cluster_id": -1,
+      "n_total": 585,
+      "n_tinnitus_nonmissing": 308,
+      "n_tinnitus_yes": 117,
+      "n_tinnitus_no": 191,
+      "tinnitus_rate": 0.3799
+    },
+    "cluster_0": {
+      "cluster_id": 0,
+      "n_total": 7098,
+      "n_tinnitus_nonmissing": 4397,
+      "n_tinnitus_yes": 805,
+      "n_tinnitus_no": 3592,
+      "tinnitus_rate": 0.1831
+    },
+    "cluster_1": {
+      "cluster_id": 1,
+      "n_total": 12,
+      "n_tinnitus_nonmissing": 8,
+      "n_tinnitus_yes": 4,
+      "n_tinnitus_no": 4,
+      "tinnitus_rate": 0.5
+    }
+  },
+  "chi_square_test": {
+    "chi2": 75.2829,
+    "p_value": 4.4929290653096244e-17,
+    "dof": 2,
+    "cramers_v": 0.1264,
+    "contingency_table": {
+      "0": {
+        "cluster_0": 3592,
+        "cluster_1": 4,
+        "outliers": 191
+      },
+      "1": {
+        "cluster_0": 805,
+        "cluster_1": 4,
+        "outliers": 117
+      }
+    },
+    "n_total": 4713
+  },
+  "correlation_tinnitus_pta_high": {
+    "x": "tinnitus_any",
+    "y": "pta_high_mean_binaural",
+    "n": 4713,
+    "pearson_r": 0.233128,
+    "pearson_p": 3.392505241788631e-59,
+    "spearman_r": 0.221645,
+    "spearman_p": 1.5353355709242163e-53
+  },
+  "status": "EXECUTED — sem rótulo clínico"
+}
