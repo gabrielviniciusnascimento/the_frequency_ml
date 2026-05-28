@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Frequency — Hear What Hearing Loss Sounds Like</title>
+<meta name="description" content="An interactive experience based on real data from 26,583 people. Discover how hearing loss changes the way the world sounds.">
+<meta property="og:title" content="The Frequency — Hear What Hearing Loss Sounds Like">
+<meta property="og:description" content="Based on real audiometric data from 26,583 people. Not a preset — a discovery.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#161616;--border:#222;--red:#e15759;--blue:#4e79a7;--gray:#888;--text:#e0e0e0;--dim:#aaa}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.6}
+.hero{text-align:center;padding:80px 20px 40px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0a0a0a 100%)}
+.hero h1{font-size:2.4em;font-weight:300;letter-spacing:-1px;margin-bottom:12px}
+.hero h1 span{color:var(--red);font-weight:700}
+.hero p{font-size:1.1em;color:var(--gray);max-width:600px;margin:0 auto;line-height:1.7}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.section{margin:40px 0}
+.section h2{font-size:1.4em;font-weight:600;margin-bottom:16px;color:var(--text)}
+.section h2 span{color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all 0.3s}
+.card:hover{border-color:var(--red);transform:translateY(-2px)}
+.card.active{border-color:var(--red);box-shadow:0 0 20px rgba(225,87,89,0.2)}
+.card h3{font-size:1em;margin-bottom:8px}
+.card .stat{font-size:2em;font-weight:700;color:var(--red)}
+.card .label{font-size:0.8em;color:var(--gray);margin-top:4px}
+.player{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:24px 0;text-align:center}
+.player .now-playing{font-size:0.9em;color:var(--gray);margin-bottom:12px}
+.player button{background:var(--red);color:white;border:none;padding:12px 32px;border-radius:8px;font-size:1em;cursor:pointer;font-weight:600;transition:all 0.2s}
+.player button:hover{background:#c94446;transform:scale(1.02)}
+.player button:disabled{background:#333;cursor:not-allowed;transform:none}
+.visualizer{width:100%;height:120px;background:#0a0a0a;border-radius:8px;margin:16px 0}
+.info{background:var(--card);border-left:3px solid var(--blue);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0;font-size:0.9em;line-height:1.7;color:var(--dim)}
+.info strong{color:var(--blue)}
+.info em{color:var(--red)}
+.disclaimer{background:#1a1a0a;border-left:3px solid #edc949;padding:16px 20px;border-radius:0 8px 8px 0;margin:24px 0;font-size:0.85em;line-height:1.7;color:#ccc}
+.disclaimer strong{color:#edc949}
+.share-section{text-align:center;margin:40px 0}
+.share-section button{background:var(--blue);color:white;border:none;padding:12px 24px;border-radius:8px;font-size:0.95em;cursor:pointer;margin:4px;font-weight:500;transition:all 0.2s}
+.share-section button:hover{opacity:0.85}
+.audiogram-viz{display:flex;align-items:flex-end;gap:4px;height:120px;margin:16px 0;justify-content:center}
+.freq-bar{display:flex;flex-direction:column;align-items:center;gap:4px}
+.freq-bar .bar{width:24px;background:var(--red);border-radius:4px 4px 0 0;transition:height 0.5s}
+.freq-bar .bar.left{background:var(--blue)}
+.freq-bar .label{font-size:0.65em;color:var(--gray)}
+.footer{text-align:center;padding:40px 20px;color:#444;font-size:0.8em;border-top:1px solid #1a1a1a}
+.hidden{display:none}
+@media(max-width:600px){
+  .hero h1{font-size:1.8em}
+  .cards{grid-template-columns:1fr}
+  .card{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>What does hearing loss <span>sound like</span>?</h1>
+<p>An interactive experience based on real data from 26,583 people. Not a preset — a discovery.</p>
+</div>
+
+<div class="container">
+
+<!-- STEP 1: Choose profile -->
+<div class="section">
+<h2>1. Choose a <span>profile</span></h2>
+<div class="cards">
+<div class="card" data-profile="0" onclick="selectProfile(0)">
+<h3>Cluster 0</h3>
+<div class="stat">7,098</div>
+<div class="label">people · mild-to-moderate sloping loss</div>
+</div>
+<div class="card" data-profile="1" onclick="selectProfile(1)">
+<h3>Cluster 1</h3>
+<div class="stat">12</div>
+<div class="label">people · severe right-ear asymmetry</div>
+</div>
+<div class="card" data-profile="2" onclick="selectProfile(2)">
+<h3>Outliers</h3>
+<div class="stat">585</div>
+<div class="label">people · atypical patterns</div>
+</div>
+</div>
+</div>
+
+<!-- STEP 2: See the audiogram -->
+<div class="section hidden" id="section-audiogram">
+<h2>2. See the <span>audiogram</span></h2>
+<p style="color:var(--gray);font-size:0.9em;margin-bottom:12px">This is the median hearing threshold for this profile. Higher = worse hearing at that frequency.</p>
+<div class="audiogram-viz" id="audiogram-viz"></div>
+<div class="info" id="profile-info"></div>
+</div>
+
+<!-- STEP 3: Listen -->
+<div class="section hidden" id="section-listen">
+<h2>3. <span>Listen</span></h2>
+<div class="player">
+<div class="now-playing" id="now-playing">Select a profile above to begin</div>
+<canvas class="visualizer" id="visualizer" width="800" height="120"></canvas>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+<button id="btn-voice" onclick="playSample('voice')" disabled>🗣️ Conversation</button>
+<button id="btn-music" onclick="playSample('music')" disabled>🎵 Music</button>
+<button id="btn-street" onclick="playSample('street')" disabled>🏙️ Street</button>
+<button id="btn-mic" onclick="toggleMic()" disabled>🎤 Your microphone</button>
+</div>
+<button id="btn-normal" onclick="toggleNormal()" style="margin-top:12px;background:#333;font-size:0.85em">🔊 Hear normal (for comparison)</button>
+</div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+<strong>⚠️ Important:</strong> This simulation shows only <strong>frequency sensitivity loss</strong> — the most basic aspect of hearing loss. Real hearing loss also includes <strong>distortion, tinnitus (internal noise), fatigue, and difficulty understanding speech in noise</strong> — none of which can be simulated with simple filters. This is an approximation based on real data, not a clinical tool.
+</div>
+
+<!-- SHARE -->
+<div class="share-section">
+<p style="color:var(--gray);margin-bottom:12px">Help others understand what hearing loss sounds like.</p>
+<button onclick="shareNative()">📱 Share</button>
+<button onclick="shareTwitter()">🐦 Twitter</button>
+<button onclick="shareWhatsApp()">💬 WhatsApp</button>
+<button onclick="shareLinkedIn()">💼 LinkedIn</button>
+</div>
+
+<!-- DATA SECTION -->
+<div class="section">
+<h2>About the <span>data</span></h2>
+<div class="info">
+<strong>Source:</strong> NHANES (National Health and Nutrition Examination Survey), CDC/NCHS. 26,583 audiograms from 9 cycles (1999–2020).<br><br>
+<strong>Method:</strong> HDBSCAN density-based clustering with row-centering (preserves curve shape, removes overall level). 14 pure-tone thresholds (500–8000 Hz, bilateral).<br><br>
+<strong>Validation:</strong> 100× bootstrap (ARI median 0.68). External validation on OHHR dataset (581 people, Germany).<br><br>
+<strong>Source code:</strong> <a href="https://github.com/gabrielviniciusnascimento/the_frequency_ml" style="color:var(--blue)">github.com/gabrielviniciusnascimento/the_frequency_ml</a> (MIT License)<br><br>
+<strong>Disclaimer:</strong> This tool is for educational and empathy purposes only. It does not diagnose hearing loss. If you have concerns about your hearing, consult an audiologist.
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+The Frequency ML · 26,583 audiograms · 25 scripts · 0 clinical labels in training<br>
+Built by Gabriel Vinicius Nascimento · childhood cancer survivor · cisplatin ototoxicity
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// PROFILES — centroid thresholds from NHANES clustering
+// ═══════════════════════════════════════════════════════════════════
+const PROFILES = {
+  0: {
+    name: "Mild-to-moderate sloping loss",
+    prevalence: "92.2% of people with hearing loss",
+    description: "The main body of hearing loss. Mild loss in low frequencies, gradually worsening in high frequencies. Bilateral, relatively symmetric.",
+    thresholds: {
+      R: [14.5, 14.5, 16.5, 24.1, 28.1, 31.2, 33.1],
+      L: [14.6, 14.6, 16.6, 25.6, 30.6, 32.1, 33.6]
+    }
+  },
+  1: {
+    name: "Severe unilateral right-ear asymmetry",
+    prevalence: "0.2% — only 12 people in 26,583",
+    description: "Severe loss in the right ear (70-90 dB), near-normal left ear (10-20 dB). Median asymmetry: 61 dB. Found across 4 NHANES cycles (2001-2016).",
+    thresholds: {
+      R: [68.6, 70.0, 72.5, 77.5, 85.0, 85.0, 87.5],
+      L: [10.0, 7.5, 12.5, 15.0, 22.5, 25.0, 32.5]
+    }
+  },
+  2: {
+    name: "Atypical patterns (outliers)",
+    prevalence: "7.6% — 585 people",
+    description: "Heterogeneous patterns that don't fit the main clusters. Moderate-severe loss with high variability. 38% report tinnitus (2× the main cluster).",
+    thresholds: {
+      R: [26.9, 26.9, 28.9, 43.2, 53.2, 56.0, 53.2],
+      L: [27.9, 27.9, 29.9, 46.0, 56.0, 58.7, 56.0]
+    }
+  }
+};
+
+const FREQS = [500, 1000, 2000, 3000, 4000, 6000, 8000];
+let currentProfile = null;
+let audioCtx = null;
+let isPlaying = false;
+let currentSource = null;
+let micStream = null;
+let analyser = null;
+let normalMode = false;
+
+// ═══════════════════════════════════════════════════════════════════
+// PROFILE SELECTION
+// ═══════════════════════════════════════════════════════════════════
+function selectProfile(id) {
+  currentProfile = id;
+  const p = PROFILES[id];
+
+  // Update cards
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[data-profile="${id}"]`).classList.add('active');
+
+  // Show sections
+  document.getElementById('section-audiogram').classList.remove('hidden');
+  document.getElementById('section-listen').classList.remove('hidden');
+
+  // Enable buttons
+  ['btn-voice','btn-music','btn-street','btn-mic'].forEach(b => {
+    document.getElementById(b).disabled = false;
+  });
+
+  // Draw audiogram
+  drawAudiogram(p.thresholds);
+
+  // Update info
+  document.getElementById('profile-info').innerHTML = `
+    <strong>${p.name}</strong> — ${p.prevalence}<br>
+    ${p.description}
+  `;
+
+  document.getElementById('now-playing').textContent = `Profile selected: ${p.name}`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// AUDIOGRAM VISUALIZATION
+// ═══════════════════════════════════════════════════════════════════
+function drawAudiogram(thresholds) {
+  const viz = document.getElementById('audiogram-viz');
+  viz.innerHTML = '';
+  const maxDb = 100;
+
+  FREQS.forEach((freq, i) => {
+    const rH = Math.min(thresholds.R[i] / maxDb, 1) * 100;
+    const lH = Math.min(thresholds.L[i] / maxDb, 1) * 100;
+
+    const bar = document.createElement('div');
+    bar.className = 'freq-bar';
+    bar.innerHTML = `
+      <div class="bar" style="height:${rH}px" title="Right: ${thresholds.R[i]} dB"></div>
+      <div class="bar left" style="height:${lH}px" title="Left: ${thresholds.L[i]} dB"></div>
+      <div class="label">${freq >= 1000 ? (freq/1000)+'k' : freq}</div>
+    `;
+    viz.appendChild(bar);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// AUDIO ENGINE
+// ═══════════════════════════════════════════════════════════════════
+function getAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    analyser.connect(audioCtx.destination);
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function applyHearingLoss(source, thresholds) {
+  const ctx = getAudioCtx();
+  const filters = [];
+
+  // Create band-pass filters for each frequency
+  const freqMap = [500, 1000, 2000, 3000, 4000, 6000, 8000];
+  const avgThresholds = freqMap.map((_, i) =>
+    (thresholds.R[i] + thresholds.L[i]) / 2
+  );
+
+  // Create a chain of peaking filters
+  let lastNode = source;
+  freqMap.forEach((freq, i) => {
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'peaking';
+    filter.frequency.value = freq;
+    filter.Q.value = 1.2;
+
+    // Calculate gain: normal hearing = 0 dB, loss = negative gain
+    // Scale: each dB of loss = -0.8 dB of gain (not 1:1 to avoid harsh)
+    const loss = avgThresholds[i];
+    const gain = -(loss * 0.8);
+    filter.gain.value = Math.max(gain, -40); // Cap at -40 dB
+
+    lastNode.connect(filter);
+    lastNode = filter;
+    filters.push(filter);
+  });
+
+  // Connect to analyser
+  lastNode.connect(analyser);
+
+  return { filters, lastNode };
+}
+
+function applyNormal(source) {
+  const ctx = getAudioCtx();
+  const gain = ctx.createGain();
+  gain.gain.value = 0.3; // Match perceived loudness
+  source.connect(gain);
+  gain.connect(analyser);
+  return gain;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SAMPLE GENERATION (Web Audio API — no external files)
+// ═══════════════════════════════════════════════════════════════════
+function generateVoiceSample() {
+  const ctx = getAudioCtx();
+  const duration = 8;
+  const sampleRate = ctx.sampleRate;
+  const length = sampleRate * duration;
+  const buffer = ctx.createBuffer(1, length, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  // Simulate voice-like signal: fundamental + harmonics + noise
+  const f0 = 150; // fundamental frequency
+  for (let i = 0; i < length; i++) {
+    const t = i / sampleRate;
+    const envelope = Math.sin(Math.PI * t / duration) * 0.5;
+    // Fundamental + harmonics (formant-like)
+    let sample = 0;
+    sample += 0.3 * Math.sin(2 * Math.PI * f0 * t);
+    sample += 0.2 * Math.sin(2 * Math.PI * f0 * 2 * t);
+    sample += 0.15 * Math.sin(2 * Math.PI * f0 * 3 * t);
+    sample += 0.1 * Math.sin(2 * Math.PI * f0 * 5 * t);
+    sample += 0.08 * Math.sin(2 * Math.PI * 2500 * t); // formant
+    sample += 0.05 * Math.sin(2 * Math.PI * 3500 * t); // formant
+    sample += 0.03 * (Math.random() * 2 - 1); // breathiness
+    data[i] = sample * envelope;
+  }
+  return buffer;
+}
+
+function generateMusicSample() {
+  const ctx = getAudioCtx();
+  const duration = 8;
+  const sampleRate = ctx.sampleRate;
+  const length = sampleRate * duration;
+  const buffer = ctx.createBuffer(1, length, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  // Simple chord: C major (C4, E4, G4) + harmonics
+  const freqs = [261.6, 329.6, 392.0, 523.3, 659.3, 784.0, 1047, 1319, 1568];
+  const amps = [0.15, 0.12, 0.10, 0.08, 0.06, 0.05, 0.03, 0.02, 0.015];
+
+  for (let i = 0; i < length; i++) {
+    const t = i / sampleRate;
+    const envelope = Math.sin(Math.PI * t / duration) * 0.6;
+    let sample = 0;
+    freqs.forEach((f, j) => {
+      sample += amps[j] * Math.sin(2 * Math.PI * f * t);
+    });
+    // Add some rhythm
+    const beat = Math.sin(2 * Math.PI * 2 * t) > 0 ? 1 : 0.7;
+    data[i] = sample * envelope * beat;
+  }
+  return buffer;
+}
+
+function generateStreetSample() {
+  const ctx = getAudioCtx();
+  const duration = 8;
+  const sampleRate = ctx.sampleRate;
+  const length = sampleRate * duration;
+  const buffer = ctx.createBuffer(1, length, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < length; i++) {
+    const t = i / sampleRate;
+    const envelope = Math.sin(Math.PI * t / duration);
+    // Low-frequency rumble + mid traffic + high hiss
+    let sample = 0;
+    sample += 0.2 * Math.sin(2 * Math.PI * 80 * t); // engine
+    sample += 0.15 * Math.sin(2 * Math.PI * 120 * t);
+    sample += 0.1 * Math.sin(2 * Math.PI * 250 * t);
+    sample += 0.08 * Math.sin(2 * Math.PI * 1000 * t); // traffic mid
+    sample += 0.05 * Math.sin(2 * Math.PI * 3000 * t);
+    sample += 0.03 * (Math.random() * 2 - 1); // broadband noise
+    data[i] = sample * envelope;
+  }
+  return buffer;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// PLAYBACK
+// ═══════════════════════════════════════════════════════════════════
+function stopCurrent() {
+  if (currentSource) {
+    try { currentSource.stop(); } catch(e) {}
+    currentSource = null;
+  }
+  isPlaying = false;
+}
+
+function playSample(type) {
+  if (currentProfile === null) return;
+  stopCurrent();
+
+  const ctx = getAudioCtx();
+  const p = PROFILES[currentProfile];
+
+  let buffer;
+  if (type === 'voice') buffer = generateVoiceSample();
+  else if (type === 'music') buffer = generateMusicSample();
+  else if (type === 'street') buffer = generateStreetSample();
+
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+  currentSource = source;
+
+  if (normalMode) {
+    applyNormal(source);
+  } else {
+    applyHearingLoss(source, p.thresholds);
+  }
+
+  source.start();
+  isPlaying = true;
+
+  const names = { voice: 'Conversation', music: 'Music', street: 'Street noise' };
+  document.getElementById('now-playing').textContent =
+    `${normalMode ? 'NORMAL' : p.name} — ${names[type]}`;
+
+  source.onended = () => {
+    isPlaying = false;
+    document.getElementById('now-playing').textContent = 'Ended. Click to play again.';
+  };
+
+  drawVisualizer();
+}
+
+function toggleMic() {
+  if (micStream) {
+    micStream.getTracks().forEach(t => t.stop());
+    micStream = null;
+    document.getElementById('btn-mic').textContent = '🎤 Your microphone';
+    return;
+  }
+
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    micStream = stream;
+    const ctx = getAudioCtx();
+    const source = ctx.createMediaStreamSource(stream);
+    currentSource = source;
+
+    if (currentProfile !== null && !normalMode) {
+      applyHearingLoss(source, PROFILES[currentProfile].thresholds);
+    } else {
+      source.connect(analyser);
+    }
+
+    document.getElementById('btn-mic').textContent = '🎤 Stop microphone';
+    document.getElementById('now-playing').textContent =
+      `${normalMode ? 'NORMAL' : PROFILES[currentProfile].name} — Live microphone`;
+    drawVisualizer();
+  }).catch(err => {
+    alert('Microphone access denied. Please allow microphone access in your browser settings.');
+  });
+}
+
+function toggleNormal() {
+  normalMode = !normalMode;
+  const btn = document.getElementById('btn-normal');
+  btn.textContent = normalMode ? '🔊 Hear with hearing loss' : '🔊 Hear normal (for comparison)';
+  btn.style.background = normalMode ? '#4e79a7' : '#333';
+
+  if (isPlaying && currentSource) {
+    // Restart with new mode
+    const type = document.getElementById('now-playing').textContent.includes('Conversation') ? 'voice' :
+                 document.getElementById('now-playing').textContent.includes('Music') ? 'music' : 'street';
+    playSample(type);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// VISUALIZER
+// ═══════════════════════════════════════════════════════════════════
+function drawVisualizer() {
+  const canvas = document.getElementById('visualizer');
+  const ctx = canvas.getContext('2d');
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  function draw() {
+    if (!isPlaying && !micStream) return;
+    requestAnimationFrame(draw);
+
+    analyser.getByteFrequencyData(dataArray);
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const barWidth = (canvas.width / bufferLength) * 2.5;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const barHeight = (dataArray[i] / 255) * canvas.height;
+      const hue = (dataArray[i] / 255) * 60; // red to yellow
+      ctx.fillStyle = `hsl(${hue}, 80%, 50%)`;
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+      x += barWidth + 1;
+      if (x > canvas.width) break;
+    }
+  }
+  draw();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SHARING
+// ═══════════════════════════════════════════════════════════════════
+const SHARE_TEXT = "I just experienced what hearing loss sounds like using real data from 26,583 people. It's not what I expected. Try it:";
+const SHARE_URL = window.location.href;
+
+function shareNative() {
+  if (navigator.share) {
+    navigator.share({ title: 'The Frequency', text: SHARE_TEXT, url: SHARE_URL });
+  } else {
+    copyLink();
+  }
+}
+
+function shareTwitter() {
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`);
+}
+
+function shareWhatsApp() {
+  window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL)}`);
+}
+
+function shareLinkedIn() {
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SHARE_URL)}`);
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(SHARE_URL).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+</body>
+</html>
