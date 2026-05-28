@@ -45,6 +45,7 @@ outputs/dashboards/the_frequency_v4_en.html
 outputs/dashboards/the_frequency_v4_es.html
 outputs/dashboards/the_frequency_v4_de.html
 outputs/dashboards/the_frequency_v4_fr.html
+outputs/dashboards/the_frequency_visual_*.html
 
 # Git architecture doc (internal)
 GIT_ARCHITECTURE.md
