@@ -141,7 +141,19 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 | Bootstrap ARI (condicional) | 0,60 | Quando clusters aparecem (85% das subamostras) |
 
 > **Nota:** Cross-cycle ARI e Bootstrap ARI são métricas diferentes. O primeiro mede consistência entre populações diferentes (ciclos NHANES); o segundo mede reprodutibilidade dentro da mesma população. Ambos são reportados para transparência.
-| RF AUC (cluster 0 vs 1) | 1,0 | Separação perfeita (classes desbalanceadas) |
+| RF AUC (cluster 0 vs 1) | 1,0 | Nota descritiva: separação trivialmente perfeita — rótulos derivam das mesmas features (PCA→HDBSCAN), por isso AUC≈1.0 é o resultado esperado e **não constitui evidência de validade** do cluster |
+
+> **Nota sobre AUC=1.0:** O RF surrogate prevê rótulos derivados das mesmas features de entrada, tornando o resultado circular. A métrica serve exclusivamente para ranquear quais frequências dominam a separação (ver §5.3), não para avaliar robustez ou generalização. Ver `outputs/json/rf_surrogate_cv.json` para validação cruzada e LOO.
+
+#### RF surrogate — validação cruzada (v1.1.5)
+
+| Métrica | Resultado | Interpretação |
+|---------|-----------|---------------|
+| AUC-ROC (CV k=5, médio) | 1,0000 ± 0,0000 | Circular — esperado (ver nota acima) |
+| PR-AUC (CV k=5, médio) | 1,0000 ± 0,0000 | Circular — esperado |
+| LOO recall (12 positivos) | 9/12 = 75% | 3 positivos com baixa probabilidade quando excluídos do treino (SEQN 12310, 66373, 88806) — sinal de heterogeneidade dentro do Cluster 1 |
+
+> **LOO (leave-one-out nos 12 positivos):** Treina sem cada positivo e verifica se ele é reconhecido. Recall=75% indica que 9/12 membros do Cluster 1 têm padrão suficientemente distinto para ser detectado mesmo fora do treino. Os 3 casos não reconhecidos (prob. < 0,50) podem representar casos limítrofes ou heterogeneidade geométrica dentro do cluster.
 
 ### 5.3 Caixa preta (RF surrogate)
 
@@ -244,7 +256,7 @@ ARI médio: 0,27. Ciclos mais recentes (maior N) têm ARI mais alto.
 5. `approximate_predict` com clusterer HDBSCAN do NHANES
 
 **Resultados:**
-- 53% do OHHR caiu como ruído (vs 37.6% no NHANES) — esperado, pois OHHR é mais velho e clínico
+- 53% do OHHR caiu como ruído (vs 7.6% no NHANES) — esperado, pois OHHR é mais velho e clínico
 - Correlação PTA × SRT: Pearson r=0.015, Spearman r=−0.007 (N=581)
 - Interpretação: audiograma não prevê fala em ruído ("Factor D")
 
@@ -277,56 +289,4 @@ ARI médio: 0,27. Ciclos mais recentes (maior N) têm ARI mais alto.
 1. Nenhum cluster recebeu rótulo clínico — é geometria, não diagnóstico.
 2. O caso pessoal do fundador não foi usado no treino.
 3. Prevalências não devem ser inferidas sem survey weights.
-4. O modelo não deve ser usado para decisões clínicas individuais.
-
----
-
-## 9. Uso Recomendado
-
-| ✅ Pode | ❌ Não deve |
-|---------|------------|
-| Pesquisa em padrões audiométricos | Diagnóstico clínico individual |
-| Simulação de empatia auditiva | Inferência prevalência sem pesos |
-| Geração de hipóteses clínicas | Substituir audiologista |
-| Validação de caso pessoal como ponto externo | Usar dados pessoais como base estatística |
-
----
-
-## 10. Reprodutibilidade
-
-### 10.1 Ambiente
-
-```
-Python 3.13+
-numpy, pandas, scipy, scikit-learn, hdbscan, joblib, plotly
-```
-
-### 10.2 Scripts
-
-27 scripts Python, numerados sequencialmente. Cada script tem checkpointing (não re-executa se output existe).
-
-### 10.3 Dados
-
-NHANES XPT públicos via CDC. URLs documentadas em `scripts/00_download_nhanes.py`.
-
-### 10.4 Outputs
-
-15+ arquivos JSON com resultados completos. Todos reprodutíveis a partir dos scripts.
-
----
-
-## 11. Referências
-
-- NHANES: https://wwwn.cdc.gov/nchs/nhanes/
-- HDBSCAN: McInnes, L., Healy, J. (2017). Accelerated Hierarchical Density Based Clustering. ICDM 2017.
-- ARI: Hubert, L., Arabie, P. (1985). Comparing partitions. Journal of Classification, 2(1), 193-218.
-
----
-
-## 12. Contato
-
-The Frequency — gabrielviniciusnascimento345@gmail.com
-
----
-
-*Model Card gerado em 2026-05-26. Nenhum rótulo clínico foi usado no treino.*
+4. O modelo não deve

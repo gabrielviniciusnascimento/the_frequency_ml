@@ -1,0 +1,133 @@
+{
+  "script": "21_session5_rf_surrogate_cv.py",
+  "random_state": 42,
+  "n_samples": 7110,
+  "n_class0": 7098,
+  "n_class1": 12,
+  "class_weight": "balanced",
+  "n_estimators": 500,
+  "note": "AUC-ROC=1.0 e PR-AUC=1.0 são esperados — rótulos derivam das mesmas features (PCA→HDBSCAN). Serve apenas para ranquear features dominantes, não como evidência de validade do cluster. LOO confirma quais positivos são reconhecíveis fora do treino.",
+  "stratified_kfold_k5": {
+    "mean_auc_roc": 1.0,
+    "mean_pr_auc": 1.0,
+    "std_auc_roc": 0.0,
+    "std_pr_auc": 0.0,
+    "per_fold": [
+      {
+        "fold": 0,
+        "auc_roc": 1.0,
+        "pr_auc": 1.0,
+        "n_test": 1422,
+        "n_pos_test": 2
+      },
+      {
+        "fold": 1,
+        "auc_roc": 1.0,
+        "pr_auc": 1.0,
+        "n_test": 1422,
+        "n_pos_test": 2
+      },
+      {
+        "fold": 2,
+        "auc_roc": 1.0,
+        "pr_auc": 1.0,
+        "n_test": 1422,
+        "n_pos_test": 2
+      },
+      {
+        "fold": 3,
+        "auc_roc": 1.0,
+        "pr_auc": 1.0,
+        "n_test": 1422,
+        "n_pos_test": 3
+      },
+      {
+        "fold": 4,
+        "auc_roc": 1.0,
+        "pr_auc": 1.0,
+        "n_test": 1422,
+        "n_pos_test": 3
+      }
+    ]
+  },
+  "leave_one_out_positives": {
+    "n_positives": 12,
+    "n_correctly_identified": 9,
+    "loo_recall": 0.75,
+    "per_sample": [
+      {
+        "seqn": 11373,
+        "prob_class1": 0.8067,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 12310,
+        "prob_class1": 0.49,
+        "predicted_class": 0,
+        "correctly_identified": false
+      },
+      {
+        "seqn": 26532,
+        "prob_class1": 0.9267,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 30574,
+        "prob_class1": 0.73,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 63701,
+        "prob_class1": 0.9467,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 64371,
+        "prob_class1": 0.9433,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 65402,
+        "prob_class1": 0.7467,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 66116,
+        "prob_class1": 0.7333,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 66373,
+        "prob_class1": 0.3633,
+        "predicted_class": 0,
+        "correctly_identified": false
+      },
+      {
+        "seqn": 68127,
+        "prob_class1": 0.6567,
+        "predicted_class": 1,
+        "correctly_identified": true
+      },
+      {
+        "seqn": 88806,
+        "prob_class1": 0.1767,
+        "predicted_class": 0,
+        "correctly_identified": false
+      },
+      {
+        "seqn": 93249,
+        "prob_class1": 0.9467,
+        "predicted_class": 1,
+        "correctly_identified": true
+      }
+    ]
+  },
+  "interpretation": "CV estratificada k=5: AUC-ROC=1.0000, PR-AUC=1.0000 (circular — ver nota). LOO: 9/12 positivos reconhecidos quando excluídos do treino."
+}
