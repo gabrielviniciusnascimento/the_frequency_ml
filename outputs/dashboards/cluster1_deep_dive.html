@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cluster 1 — The 12: Deep Dive</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'Inter',system-ui,sans-serif;line-height:1.6;padding:20px}
+.header{text-align:center;padding:40px 20px 20px}
+.header h1{font-size:2em;font-weight:300;margin-bottom:8px}
+.header h1 span{color:#e15759;font-weight:700}
+.header p{color:#888;font-size:0.95em;max-width:700px;margin:0 auto}
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:24px 0}
+.stat{background:#161616;border:1px solid #333;border-radius:10px;padding:12px 18px;text-align:center;min-width:100px}
+.stat .num{font-size:1.8em;font-weight:700;color:#e15759}
+.stat .lbl{font-size:0.75em;color:#888;margin-top:2px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px;max-width:1400px;margin:0 auto}
+.person-card{background:#161616;border:1px solid #222;border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.person-card:hover{border-color:#e15759}
+.card-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #222;background:#1a1a1a}
+.seqn{font-weight:700;font-size:1.1em;color:#e15759}
+.cycle{font-size:0.8em;color:#888;background:#222;padding:2px 8px;border-radius:4px}
+.card-body{padding:16px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:12px}
+.meta-item{text-align:center}
+.meta-label{display:block;font-size:0.65em;color:#666;text-transform:uppercase;letter-spacing:0.5px}
+.meta-value{font-size:1em;font-weight:600}
+.meta-value.red{color:#e15759}
+.meta-value.blue{color:#4e79a7}
+.badge{display:inline-block;font-size:0.7em;padding:1px 6px;border-radius:4px;margin-left:4px}
+.badge-red{background:#e1575933;color:#e15759}
+.audiogram-section{margin-top:12px;background:#0a0a0a;border-radius:8px;padding:12px}
+.ear-label{font-size:0.7em;color:#e15759;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.ear-label.left{color:#4e79a7}
+.bars-container{display:flex;gap:3px;align-items:flex-end;height:80px;margin-bottom:8px}
+.freq-col{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.bar-r{width:100%;background:#e15759;border-radius:2px 2px 0 0;min-height:1px}
+.bar-l{width:100%;background:#4e79a7;border-radius:2px 2px 0 0;min-height:1px}
+.freq-label{font-size:0.55em;color:#555}
+.section-title{max-width:1400px;margin:32px auto 12px;font-size:1.1em;color:#888}
+.section-title span{color:#e15759}
+.info-box{max-width:1400px;margin:0 auto 24px;background:#161616;border-left:3px solid #4e79a7;padding:16px 20px;border-radius:0 8px 8px 0;font-size:0.85em;line-height:1.7;color:#aaa}
+.info-box strong{color:#4e79a7}
+.info-box em{color:#e15759}
+.footer{text-align:center;padding:40px 20px;color:#444;font-size:0.75em;margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>Cluster 1 — <span>The 12</span></h1>
+<p>12 individuals identified by HDBSCAN as a distinct audiometric phenotype: severe unilateral right-ear asymmetry.
+Found across 4 NHANES cycles (2001–2016) without any clinical label in the training data.</p>
+</div>
+
+<div class="stats-row">
+<div class="stat"><div class="num">12</div><div class="lbl">People</div></div>
+<div class="stat"><div class="num">46.5</div><div class="lbl">Median age</div></div>
+<div class="stat"><div class="num">78.6</div><div class="lbl">PTA R (dB)</div></div>
+<div class="stat"><div class="num">15.8</div><div class="lbl">PTA L (dB)</div></div>
+<div class="stat"><div class="num">61.0</div><div class="lbl">Asymmetry (dB)</div></div>
+<div class="stat"><div class="num">50%</div><div class="lbl">Tinnitus</div></div>
+<div class="stat"><div class="num">4</div><div class="lbl">NHANES cycles</div></div>
+<div class="stat"><div class="num">0</div><div class="lbl">666 codes</div></div>
+</div>
+
+<div class="info-box">
+<strong>How to read the audiograms:</strong> Each card shows one person. The <em>red bars</em> are the right ear thresholds, <em>blue bars</em> are the left ear. Higher bars = worse hearing at that frequency. Normal hearing is below 25 dB (the bars would be very short). Notice how the right ear bars are tall (severe loss) while the left ear bars are short (near-normal).<br><br>
+<strong>Metadata decoded:</strong> Race/ethnicity codes from NHANES: 1=Mexican American, 2=Other Hispanic, 3=Non-Hispanic White, 4=Non-Hispanic Black, 5=Other/Multi. Tinnitus (AUQ191): 1=Yes, 2=No. Hearing difficulty (AUQ054): 1=Excellent, 2=Good, 3=A little trouble, 4=Moderate trouble, 5=A lot of trouble.
+</div>
+
+<div class="section-title">Individual <span>profiles</span></div>
+<div class="cards-grid">
+
+    <div class="person-card" id="card-11373">
+      <div class="card-header">
+        <div class="seqn">SEQN 11373</div>
+        <div class="cycle">2001-2002</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">46</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic Black</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">71.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">5.0 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">66.2 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 1k: 65 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 2k: 75 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 3k: 65 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 4k: 80 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 6k: 75 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 8k: 65 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 500: 5 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 1k: 5 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 2k: 0 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 3k: 5 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 4k: 10 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 6k: 5 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 8k: 0 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-12310">
+      <div class="card-header">
+        <div class="seqn">SEQN 12310</div>
+        <div class="cycle">2001-2002</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">34</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Female</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic Black</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">77.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">10.0 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">67.5 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 500: 60 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:55.00000000000001px" title="R 1k: 55 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 2k: 65 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 3k: 70 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 4k: 75 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:85.0px" title="R 6k: 85 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 8k: 80 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 500: 20 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 1k: 5 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 2k: 5 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 3k: 10 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 4k: 5 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 6k: 10 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 8k: 15 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-26532">
+      <div class="card-header">
+        <div class="seqn">SEQN 26532</div>
+        <div class="cycle">2003-2004</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">20</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic Black</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">73.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">7.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">66.2 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 500: 65 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 1k: 60 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 2k: 75 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 3k: 80 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 4k: 70 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 6k: 75 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 8k: 70 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 500: 15 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 1k: 0 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 2k: 10 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 3k: 10 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 4k: 5 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 6k: 10 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 8k: 5 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-30574">
+      <div class="card-header">
+        <div class="seqn">SEQN 30574</div>
+        <div class="cycle">2003-2004</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">39</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Mexican American</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">66.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">3.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">62.5 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 1k: 70 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 2k: 60 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 3k: 65 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 4k: 65 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 6k: 70 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 8k: 65 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 500: 5 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 1k: 5 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:-10.0px" title="L 2k: -10 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 3k: 5 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 4k: 0 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 6k: 0 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 8k: 10 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-63701">
+      <div class="card-header">
+        <div class="seqn">SEQN 63701</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">55</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic White</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">76.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">12.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">63.8 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">Good</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 500: 65 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 1k: 75 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 2k: 80 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 3k: 80 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 4k: 75 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 6k: 75 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 8k: 75 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 500: 10 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 1k: 15 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 2k: 10 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 3k: 15 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 4k: 0 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 6k: 20 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 8k: 15 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-64371">
+      <div class="card-header">
+        <div class="seqn">SEQN 64371</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">51</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Female</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic Black</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">83.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">10.0 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">73.8 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">Moderate trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 500: 65 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 1k: 70 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 2k: 75 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 3k: 80 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 4k: 80 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 6k: 80 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:95.0px" title="R 8k: 95 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 500: 5 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 1k: 5 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 2k: 20 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 3k: 5 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 4k: 10 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 6k: 15 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 8k: 10 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-65402">
+      <div class="card-header">
+        <div class="seqn">SEQN 65402</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">33</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic White</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">73.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">18.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">55.0 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">A little trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 1k: 65 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 2k: 60 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 3k: 70 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 4k: 75 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 6k: 70 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 8k: 80 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 500: 20 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 1k: 25 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 2k: 10 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 3k: 5 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 4k: 20 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 6k: 25 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 8k: 25 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-66116">
+      <div class="card-header">
+        <div class="seqn">SEQN 66116</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">47</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic Black</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">76.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">13.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">62.5 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">A little trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:55.00000000000001px" title="R 1k: 55 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 2k: 60 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 3k: 80 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 4k: 65 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:85.0px" title="R 6k: 85 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 8k: 75 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 500: 10 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:5.0px" title="L 1k: 5 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 2k: 15 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 3k: 10 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 4k: 10 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 6k: 10 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 8k: 25 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-66373">
+      <div class="card-header">
+        <div class="seqn">SEQN 66373</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">68</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Female</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Non-Hispanic White</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">97.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">31.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">66.2 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">Good</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 1k: 75 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:90.0px" title="R 2k: 90 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:100.0px" title="R 3k: 100 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:90.0px" title="R 4k: 90 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:100.0px" title="R 6k: 100 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:100.0px" title="R 8k: 100 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 500: 15 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 1k: 20 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:30.0px" title="L 2k: 30 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:30.0px" title="L 3k: 30 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 4k: 25 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:35.0px" title="L 6k: 35 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:35.0px" title="L 8k: 35 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-68127">
+      <div class="card-header">
+        <div class="seqn">SEQN 68127</div>
+        <div class="cycle">2011-2012</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">50</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Female</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Other/Multi</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">72.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">16.2 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">56.2 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">A little trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:65.0px" title="R 500: 65 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:60.0px" title="R 1k: 60 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:55.00000000000001px" title="R 2k: 55 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 3k: 70 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 4k: 75 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 6k: 70 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 8k: 75 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 500: 0 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 1k: 0 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:0.0px" title="L 2k: 0 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 3k: 25 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 4k: 15 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:10.0px" title="L 6k: 10 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 8k: 15 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-88806">
+      <div class="card-header">
+        <div class="seqn">SEQN 88806</div>
+        <div class="cycle">2015-2016</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">66</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Other Hispanic</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">92.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">37.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">55.0 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">Moderate trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">Yes</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 500: 75 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:90.0px" title="R 1k: 90 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 2k: 70 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:90.0px" title="R 3k: 90 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:90.0px" title="R 4k: 90 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:95.0px" title="R 6k: 95 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:95.0px" title="R 8k: 95 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 500: 25 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 1k: 25 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 2k: 20 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 3k: 25 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:40.0px" title="L 4k: 40 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:45.0px" title="L 6k: 45 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:40.0px" title="L 8k: 40 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="person-card" id="card-93249">
+      <div class="card-header">
+        <div class="seqn">SEQN 93249</div>
+        <div class="cycle">2015-2016</div>
+      </div>
+      <div class="card-body">
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">37</span></div>
+          <div class="meta-item"><span class="meta-label">Sex</span><span class="meta-value">Male</span></div>
+          <div class="meta-item"><span class="meta-label">Race</span><span class="meta-value">Other Hispanic</span></div>
+          <div class="meta-item"><span class="meta-label">PTA R</span><span class="meta-value red">82.5 dB</span></div>
+          <div class="meta-item"><span class="meta-label">PTA L</span><span class="meta-value blue">23.8 dB</span></div>
+          <div class="meta-item"><span class="meta-label">Asymmetry</span><span class="meta-value">58.8 dB</span></div>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Hearing difficulty</span><span class="meta-value">A lot of trouble</span></div>
+          <div class="meta-item"><span class="meta-label">Tinnitus</span><span class="meta-value">No</span></div>
+          <div class="meta-item"><span class="meta-label">Noise exposure</span><span class="meta-value">—</span></div>
+          <div class="meta-item"><span class="meta-label">666 codes</span><span class="meta-value">0</span></div>
+        </div>
+        <div class="audiogram-section">
+          <div class="ear-label">Right ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-r" style="height:70.0px" title="R 500: 70 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 1k: 75 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-r" style="height:75.0px" title="R 2k: 75 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-r" style="height:85.0px" title="R 3k: 85 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 4k: 80 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-r" style="height:80.0px" title="R 6k: 80 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-r" style="height:85.0px" title="R 8k: 85 dB"></div><div class="freq-label">8k</div></div></div>
+          <div class="ear-label left">Left ear</div>
+          <div class="bars-container"><div class="freq-col"><div class="bar-l" style="height:15.0px" title="L 500: 15 dB"></div><div class="freq-label">500</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 1k: 20 dB"></div><div class="freq-label">1k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 2k: 20 dB"></div><div class="freq-label">2k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 3k: 25 dB"></div><div class="freq-label">3k</div></div><div class="freq-col"><div class="bar-l" style="height:20.0px" title="L 4k: 20 dB"></div><div class="freq-label">4k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 6k: 25 dB"></div><div class="freq-label">6k</div></div><div class="freq-col"><div class="bar-l" style="height:25.0px" title="L 8k: 25 dB"></div><div class="freq-label">8k</div></div></div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+<div class="info-box">
+<strong>Key observations:</strong><br>
+• All 12 show the same pattern: severe right-ear loss (65–100 dB) with near-normal left ear (0–40 dB)<br>
+• Age range: 20–68 — this is NOT age-related<br>
+• 7 males, 5 females — no strong sex bias<br>
+• 4 of 8 with available data report tinnitus (50%)<br>
+• 0 codes of 666 (no response) — all thresholds are valid measurements, not censoring artifacts<br>
+• Appears across 4 different NHANES cycles spanning 15 years — rules out single-cycle equipment bias<br>
+• This pattern is clinically recognized: unilateral severe hearing loss warrants investigation for retrocochlear pathology (e.g., vestibular schwannoma)
+</div>
+
+<div class="footer">
+The Frequency ML · Cluster 1 Deep Dive · Data: NHANES/CDC · No clinical labels used in training
+</div>
+
+</body>
+</html>

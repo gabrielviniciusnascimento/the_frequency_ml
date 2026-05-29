@@ -2,7 +2,7 @@
 
 **Versión:** 1.0  
 **Fecha:** 2026-05-26  
-**Autores:** El equipo de Frecuencia  
+**Autor:** Gabriel Vinicius Nascimento, investigador independiente, sobreviviente de hepatoblastoma infantil, ototoxicidad por cisplatino. Construido con asistencia de IA (Claude, Gemini). Sin afiliación institucional.  
 **Estado:** Experimental: sin etiqueta clínica  
 
 ---
@@ -114,7 +114,9 @@ HDBSCAN (agrupación espacial jerárquica de aplicaciones con ruido basada en de
 |-----------------|-------------|------------|----------------|
 | 5 | 3 | 12 | 0,048 |
 | 5 | 5 | 4 | 0,088 |
-| **10** | **5** | **2** | **0,076** |
+| **10** | **5** | **2*
+
+* | **0,076** |
 | 15 | 5 | 2 | 0,083 |
 | 20 | 5 | 0 | 1.000 |
 | 30+ | cualquiera | 0 | 1.000 |
@@ -125,12 +127,10 @@ HDBSCAN (agrupación espacial jerárquica de aplicaciones con ruido basada en de
 
 ### 5.1 Clústeres encontrados
 
-| Clúster | norte | %
-
-| Descripción geométrica |
+| Clúster | norte | % | Descripción geométrica |
 |---------|---|---|---------------------|
 | 0 | 7.098 | 92,2% | Pérdida inclinada leve a moderada, bilateral relativamente simétrica |
-| 1 | 12 | 0,2% | Asimetría unilateral grave (oído derecho ~80 dB, oído izquierdo ~16 dB) |
+| 1 | 12 | 0,2% | Asimetría unilateral grave (oído derecho ~80 dB, oído izquierdo ~16 dB). La dirección correcta es notable: la exposición a armas de fuego generalmente causa pérdida de izquierda en los diestros (efecto de sombra de cabeza). Sugiere diferentes etiologías del ruido ocupacional. |
 | Ruido | 585 | 7,6% | Patrones heterogéneos, pérdida moderada-grave |
 
 ### 5.2 Métricas
@@ -138,7 +138,7 @@ HDBSCAN (agrupación espacial jerárquica de aplicaciones con ruido basada en de
 | Métrica | Valor | Interpretación |
 |---------|-------|---------------|
 | Ruido HDBSCAN | 7,6% | Bajo (era ~90 % antes de los filtros) |
-| IRA de ciclo cruzado | 0,27 | Coherencia entre ciclos NHANES con diferente elegibilidad (mide la solidez ante la variación del protocolo/cohorte) |
+| IRA de ciclo cruzado | 0,27 | Coherencia entre ciclos NHANES con diferente elegibilidad. Valor moderado que refleja la variación en la composición por edades entre ciclos, no un defecto metodológico. Complementa Bootstrap ARI (0,68) que mide la estabilidad dentro de la misma población. |
 | Bootstrap ARI (medio) | 0,68 | Reproducibilidad dentro de submuestras de la misma población (mide la estabilidad interna) |
 | Bootstrap ARI (condicional) | 0,60 | Cuándo aparecen los conglomerados (85% de las submuestras) |
 
@@ -184,7 +184,7 @@ Chi² p<0,001, V de Cramér=0,126.
 
 ### 6.2 Sensibilidad del filtro ANY25
 
-| Configuración | norte | Grupos | Ruido | IRA vs primaria |
+| Configuración | norte | Grupos | Ruido | IRA versus primaria |
 |---------------|---|----------|-------|----------------|
 | Con ANY25 (primario) | 7.695 | 2 | 7,6% | — |
 | Sin ANY25 | 13.433 | 2 | 4,4% | 0,85 |
@@ -218,7 +218,9 @@ El espacio medio binaural de 4 frecuencias es *más estable* que el espacio comp
 ### 7.1 Validación por ciclo (predicción_aproximada)
 
 | Ciclo | norte prueba | IRA |
-|-------|------------|-----|
+|----
+
+---|---------|-----|
 | 1999–2000 | 949 | 0,17 |
 | 2001–2002 | 1.031 | 0,21 |
 | 2003–2004 | 1.000 | 0,18 |
@@ -234,9 +236,7 @@ IRA media: 0,27. Los ciclos más recientes (mayor N) tienen mayor ARI.
 - ARI condicional (cuando 2 grupos): 0,60
 - 15% de fracaso: el grupo 1 (12 personas) no se forma cuando se realiza el submuestreo
 
-### 7.3Va
-
-Relaciones externas — ACNUDH
+### 7.3 Validación externa — ACNUDH
 
 **Ejecutado.** OHHR (Registro de salud auditiva de Oldenburg; Jafri et al., 2025): 581 adultos (edad media 71, PTA media 45 dB), CC BY 4,0.
 
@@ -274,7 +274,7 @@ Relaciones externas — ACNUDH
 2. El centrado de filas elimina el nivel; no capta "qué tan grave" es la pérdida, solo la forma.
 3. 14 dimensiones son pocas, pero capturan el 95% de la varianza.
 4. El grupo 1 (12 personas) es demasiado pequeño para la generalización de la población.
-5. El fallo del arranque del 15 % muestra la sensibilidad del muestreo.
+5. La falla del arranque del 15 % muestra la sensibilidad del muestreo.
 
 ### 8.3 Limitaciones éticas
 
@@ -307,7 +307,7 @@ numpy, pandas, scipy, scikit-learn, hdbscan, joblib, trama
 
 ### 10.2 Guiones
 
-20 scripts de Python, numerados secuencialmente. Cada script tiene puntos de control (no se vuelve a ejecutar si existe salida).
+27 scripts de Python, numerados secuencialmente. Cada script tiene puntos de control (no se vuelve a ejecutar si existe salida).
 
 ### 10.3 Datos
 
@@ -329,7 +329,7 @@ Más de 15 archivos JSON con resultados completos. Todo reproducible de los guio
 
 ## 12. Contacto
 
-La frecuencia - gabrielviniciusnascimento345@gmail.com
+La Frecuencia - gabrielviniciusnascimento345@gmail.com
 
 ---
 

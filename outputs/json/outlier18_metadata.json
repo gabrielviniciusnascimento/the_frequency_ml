@@ -1,0 +1,164 @@
+[
+  {
+    "SEQN": 8866,
+    "age": 43.0,
+    "sex": 1,
+    "race": 3,
+    "tinnitus": null,
+    "noise": null,
+    "hearing_diff": null
+  },
+  {
+    "SEQN": 17962,
+    "age": 51.0,
+    "sex": 2,
+    "race": 3,
+    "tinnitus": null,
+    "noise": null,
+    "hearing_diff": null
+  },
+  {
+    "SEQN": 20560,
+    "age": 49.0,
+    "sex": 1,
+    "race": 3,
+    "tinnitus": null,
+    "noise": null,
+    "hearing_diff": null
+  },
+  {
+    "SEQN": 25054,
+    "age": 64.0,
+    "sex": 2,
+    "race": 1,
+    "tinnitus": null,
+    "noise": null,
+    "hearing_diff": null
+  },
+  {
+    "SEQN": 27725,
+    "age": 24.0,
+    "sex": 1,
+    "race": 3,
+    "tinnitus": null,
+    "noise": null,
+    "hearing_diff": null
+  },
+  {
+    "SEQN": 62736,
+    "age": 40.0,
+    "sex": 2,
+    "race": 4,
+    "tinnitus": 1,
+    "noise": 2,
+    "hearing_diff": 3
+  },
+  {
+    "SEQN": 64704,
+    "age": 62.0,
+    "sex": 1,
+    "race": 1,
+    "tinnitus": 1,
+    "noise": 1,
+    "hearing_diff": 5
+  },
+  {
+    "SEQN": 69759,
+    "age": 51.0,
+    "sex": 1,
+    "race": 3,
+    "tinnitus": 2,
+    "noise": 1,
+    "hearing_diff": 5
+  },
+  {
+    "SEQN": 83992,
+    "age": 68.0,
+    "sex": 1,
+    "race": 5,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 2
+  },
+  {
+    "SEQN": 85198,
+    "age": 55.0,
+    "sex": 1,
+    "race": 1,
+    "tinnitus": 1,
+    "noise": null,
+    "hearing_diff": 5
+  },
+  {
+    "SEQN": 85696,
+    "age": 32.0,
+    "sex": 2,
+    "race": 2,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 4
+  },
+  {
+    "SEQN": 87236,
+    "age": 45.0,
+    "sex": 2,
+    "race": 2,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 5
+  },
+  {
+    "SEQN": 87690,
+    "age": 55.0,
+    "sex": 1,
+    "race": 5,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 4
+  },
+  {
+    "SEQN": 88855,
+    "age": 64.0,
+    "sex": 1,
+    "race": 1,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 3
+  },
+  {
+    "SEQN": 88885,
+    "age": 54.0,
+    "sex": 1,
+    "race": 2,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 2
+  },
+  {
+    "SEQN": 91702,
+    "age": 59.0,
+    "sex": 2,
+    "race": 1,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 3
+  },
+  {
+    "SEQN": 92878,
+    "age": 63.0,
+    "sex": 2,
+    "race": 3,
+    "tinnitus": 2,
+    "noise": null,
+    "hearing_diff": 4
+  },
+  {
+    "SEQN": 93560,
+    "age": 59.0,
+    "sex": 1,
+    "race": 4,
+    "tinnitus": 1,
+    "noise": null,
+    "hearing_diff": 5
+  }
+]

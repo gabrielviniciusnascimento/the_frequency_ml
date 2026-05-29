@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Datum:** 26.05.2026  
-**Autoren:** Das Frequency-Team  
+**Autor:** Gabriel Vinicius Nascimento – unabhängiger Forscher, Überlebender eines Hepatoblastoms im Kindesalter, Cisplatin-Ototoxizität. Gebaut mit KI-Unterstützung (Claude, Gemini). Keine institutionelle Zugehörigkeit.  
 **Status:** Experimentell – keine klinische Kennzeichnung  
 
 ---
@@ -80,7 +80,7 @@ $$\mu_i = \frac{1}{14} \sum_{f \in F} T_{i,f}$$
 
 $$T^{shape}_{i,f} = T_{i,f} - \mu_i$$
 
-Es entfernt das durchschnittliche „Ausmaß“ des Verlusts (wie viel die Person im Durchschnitt verliert) und behält die „Form“ der Kurve bei (wo der Verlust am größten/kleinsten ist).
+Es entfernt das durchschnittliche „Ausmaß“ des Verlusts (wie viel die Person im Durchschnitt verliert) und behält die „Form“ der Kurve bei (wo der Verlust am größten/am kleinsten ist).
 
 ### 3.3 Skalierung
 
@@ -114,7 +114,9 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 |-----------------|-------------|------------|----------------|
 | 5 | 3 | 12 | 0,048 |
 | 5 | 5 | 4 | 0,088 |
-| **10** | **5** | **2** | **0,076** |
+| **10** | **5** | **2*
+
+* | **0,076** |
 | 15 | 5 | 2 | 0,083 |
 | 20 | 5 | 0 | 1.000 |
 | 30+ | irgendein | 0 | 1.000 |
@@ -125,12 +127,10 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 
 ### 5.1 Cluster gefunden
 
-| Cluster | n | %
-
-| Geometrische Beschreibung |
+| Cluster | n | % | Geometrische Beschreibung |
 |---------|---|---|---------------------|
 | 0 | 7.098 | 92,2 % | Leichter bis mäßiger Neigungsverlust, relativ symmetrisch beidseitig |
-| 1 | 12 | 0,2 % | Schwere einseitige Asymmetrie (rechtes Ohr ~80 dB, linkes Ohr ~16 dB) |
+| 1 | 12 | 0,2 % | Schwere einseitige Asymmetrie (rechtes Ohr ~80 dB, linkes Ohr ~16 dB). Bemerkenswert ist die Richtung nach rechts: Die Exposition gegenüber Schusswaffen verursacht bei Rechtshändern typischerweise einen Verlust nach links (Kopfschatteneffekt). Legt eine unterschiedliche Ätiologie des Berufslärms nahe. |
 | Lärm | 585 | 7,6 % | Heterogene Muster, mäßiger bis schwerer Verlust |
 
 ### 5.2 Metriken
@@ -138,7 +138,7 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 | Metrisch | Wert | Interpretation |
 |---------|-------|---------------|
 | HDBSCAN-Rauschen | 7,6 % | Niedrig (war ~90 % vor den Filtern) |
-| Zyklusübergreifender ARI | 0,27 | Konsistenz zwischen NHANES-Zyklen mit unterschiedlicher Eignung (misst die Robustheit gegenüber Protokoll-/Kohortenvariationen) |
+| Zyklusübergreifender ARI | 0,27 | Konsistenz zwischen NHANES-Zyklen mit unterschiedlicher Berechtigung. Moderater Wert, der die Variation in der Alterszusammensetzung zwischen den Zyklen widerspiegelt, kein methodischer Fehler. Ergänzt Bootstrap ARI (0,68), der die Stabilität innerhalb derselben Population misst. |
 | Bootstrap ARI (mittel) | 0,68 | Reproduzierbarkeit innerhalb von Teilstichproben derselben Population (misst die interne Stabilität) |
 | Bootstrap ARI (bedingt) | 0,60 | Wenn Cluster auftreten (85 % der Teilstichproben) |
 
@@ -218,7 +218,9 @@ Der binaurale Mittelwertraum mit 4 Frequenzen ist *stabiler* als der vollständi
 ### 7.1 Validierung pro Zyklus ( approximate_predict )
 
 | Zyklus | n-Test | ARI |
-|-------|------------|-----|
+|----
+
+---|---------|-----|
 | 1999–2000 | 949 | 0,17 |
 | 2001–2002 | 1.031 | 0,21 |
 | 2003–2004 | 1.000 | 0,18 |
@@ -234,9 +236,7 @@ Durchschnittlicher ARI: 0,27. Neuere Zyklen (höheres N) weisen einen höheren A
 - Bedingter ARI (bei 2 Clustern): 0,60
 - 15 % Fehler: Cluster 1 (12 Personen) bildet sich bei der Unterabtastung nicht
 
-### 7,3 Va
-
-Externer Handel – OHHR
+### 7.3 Externe Validierung – OHHR
 
 **Ausgeführt.** OHHR (Oldenburg Hearing Health Record; Jafri et al., 2025): 581 Erwachsene (Durchschnittsalter 71, mittlerer PTA 45 dB), CC BY 4,0.
 
@@ -307,7 +307,7 @@ numpy, pandas, scipy, scikit-learn, hdbscan, joblib, plotly
 
 ### 10.2 Skripte
 
-20 Python-Skripte, fortlaufend nummeriert. Jedes Skript verfügt über Prüfpunkte (wird nicht erneut ausgeführt, wenn eine Ausgabe vorhanden ist).
+27 Python-Skripte, fortlaufend nummeriert. Jedes Skript verfügt über Prüfpunkte (wird nicht erneut ausgeführt, wenn eine Ausgabe vorhanden ist).
 
 ### 10.3 Daten
 

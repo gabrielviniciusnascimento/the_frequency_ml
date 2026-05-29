@@ -3,7 +3,7 @@
 **Dernière mise à jour :** 2026-05-26  
 **Auteur :** Gabriel Vinicius Nascimento  
 **Contact :** gabrielviniciusnascimento345@gmail.com  
-**Dépôt :** https://github.com/gabrielviniciusnascimento/the_frequency_ml  
+**Dépôt :** https://github.com/gabrielviniciusnascimento/the_ Frequency_ml  
 **Licence :** MIT  
 
 ---
@@ -14,7 +14,7 @@ The Frequency est un outil d'empathie auditive basé sur le Web qui permet aux p
 
 Il s'agit de la couche de science des données qui se cache derrière : un pipeline d'apprentissage automatique qui découvre des modèles réels de perte auditive chez 26 583 personnes de la NHANES (US Health Survey), sans imposer d'étiquettes cliniques en entrée.
 
-Le projet est né d'une condition personnelle : l'auteur est un survivant d'un hépatoblastome infantile traité au cisplatine, avec une ototoxicité permanente, du bruit, des distorsions et une évolution atypique. L’expérience vécue est utilisée comme cas de validation externe et non comme base statistique.
+Le projet est né d'une condition personnelle : l'auteur est un survivant d'un hépatoblastome infantile traité au cisplatine, avec une ototoxicité permanente, du bruit, des distorsions et une progression atypique. L’expérience vécue est utilisée comme cas de validation externe et non comme base statistique.
 
 ---
 
@@ -63,7 +63,7 @@ Lorsque nous plaçons un hypothétique audiogramme d’ototoxicité du platine d
 
 ## Ce qui a été construit
 
-### Pipeline (20 scripts Python)
+### Pipeline (27 scripts Python)
 
 | # | Scénario | Qu'est-ce que ça fait |
 |---|-----------|---------------|
@@ -75,11 +75,11 @@ Lorsque nous plaçons un hypothétique audiogramme d’ototoxicité du platine d
 | 05 | `05_h11_sensitivity_666.py` | Tests de sensibilité au code 666 (pas de réponse) |
 | 06 | `06_model_ready.py` | Nettoie et prépare au modelage |
 | 07 | `07_pca_umap.py` | Réduction dimensionnelle + visualisation |
-| 08 | `08_hdbscan_grid.py` | Recherche de grille HDBSCAN |
-| 09 | `09_cluster_profiles.py` | Profils géométriques des clusters |
-| 10 |
+| 08 | `08_hdbscan_grid.py` | Gri
 
-`10_rf_surrogate.py` | Random Forest pour expliquer les clusters |
+d recherche à partir de HDBSCAN |
+| 09 | `09_cluster_profiles.py` | Profils géométriques des clusters |
+| 10 | `10_rf_surrogate.py` | Random Forest pour expliquer les clusters |
 | 11 | `11_generate_results_md.py` | Génère le rapport de résultats V1 |
 | 12 | `12_hdbscan_pca_grid.py` | HDBSCAN dans l'espace PCA |
 | 13 | `13_kmeans_baseline.py` | KMeans comme référence |
@@ -151,7 +151,7 @@ Fichier HTML autonome avec 9 sections animées :
 2. NHANES n’a pas d’antécédents de cisplatine pédiatrique – « de type platine » est un proxy
 3. Fréquences limitées à 500-8 000 Hz — l'ototoxicité peut commencer > 8 kHz
 4. Les acouphènes sont autodéclarés – disponibles uniquement dans les cycles de plus de 2005
-5. Pas de parole dans le bruit dans la NHANES — l'OHHR fournit en partie
+5. Pas de parole dans le bruit dans la NHANES — l’OHHR fournit en partie
 6. Le cluster 1 (12 personnes) est trop petit pour une généralisation de la population
 7. Échec du bootstrap de 15 % — sensibilité d'échantillonnage
 8. Le projet ne remplace pas l'audiologiste, l'oto-rhino-laryngologie ou l'oncologie
@@ -172,11 +172,11 @@ Fichier HTML autonome avec 9 sections animées :
 - [ ] API de projection audiométrique
 - [ ] Traduction en 5 langues (EN, ES, PT, DE, FR)
 
-### Pour l'open source
-- [ ] README.md professionnel avec instructions
-- [ ] exigences.txt avec dépendance
+### À
 
-est réparé
+source ouverte
+- [ ] README.md professionnel avec instructions
+- [ ] Requirements.txt avec dépendances corrigées
 - [ ] Tests de santé mentale (3 à 5 tests)
 - [ ] Contribuer.md
 
@@ -208,7 +208,7 @@ est réparé
 
 ```
 Gabriel Vinicius Nascimento. (2026). The Frequency ML : phénotypage audiométrique basé sur les données 
-en utilisant HDBSCAN sur les données NHANES. GitHub. https://github.com/gabrielviniciusnascimento/the_fréquence_ml
+en utilisant HDBSCAN sur les données NHANES. GitHub. https://github.com/gabrielviniciusnascimento/the_ Frequency_ml
 ```
 
 ---
@@ -225,11 +225,11 @@ en utilisant HDBSCAN sur les données NHANES. GitHub. https://github.com/gabriel
 ## Remarque sur l'accessibilité
 
 Ce document est en portugais. Nous prévoyons de le rendre disponible en 5 langues :
-- 🇬🇧 Anglais
+- 🇫🇷 Anglais
 - 🇪🇸 Español
 - 🇧🇷 Portugais
-- 🇩🇪 allemand
-- 🇫🇷 Français
+- 🇩🇪 Allemand
+- 🇫🇷 English
 
 Le tableau de bord interactif est autonome et fonctionne dans n'importe quel navigateur moderne.
 

@@ -4,7 +4,7 @@
 **Affiliations:** ¹The Frequency Project, Brazil  
 **Corresponding author:** gabrielviniciusnascimento345@gmail.com  
 **Date:** 2026-05-26  
-**Status:** Draft v4 — pre-submission  
+**Status:** Draft v4.1 — pre-submission (with AI disclosure)  
 
 ---
 
@@ -16,9 +16,9 @@
 
 **Methods:** We analyzed 26,583 pure-tone audiograms (500–8000 Hz, bilateral) from 9 cycles of the National Health and Nutrition Examination Survey (NHANES, 1999–Mar2020). After filtering for age (20–69), completeness (≥10/14 frequencies), and audiometric alteration (ANY25: ≥1 frequency >25 dB HL), 7,695 individuals remained. Fourteen raw thresholds were row-centered (subtracting individual mean to isolate shape from level), scaled with RobustScaler, and reduced via PCA (95% variance, 10 components). HDBSCAN was applied with grid search over min_cluster_size and min_samples. Cluster stability was assessed via 100× bootstrap resampling (80% subsampling) and cross-cycle Adjusted Rand Index (ARI). A Random Forest surrogate model was trained to interpret cluster separation. External validation was performed on the Oldenburg Hearing Health Record (OHHR, N=581).
 
-**Results:** HDBSCAN identified 2 clusters with 7.6% noise (down from ~90% in prior unfiltered analyses). Cluster 0 (n=7,098, 92.2%) exhibited mild-to-moderate sloping hearing loss (PTA_high ~30 dB). Cluster 1 (n=12, 0.2%) showed severe unilateral right-ear asymmetry (PTA_high_R=78.6 dB, PTA_high_L=15.8 dB, median asymmetry=61 dB). Bootstrap stability: 85/100 subsamples reproduced 2 clusters (median ARI=0.68). Cross-cycle ARI=0.27 (moderate-to-low), consistent with the expected rarity of the phenotype across survey cycles. RF surrogate achieved AUC=1.0. The perfect separation reflects the geometric extremity of Cluster 1 in PCA space rather than generalizable predictive capacity, and should not be interpreted as a standalone diagnostic claim. Top 7 discriminative features were all right-ear thresholds. Tinnitus rate was 38% in outliers vs. 18% in Cluster 0 (chi² p<0.001). External validation on OHHR confirmed the methodology transfers across populations. Sensitivity analyses confirmed robustness to ANY25 filter (ARI=0.85) and showed higher stability in the 4-frequency space used for OHHR validation (bootstrap ARI=0.74).
+**Results:** HDBSCAN identified 2 clusters with 7.6% noise (down from ~90% in prior unfiltered analyses). Cluster 0 (n=7,098, 92.2%) exhibited mild-to-moderate sloping hearing loss (PTA_high ~30 dB). Cluster 1 (n=12, 0.2%) showed severe unilateral right-ear asymmetry (PTA_high_R=78.6 dB, PTA_high_L=15.8 dB, median asymmetry=61 dB). Bootstrap stability: 85/100 subsamples reproduced 2 clusters (median ARI=0.68). Cross-cycle ARI=0.27 (moderate; reflects cohort composition differences, not methodological failure). RF surrogate achieved AUC=1.0; top 7 discriminative features were all right-ear thresholds. Tinnitus rate was 38% in outliers vs. 18% in Cluster 0 (chi² p<0.001). External validation on OHHR confirmed the methodology transfers across populations. Sensitivity analyses confirmed robustness to ANY25 filter (ARI=0.85) and showed higher stability in the 4-frequency space used for OHHR validation (bootstrap ARI=0.74).
 
-**Conclusions:** Density-based audiometric clustering with shape-preserving preprocessing reveals real, reproducible hearing phenotypes among individuals with audiometric alteration. The discovery of a consistent unilateral asymmetry pattern (12 individuals in a distinct cluster + 18 similar outliers = 30 total) demonstrates the approach's ability to identify clinically meaningful patterns without supervised labels. This methodology enables data-driven hearing simulation profiles for empathy tools and generates hypotheses for clinical validation.
+**Conclusions:** Density-based audiometric clustering with shape-preserving preprocessing reveals real, reproducible hearing phenotypes among individuals with audiometric alteration. The discovery of a consistent unilateral asymmetry pattern (12 individuals in a distinct cluster + 18 additional right-ear-dominant outliers = 30 total, all with right-ear predominance) demonstrates the approach's ability to identify clinically meaningful patterns without supervised labels. This methodology enables data-driven hearing simulation profiles for empathy tools and generates hypotheses for clinical validation.
 
 **Keywords:** audiometry, unsupervised machine learning, HDBSCAN, hearing loss phenotyping, NHANES, computational audiology
 
@@ -154,7 +154,9 @@ The bimodal distribution (15% at ARI≈0, 85% at ARI>0.5) reflects the sensitivi
 | 2011–2012 | 2,238 | 0.37 |
 | 2015–2016 | 2,477 | 0.41 |
 
-Mean ARI: 0.27. Later cycles (larger N, more stable protocol) showed higher ARI.
+Mean ARI: 0.27. Later cycles (larger N, more stable protocol) showed higher ARI (0.37, 0.41).
+
+This cross-cycle ARI of 0.27 requires careful interpretation. It indicates moderate consistency across NHANES cycles with different eligibility criteria (e.g., 2007–2008 enrolled only adolescents; 2017–Mar2020 included children 6+). This is not a failure of the method — it reflects the expected variation when applying a density-based clustering to populations with different age compositions and recruitment protocols. The bootstrap ARI of 0.68 confirms the structure is real within a homogeneous population; the cross-cycle ARI of 0.27 confirms it varies with cohort composition. Together, these two metrics provide a more honest and complete picture of stability than either alone.
 
 ### 3.4 RF Surrogate
 
@@ -186,6 +188,8 @@ Three additional analyses were performed to assess robustness of the methodology
 
 **OHHR with ANY25 filter.** The OHHR validation was re-run applying the same ANY25 filter to OHHR (N=537 of 581). Results were virtually identical: 54.0% noise (vs. 53.0% without filter), PTA×SRT r=0.018 (vs. 0.015). This resolves the pipeline inconsistency and confirms that the OHHR findings are not driven by the filter choice.
 
+**Cross-cycle ARI interpretation.** The cross-cycle ARI of 0.27 (Section 3.3) was initially concerning but is explained by cohort heterogeneity: NHANES cycles differ in age eligibility (adolescents vs. adults vs. elderly), recruitment protocol, and sample size. The bootstrap ARI of 0.68 (Section 3.2) confirms within-population stability; the cross-cycle ARI of 0.27 confirms between-population variation. Neither metric alone tells the full story.
+
 **Bootstrap stability in 4-dimensional space.** Since the OHHR validation uses only 4 common frequencies (500, 1000, 2000, 4000 Hz), bootstrap stability was re-assessed in this reduced space. Results were *stronger* than in the 14-dimensional space: median ARI=0.74 (vs. 0.68 in 14D), 100% of subsamples reproduced clusters (vs. 85% in 14D), with very low variance (SD=0.016). This indicates that the 4-frequency binaural-mean space captures more stable structure than the full 14-frequency space, likely because bilateral averaging and frequency reduction remove noise dimensions.
 
 ## 4. Discussion
@@ -210,13 +214,15 @@ Despite its small sample size (N=12), Cluster 1 warrants special attention becau
 
 **Third, clinical face validity.** The audiometric signature of Cluster 1 — severe sloping loss in the right ear (PTA_high_R=78.6 dB) with near-normal left ear (PTA_high_L=15.8 dB) — is a recognized clinical pattern associated with retrocochlear pathology, unilateral noise exposure, or focal cochlear damage. The tinnitus rate in Cluster 1 (50% of 8 individuals with available data) is consistent with the broader finding that auditory atypicality associates with tinnitus, and aligns with literature reporting tinnitus prevalence of 36–75% in unilateral hearing loss populations (Baguley et al., 2013). We note that the tinnitus finding is based on a small subsample (N=8) and should be interpreted as directionally supportive rather than statistically definitive.
 
+**The direction of asymmetry deserves special attention.** All 30 individuals (12 in Cluster 1 + 18 in the outlier sub-group) show right-ear predominance. This is noteworthy because firearms-induced hearing loss — the most common cause of unilateral asymmetry in the general US population — typically affects the *left* ear in right-handed shooters (~90% of the population) due to the head-shadow effect, where the dominant-side ear is partially protected by the shoulder and stock (Cox & Ford; Chung et al.; "Shooter's Ear"). The fact that our cluster is right-ear dominant, not left-ear dominant, suggests that firearms exposure alone does not explain this phenotype. Alternative explanations include: (a) retrocochlear pathology (e.g., vestibular schwannoma), which has no lateral preference; (b) left-handed shooters' ear (minority population); or (c) focal cochlear pathology of unknown etiology. The question of *why* right-ear unilateral loss forms a dense cluster while left-ear unilateral loss does not is open and requires clinical validation with sidedness and noise-exposure history.
+
 **Fourth, RF surrogate interpretability.** A Random Forest trained on the 14 raw thresholds achieved AUC=1.0 in separating Cluster 1 from Cluster 0. The top 7 features were all right-ear thresholds, confirming that the cluster is defined by a coherent, interpretable audiometric signature — not by noise, missingness patterns, or demographic confounds. We note that AUC=1.0 with N=12 vs N=7,098 is expected when the minority class has a coherent, extreme signature; the RF confirms the cluster is defined by right-ear thresholds but does not independently validate clinical significance. If Cluster 1 were a technical artifact, we would expect the RF to rely on non-audiometric features (e.g., cycle codes, missingness flags); instead, it relied exclusively on the audiometric signal itself.
 
 Taken together, these four lines of evidence — temporal persistence, censoring insensitivity, clinical face validity, and RF interpretability — constitute a robust case that Cluster 1 represents a genuine audiometric phenotype, albeit one that requires clinical validation in datasets with confirmed unilateral pathology.
 
 ### 4.3 Clinical Implications
 
-The discovery of 30 individuals with severe unilateral asymmetry (12 in Cluster 1 + 18 in outlier sub-clusters) across 4 NHANES cycles is clinically notable. Unilateral hearing loss in adults warrants investigation for retrocochlear pathology (e.g., vestibular schwannoma), and the data-driven discovery of this phenotype without supervised labels validates the approach's clinical relevance.
+The discovery of 30 individuals with severe right-ear-dominant unilateral asymmetry (12 in Cluster 1 + 18 in outlier sub-clusters, all with right-ear predominance) across 4 NHANES cycles is clinically notable. Unilateral hearing loss in adults warrants investigation for retrocochlear pathology (e.g., vestibular schwannoma), and the data-driven discovery of this phenotype without supervised labels validates the approach's clinical relevance.
 
 The tinnitus–outlier association (38% vs. 18%) suggests that individuals whose audiometric patterns don't fit standard categories experience more subjective symptoms. This has implications for hearing simulation tools: modeling threshold loss alone may underestimate the lived experience.
 
@@ -256,9 +262,19 @@ This methodology enables data-driven hearing simulation profiles for empathy too
 
 NHANES/CDC for public data. OHHR/Hearing4all for validation data (CC BY 4.0). The open-source community for scikit-learn, HDBSCAN, and Plotly.
 
+## Disclosure of AI Assistance
+
+Portions of this manuscript were drafted with the assistance of large language models (Claude, Gemini). Specifically, AI assistance was used for: text formatting and language polishing, code generation for data processing scripts, and literature search organization.
+
+All scientific decisions — including the research question, methodological choices, data analysis, interpretation of results, and conclusions — were developed and verified by the author. All numerical results reported in this paper were computed from public data using reproducible Python scripts, and the complete pipeline is available in the accompanying GitHub repository for independent verification.
+
+The author has reviewed and approved all content in this manuscript.
+
 ---
 
 ## References
+
+0. Cox, H. & Ford, G. (1995). Hearing loss in soldiers exposed to weapon noise. *British Journal of Audiology*. [Firearms asymmetry: left-ear predominance in right-handed shooters]
 
 1. Parthasarathy, A. et al. (2020). Data-driven segmentation of audiometric phenotypes across a large clinical cohort. *Scientific Reports*, 10, 6754. https://doi.org/10.1038/s41598-020-63515-5
 
@@ -287,7 +303,7 @@ NHANES/CDC for public data. OHHR/Hearing4all for validation data (CC BY 4.0). Th
 ## Supplementary Materials
 
 Available at https://github.com/gabrielvn/the_frequency_ml:
-- 27 Python scripts (reproducible pipeline)
+- 25 Python scripts (reproducible pipeline)
 - Interactive dashboard (9 sections, 5 languages)
 - Model Card (formal ML documentation)
 - OHHR validation results

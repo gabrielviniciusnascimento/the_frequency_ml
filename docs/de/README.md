@@ -3,7 +3,7 @@
 **Letzte Aktualisierung:** 26.05.2026  
 **Autor:** Gabriel Vinicius Nascimento  
 **Kontakt:** gabrielviniciusnascimento345@gmail.com  
-**Repository:** https://github.com/gabrielviniciusnascimento/the_frequency_ml  
+**Repository:** https://github.com/gabrielviniciusnascimento/the_frequenz_ml  
 **Lizenz:** MIT  
 
 ---
@@ -63,7 +63,7 @@ Wenn wir ein hypothetisches Audiogramm der Platin-Ototoxizität im trainierten R
 
 ## Was gebaut wurde
 
-### Pipeline (20 Python-Skripte)
+### Pipeline (27 Python-Skripte)
 
 | # | Skript | Was macht es |
 |---|-----------|-----------|
@@ -75,11 +75,11 @@ Wenn wir ein hypothetisches Audiogramm der Platin-Ototoxizität im trainierten R
 | 05 | `05_h11_sensitivity_666.py` | Testet die Empfindlichkeit gegenüber Code 666 (keine Reaktion) |
 | 06 | `06_model_ready.py` | Reinigt und bereitet für die Modellage vor |
 | 07 | `07_pca_umap.py` | Dimensionsreduktion + Visualisierung |
-| 08 | `08_hdbscan_grid.py` | HDBSCAN-Rastersuche |
-| 09 | `09_cluster_profiles.py` | Geometrische Profile der Cluster |
-| 10 |
+| 08 | `08_hdbscan_grid.py` | Gri
 
-`10_rf_surrogate.py` | Random Forest zur Erklärung von Clustern |
+d Suche von HDBSCAN |
+| 09 | `09_cluster_profiles.py` | Geometrische Profile der Cluster |
+| 10 | `10_rf_surrogate.py` | Random Forest zur Erklärung von Clustern |
 | 11 | `11_generate_results_md.py` | Erstellt einen V1-Ergebnisbericht |
 | 12 | `12_hdbscan_pca_grid.py` | HDBSCAN im PCA-Bereich |
 | 13 | `13_kmeans_baseline.py` | KMeans als Basis |
@@ -172,11 +172,11 @@ Eigenständige HTML-Datei mit 9 animierten Abschnitten:
 - [ ] Audiometrische Projektions-API
 - [ ] Übersetzung in 5 Sprachen (EN, ES, PT, DE, FR)
 
-### Für Open Source
-- [] professionelle README.md mit Anweisungen
-- [ ] Anforderungen.txt mit Abhängigkeit
+### An
 
-Es ist behoben
+Open Source
+- [] professionelle README.md mit Anweisungen
+- [ ] Anforderungen.txt mit behobenen Abhängigkeiten
 - [ ] Geisteskrankheitstests (3–5 Tests)
 - [ ] Contributing.md
 
@@ -207,8 +207,8 @@ Es ist behoben
 ## So zitieren Sie diese Arbeit
 
 „
-[Dein Name]. (2026). The Frequency ML: Datengesteuerte audiometrische Phänotypisierung 
-Verwendung von HDBSCAN für NHANES-Daten. GitHub. https://github.com/gabrielviniciusnascimento/the_frequency_ml
+Gabriel Vinicius Nascimento. (2026). The Frequency ML: Datengesteuerte audiometrische Phänotypisierung 
+Verwendung von HDBSCAN für NHANES-Daten. GitHub. https://github.com/gabrielviniciusnascimento/the_frequenz_ml
 „
 
 ---

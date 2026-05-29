@@ -41,7 +41,7 @@ El proyecto nació de una condición personal: el autor es un sobreviviente de u
 
 ### 1. La mayoría de las pérdidas auditivas son un gradiente, no categorías
 
-No existen "casillas" separadas para el "tipo 1, tipo 2, tipo 3" de pérdida auditiva. Existe una transición suave desde “casi normal” hasta “moderado”. Eso es como decir: no hay 5 tallas de zapato, hay un pie que crece continuamente.
+No existen "casillas" separadas para el "tipo 1, tipo 2, tipo 3" de pérdida auditiva. Hay una transición suave desde “casi normal” hasta “moderado”. Eso es como decir: no hay 5 tallas de zapato, hay un pie que crece continuamente.
 
 ### 2. Hay un grupo real de 30 personas con pérdida severa en un solo oído.
 
@@ -63,7 +63,7 @@ Cuando colocamos un audiograma hipotético de ototoxicidad por platino en el esp
 
 ## Lo que se construyó
 
-### Canalización (20 scripts de Python)
+### Canalización (27 scripts de Python)
 
 | # | Guión | ¿Qué hace?
 |---|-----------|-----------|
@@ -75,11 +75,11 @@ Cuando colocamos un audiograma hipotético de ototoxicidad por platino en el esp
 | 05 | `05_h11_sensibilidad_666.py` | Prueba la sensibilidad al código 666 (sin respuesta) |
 | 06 | `06_model_ready.py` | Limpia y prepara para modelar |
 | 07 | `07_pca_umap.py` | Reducción dimensional + visualización |
-| 08 | `08_hdbscan_grid.py` | Búsqueda de cuadrícula HDBSCAN |
-| 09 | `09_cluster_profiles.py` | Perfiles geométricos de los clusters |
-| 10 |
+| 08 | `08_hdbscan_grid.py` | Gri
 
-`10_rf_surrogate.py` | Random Forest para explicar los clusters |
+d búsqueda desde HDBSCAN |
+| 09 | `09_cluster_profiles.py` | Perfiles geométricos de los clusters |
+| 10 | `10_rf_surrogate.py` | Random Forest para explicar los clusters |
 | 11 | `11_generate_results_md.py` | Genera informe de resultados V1 |
 | 12 | `12_hdbscan_pca_grid.py` | HDBSCAN en el espacio PCA |
 | 13 | `13_kmeans_baseline.py` | KMeans como línea base |
@@ -150,7 +150,7 @@ Archivo HTML autónomo con 9 secciones animadas:
 1. NHANES es transversal: no existe una progresión temporal individual
 2. NHANES no tiene antecedentes de cisplatino pediátrico; "similar al platino" es un sustituto
 3. Frecuencias limitadas a 500-8000 Hz: la ototoxicidad puede comenzar >8 kHz
-4. El tinnitus lo informan los propios pacientes; solo está disponible en ciclos de más de 2005
+4. El tinnitus es autoinformado; solo está disponible en ciclos de más de 2005
 5. No se permite hablar en ruido en NHANES: el ACNUDH proporciona parcialmente
 6. El grupo 1 (12 personas) es demasiado pequeño para la generalización de la población.
 7. 15% de falla de arranque: sensibilidad de muestreo
@@ -172,11 +172,11 @@ Archivo HTML autónomo con 9 secciones animadas:
 - [] API de proyección audiométrica
 - [ ] Traducción a 5 idiomas (EN, ES, PT, DE, FR)
 
-### Para código abierto
-- [] README.md profesional con instrucciones
-- [] requisitos.txt con dependencia
+### Para
 
-está arreglado
+fuente abierta
+- [] README.md profesional con instrucciones
+- [] requisitos.txt con dependencias arregladas
 - [] Pruebas de cordura (3 a 5 pruebas)
 - [] Contribuyendo.md
 
@@ -207,7 +207,7 @@ está arreglado
 ## Cómo citar este trabajo
 
 ```
-[Tu nombre]. (2026). The Frequency ML: fenotipado audiométrico basado en datos 
+Gabriel Vinicius Nascimento. (2026). The Frequency ML: fenotipado audiométrico basado en datos 
 utilizando HDBSCAN en datos NHANES. GitHub. https://github.com/gabrielviniciusnascimento/the_frequency_ml
 ```
 
@@ -226,7 +226,7 @@ utilizando HDBSCAN en datos NHANES. GitHub. https://github.com/gabrielviniciusna
 
 Este documento está en portugués. Planeamos que esté disponible en 5 idiomas:
 - 🇬🇧 Inglés
-- 🇬🇧 English
+- 🇪🇸 English
 - 🇧🇷 portugués
 - 🇩🇪 Alemán
 - 🇫🇷 Francés

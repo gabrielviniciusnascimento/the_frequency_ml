@@ -128,7 +128,7 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 | Cluster | n | % | Descrição geométrica |
 |---------|---|---|---------------------|
 | 0 | 7.098 | 92,2% | Perda leve-moderada sloping, bilateral relativamente simétrica |
-| 1 | 12 | 0,2% | Assimetria unilateral severa (ouvido direito ~80 dB, esquerdo ~16 dB) |
+| 1 | 12 | 0,2% | Assimetria unilateral severa (ouvido direito ~80 dB, esquerdo ~16 dB). Direção direita é notável: firearms exposure tipicamente causa perda esquerda em destros (head-shadow effect). Sugere etiologia diferente de ruído ocupacional. |
 | Ruído | 585 | 7,6% | Padrões heterogêneos, perda moderada-severa |
 
 ### 5.2 Métricas
@@ -136,7 +136,7 @@ HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Nois
 | Métrica | Valor | Interpretação |
 |---------|-------|---------------|
 | Ruído HDBSCAN | 7,6% | Baixo (era ~90% antes dos filtros) |
-| Cross-cycle ARI | 0,27 | Consistência entre ciclos NHANES com elegibilidade diferente (mede robustez a variação de protocolo/coorte) |
+| Cross-cycle ARI | 0,27 | Consistência entre ciclos NHANES com elegibilidade diferente. Valor moderado que reflete variação de composição etária entre ciclos, não falha metodológica. Complementa o Bootstrap ARI (0.68) que mede estabilidade dentro da mesma população. |
 | Bootstrap ARI (mediano) | 0,68 | Reprodutibilidade dentro de subamostras da mesma população (mede estabilidade interna) |
 | Bootstrap ARI (condicional) | 0,60 | Quando clusters aparecem (85% das subamostras) |
 

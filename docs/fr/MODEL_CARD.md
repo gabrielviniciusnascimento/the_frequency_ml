@@ -2,7 +2,7 @@
 
 **Version :** 1.0  
 **Date :** 2026-05-26  
-**Auteurs :** L'équipe Fréquence  
+**Auteur :** Gabriel Vinicius Nascimento — chercheur indépendant, survivant d'un hépatoblastome infantile, ototoxicité du cisplatine. Construit avec l'aide de l'IA (Claude, Gemini). Aucune affiliation institutionnelle.  
 **Statut :** Expérimental — pas d'étiquette clinique  
 
 ---
@@ -114,7 +114,9 @@ HDBSCAN (Regroupement spatial hiérarchique d'applications avec bruit basé sur 
 |-----------------|-------------|------------|----------------|
 | 5 | 3 | 12 | 0,048 |
 | 5 | 5 | 4 | 0,088 |
-| **10** | **5** | **2** | **0,076** |
+| **10** | **5** | **2*
+
+* | **0,076** |
 | 15 | 5 | 2 | 0,083 |
 | 20 | 5 | 0 | 1 000 |
 | 30+ | n'importe quel | 0 | 1 000 |
@@ -125,12 +127,10 @@ HDBSCAN (Regroupement spatial hiérarchique d'applications avec bruit basé sur 
 
 ### 5.1 Clusters trouvés
 
-| Grappe | n | %
-
-| Description géométrique |
+| Grappe | n | % | Description géométrique |
 |---------|---|---|-----------|
 | 0 | 7 098 | 92,2% | Perte de pente légère à modérée, bilatérale relativement symétrique |
-| 1 | 12 | 0,2% | Asymétrie unilatérale sévère (oreille droite ~80 dB, oreille gauche ~16 dB) |
+| 1 | 12 | 0,2% | Asymétrie unilatérale sévère (oreille droite ~80 dB, oreille gauche ~16 dB). La direction droite est remarquable : l’exposition aux armes à feu provoque généralement une perte du côté gauche chez les droitiers (effet d’ombre sur la tête). Suggère une étiologie différente du bruit professionnel. |
 | Bruit | 585 | 7,6% | Modèles hétérogènes, pertes modérées à sévères |
 
 ### 5.2 Métriques
@@ -138,7 +138,7 @@ HDBSCAN (Regroupement spatial hiérarchique d'applications avec bruit basé sur 
 | Métrique | Valeur | Interprétation |
 |---------|-------|---------------|
 | Bruit HDBSCAN | 7,6% | Faible (était d'environ 90 % avant les filtres) |
-| ARI à cycles croisés | 0,27 | Cohérence entre les cycles NHANES avec différentes éligibilités (mesure la robustesse aux variations du protocole/cohorte) |
+| ARI à cycles croisés | 0,27 | Cohérence entre les cycles NHANES avec des éligibilités différentes. Valeur modérée qui reflète la variation de la composition par âge entre les cycles, et non un défaut méthodologique. Complète Bootstrap ARI (0,68) qui mesure la stabilité au sein d’une même population. |
 | Bootstrap ARI (moyen) | 0,68 | Reproductibilité au sein de sous-échantillons de la même population (mesure la stabilité interne) |
 | Bootstrap ARI (conditionnel) | 0,60 | Quand les clusters apparaissent (85 % des sous-échantillons) |
 
@@ -194,7 +194,7 @@ Le filtre ANY25 supprime le « noyau sain » mais ne déforme pas la structure d
 ### 6.3 Cohérence du pipeline du OHHR
 
 | OHHRConfiguration | N | Bruit | PTA × SRT r |
-|----------|---|-------|---------------|
+|------------------------|---|-------|---------------|
 | Sans ANY25 | 581 | 53,0% | 0,015 |
 | Avec ANY25 | 537 | 54,0% | 0,018 |
 
@@ -218,7 +218,9 @@ L'espace binaural moyen à 4 fréquences est *plus stable* que l'espace complet 
 ### 7.1 Validation par cycle (approximate_predict)
 
 | Cycles | n test | ARI |
-|-------|------------|-----|
+|----
+
+---|---------|-----|
 | 1999-2000 | 949 | 0,17 |
 | 2001-2002 | 1 031 | 0,21 |
 | 2003-2004 | 1 000 | 0,18 |
@@ -234,9 +236,7 @@ ARI moyen : 0,27. Les cycles plus récents (N plus élevé) ont un ARI plus éle
 - ARI conditionnel (quand 2 clusters) : 0,60
 - 15 % d'échec : le cluster 1 (12 personnes) ne se forme pas lors du sous-échantillonnage
 
-### 7,3 Va
-
-relations extérieures — OHHR
+### 7.3 Validation externe — OHHR
 
 **Exécuté.** OHHR (Oldenburg Hearing Health Record ; Jafri et al., 2025) : 581 adultes (âge médian 71 ans, PTA médian 45 dB), CC BY 4.0.
 
@@ -307,7 +307,7 @@ numpy, pandas, scipy, scikit-learn, hdbscan, joblib, plotly
 
 ### 10.2 Scripts
 
-20 scripts Python, numérotés séquentiellement. Chaque script a des points de contrôle (ne se réexécute pas si la sortie existe).
+27 scripts Python, numérotés séquentiellement. Chaque script a des points de contrôle (ne se réexécute pas si la sortie existe).
 
 ### 10.3 Données
 

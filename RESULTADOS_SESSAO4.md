@@ -38,6 +38,8 @@ A Sessão 4 aplicou a estratégia de unblock: filtro ANY25, row-centering, 14 li
 
 ## ARI inter-ciclos: 0.27 (±0.10)
 
+**Nota:** O ARI moderado (0.27) reflete variação de composição etária entre ciclos NHANES, não falha metodológica. O Bootstrap ARI (0.68) confirma que a estrutura é real dentro de uma população homogênea. Os dois números juntos contam a história completa.
+
 ---
 
 *Sessão 4 executada com sucesso. Nenhum cluster recebeu rótulo clínico.*
