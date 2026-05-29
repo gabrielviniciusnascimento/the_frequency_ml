@@ -289,4 +289,56 @@ ARI médio: 0,27. Ciclos mais recentes (maior N) têm ARI mais alto.
 1. Nenhum cluster recebeu rótulo clínico — é geometria, não diagnóstico.
 2. O caso pessoal do fundador não foi usado no treino.
 3. Prevalências não devem ser inferidas sem survey weights.
-4. O modelo não deve
+4. O modelo não deve ser usado para decisões clínicas individuais.
+
+---
+
+## 9. Uso Recomendado
+
+| ✅ Pode | ❌ Não deve |
+|---------|------------|
+| Pesquisa em padrões audiométricos | Diagnóstico clínico individual |
+| Simulação de empatia auditiva | Inferência prevalência sem pesos |
+| Geração de hipóteses clínicas | Substituir audiologista |
+| Validação de caso pessoal como ponto externo | Usar dados pessoais como base estatística |
+
+---
+
+## 10. Reprodutibilidade
+
+### 10.1 Ambiente
+
+```
+Python 3.13+
+numpy, pandas, scipy, scikit-learn, hdbscan, joblib, plotly
+```
+
+### 10.2 Scripts
+
+27 scripts Python, numerados sequencialmente. Cada script tem checkpointing (não re-executa se output existe).
+
+### 10.3 Dados
+
+NHANES XPT públicos via CDC. URLs documentadas em `scripts/00_download_nhanes.py`.
+
+### 10.4 Outputs
+
+15+ arquivos JSON com resultados completos. Todos reprodutíveis a partir dos scripts.
+
+---
+
+## 11. Referências
+
+- NHANES: https://wwwn.cdc.gov/nchs/nhanes/
+- HDBSCAN: McInnes, L., Healy, J. (2017). Accelerated Hierarchical Density Based Clustering. ICDM 2017.
+- ARI: Hubert, L., Arabie, P. (1985). Comparing partitions. Journal of Classification, 2(1), 193-218.
+
+---
+
+## 12. Contato
+
+The Frequency — gabrielviniciusnascimento345@gmail.com
+
+---
+
+*Model Card gerado em 2026-05-26. Nenhum rótulo clínico foi usado no treino.*
