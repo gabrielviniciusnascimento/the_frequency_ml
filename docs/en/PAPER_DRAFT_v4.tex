@@ -62,6 +62,10 @@
 
 \begin{document}
 
+\fbox{\parbox{\linewidth}{\textbf{$\triangle$ AUTO-GENERATED \& OUT OF DATE --- DO NOT RENDER OR SUBMIT.} This \texttt{.tex} was exported from an early version of \texttt{PAPER\_DRAFT\_v4.md} and does \emph{not} reflect the 2026-06 corrections (OHHR PTA$\times$SRT r=0.015$\rightarrow$0.85; ``external validation''$\rightarrow$exploratory projection; Cluster~1 reframed as exploratory signal, not a validated phenotype; AUC=1.0 marked circular). The OHHR figures below have been patched, but other claims remain stale. Regenerate from the current \texttt{.md} (now \texttt{PAPER\_DRAFT\_v5\_audit.md}) before producing any PDF.}}
+
+\vspace{1em}
+
 \section{Data-Driven Audiometric Phenotyping Using HDBSCAN on NHANES Data: An
 Unsupervised Approach to Hearing Loss Pattern
 Discovery}\label{data-driven-audiometric-phenotyping-using-hdbscan-on-nhanes-data-an-unsupervised-approach-to-hearing-loss-pattern-discovery}
@@ -97,7 +101,7 @@ RobustScaler, and reduced via PCA (95\% variance, 10 components). HDBSCAN was
 applied with grid search over min\_cluster\_size and min\_samples. Cluster
 stability was assessed via 100× bootstrap resampling (80\% subsampling) and
 cross-cycle Adjusted Rand Index (ARI). A Random Forest surrogate model was
-trained to interpret cluster separation. External validation was performed on
+trained to interpret cluster separation. An exploratory cross-population projection was performed on
 the Oldenburg Hearing Health Record (OHHR, N=581).
 
 \textbf{Results:} HDBSCAN identified 2 clusters with 7.6\% noise (down from
@@ -109,8 +113,8 @@ stability: 85/100 subsamples reproduced 2 clusters (median ARI=0.68).
 Cross-cycle ARI=0.27 (moderate; reflects cohort composition differences, not
 methodological failure). RF surrogate achieved AUC=1.0; top 7 discriminative
 features were all right-ear thresholds. Tinnitus rate was 38\% in outliers
-vs.~18\% in Cluster 0 (chi² p\textless0.001). External validation on OHHR
-confirmed the methodology transfers across populations. Sensitivity analyses
+vs.~18\% in Cluster 0 (chi² p\textless0.001). An exploratory projection onto OHHR
+was performed as a cross-population check (it does not validate the phenotypes). Sensitivity analyses
 confirmed robustness to ANY25 filter (ARI=0.85) and showed higher stability in
 the 4-frequency space used for OHHR validation (bootstrap ARI=0.74).
 
@@ -270,7 +274,7 @@ against independent re-clustering of the holdout.
 trained to predict cluster assignment from the 14 raw thresholds. Gini
 importance, permutation importance, and top split features were recorded.
 
-\subsubsection{2.6 External Validation (OHHR)}\label{external-validation-ohhr}
+\subsubsection{2.6 Exploratory Cross-Population Probe (OHHR)}\label{external-validation-ohhr}
 
 The Oldenburg Hearing Health Record (OHHR; Jafri et al., 2025) is an open-access
 dataset (CC BY 4.0) containing 581 adults (median age 71, 255 female) with
@@ -278,7 +282,7 @@ pure-tone audiometry, speech reception threshold (SRT via Digit Triplet Test),
 and categorical loudness scaling. Data were collected at Hörzentrum Oldenburg
 gGmbH (2013--2015).
 
-For external validation, we applied the following pipeline:
+For this exploratory cross-population projection, we applied the following pipeline:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -429,16 +433,17 @@ Outliers & 308 & 38.0\% \\
 Chi² p\textless0.001, Cramér's V=0.126. Outliers had 2× the tinnitus rate of the
 main cluster.
 
-\subsubsection{3.6 External Validation (OHHR)}\label{external-validation-ohhr-1}
+\subsubsection{3.6 Exploratory Cross-Population Probe (OHHR)}\label{external-validation-ohhr-1}
 
 OHHR individuals (N=581, median age=71, median PTA=45 dB) were projected into
 the NHANES-trained space. 53\% fell as noise (vs.~37.6\% in NHANES), consistent
 with OHHR being an older, clinical population with more severe and heterogeneous
 hearing loss.
 
-The near-zero correlation between PTA and SRT in OHHR (Pearson r=0.015, Spearman
-r=−0.007, N=581) confirms that pure-tone thresholds alone do not predict
-speech-in-noise performance. We note that this correlation is lower than
+CORRECTED (2026-06): better-ear PTA strongly predicts the OHHR Digit-Triplet
+speech-in-noise score (Pearson r=0.85, Spearman r=0.91, N=581). An earlier
+version reported r=0.015; that was an ingestion artifact (mismatched join key),
+not a finding. The text below is stale and retained only for context: We note that this correlation is lower than
 typically reported in the literature (r\textasciitilde0.3--0.5 in younger
 populations), likely reflecting the older OHHR cohort (median age 71) where
 cognitive and central auditory factors may dominate over peripheral thresholds,
@@ -462,7 +467,7 @@ noise points: 87.7\% remained as noise.
 
 \textbf{OHHR with ANY25 filter.} The OHHR validation was re-run applying the
 same ANY25 filter to OHHR (N=537 of 581). Results were virtually identical:
-54.0\% noise (vs.~53.0\% without filter), PTA×SRT r=0.018 (vs.~0.015). This
+54.0\% noise (vs.~53.0\% without filter), PTA×SRT r=0.018 (vs.~0.015). [SUPERSEDED: these r values used the buggy ingestion; corrected r=0.85.] This
 resolves the pipeline inconsistency and confirms that the OHHR findings are not
 driven by the filter choice.
 
@@ -599,12 +604,12 @@ modeling threshold loss alone may underestimate the lived experience.
 
 \subsubsection{4.4 The OHHR Gap}\label{the-ohhr-gap}
 
-The near-zero correlation (r=0.015) between PTA and SRT in OHHR confirms decades
-of clinical observation: pure-tone audiometry does not predict speech-in-noise
-performance. This ``Factor D'' (Füllgrabe \& Moore, 2018) --- the component of
-hearing difficulty unexplained by thresholds --- represents a fundamental
-limitation of audiogram-based phenotyping and a target for future work
-incorporating speech-in-noise and loudness scaling data.
+RETRACTED (2026-06): we initially read a near-zero PTA--SRT correlation (r=0.015)
+as evidence of a ``Factor D'' threshold--speech gap. That correlation was an
+ingestion artifact; corrected, PTA predicts the OHHR Digit-Triplet score strongly
+(r=0.85). There is no threshold--speech dissociation in this dataset. Probing a
+genuine supra-threshold effect would require an adaptive-SNR or cognitive measure
+not available in OHHR.
 
 The 53\% noise rate when projecting OHHR into the NHANES-trained space
 (vs.~37.6\% in NHANES itself) is expected: OHHR is an older, clinical population
@@ -663,8 +668,9 @@ alteration (ANY25 subset). The key findings are:
   Auditory ``atypicality'' (outlier status) is associated with 2× tinnitus
   rates.
 \item
-  Pure-tone audiometry alone does not predict speech-in-noise performance
-  (PTA×SRT r=0.015 in OHHR).
+  In OHHR, pure-tone thresholds strongly predict the Digit-Triplet
+  speech-in-noise score (better-ear PTA×SRT r=0.85; the earlier r=0.015 was an
+  ingestion artifact).
 \end{enumerate}
 
 This methodology enables data-driven hearing simulation profiles for empathy

@@ -1,5 +1,7 @@
 {
   "analysis": "ohhr_with_any25",
+  "INGESTION_BUG": true,
+  "WARNING": "VALORES OBSOLETOS — ESTE ARQUIVO USOU A INGESTÃO COM BUG (merge audiogramlineid×audiogramid, 3433/20538 pontos, orelha/bc/ucl misturados). pta_srt_pearson_r aqui (0.018/0.015) é ARTEFATO. Valor correto (cadeia point→line→audiogram, htl+ac, melhor orelha): Pearson r=0.85, Spearman 0.91 (ver outputs/json/25_ohhr_validation.json e scripts/25). NÃO usar os r deste arquivo.",
   "ohhr_n_total": 581,
   "ohhr_n_any25": 537,
   "noise_fraction": 0.54,
@@ -9,5 +11,10 @@
   "comparison_without_any25": {
     "noise_fraction": 0.53,
     "pearson_r": 0.015
+  },
+  "corrected_reference": {
+    "pta_srt_pearson_r": 0.8537,
+    "pta_srt_spearman_r": 0.9115,
+    "source": "outputs/json/25_ohhr_validation.json"
   }
 }
