@@ -84,7 +84,7 @@ We judged "is there a natural number of well-separated clusters?" with: the **si
 
 ### 2.7 Software and reproducibility
 
-Analyses used Python (NumPy, pandas, scikit-learn, hdbscan, SciPy). All randomness is governed by a single fixed `random_state = 42` to provide one source of truth across the comparison; the core comparison is implemented in `scripts/26_method_comparison.py`, which emits a complete results record (`outputs/json/26_method_comparison.json`). The full pipeline is released as a reproducible audit scaffold (§4.3) so that other groups can run the identical robustness battery on their own datasets.
+Analyses used Python (NumPy, pandas, scikit-learn, hdbscan, SciPy). All randomness is governed by a single fixed `random_state = 42` to provide one source of truth across the comparison; the core comparison is implemented in `scripts/26_method_comparison.py`, which emits a complete results record (`outputs/json/26_method_comparison.json`). Exact package versions are pinned in `requirements-lock.txt`. As a reproducibility check, the full comparison was re-executed independently on a separate machine in a clean environment (Python 3.13, scikit-learn 1.7.2, hdbscan 0.8.44); the silhouette and Gap curves, seed-stability ARI, GMM BIC across covariance specifications, and HDBSCAN diagnostics all matched the reported values to stated precision (e.g., k=2 silhouette 0.2819, GMM full-covariance BIC-minimizing k=5, HDBSCAN dominant-cluster fraction 0.9223). The full pipeline is released as a reproducible audit scaffold (§4.3) so that other groups can run the identical robustness battery on their own datasets.
 
 ---
 
