@@ -1,0 +1,187 @@
+{
+  "script": "26_method_comparison.py",
+  "claim_tested": "estrutura discreta dependente de algoritmo/seed; sob criterios internos ha continuo dominante + outliers raros",
+  "random_state": 42,
+  "n_seeds_kmeans": 12,
+  "gap_B": 5,
+  "silhouette_sample_size": 2500,
+  "n_samples": 7695,
+  "pca_components": 10,
+  "kmeans": {
+    "per_k": {
+      "2": {
+        "silhouette": 0.2819,
+        "seed_ari_mean": 0.9981,
+        "seed_ari_min": 0.9951,
+        "gap": 2.1739,
+        "gap_s": 0.0621
+      },
+      "3": {
+        "silhouette": 0.1577,
+        "seed_ari_mean": 0.8126,
+        "seed_ari_min": 0.4544,
+        "gap": 2.0627,
+        "gap_s": 0.0028
+      },
+      "4": {
+        "silhouette": 0.1586,
+        "seed_ari_mean": 0.6613,
+        "seed_ari_min": 0.3349,
+        "gap": 2.0047,
+        "gap_s": 0.0039
+      },
+      "5": {
+        "silhouette": 0.1763,
+        "seed_ari_mean": 0.6638,
+        "seed_ari_min": 0.3563,
+        "gap": 2.0346,
+        "gap_s": 0.0043
+      },
+      "6": {
+        "silhouette": 0.1587,
+        "seed_ari_mean": 0.9873,
+        "seed_ari_min": 0.9762,
+        "gap": 2.0612,
+        "gap_s": 0.0066
+      },
+      "7": {
+        "silhouette": 0.1064,
+        "seed_ari_mean": 0.9005,
+        "seed_ari_min": 0.7135,
+        "gap": 2.0615,
+        "gap_s": 0.0033
+      },
+      "8": {
+        "silhouette": 0.1052,
+        "seed_ari_mean": 0.8774,
+        "seed_ari_min": 0.4886,
+        "gap": 2.0546,
+        "gap_s": 0.0032
+      },
+      "9": {
+        "silhouette": 0.0969,
+        "seed_ari_mean": 0.759,
+        "seed_ari_min": 0.4804,
+        "gap": 2.0528,
+        "gap_s": 0.0037
+      },
+      "10": {
+        "silhouette": 0.1002,
+        "seed_ari_mean": 0.8391,
+        "seed_ari_min": 0.6241,
+        "gap": 2.0534,
+        "gap_s": 0.0045
+      }
+    },
+    "best_k_by_silhouette": 2,
+    "best_silhouette_value": 0.2819,
+    "gap_optimal_k": 2
+  },
+  "gmm": {
+    "per_k": {
+      "2": {
+        "bic": 171095.5,
+        "aic": 170185.3
+      },
+      "3": {
+        "bic": 168725.0,
+        "aic": 167356.2
+      },
+      "4": {
+        "bic": 168361.3,
+        "aic": 166533.9
+      },
+      "5": {
+        "bic": 168554.9,
+        "aic": 166268.9
+      },
+      "6": {
+        "bic": 168444.0,
+        "aic": 165699.4
+      },
+      "7": {
+        "bic": 168564.5,
+        "aic": 165361.3
+      },
+      "8": {
+        "bic": 168571.4,
+        "aic": 164909.6
+      },
+      "9": {
+        "bic": 168965.4,
+        "aic": 164845.0
+      },
+      "10": {
+        "bic": 169431.1,
+        "aic": 164852.2
+      }
+    },
+    "bic_min_k": 4,
+    "bic_at_kmax_is_min": false,
+    "bic_monotonic_decreasing": false,
+    "bic_range_abs": 2734.2,
+    "bic_range_pct_of_mean": 1.618,
+    "bic_robustness_covariance": {
+      "method": "GMM BIC sweep, covariance in {full,tied,diag,spherical}, n_init=10, max_iter=500, random_state=42",
+      "n_init": 10,
+      "results": {
+        "full": {
+          "bic_min_k": 5,
+          "interior_minimum": true,
+          "bic_range_pct": 1.718,
+          "bic_by_k": {
+            "2": 171095.3,
+            "3": 168725.0,
+            "4": 168357.7,
+            "5": 168194.9,
+            "6": 168440.6,
+            "7": 168419.3,
+            "8": 168571.4,
+            "9": 168825.1,
+            "10": 169220.4
+          }
+        },
+        "tied": {
+          "bic_min_k": 10,
+          "interior_minimum": false,
+          "bic_range_pct": 3.809,
+          "bic_by_k": {
+            "2": 179685.0,
+            "3": 178411.4,
+            "4": 175456.0,
+            "5": 174824.6,
+            "6": 173936.5,
+            "7": 173254.2,
+            "8": 173337.6,
+            "9": 173192.6,
+            "10": 173019.1
+          }
+        },
+        "diag": {
+          "bic_min_k": 10,
+          "interior_minimum": false,
+          "bic_range_pct": 1.476
+        },
+        "spherical": {
+          "bic_min_k": 10,
+          "interior_minimum": false,
+          "bic_range_pct": 8.296
+        }
+      },
+      "conclusion": "Com n_init=10, mínimo interior de BIC SÓ em covariance='full' — e mesmo nele a posição é instável (k=4 com n_init=3 -> k=5 com n_init=10), com amplitude rasa (1.7%). tied/diag/spherical não têm mínimo interior (BIC decresce até k=10). O 'K natural' não é robusto à especificação de covariância nem ao n_init: confirma ausência de estrutura discreta bem definida."
+    }
+  },
+  "hdbscan": {
+    "min_cluster_size": 10,
+    "min_samples": 5,
+    "n_clusters": 2,
+    "n_noise": 585,
+    "noise_fraction": 0.076,
+    "largest_cluster_fraction": 0.9223
+  },
+  "interpretation": "RESOLVIDO (favorável a contínuo, confirmado com n_init=10). Silhouette máx 0.28 em k=2 (separação fraca), caindo p/ k>=3; Gap-ótimo k=2; HDBSCAN = 2 clusters, 7.6% ruído, 1 cluster dominante (92.2%); K-means seed-instável em k=3-5. O único sinal de 'K natural' (GMM BIC com mínimo interior) aparece SÓ com covariance='full', é raso (~1.7%) e instável ao n_init (k=4->k=5); tied/diag/spherical não têm mínimo interior. CLAIM DEFENSÁVEL: sob critérios internos não há suporte robusto para múltiplos fenótipos bem separados; estrutura = contínuo dominante + outliers raros. Consistente com Allen & Eddins (2010).",
+  "review_note": "Confirmado n_init=10 (covariance sweep). silhouette<0.5 = sem estrutura substancial.",
+  "elapsed_s": 17.9,
+  "status": "EXECUTED",
+  "review_decision_needed": "RESOLVIDO com n_init=10: K natural não-robusto (só full, raso, k=4->k=5). Sem pendência."
+}
