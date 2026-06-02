@@ -1,0 +1,43 @@
+{
+  "script": "25_external_validation_ohhr.py",
+  "status": "EXECUTED — corrigido 2026-06 (cadeia point->line->audiogram, HTL+AC, melhor orelha)",
+  "random_state": 42,
+  "ohhr_n": 581,
+  "nhanes_n": 7695,
+  "common_frequencies": [
+    500,
+    1000,
+    2000,
+    4000
+  ],
+  "ingestion_fix": {
+    "old_points_matched": 3433,
+    "corrected_points_matched": 4625,
+    "note": "merge antigo unia line-id a audiogram-id; casava 3433/20538 e misturava orelha/bc/ucl"
+  },
+  "pca_variance_explained": 1.0,
+  "nhanes_common": {
+    "n_clusters": 257,
+    "n_noise": 2886,
+    "noise_fraction": 0.375
+  },
+  "ohhr_projected": {
+    "n_clusters": 113,
+    "n_noise": 357,
+    "noise_fraction": 0.6145
+  },
+  "pta_srt_correlation": {
+    "n": 581,
+    "pta_definition": "best-ear raw PTA (500/1k/2k/4k), not row-centered",
+    "srt_definition": "DTT speech-in-noise SNR threshold, fixed 65 dB noise",
+    "pearson_r": 0.8537,
+    "pearson_p": 3.5892733214818313e-166,
+    "spearman_r": 0.9115,
+    "pta_range_db": [
+      -5.0,
+      78.75
+    ],
+    "pta_sd": 17.2,
+    "prev_buggy_pearson_r": 0.0151
+  }
+}

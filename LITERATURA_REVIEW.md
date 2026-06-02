@@ -134,7 +134,7 @@ O audiograma (PTA) **não conta a história toda**. A literatura é clara:
 - "Factor D" é desconhecido e não capturado pelo audiograma
 - Apenas 50% da performance em SIN é explicada por thresholds
 
-O OHHR tem SRT (speech reception threshold). Nossa análise mostrou correlação PTA × SRT ≈ 0 (r=0.015). Isso **confirma** a literatura: o audiograma não prevê a capacidade de entender fala em ruído.
+O OHHR tem SRT do Digit Triplets Test (fala-no-ruído, SNR com ruído fixo 65 dB). **Correção (2026-06):** uma análise anterior reportou PTA × SRT ≈ 0 (r=0.015), mas era artefato de ingestão (chave de merge errada, orelhas/condução óssea misturadas). Com a ingestão corrigida, melhor-orelha PTA × SRT = **0,85** — neste paradigma de ruído fixo o audiograma **prevê** a fala. Este dataset, portanto, **não** demonstra a dissociação threshold–fala da literatura "hidden hearing loss"; capturá-la exigiria um SNR adaptativo ou medida supraliminar que o OHHR não fornece.
 
 Para The Frequency: as simulações precisam ir além de filtros lineares por frequência. Precisam simular **distorção**, **ruído interno**, **esforço cognitivo** — coisas que o audiograma não captura.
 
@@ -205,6 +205,7 @@ No prior audiometric clustering study has reported this level of sensitivity ana
 2. Wang, M. et al. (2021). "Audiometric phenotypes of noise-induced hearing loss by data-driven cluster analysis." *Frontiers in Medicine*, 8, 662045. [frontiersin.org/articles/10.3389/fmed.2021.662045](https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.662045/full)
 3. Systematic Review (2025). "Uncovering Phenotypes in Sensorineural Hearing Loss: A Systematic Review of Unsupervised Machine Learning Approaches." *PMC 12533775*. [pmc.ncbi.nlm.nih.gov/articles/PMC12533775](https://pmc.ncbi.nlm.nih.gov/articles/PMC12533775/)
 4. Sanchez-Lopez, R. et al. (2020). "Data-driven audiogram classification for mobile audiometry." *Scientific Reports*, 10, 3351. [nature.com/articles/s41598-020-60898-3](https://www.nature.com/articles/s41598-020-60898-3)
+4b. Allen, P. D. & Eddins, D. A. (2010). "Presbycusis phenotypes form a heterogeneous continuum when ordered by degree and configuration of hearing loss." *Hearing Research*, 264(1-2), 10-20. [pubmed.ncbi.nlm.nih.gov/20144701](https://pubmed.ncbi.nlm.nih.gov/20144701/) — **Prior art para o achado de contínuo:** usando PCA (grau + configuração), mostraram que os fenótipos de presbiacusia formam um contínuo heterogêneo e que os "subtipos" surgem da segregação categórica de uma distribuição contínua. O nosso Cluster 0 confirma isso numa amostra maior; não somos os primeiros a propor o contínuo.
 
 ### NHANES + audição
 5. Reed, N. et al. (2021). "Using ML and NHANES to predict hearing loss." *PMC 8521948*. [pmc.ncbi.nlm.nih.gov/articles/PMC8521948](https://pmc.ncbi.nlm.nih.gov/articles/PMC8521948/)

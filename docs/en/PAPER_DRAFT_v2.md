@@ -1,3 +1,5 @@
+> ⚠️ **SUPERSEDED — do not cite or circulate.** Early draft (v2); current version is `PAPER_DRAFT_v4.md`. Contains claims later found incorrect — notably the OHHR PTA×SRT correlation (here ≈0; corrected value r=0.85 after an ingestion bug) and "external validation" framing of the OHHR projection (it is an exploratory 4D check that does not validate the phenotypes). Kept for history only.
+
 # Data-Driven Audiometric Phenotyping Using HDBSCAN on NHANES Data: An Unsupervised Approach to Hearing Loss Pattern Discovery
 
 **Authors:** [Your Name]¹  

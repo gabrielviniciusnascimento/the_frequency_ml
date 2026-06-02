@@ -201,14 +201,14 @@ Chi² p<0,001, Cramér's V=0,126.
 
 The ANY25 filter removes the "healthy core" but does not distort the discovered structure. 98.9% of Cluster 0 members and 75% of Cluster 1 members are preserved across filter settings.
 
-### 6.3 OHHR Pipeline Consistency
+### 6.3 OHHR Projection (corrected ingestion)
 
-| OHHR Configuration | N | Noise | PTA×SRT r |
+| OHHR Configuration | N | Noise | Better-ear PTA × DTT-SRT r |
 |--------------------|---|-------|-----------|
-| Without ANY25 | 581 | 53.0% | 0.015 |
-| With ANY25 | 537 | 54.0% | 0.018 |
+| Corrected (point→line→audiogram, HTL+AC) | 581 | 61.4% | **0.85** |
+| ~~Earlier (mismatched join key)~~ | ~~581~~ | ~~53.0%~~ | ~~0.015 (artifact)~~ |
 
-The ANY25 filter applied to OHHR produces virtually identical results, confirming the pipeline is robust to this choice.
+> **Correção (2026-06):** a ingestão anterior unia `audiogram_point.audiogramlineid` a `audiogram.audiogramid` (chaves de espaços diferentes), casando só 3.433 de 20.538 pontos e misturando orelha, condução óssea e níveis de desconforto no PTA. Isso gerou um r espúrio de 0.015. Com a cadeia correta o r é 0.85 (ver §7.3).
 
 ### 6.4 Bootstrap Stability in 4D Space
 
@@ -217,7 +217,7 @@ The ANY25 filter applied to OHHR produces virtually identical results, confirmin
 | 14D (full thresholds) | 10 PCA | 0.68 | 85% | ~0.40 |
 | 4D (binaural mean 500/1k/2k/4k) | 4 PCA | **0.74** | **100%** | **0.016** |
 
-The 4-frequency binaural-mean space is *more stable* than the full 14-frequency space. This is the space used for OHHR external validation, strengthening the cross-population comparison.
+The 4-frequency binaural-mean space is *more reproducible at the micro-partition level* (ARI 0.74), but in this space HDBSCAN finds 257 micro-clusters, not the 2-cluster solution — so this ARI does **not** mean the phenotype structure is more stable. It is the space used for the exploratory OHHR projection, which does not validate the 14D phenotypes.
 
 
 
@@ -248,21 +248,19 @@ ARI médio: 0,27. Ciclos mais recentes (maior N) têm ARI mais alto.
 
 **Executado.** OHHR (Oldenburg Hearing Health Record; Jafri et al., 2025): 581 adultos (mediana idade 71, PTA mediana 45 dB), CC BY 4.0.
 
-**Pipeline aplicado:**
-1. Extração das 4 frequências comuns com NHANES (500, 1000, 2000, 4000 Hz)
-2. Row-centering (mesma operação do NHANES)
-3. RobustScaler com parâmetros do NHANES (não re-ajustado)
-4. Projeção no PCA treinado no NHANES (10 componentes)
-5. `approximate_predict` com clusterer HDBSCAN do NHANES
+**Pipeline aplicado (espaço comum 4D — distinto do modelo principal 14D):**
+1. Extração das 4 frequências comuns (500, 1000, 2000, 4000 Hz); NHANES reduzido a média binaural por frequência (4 variáveis). As 3 freqs só-NHANES (3000/6000/8000) são descartadas, não imputadas.
+2. Row-centering (mesma operação).
+3. RobustScaler **novo** e PCA **novo** (4 comp, 100% variância trivial) ajustados no NHANES-4D e aplicados ao OHHR. O scaler/PCA 14D do modelo principal **não** são usados (incompatíveis dimensionalmente).
+4. HDBSCAN (mcs=10, ms=5) ajustado no NHANES-4D → **257 micro-clusters**, não os 2 do modelo principal.
+5. `approximate_predict` projeta o OHHR nesse modelo 4D.
 
-**Resultados:**
-- 53% do OHHR caiu como ruído (vs 7.6% no NHANES) — esperado, pois OHHR é mais velho e clínico
-- Correlação PTA × SRT: Pearson r=0.015, Spearman r=−0.007 (N=581)
-- Interpretação: audiograma não prevê fala em ruído ("Factor D")
+**Resultados (ingestão corrigida 2026-06):**
+- 61,4% do OHHR caiu como ruído (vs 37,5% do NHANES no mesmo espaço 4D) — esperado, pois OHHR é mais velho e clínico.
+- Correlação melhor-orelha PTA (bruto) × DTT-SRT: **Pearson r=0,85, Spearman r=0,91 (N=581, p<10⁻¹⁶⁰)**. O DTT é fala-no-ruído com ruído fixo (65 dB), onde a audibilidade domina — por isso a correlação é forte.
+- **Retratação:** a versão anterior reportava r=0,015 e o interpretava como "Factor D / audiograma não prevê fala". Era artefato de ingestão (chave de merge errada). Neste dataset o audiograma **prevê** o escore de fala; não há dissociação threshold–fala demonstrável aqui.
 
-**Limitação:** OHHR não separa R/L, impossibilitando comparação de assimetria. Frequências limitadas a 500–4000 Hz — mas bootstrap em 4D mostrou estabilidade *maior* que 14D (ARI 0.74 vs 0.68).
-
-**Consistência do pipeline:** OHHR com filtro ANY25 (N=537): 54.0% ruído, PTA×SRT r=0.018 — virtualmente idêntico ao sem filtro (53.0%, r=0.015).
+**Limitação:** o projeto OHHR é um check exploratório de sobreposição de forma, **não** valida o Cluster 0/Cluster 1 (espaço 4D com 257 micro-clusters). OHHR não separa R/L nem cobre 3000/6000/8000 Hz, então não testa a assimetria.
 
 ---
 

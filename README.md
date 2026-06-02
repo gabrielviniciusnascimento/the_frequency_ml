@@ -26,7 +26,7 @@ An unsupervised machine learning pipeline that discovers real patterns of hearin
 | Population hearing loss is a continuum, not discrete types | HDBSCAN found 2 clusters, not 10+ |
 | 30 people have severe unilateral right-ear asymmetry | Cluster 1 (12) + outlier sub-group (18), across 4 NHANES cycles |
 | Tinnitus is 2× higher in outliers than main cluster | Chi² p<0.001 |
-| Audiogram doesn't predict speech-in-noise | PTA × SRT r=0.015 in OHHR |
+| In OHHR, the audiogram strongly predicts the fixed-noise speech score | Better-ear PTA × DTT SRT r=0.85 |
 
 
 ## Web API

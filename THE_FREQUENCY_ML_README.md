@@ -30,7 +30,7 @@ O projeto nasceu de uma condição pessoal: o autor é sobrevivente de hepatobla
 | ARI inter-ciclos | **0,27** | Estabilidade moderada |
 | Assimetria unilateral (Cluster 1) | **30 pessoas** | Perda severa em 1 ouvido, outro normal |
 | Tinnitus nos outliers | **38%** | 2x mais que no grupo principal |
-| Correlação PTA × SRT (OHHR) | **r=0,015** | Audiograma não prevê fala em ruído |
+| Correlação PTA × SRT (OHHR) | **r=0,85** | No OHHR, audiograma prevê o escore de fala (ruído fixo) |
 | Scripts Python | **20** | Pipeline reprodutível |
 | Outputs JSON | **15+** | Resultados auditáveis |
 | Dashboard interativo | **9 seções** | Visualização completa |
@@ -51,9 +51,9 @@ O computador encontrou, sem ninguém mandar, 30 pessoas no NHANES que têm perda
 
 Os 585 casos que não se encaixam em nenhum padrão claro têm taxa de tinnitus de 38%, contra 18% no grupo principal. A "estranheza" auditiva está associada a mais sintomas.
 
-### 4. O audiograma não conta a história toda
+### 4. No OHHR, o audiograma prevê o escore de fala (correção)
 
-No dataset OHHR (581 pessoas alemãs), a correlação entre audiograma (PTA) e capacidade de entender fala em ruído (SRT) é praticamente zero (r=0,015). Pessoas com audiogramas similares podem ter performance muito diferente em situações reais.
+No dataset OHHR (581 pessoas alemãs), com a ingestão corrigida, a correlação entre audiograma (melhor-orelha PTA) e o escore do Digit Triplets Test (fala em ruído fixo) é **forte: r=0,85**. Uma análise anterior reportou r≈0 por um erro de junção de dados; corrigido, não há dissociação threshold–fala neste dataset.
 
 ### 5. O sistema de projeção funciona
 

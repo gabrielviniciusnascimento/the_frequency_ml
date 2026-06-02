@@ -20,7 +20,7 @@ I have extended your approach using HDBSCAN (density-based clustering) on the sa
 Key findings:
 - 2 clusters with 7.6% noise (vs. your 6 GMM clusters)
 - Discovery of 30 individuals with severe unilateral asymmetry across 4 NHANES cycles
-- External validation on OHHR (581 individuals, Germany)
+- Exploratory cross-population projection onto OHHR (581 individuals, Germany)
 
 The pipeline is open-source (MIT) with 25 reproducible scripts.
 
@@ -39,26 +39,24 @@ Best regards,
 ## Email 2: Oldenburg / Hearing4all (OHHR creators)
 
 **To:** hearing4all.de / [Jafri's email]  
-**Subject:** External validation of OHHR using NHANES-trained audiometric clustering
+**Subject:** Exploratory projection of OHHR into a NHANES-trained audiometric space
 
 Dear Hearing4all team,
 
-I am writing to share results from using the OHHR dataset (Jafri et al., 2025, Scientific Data) as an external validation cohort for audiometric phenotype discovery.
+I am writing to share an exploratory analysis using the OHHR dataset (Jafri et al., 2025, Scientific Data) as a cross-population reference for audiometric shape discovery, and to ask a question about the Digit-Triplet data.
 
 **What I did:**
 - Trained HDBSCAN clustering on 7,695 NHANES audiograms (US, 1999–2020)
-- Projected 581 OHHR individuals (Germany, 2013–2015) into the NHANES-trained space using `approximate_predict`
-- Computed PTA × SRT correlation in OHHR
+- Built a reduced 4-frequency (500/1k/2k/4k Hz) binaural-mean common space and projected 581 OHHR individuals into it via `approximate_predict`
+- Computed the correlation between better-ear PTA and the OHHR Digit-Triplet SRT
 
-**Key results:**
-- 53% of OHHR fell as noise (vs. 37.6% in NHANES) — expected for an older, clinical population
-- PTA × SRT correlation: r=0.015 — confirming that audiometric thresholds alone don't predict speech-in-noise performance
-- The methodology successfully distinguishes population-based (NHANES) from clinical (OHHR) hearing profiles
+**Key results (honest framing):**
+- In the 4-frequency common space, HDBSCAN fragments into 257 micro-clusters, so this projection probes shape overlap — it is **not** an external validation of the 2-cluster phenotypes. 61.4% of OHHR projected as noise (vs. 37.5% for NHANES in the same space), consistent with an older, clinical cohort.
+- Better-ear PTA × DTT-SRT correlation: **r=0.85** (Spearman 0.91). With the DTT's fixed-noise paradigm, audibility predicts the speech score strongly. (An earlier version of my analysis reported r≈0; that was an ingestion bug on my side — a mismatched join key — which I have since corrected. I mention it transparently.)
 
-**Why this matters for OHHR:**
-- Demonstrates the dataset's value for cross-population validation
-- The speech-in-noise data (SRT) fills a gap that NHANES cannot
-- Opens the door for future work combining OHHR's loudness scaling with NHANES-derived profiles
+**Why I'm reaching out:**
+- I would value your guidance on the correct way to align the Digit-Triplet SRT with audiometric data, and whether an adaptive-SNR or supra-threshold measure in OHHR would be more appropriate for probing threshold-independent speech difficulty.
+- Opens the door for future work combining OHHR's loudness scaling with NHANES-derived shape profiles.
 
 The full pipeline is open-source (MIT). I would be grateful for any feedback on the methodology.
 
@@ -83,7 +81,7 @@ I have built an open-source pipeline that applies HDBSCAN clustering to 26,583 N
 
 - Row-centering to isolate shape from level
 - 100× bootstrap validation (ARI median 0.68)
-- External validation on OHHR (581 individuals, Germany)
+- Exploratory cross-population projection onto OHHR (581 individuals, Germany)
 - Interactive dashboard with 12 sections, 5 languages
 
 **What I am looking for:**
