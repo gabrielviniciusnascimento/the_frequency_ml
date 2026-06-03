@@ -1,3 +1,5 @@
+> ℹ️ **Framing superseded — retained as the descriptive base.** The current manuscript is the reproducibility audit [`PAPER_DRAFT_v5_audit.md`](PAPER_DRAFT_v5_audit.md), which reframes this work from "phenotype discovery" to "do reported subtypes survive method/seed/specification?". This v4 is **kept because v5 cites its detailed analyses** (e.g., the 14D Cluster-1 characterization and LOO recall). Its numbers reflect the 2026-06 corrections (OHHR r=0.85; OHHR = exploratory probe, not validation; AUC=1.0 marked circular; Cluster 1 = exploratory signal). Read its "discovery" language as superseded by the v5 audit framing.
+
 # Data-Driven Audiometric Phenotyping Using HDBSCAN on NHANES Data: An Unsupervised Approach to Hearing Loss Pattern Discovery
 
 **Authors:** Gabriel Vinicius Nascimento¹  

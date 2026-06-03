@@ -1,5 +1,13 @@
 # Model Card — The Frequency ML
 
+> ℹ️ **Enquadramento superado pelo manuscrito de auditoria.** O projeto deixou de ser
+> "descoberta de fenótipos" e passou a ser uma **auditoria de reprodutibilidade** (ver
+> [`docs/en/PAPER_DRAFT_v5_audit.md`](docs/en/PAPER_DRAFT_v5_audit.md) e
+> [`MUDANCA_v5_AUDITORIA.md`](MUDANCA_v5_AUDITORIA.md)). Este Model Card é **mantido como
+> referência técnica detalhada** do pipeline (dados, pré-processamento, resultados já
+> corrigidos), mas onde ele fala em "descobrir padrões" leia "caracterizar a estrutura
+> que a auditoria testa". Os números estão corretos; o enquadramento conceitual está no v5.
+
 **Versão:** 1.0  
 **Data:** 2026-05-26  
 **Autor:** Gabriel Vinicius Nascimento — independent researcher, childhood hepatoblastoma survivor, cisplatin ototoxicity. Built with AI assistance (Claude, Gemini). No institutional affiliation.  
