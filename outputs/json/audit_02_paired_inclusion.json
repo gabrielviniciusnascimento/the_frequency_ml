@@ -1,0 +1,280 @@
+{
+  "script": "audit_02_paired_inclusion.py",
+  "task": "HANDOFF Task 2 — paired inclusion (D2)",
+  "B": 1000,
+  "policies": {
+    "none": "no abnormality filter on any system",
+    "abn_all": "auditory ANY25; grip min-hand<P20(sex x decade); vision max|SE|>=1D",
+    "current": "auditory ANY25; grip/vision unfiltered (published)"
+  },
+  "results": {
+    "none": {
+      "audicao": {
+        "n": 13433,
+        "z_cells": {
+          "2": {
+            "real": 611,
+            "null_mean": 480.24,
+            "ratio_real_over_nullmean": 1.27,
+            "p_emp": 0.001
+          },
+          "3": {
+            "real": 304,
+            "null_mean": 70.19,
+            "ratio_real_over_nullmean": 4.33,
+            "p_emp": 0.001
+          },
+          "4": {
+            "real": 158,
+            "null_mean": 8.19,
+            "ratio_real_over_nullmean": 19.3,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 94,
+            "null_mean": 0.73,
+            "ratio_real_over_nullmean": 128.07,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "grip": {
+        "n": 8335,
+        "z_cells": {
+          "2": {
+            "real": 559,
+            "null_mean": 645.05,
+            "ratio_real_over_nullmean": 0.87,
+            "p_emp": 0.999
+          },
+          "3": {
+            "real": 128,
+            "null_mean": 94.91,
+            "ratio_real_over_nullmean": 1.35,
+            "p_emp": 0.002
+          },
+          "4": {
+            "real": 35,
+            "null_mean": 7.05,
+            "ratio_real_over_nullmean": 4.96,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 14,
+            "null_mean": 0.26,
+            "ratio_real_over_nullmean": 54.69,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "visao": {
+        "n": 7057,
+        "z_cells": {
+          "2": {
+            "real": 235,
+            "null_mean": 649.28,
+            "ratio_real_over_nullmean": 0.36,
+            "p_emp": 1.0
+          },
+          "3": {
+            "real": 104,
+            "null_mean": 238.68,
+            "ratio_real_over_nullmean": 0.44,
+            "p_emp": 1.0
+          },
+          "4": {
+            "real": 64,
+            "null_mean": 96.49,
+            "ratio_real_over_nullmean": 0.66,
+            "p_emp": 1.0
+          },
+          "5": {
+            "real": 40,
+            "null_mean": 34.88,
+            "ratio_real_over_nullmean": 1.15,
+            "p_emp": 0.21578
+          }
+        }
+      }
+    },
+    "abn_all": {
+      "audicao": {
+        "n": 7695,
+        "z_cells": {
+          "2": {
+            "real": 408,
+            "null_mean": 288.15,
+            "ratio_real_over_nullmean": 1.42,
+            "p_emp": 0.001
+          },
+          "3": {
+            "real": 175,
+            "null_mean": 31.5,
+            "ratio_real_over_nullmean": 5.56,
+            "p_emp": 0.001
+          },
+          "4": {
+            "real": 92,
+            "null_mean": 2.46,
+            "ratio_real_over_nullmean": 37.35,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 52,
+            "null_mean": 0.13,
+            "ratio_real_over_nullmean": 400.0,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "grip": {
+        "n": 2215,
+        "z_cells": {
+          "2": {
+            "real": 138,
+            "null_mean": 161.15,
+            "ratio_real_over_nullmean": 0.86,
+            "p_emp": 0.97702
+          },
+          "3": {
+            "real": 38,
+            "null_mean": 18.77,
+            "ratio_real_over_nullmean": 2.02,
+            "p_emp": 0.001
+          },
+          "4": {
+            "real": 13,
+            "null_mean": 0.53,
+            "ratio_real_over_nullmean": 24.76,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 4,
+            "null_mean": 0.0,
+            "ratio_real_over_nullmean": 1333.33,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "visao": {
+        "n": 3341,
+        "z_cells": {
+          "2": {
+            "real": 111,
+            "null_mean": 146.27,
+            "ratio_real_over_nullmean": 0.76,
+            "p_emp": 1.0
+          },
+          "3": {
+            "real": 55,
+            "null_mean": 27.05,
+            "ratio_real_over_nullmean": 2.03,
+            "p_emp": 0.001
+          },
+          "4": {
+            "real": 32,
+            "null_mean": 6.11,
+            "ratio_real_over_nullmean": 5.23,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 19,
+            "null_mean": 2.13,
+            "ratio_real_over_nullmean": 8.92,
+            "p_emp": 0.001
+          }
+        }
+      }
+    },
+    "current": {
+      "audicao": {
+        "n": 7695,
+        "z_cells": {
+          "2": {
+            "real": 408,
+            "null_mean": 288.15,
+            "ratio_real_over_nullmean": 1.42,
+            "p_emp": 0.001
+          },
+          "3": {
+            "real": 175,
+            "null_mean": 31.5,
+            "ratio_real_over_nullmean": 5.56,
+            "p_emp": 0.001
+          },
+          "4": {
+            "real": 92,
+            "null_mean": 2.46,
+            "ratio_real_over_nullmean": 37.35,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 52,
+            "null_mean": 0.13,
+            "ratio_real_over_nullmean": 400.0,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "grip": {
+        "n": 8335,
+        "z_cells": {
+          "2": {
+            "real": 559,
+            "null_mean": 645.05,
+            "ratio_real_over_nullmean": 0.87,
+            "p_emp": 0.999
+          },
+          "3": {
+            "real": 128,
+            "null_mean": 94.91,
+            "ratio_real_over_nullmean": 1.35,
+            "p_emp": 0.002
+          },
+          "4": {
+            "real": 35,
+            "null_mean": 7.05,
+            "ratio_real_over_nullmean": 4.96,
+            "p_emp": 0.001
+          },
+          "5": {
+            "real": 14,
+            "null_mean": 0.26,
+            "ratio_real_over_nullmean": 54.69,
+            "p_emp": 0.001
+          }
+        }
+      },
+      "visao": {
+        "n": 7057,
+        "z_cells": {
+          "2": {
+            "real": 235,
+            "null_mean": 649.28,
+            "ratio_real_over_nullmean": 0.36,
+            "p_emp": 1.0
+          },
+          "3": {
+            "real": 104,
+            "null_mean": 238.68,
+            "ratio_real_over_nullmean": 0.44,
+            "p_emp": 1.0
+          },
+          "4": {
+            "real": 64,
+            "null_mean": 96.49,
+            "ratio_real_over_nullmean": 0.66,
+            "p_emp": 1.0
+          },
+          "5": {
+            "real": 40,
+            "null_mean": 34.88,
+            "ratio_real_over_nullmean": 1.15,
+            "p_emp": 0.21578
+          }
+        }
+      }
+    }
+  },
+  "status": "EXECUTED"
+}

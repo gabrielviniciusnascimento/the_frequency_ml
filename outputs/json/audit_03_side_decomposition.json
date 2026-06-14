@@ -1,0 +1,60 @@
+{
+  "script": "audit_03_side_decomposition.py",
+  "task": "HANDOFF Task 3 — tail decomposition by side (D3)",
+  "N": 7695,
+  "sd_native_db": 10.9452,
+  "contrast_def": "c = PTA_R - PTA_L (mean of 7 freq per ear); c>0 = right ear worse",
+  "population_sign_split": {
+    "n_right_worse": 3367,
+    "n_left_worse": 4021,
+    "frac_right_worse": 0.4557,
+    "binom_p_vs_50_50": 2.915728809357316e-14
+  },
+  "tail_by_side": {
+    "native_abs_gt_40dB": {
+      "n_tail": 107,
+      "n_right_worse": 54,
+      "n_left_worse": 53,
+      "frac_right_worse": 0.5047,
+      "binom_p_vs_50_50": 1.0
+    },
+    "native_abs_gt_50dB": {
+      "n_tail": 69,
+      "n_right_worse": 38,
+      "n_left_worse": 31,
+      "frac_right_worse": 0.5507,
+      "binom_p_vs_50_50": 0.47036853185814453
+    },
+    "abs_z_gt_2": {
+      "n_tail": 411,
+      "n_right_worse": 172,
+      "n_left_worse": 239,
+      "frac_right_worse": 0.4185,
+      "binom_p_vs_50_50": 0.0011065454720735018
+    },
+    "abs_z_gt_3": {
+      "n_tail": 181,
+      "n_right_worse": 84,
+      "n_left_worse": 97,
+      "frac_right_worse": 0.4641,
+      "binom_p_vs_50_50": 0.3724648239355135
+    },
+    "abs_z_gt_4": {
+      "n_tail": 91,
+      "n_right_worse": 46,
+      "n_left_worse": 45,
+      "frac_right_worse": 0.5055,
+      "binom_p_vs_50_50": 1.0
+    },
+    "abs_z_gt_5": {
+      "n_tail": 50,
+      "n_right_worse": 30,
+      "n_left_worse": 20,
+      "frac_right_worse": 0.6,
+      "binom_p_vs_50_50": 0.20263875106454066
+    }
+  },
+  "test_order_variable_available": false,
+  "note_test_order": "No test-order / ear-first variable in the processed matrix (would require re-ingesting raw AUX). Quality codes AUAREQC/AUALEQC exist.",
+  "status": "EXECUTED"
+}
