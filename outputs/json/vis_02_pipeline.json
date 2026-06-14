@@ -1,0 +1,108 @@
+{
+  "script": "vis_02_pipeline.py",
+  "note": "MESMO pipeline (26/grip_02). Feature space = [vis_R, vis_L] SE (2D).",
+  "n_samples": 7057,
+  "pca_components": 1,
+  "kmeans": {
+    "per_k": {
+      "2": {
+        "silhouette": 0.6982,
+        "seed_ari_mean": 0.597,
+        "gap": 3.7042,
+        "gap_s": 0.0141
+      },
+      "3": {
+        "silhouette": 0.7346,
+        "seed_ari_mean": 0.6477,
+        "gap": 3.2559,
+        "gap_s": 0.0091
+      },
+      "4": {
+        "silhouette": 0.4784,
+        "seed_ari_mean": 0.6213,
+        "gap": 3.0306,
+        "gap_s": 0.0121
+      },
+      "5": {
+        "silhouette": 0.5975,
+        "seed_ari_mean": 0.4906,
+        "gap": 2.931,
+        "gap_s": 0.0042
+      },
+      "6": {
+        "silhouette": 0.5256,
+        "seed_ari_mean": 0.7083,
+        "gap": 2.8959,
+        "gap_s": 0.0088
+      },
+      "7": {
+        "silhouette": 0.541,
+        "seed_ari_mean": 0.5724,
+        "gap": 2.8788,
+        "gap_s": 0.015
+      },
+      "8": {
+        "silhouette": 0.5405,
+        "seed_ari_mean": 0.6394,
+        "gap": 2.8641,
+        "gap_s": 0.0297
+      },
+      "9": {
+        "silhouette": 0.5412,
+        "seed_ari_mean": 0.5873,
+        "gap": 2.8133,
+        "gap_s": 0.0409
+      },
+      "10": {
+        "silhouette": 0.5625,
+        "seed_ari_mean": 0.5523,
+        "gap": 2.7739,
+        "gap_s": 0.0194
+      }
+    },
+    "best_k_by_silhouette": 3,
+    "best_silhouette_value": 0.7346,
+    "gap_optimal_k": 2
+  },
+  "gmm": {
+    "per_k": {
+      "2": {
+        "bic": 27139.8
+      },
+      "3": {
+        "bic": 26747.3
+      },
+      "4": {
+        "bic": 26740.2
+      },
+      "5": {
+        "bic": 26776.0
+      },
+      "6": {
+        "bic": 26793.0
+      },
+      "7": {
+        "bic": 26801.1
+      },
+      "8": {
+        "bic": 26844.8
+      },
+      "9": {
+        "bic": 26874.5
+      },
+      "10": {
+        "bic": 26865.1
+      }
+    },
+    "bic_min_k": 4,
+    "interior_minimum": true,
+    "bic_range_pct_of_mean": 1.489
+  },
+  "hdbscan": {
+    "n_clusters": 38,
+    "n_noise": 91,
+    "noise_fraction": 0.0129,
+    "largest_cluster_fraction": 0.1421
+  },
+  "status": "EXECUTED"
+}

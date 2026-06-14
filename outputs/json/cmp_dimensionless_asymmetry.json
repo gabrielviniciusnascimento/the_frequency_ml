@@ -1,0 +1,74 @@
+{
+  "script": "cmp_dimensionless_asymmetry.py",
+  "metric": "z = (R-L)/sd(R-L real); conta |z|>2,3,4,5; razão = real/(copula+1)",
+  "note": "Camada adimensional; thresholds clínicos nativos preservados nos JSONs originais.",
+  "systems": {
+    "audicao": {
+      "n": 7695,
+      "sd_native": 10.9827,
+      "real": {
+        "2": 405,
+        "3": 176,
+        "4": 89,
+        "5": 47
+      },
+      "copula": {
+        "2": 272,
+        "3": 31,
+        "4": 1,
+        "5": 0
+      },
+      "ratio": {
+        "2": 1.48,
+        "3": 5.5,
+        "4": 44.5,
+        "5": 47.0
+      }
+    },
+    "grip": {
+      "n": 8335,
+      "sd_native": 4.1102,
+      "real": {
+        "2": 559,
+        "3": 128,
+        "4": 35,
+        "5": 14
+      },
+      "copula": {
+        "2": 649,
+        "3": 97,
+        "4": 10,
+        "5": 0
+      },
+      "ratio": {
+        "2": 0.86,
+        "3": 1.31,
+        "4": 3.18,
+        "5": 14.0
+      }
+    },
+    "visao": {
+      "n": 7057,
+      "sd_native": 0.9352,
+      "real": {
+        "2": 235,
+        "3": 104,
+        "4": 64,
+        "5": 40
+      },
+      "copula": {
+        "2": 638,
+        "3": 228,
+        "4": 109,
+        "5": 28
+      },
+      "ratio": {
+        "2": 0.37,
+        "3": 0.45,
+        "4": 0.58,
+        "5": 1.38
+      }
+    }
+  },
+  "status": "EXECUTED"
+}

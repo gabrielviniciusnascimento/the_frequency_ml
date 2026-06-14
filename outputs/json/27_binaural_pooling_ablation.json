@@ -1,0 +1,140 @@
+{
+  "script": "27_binaural_pooling_ablation.py",
+  "random_state": 42,
+  "n_samples": 7695,
+  "hdbscan": {
+    "min_cluster_size": 10,
+    "min_samples": 5
+  },
+  "arm_A_14d_separate_ears": {
+    "pca_components": 10,
+    "n_clusters": 2,
+    "n_noise": 585,
+    "largest_cluster_fraction": 0.9223,
+    "cluster_sizes": {
+      "0": 13,
+      "1": 7097
+    },
+    "asymmetry_cluster": {
+      "label": 0,
+      "n": 13,
+      "pta_right_db": 74.3,
+      "pta_left_db": 15.1,
+      "right_minus_left_db": 59.2,
+      "seqn": [
+        11373,
+        12310,
+        26532,
+        30574,
+        63701,
+        64371,
+        65402,
+        66116,
+        66373,
+        68127,
+        69108,
+        88806,
+        93249
+      ]
+    },
+    "asymmetry_separability": {
+      "mean_silhouette": 0.7207,
+      "centroid_separation_d": 8.5388
+    }
+  },
+  "arm_B_7d_binaural_mean": {
+    "pca_components": 5,
+    "n_clusters": 2,
+    "n_noise": 6680,
+    "largest_cluster_fraction": 0.1306,
+    "cluster_sizes": {
+      "0": 10,
+      "1": 1005
+    },
+    "asymmetry_separability": {
+      "mean_silhouette": 0.3785,
+      "centroid_separation_d": 1.24
+    }
+  },
+  "asymmetry_fate_under_pooling": {
+    "n_asymmetric": 13,
+    "fate_counts": {
+      "noise": 11,
+      "dominant_cluster": 2,
+      "small_cluster": 0
+    },
+    "largest_coclustered_block": 0,
+    "modal_label_in_B": null,
+    "survival_rate": 0.0,
+    "per_seqn": [
+      {
+        "seqn": 11373,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 12310,
+        "braco_b_label": 1,
+        "destino": "dominant_cluster"
+      },
+      {
+        "seqn": 26532,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 30574,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 63701,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 64371,
+        "braco_b_label": 1,
+        "destino": "dominant_cluster"
+      },
+      {
+        "seqn": 65402,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 66116,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 66373,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 68127,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 69108,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 88806,
+        "braco_b_label": -1,
+        "destino": "noise"
+      },
+      {
+        "seqn": 93249,
+        "braco_b_label": -1,
+        "destino": "noise"
+      }
+    ]
+  },
+  "verdict": "POOLING APAGA A ASSIMETRIA",
+  "interpretation": "Braço A (orelhas separadas) isola um cluster de assimetria unilateral (N=13, PTA direito 74.3 dB vs esquerdo 15.1 dB, diferença 59.2 dB). Sob média binaural (Braço B), a dimensão R-vs-L é removida do espaço de features; 2 dos 13 caem no cluster dominante e 11 viram ruído. Taxa de sobrevivência=0.0. Separabilidade do grupo (independente do HDBSCAN): silhouette 0.7207 (14D) -> 0.3785 (7D pooled); separação de centróides d=8.5388 -> 1.24. POOLING APAGA A ASSIMETRIA.",
+  "status": "EXECUTED"
+}

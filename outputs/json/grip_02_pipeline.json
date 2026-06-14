@@ -1,0 +1,141 @@
+{
+  "script": "grip_02_pipeline.py",
+  "note": "MESMO pipeline da audiometria (26). Feature space = 6 grip trials (lado anatômico). Sem filtro ANY25-equivalente (não justificado no codebook MGX).",
+  "n_samples": 8304,
+  "pca_components": 5,
+  "kmeans": {
+    "per_k": {
+      "2": {
+        "silhouette": 0.2409,
+        "seed_ari_mean": 0.9927,
+        "gap": 2.6517,
+        "gap_s": 0.0035
+      },
+      "3": {
+        "silhouette": 0.2119,
+        "seed_ari_mean": 0.9768,
+        "gap": 2.6599,
+        "gap_s": 0.02
+      },
+      "4": {
+        "silhouette": 0.1884,
+        "seed_ari_mean": 0.9864,
+        "gap": 2.6115,
+        "gap_s": 0.0052
+      },
+      "5": {
+        "silhouette": 0.1716,
+        "seed_ari_mean": 0.9936,
+        "gap": 2.6111,
+        "gap_s": 0.0043
+      },
+      "6": {
+        "silhouette": 0.1484,
+        "seed_ari_mean": 0.6285,
+        "gap": 2.6088,
+        "gap_s": 0.0118
+      },
+      "7": {
+        "silhouette": 0.1404,
+        "seed_ari_mean": 0.8845,
+        "gap": 2.5896,
+        "gap_s": 0.0071
+      },
+      "8": {
+        "silhouette": 0.1417,
+        "seed_ari_mean": 0.6575,
+        "gap": 2.5856,
+        "gap_s": 0.0144
+      },
+      "9": {
+        "silhouette": 0.1378,
+        "seed_ari_mean": 0.7992,
+        "gap": 2.5803,
+        "gap_s": 0.0077
+      },
+      "10": {
+        "silhouette": 0.1251,
+        "seed_ari_mean": 0.5596,
+        "gap": 2.5729,
+        "gap_s": 0.007
+      }
+    },
+    "best_k_by_silhouette": 2,
+    "best_silhouette_value": 0.2409,
+    "gap_optimal_k": 2
+  },
+  "gmm": {
+    "per_k": {
+      "2": {
+        "bic": 98808.5
+      },
+      "3": {
+        "bic": 98713.7
+      },
+      "4": {
+        "bic": 98591.3
+      },
+      "5": {
+        "bic": 98758.0
+      },
+      "6": {
+        "bic": 98800.5
+      },
+      "7": {
+        "bic": 98778.7
+      },
+      "8": {
+        "bic": 98891.7
+      },
+      "9": {
+        "bic": 99055.1
+      },
+      "10": {
+        "bic": 99181.2
+      }
+    },
+    "bic_min_k": 4,
+    "interior_minimum": true,
+    "bic_range_pct_of_mean": 0.597,
+    "bic_robustness_covariance": {
+      "full": {
+        "bic_min_k": 4,
+        "interior_minimum": true,
+        "bic_range_pct": 0.583
+      },
+      "tied": {
+        "bic_min_k": 10,
+        "interior_minimum": false,
+        "bic_range_pct": 3.091
+      },
+      "diag": {
+        "bic_min_k": 5,
+        "interior_minimum": true,
+        "bic_range_pct": 0.403
+      },
+      "spherical": {
+        "bic_min_k": 10,
+        "interior_minimum": false,
+        "bic_range_pct": 11.666
+      },
+      "_interior_in": [
+        "full",
+        "diag"
+      ]
+    }
+  },
+  "hdbscan": {
+    "n_clusters": 2,
+    "n_noise": 7474,
+    "noise_fraction": 0.9,
+    "largest_cluster_fraction": 0.0984
+  },
+  "comparison_to_audiometry": {
+    "audiometry_best_silhouette": 0.28,
+    "audiometry_hdbscan_largest_frac": 0.9223,
+    "grip_best_silhouette": 0.2409,
+    "grip_hdbscan_largest_frac": 0.0984,
+    "grip_gmm_bic_depth_pct": 0.597
+  },
+  "status": "EXECUTED"
+}

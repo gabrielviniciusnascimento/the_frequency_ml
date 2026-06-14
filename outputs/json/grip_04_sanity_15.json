@@ -1,0 +1,572 @@
+{
+  "script": "grip_04_sanity_15.py",
+  "sanity_15": {
+    "n": 15,
+    "n_consistent": 15,
+    "n_single_trial_outlier": 0,
+    "n_fully_separated_weak_lt_strong": 14,
+    "effort_flag_note": "*E: 1=esforço máximo (bom), 2=questionável",
+    "n_with_questionable_effort_trial": 2,
+    "cases": [
+      {
+        "seqn": 63738,
+        "MGATHAND": 1,
+        "R_trials": [
+          22.9,
+          22.8,
+          18.9
+        ],
+        "L_trials": [
+          42.8,
+          43.5,
+          44.7
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 22.9,
+        "L_max": 44.7,
+        "abs_diff": 21.8,
+        "weak_hand": "R",
+        "weak_hand_spread": 4.0,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 66142,
+        "MGATHAND": 1,
+        "R_trials": [
+          31.2,
+          33.1,
+          31.8
+        ],
+        "L_trials": [
+          55.8,
+          58.4,
+          58.5
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 33.1,
+        "L_max": 58.5,
+        "abs_diff": 25.4,
+        "weak_hand": "R",
+        "weak_hand_spread": 1.9,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 67620,
+        "MGATHAND": 1,
+        "R_trials": [
+          18.9,
+          19.1,
+          16.5
+        ],
+        "L_trials": [
+          40.4,
+          42.9,
+          44.9
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 19.1,
+        "L_max": 44.9,
+        "abs_diff": 25.8,
+        "weak_hand": "R",
+        "weak_hand_spread": 2.6,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 67719,
+        "MGATHAND": 1,
+        "R_trials": [
+          49.0,
+          62.9,
+          62.5
+        ],
+        "L_trials": [
+          41.4,
+          42.0,
+          41.2
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 62.9,
+        "L_max": 42.0,
+        "abs_diff": 20.9,
+        "weak_hand": "L",
+        "weak_hand_spread": 0.8,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 67776,
+        "MGATHAND": 1,
+        "R_trials": [
+          37.1,
+          39.4,
+          40.0
+        ],
+        "L_trials": [
+          15.7,
+          16.2,
+          17.8
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 40.0,
+        "L_max": 17.8,
+        "abs_diff": 22.2,
+        "weak_hand": "L",
+        "weak_hand_spread": 2.1,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 69054,
+        "MGATHAND": 1,
+        "R_trials": [
+          45.2,
+          50.9,
+          54.1
+        ],
+        "L_trials": [
+          15.1,
+          22.4,
+          30.0
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 54.1,
+        "L_max": 30.0,
+        "abs_diff": 24.1,
+        "weak_hand": "L",
+        "weak_hand_spread": 14.9,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 69680,
+        "MGATHAND": 2,
+        "R_trials": [
+          21.5,
+          22.7,
+          22.2
+        ],
+        "L_trials": [
+          38.4,
+          46.8,
+          43.5
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 22.7,
+        "L_max": 46.8,
+        "abs_diff": 24.1,
+        "weak_hand": "R",
+        "weak_hand_spread": 1.2,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 73677,
+        "MGATHAND": 1,
+        "R_trials": [
+          9.7,
+          7.4,
+          8.2
+        ],
+        "L_trials": [
+          33.6,
+          30.4,
+          33.6
+        ],
+        "R_effort_flags": [
+          2,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 9.7,
+        "L_max": 33.6,
+        "abs_diff": 23.9,
+        "weak_hand": "R",
+        "weak_hand_spread": 2.3,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 1,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 74698,
+        "MGATHAND": 2,
+        "R_trials": [
+          62.5,
+          69.7,
+          66.3
+        ],
+        "L_trials": [
+          45.6,
+          46.8,
+          48.3
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 69.7,
+        "L_max": 48.3,
+        "abs_diff": 21.4,
+        "weak_hand": "L",
+        "weak_hand_spread": 2.7,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 77780,
+        "MGATHAND": 1,
+        "R_trials": [
+          50.6,
+          49.3,
+          50.1
+        ],
+        "L_trials": [
+          16.8,
+          20.7,
+          23.1
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 50.6,
+        "L_max": 23.1,
+        "abs_diff": 27.5,
+        "weak_hand": "L",
+        "weak_hand_spread": 6.3,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 78710,
+        "MGATHAND": 2,
+        "R_trials": [
+          12.0,
+          12.2,
+          12.8
+        ],
+        "L_trials": [
+          26.7,
+          36.4,
+          38.1
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 12.8,
+        "L_max": 38.1,
+        "abs_diff": 25.3,
+        "weak_hand": "R",
+        "weak_hand_spread": 0.8,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 79715,
+        "MGATHAND": 1,
+        "R_trials": [
+          33.3,
+          33.0,
+          33.9
+        ],
+        "L_trials": [
+          25.7,
+          54.2,
+          54.4
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          2,
+          1,
+          1
+        ],
+        "R_max": 33.9,
+        "L_max": 54.4,
+        "abs_diff": 20.5,
+        "weak_hand": "R",
+        "weak_hand_spread": 0.9,
+        "weak_max_lt_strong_min": false,
+        "n_questionable_effort_trials": 1,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 80513,
+        "MGATHAND": 1,
+        "R_trials": [
+          11.3
+        ],
+        "L_trials": [
+          30.3,
+          33.0,
+          31.5
+        ],
+        "R_effort_flags": [
+          1,
+          null,
+          null
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 11.3,
+        "L_max": 33.0,
+        "abs_diff": 21.7,
+        "weak_hand": "R",
+        "weak_hand_spread": 0.0,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 81061,
+        "MGATHAND": 1,
+        "R_trials": [
+          24.9,
+          23.6,
+          26.8
+        ],
+        "L_trials": [
+          46.0,
+          46.2,
+          47.8
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 26.8,
+        "L_max": 47.8,
+        "abs_diff": 21.0,
+        "weak_hand": "R",
+        "weak_hand_spread": 3.2,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      },
+      {
+        "seqn": 82363,
+        "MGATHAND": 2,
+        "R_trials": [
+          18.9,
+          18.8,
+          17.1
+        ],
+        "L_trials": [
+          40.6,
+          38.9,
+          40.3
+        ],
+        "R_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "L_effort_flags": [
+          1,
+          1,
+          1
+        ],
+        "R_max": 18.9,
+        "L_max": 40.6,
+        "abs_diff": 21.7,
+        "weak_hand": "R",
+        "weak_hand_spread": 1.8,
+        "weak_max_lt_strong_min": true,
+        "n_questionable_effort_trials": 0,
+        "verdict": "consistente"
+      }
+    ]
+  },
+  "overlap": {
+    "audio13": [
+      11373,
+      12310,
+      26532,
+      30574,
+      63701,
+      64371,
+      65402,
+      66116,
+      66373,
+      68127,
+      69108,
+      88806,
+      93249
+    ],
+    "n_with_valid_grip": 7,
+    "seqn_with_valid_grip": [
+      63701,
+      64371,
+      65402,
+      66116,
+      66373,
+      68127,
+      69108
+    ],
+    "grip_detail": [
+      {
+        "seqn": 63701,
+        "grip_R_max": 51.8,
+        "grip_L_max": 48.1,
+        "abs_diff_kg": 3.7,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 64371,
+        "grip_R_max": 36.0,
+        "grip_L_max": 33.5,
+        "abs_diff_kg": 2.5,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 65402,
+        "grip_R_max": 39.4,
+        "grip_L_max": 42.5,
+        "abs_diff_kg": 3.1,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 66116,
+        "grip_R_max": 43.8,
+        "grip_L_max": 44.7,
+        "abs_diff_kg": 0.9,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 66373,
+        "grip_R_max": 21.2,
+        "grip_L_max": 22.3,
+        "abs_diff_kg": 1.1,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 68127,
+        "grip_R_max": 27.1,
+        "grip_L_max": 27.1,
+        "abs_diff_kg": 0.0,
+        "grip_asym_gt20kg": false
+      },
+      {
+        "seqn": 69108,
+        "grip_R_max": 27.7,
+        "grip_L_max": 31.6,
+        "abs_diff_kg": 3.9,
+        "grip_asym_gt20kg": false
+      }
+    ],
+    "n_also_grip_asymmetric_gt20kg": 0,
+    "seqn_also_asym": []
+  },
+  "status": "EXECUTED"
+}

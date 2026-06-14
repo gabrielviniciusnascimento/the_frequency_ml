@@ -1,0 +1,56 @@
+{
+  "script": "vis_00_download_vision.py",
+  "n_files": 4,
+  "n_ok": 4,
+  "n_error": 0,
+  "results": [
+    {
+      "cycle": "1999-2000",
+      "year": "1999",
+      "component": "vix",
+      "file": "VIX",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/VIX.xpt",
+      "path": "data\\raw\\nhanes\\1999\\VIX.xpt",
+      "status": "ok",
+      "size_bytes": 3090400,
+      "sha256": "2ce0f725f162d6c6659391cb891261ade785a36d831cfe5c61700ef7fbe0945e",
+      "error": null
+    },
+    {
+      "cycle": "1999-2000",
+      "year": "1999",
+      "component": "demo",
+      "file": "DEMO",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/DEMO.xpt",
+      "path": "data\\raw\\nhanes\\1999\\DEMO.xpt",
+      "status": "ok",
+      "size_bytes": 11500560,
+      "sha256": "a17bd1ebfd6007b8dc93f16259cb090678eb6c467a39363b7e932bba15febf89",
+      "error": null
+    },
+    {
+      "cycle": "2001-2002",
+      "year": "2001",
+      "component": "vix",
+      "file": "VIX_B",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/VIX_B.xpt",
+      "path": "data\\raw\\nhanes\\2001\\VIX_B.xpt",
+      "status": "ok",
+      "size_bytes": 3403680,
+      "sha256": "753ac073ce081c5d259b78f37b679ac9cc3ef23107c9e05cce078784d936e7d8",
+      "error": null
+    },
+    {
+      "cycle": "2001-2002",
+      "year": "2001",
+      "component": "demo",
+      "file": "DEMO_B",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/DEMO_B.xpt",
+      "path": "data\\raw\\nhanes\\2001\\DEMO_B.xpt",
+      "status": "ok",
+      "size_bytes": 3273520,
+      "sha256": "6458dc2307cee244ab6ba26f70ec78c7b842ffc68e668bc43f0ab6b9737937d9",
+      "error": null
+    }
+  ]
+}

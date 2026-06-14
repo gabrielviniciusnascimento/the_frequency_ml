@@ -1,0 +1,122 @@
+{
+  "script": "grip_01_ingest_anatomical.py",
+  "mapping_rule": "MGATHAND==1 -> Hand1=Right,Hand2=Left; MGATHAND==2 -> inverted. Per-hand strength = max of 3 trials. Source: MGX_H codebook.",
+  "n_total_rows": 14984,
+  "per_cycle": {
+    "2011-2012": {
+      "n_total": 7821,
+      "n_mgathand_valid": 7177,
+      "n_excluded_mgathand": 644,
+      "mgathand_distribution": {
+        "1.0": 3614,
+        "2.0": 3563,
+        "nan": 644
+      },
+      "n_right_first": 3614,
+      "n_left_first": 3563,
+      "n_both_hands_valid": 7064
+    },
+    "2013-2014": {
+      "n_total": 8291,
+      "n_mgathand_valid": 7807,
+      "n_excluded_mgathand": 484,
+      "mgathand_distribution": {
+        "2.0": 3907,
+        "1.0": 3900,
+        "nan": 484
+      },
+      "n_right_first": 3900,
+      "n_left_first": 3907,
+      "n_both_hands_valid": 7678
+    }
+  },
+  "example_rows": [
+    {
+      "SEQN": 62161,
+      "MGATHAND": 1,
+      "MGXH1_t1t2t3": [
+        31.4,
+        31.7,
+        34.4
+      ],
+      "MGXH2_t1t2t3": [
+        33.7,
+        31.1,
+        34.9
+      ],
+      "hand1_anatomical_side": "DIREITA",
+      "grip_R_max": 34.4,
+      "grip_L_max": 34.9
+    },
+    {
+      "SEQN": 62163,
+      "MGATHAND": 1,
+      "MGXH1_t1t2t3": [
+        34.3,
+        36.5,
+        27.1
+      ],
+      "MGXH2_t1t2t3": [
+        30.6,
+        34.5,
+        29.4
+      ],
+      "hand1_anatomical_side": "DIREITA",
+      "grip_R_max": 36.5,
+      "grip_L_max": 34.5
+    },
+    {
+      "SEQN": 62168,
+      "MGATHAND": 1,
+      "MGXH1_t1t2t3": [
+        12.9,
+        12.5,
+        11.9
+      ],
+      "MGXH2_t1t2t3": [
+        8.7,
+        9.6,
+        8.8
+      ],
+      "hand1_anatomical_side": "DIREITA",
+      "grip_R_max": 12.9,
+      "grip_L_max": 9.6
+    },
+    {
+      "SEQN": 62164,
+      "MGATHAND": 2,
+      "MGXH1_t1t2t3": [
+        32.5,
+        35.4,
+        37.5
+      ],
+      "MGXH2_t1t2t3": [
+        32.9,
+        38.3,
+        37.4
+      ],
+      "hand1_anatomical_side": "ESQUERDA",
+      "grip_R_max": 38.3,
+      "grip_L_max": 37.5
+    },
+    {
+      "SEQN": 62165,
+      "MGATHAND": 2,
+      "MGXH1_t1t2t3": [
+        20.1,
+        22.2,
+        24.9
+      ],
+      "MGXH2_t1t2t3": [
+        24.6,
+        25.6,
+        25.0
+      ],
+      "hand1_anatomical_side": "ESQUERDA",
+      "grip_R_max": 25.6,
+      "grip_L_max": 24.9
+    }
+  ],
+  "output_csv": "data\\processed\\grip_feature_matrix.csv",
+  "status": "EXECUTED — STOP-GATE: aguardar revisão do mapeamento antes dos passos 3-4"
+}

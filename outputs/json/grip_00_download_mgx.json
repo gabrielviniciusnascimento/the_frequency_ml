@@ -1,0 +1,57 @@
+{
+  "script": "grip_00_download_mgx.py",
+  "n_jobs": 11,
+  "n_files": 4,
+  "n_ok": 4,
+  "n_error": 0,
+  "results": [
+    {
+      "cycle": "2011-2012",
+      "year": "2011",
+      "component": "mgx",
+      "file": "MGX_G",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/MGX_G.xpt",
+      "path": "data\\raw\\nhanes\\2011\\MGX_G.xpt",
+      "status": "ok",
+      "size_bytes": 1756560,
+      "sha256": "a91826169503b45efe605d5b51a7b0937e9cda2400011e38a6216a73200ed783",
+      "error": null
+    },
+    {
+      "cycle": "2011-2012",
+      "year": "2011",
+      "component": "demo",
+      "file": "DEMO_G",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/DEMO_G.xpt",
+      "path": "data\\raw\\nhanes\\2011\\DEMO_G.xpt",
+      "status": "ok",
+      "size_bytes": 3753760,
+      "sha256": "eaf0525d1952626885af3e935415a1f66ad62c18698080e7354789c125af252d",
+      "error": null
+    },
+    {
+      "cycle": "2013-2014",
+      "year": "2013",
+      "component": "mgx",
+      "file": "MGX_H",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/MGX_H.xpt",
+      "path": "data\\raw\\nhanes\\2013\\MGX_H.xpt",
+      "status": "ok",
+      "size_bytes": 1861840,
+      "sha256": "49f0440f0bacf180bd9a674f5411c0bae0230a8c2e5a90a41e8e6754bcb8607b",
+      "error": null
+    },
+    {
+      "cycle": "2013-2014",
+      "year": "2013",
+      "component": "demo",
+      "file": "DEMO_H",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/DEMO_H.xpt",
+      "path": "data\\raw\\nhanes\\2013\\DEMO_H.xpt",
+      "status": "ok",
+      "size_bytes": 3833200,
+      "sha256": "f8f0cbb3085a323d4cde22349b164878fea1e64dbc404e65b5815c7816b547d7",
+      "error": null
+    }
+  ]
+}

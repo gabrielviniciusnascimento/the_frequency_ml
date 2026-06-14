@@ -1,0 +1,81 @@
+{
+  "script": "vis_01_ingest.py",
+  "spherical_equivalent_rule": "SE = sphere + cylinder/2; vis_R=OD, vis_L=OS (anatômicos diretos)",
+  "special_codes": "88=could not obtain -> NaN; fora de faixa -> NaN",
+  "n_total_rows": 14203,
+  "per_cycle": {
+    "1999-2000": {
+      "n_total": 6758,
+      "n_both_eyes_valid": 6159,
+      "n_could_not_obtain_88": 241,
+      "median_SE_OD": -0.12,
+      "median_SE_OS": -0.12
+    },
+    "2001-2002": {
+      "n_total": 7445,
+      "n_both_eyes_valid": 6709,
+      "n_could_not_obtain_88": 302,
+      "median_SE_OD": -0.25,
+      "median_SE_OS": -0.25
+    }
+  },
+  "example_rows": [
+    {
+      "SEQN": 2,
+      "cycle": "1999-2000",
+      "OD_sphere": 1.75,
+      "OD_cyl": 1.0,
+      "OS_sphere": 1.75,
+      "OS_cyl": 1.5,
+      "vis_R_SE": 2.25,
+      "vis_L_SE": 2.5,
+      "asym_RL": -0.25
+    },
+    {
+      "SEQN": 5,
+      "cycle": "1999-2000",
+      "OD_sphere": 0.25,
+      "OD_cyl": 0.5,
+      "OS_sphere": 0.25,
+      "OS_cyl": 0.75,
+      "vis_R_SE": 0.5,
+      "vis_L_SE": 0.62,
+      "asym_RL": -0.12
+    },
+    {
+      "SEQN": 6,
+      "cycle": "1999-2000",
+      "OD_sphere": -12.5,
+      "OD_cyl": 1.0,
+      "OS_sphere": -13.75,
+      "OS_cyl": 2.0,
+      "vis_R_SE": -12.0,
+      "vis_L_SE": -12.75,
+      "asym_RL": 0.75
+    },
+    {
+      "SEQN": 20999,
+      "cycle": "2001-2002",
+      "OD_sphere": 2.0,
+      "OD_cyl": 1.5,
+      "OS_sphere": -1.5,
+      "OS_cyl": 2.0,
+      "vis_R_SE": 2.75,
+      "vis_L_SE": -0.5,
+      "asym_RL": 3.25
+    },
+    {
+      "SEQN": 21004,
+      "cycle": "2001-2002",
+      "OD_sphere": -2.25,
+      "OD_cyl": 2.25,
+      "OS_sphere": -1.0,
+      "OS_cyl": 0.75,
+      "vis_R_SE": -1.12,
+      "vis_L_SE": -0.62,
+      "asym_RL": -0.5
+    }
+  ],
+  "output_csv": "data\\processed\\vis_feature_matrix.csv",
+  "status": "EXECUTED — STOP-GATE: revisar 5 linhas antes dos passos 3-5"
+}
