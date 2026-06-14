@@ -1,0 +1,63 @@
+% Cross-system interaural-asymmetry audit (auditory / grip / vision) on NHANES.
+% Materialized from existing result JSONs (30_null_model, grip_02/03/04, vis_02/03,
+% cmp_dimensionless_asymmetry). No new analysis.
+% Requires: \usepackage{booktabs, threeparttable, siunitx (optional)}.
+\begin{table}[t]
+\centering
+\begin{threeparttable}
+\caption{Cross-system audit of interaural asymmetry on NHANES: auditory thresholds
+vs.\ grip strength vs.\ vision (objective autorefraction). The three systems share an
+identical clustering and Gaussian-copula null pipeline; only the dimensionless
+$|z|$ layer is comparable across native units (dB, kg, dioptres).}
+\label{tab:crosssystem-asymmetry}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & \textbf{Auditory} & \textbf{Grip} & \textbf{Vision} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Data \& integrity}}\\
+NHANES component        & Audiometry (AUX)        & Grip strength (MGX)      & Autorefraction (VIX) \\
+Cycles                  & 9 cycles, 1999--2020    & 2011--2014               & 1999--2002 \\
+$N$ (sample)            & 7{,}695                 & 8{,}335\tnote{a}         & 7{,}057 \\
+Bilateral measure       & threshold R/L $\times$7 freq & grip R/L (max of 3) & sph.\ equiv.\ OD/OS \\
+Side reconstruction     & R/L direct              & via MGATHAND\tnote{b}     & OD/OS direct \\
+Sanity of extreme cases & 13/13 genuine           & 15/15 consistent         & not audited\tnote{c} \\
+\addlinespace
+\multicolumn{4}{@{}l}{\emph{Continuum diagnostics}}\\
+Best silhouette ($k$)   & 0.28 ($k{=}2$)          & 0.24 ($k{=}2$)           & 0.73 ($k{=}3$)\tnote{d} \\
+Gap-optimal $k$         & 2                       & 2                        & 2 \\
+GMM BIC well depth      & 1.5\%                   & 0.60\%                   & 1.49\% \\
+HDBSCAN dominant / noise& 92.2\% / 7.6\%          & 9.8\% / 90.0\%           & 14.2\% / 1.3\%\tnote{d} \\
+\addlinespace
+\multicolumn{4}{@{}l}{\emph{Asymmetry tail vs.\ Gaussian-copula null}}\\
+$R$--$L$ correlation    & ---                     & 0.933                    & 0.912 \\
+SD$(R{-}L)$, native     & 10.98 dB                & 4.11 kg                  & 0.94 D \\
+Native thr.\ (copula$=$0)& $|R{-}L|{>}50$ dB      & $|R{-}L|{>}20$ kg        & $|\mathrm{OD}{-}\mathrm{OS}|{>}10$ D \\
+Real : copula (native)  & \textbf{69 : 0}         & \textbf{15 : 0}          & \textbf{8 : 0} \\
+Ratio $|z|{>}2$         & 1.48                    & 0.86                     & \textbf{0.37} \\
+Ratio $|z|{>}5$ (real:cop)& 47.0 (47:0)           & 14.0 (14:0)              & 1.38 (40:28) \\
+\midrule
+\textbf{Verdict}        & strong excess;          & excess from $\sim$3$\sigma$ & below null to 4$\sigma$\tnote{e} \\
+                        & continuous level        &                          & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item[a] Null-model sample (ages 20--69, both hands valid). The clustering pipeline used
+$N{=}8{,}304$ (complete 6-trial cases).
+\item[b] MGXH1/H2 encode test \emph{order}, not anatomical side; reconstructed by crossing
+with MGATHAND (1$=$right, 2$=$left tested first). 1{,}128 rows excluded for missing
+MGATHAND --- no side was imputed.
+\item[c] The auditory (13) and grip (15) extreme cases each passed an individual sanity
+check (raw trials, special-code/effort flags, plausibility); the vision extremes were not
+audited row-by-row.
+\item[d] \textbf{Artifact, not structure.} The bilateral vision space has only two features,
+so PCA collapses to one component; the high silhouette and the 38 HDBSCAN micro-clusters
+reflect a strongly peaked 1-D distribution plus the 0.25\,D measurement grid, not discrete
+subtypes. These two rows are not comparable to the auditory/grip values.
+\item[e] Vision stays real$<$copula up to 4$\sigma$ (central ocular coupling), crossing 1.0
+only at $|z|{>}5$ (1.38), where the copula nearly matches it (40:28) --- the cleanest
+negative control of the three. Cross-system overlap is uninformative: grip (2011--2014) and
+vision (1999--2002) cycles do not intersect.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
