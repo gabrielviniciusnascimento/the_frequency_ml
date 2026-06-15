@@ -1,41 +1,53 @@
 cff-version: 1.2.0
-title: "The Frequency ML"
-message: "If you use this software, please cite it using the metadata from this file."
+title: "The Frequency ML — a null-calibrated audit of interaural asymmetry in paired-organ measurements"
+message: "If you use this software or its findings, please cite it using the metadata from this file."
 type: software
 authors:
-  - given-names: Gabriel
+  - given-names: Gabriel Vinicius
     family-names: Nascimento
     email: gabrielviniciusnascimento345@gmail.com
     affiliation: "Independent Researcher"
+    # TODO: after creating your ORCID (https://orcid.org/register), add it here:
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
 repository-code: "https://github.com/gabrielviniciusnascimento/the_frequency_ml"
 url: "https://github.com/gabrielviniciusnascimento/the_frequency_ml"
 license: MIT
-version: "1.1.0"
-date-released: "2026-05-26"
+version: "2.0.0"
+date-released: "2026-06-15"
 keywords:
+  - paired-organ measurements
+  - interaural asymmetry
   - audiometry
-  - machine-learning
-  - hearing-loss
-  - hdbscan
+  - copula null model
+  - monte-carlo envelope
+  - negative control
+  - reproducibility
   - nhanes
   - computational-audiology
   - accessibility
-  - unsupervised-learning
 abstract: >
-  Data-driven audiometric phenotyping using HDBSCAN on NHANES data.
-  An unsupervised machine learning pipeline that discovers real patterns
-  of hearing loss in 26,583 people from the US National Health and
-  Nutrition Examination Survey, without imposing clinical labels. Motivated by the author's personal experience as a childhood cisplatin ototoxicity survivor.
+  A reusable, null-calibrated audit that separates a real inter-side contrast
+  excess from statistical and measurement artifact in paired-organ measurements
+  (ears, hands, eyes). Applied to NHANES, it shows a real far-tail of inter-ear
+  asymmetry in audiometry that is bilaterally symmetric, robust to Gaussian,
+  heteroscedastic-measurement and tail-dependent (t-copula) nulls, replicated
+  externally (OHHR), and erased by binaural averaging — while a general-population
+  visual control shows no excess. The method (4-step protocol, Monte-Carlo
+  envelope, internal negative control) and all results are reproducible from the
+  numbered scripts. Motivated by the author's lived experience as a childhood
+  cisplatin ototoxicity survivor: making audible the loss that averaging hides.
 references:
   - type: article
-    title: "Data-driven segmentation of audiometric phenotypes across a large clinical cohort"
+    title: "Presbycusis phenotypes form a heterogeneous continuum when ordered by degree and configuration of hearing loss"
     authors:
-      - family-names: Parthasarathy
-        given-names: A.
-    journal: "Scientific Reports"
-    year: 2020
-    volume: 10
-    doi: "10.1038/s41598-020-63515-5"
+      - family-names: Allen
+        given-names: P. D.
+      - family-names: Eddins
+        given-names: D. A.
+    journal: "Hearing Research"
+    year: 2010
+    volume: 264
+    doi: "10.1016/j.heares.2010.02.001"
   - type: article
     title: "The Oldenburg Hearing Health Record (OHHR)"
     authors:

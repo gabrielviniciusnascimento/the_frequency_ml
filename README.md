@@ -3,31 +3,34 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.13+](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://www.python.org/)
 
-**A reproducibility audit of unsupervised audiometric phenotyping on NHANES.**
+**A null-calibrated audit that tells a real inter-side asymmetry from artifact in paired-organ measurements (ears, hands, eyes).**
 
-This project asks a methodological question — *do the data-driven "subtypes" of hearing loss reported in the literature survive a change of clustering method, random seed, and model specification?* — rather than claiming to discover new phenotypes. On 7,695 NHANES adults, after isolating audiogram shape via row-centering, no internal criterion supports stable discrete subtypes; the structure is a dominant continuum with rare outliers. We **concede priority** on the continuum finding to prior work (Allen & Eddins, 2010) and recent large-cohort studies (Dimitrov 2026; Encina-Llamas 2024; Xu 2026), and contribute a multi-algorithm robustness audit plus a reproducible scaffold others can run on their own data.
+Many clinical measurements are made on paired organs, and each yields a difference between the two sides. This project asks a measure-agnostic question — *does a paired-organ measure carry a real non-Gaussian tail of inter-side asymmetry, beyond what its own marginals, correlation, and measurement noise can produce?* — and answers it with a reusable 4-step audit: anatomical-pairing check, sum/difference decomposition, a **Monte-Carlo null envelope** (empirical *p*), and an internal **negative control**. Applied to three NHANES paired systems with identical code, it finds a real far-tail of inter-ear asymmetry in **audiometry** that is **bilaterally symmetric**, robust to Gaussian, heteroscedastic-measurement, and tail-dependent (t-copula) nulls, **replicated externally** (OHHR), and **erased by binaural averaging** — while a general-population **visual** control shows no excess and **grip** shows excess only over a Gaussian null. We make no directional or lateralized-trauma claim; the contribution is the method and the auditory finding. We concede the audiogram-shape *continuum* to prior work (Allen & Eddins 2010; Dimitrov 2026; Encina-Llamas 2024).
 
-> 📄 Current manuscript: [`docs/en/PAPER_DRAFT_v5_audit.md`](docs/en/PAPER_DRAFT_v5_audit.md) · context: [`MUDANCA_v5_AUDITORIA.md`](MUDANCA_v5_AUDITORIA.md)
+> 📄 Current manuscript: [`docs/en/PAPER_DRAFT_v6_crosssystem.md`](docs/en/PAPER_DRAFT_v6_crosssystem.md) · the pre-commit audit that hardened it: [`HANDOFF_PRECOMMIT_AUDIT.md`](HANDOFF_PRECOMMIT_AUDIT.md) (scripts `audit_01`–`audit_08`)
+> Motivated by the author's lived experience as a childhood cisplatin ototoxicity survivor: *making audible the loss that averaging hides.*
 > 🇧🇷 [Português](docs/pt/) | 🇪🇸 [Español](docs/es/) | 🇩🇪 [Deutsch](docs/de/) | 🇫🇷 [Français](docs/fr/) *(translations pending review — old framing)*
 
 ---
 
 ## What it does
 
-1. **Ingests** 26,583 audiograms from 9 NHANES cycles (1999–2020); filters to 7,695 with audiometric alteration
-2. **Extracts shape** via row-centering (orthogonal projection onto the zero-sum hyperplane — isolates configuration from severity)
-3. **Audits robustness** across three algorithm families: K-means (k×seed), GMM (BIC × covariance specification), HDBSCAN
-4. **Scores** with silhouette, Gap statistic, seed-to-seed ARI, and BIC — testing whether any "natural" number of clusters exists
-5. **Probes** cross-population transfer onto OHHR (N=581) — exploratory, not a validation
+1. **Verifies** the anatomical pairing of the two channels from source docs (e.g. grip side via `MGATHAND`, not test order)
+2. **Decomposes** each bilateral pair into inter-side *sum* (level) and *difference* (contrast); a real unilateral signal must live in the difference subspace
+3. **Calibrates** the contrast tail against a **Monte-Carlo null envelope** (B = 2,000 copula regenerations → empirical *p*), plus heteroscedastic-measurement and tail-dependent (t-copula) nulls
+4. **Controls** with the general-population visual system (no real excess expected) as an internal negative control
+5. **Sanity-checks** every extreme case against the raw measurements, and replicates the auditory finding on a second cohort (OHHR)
 
 ## Key findings
 
 | Finding | Evidence |
 |---------|----------|
-| Discrete subtypes are **not robust** to method/seed/specification | Silhouette ≤0.28; Gap optimal at k=2; K-means seed-unstable at k=3–5; GMM BIC interior minimum only under `full` covariance (shallow, k=4→5) |
-| Structure is a dominant continuum + rare outliers | HDBSCAN: one cluster = 92.2% of sample, 7.6% noise |
-| Result independently reproduced + environment pinned | Re-run on a separate machine matches to precision; `requirements-lock.txt` |
-| (Process) A silent ingestion bug, found and fixed | OHHR PTA × DTT-SRT was r≈0.015 (artifact) → **r=0.85** after correcting the relational join |
+| Real far-tail of inter-ear asymmetry in audiometry | \|z\|>4: 92 real vs null mean 2.5 (95% CI [0,6]), *p* = 5×10⁻⁴ (Bonferroni-sig); `audit_01` |
+| Robust — not selection, not measurement noise, not tail dependence | survives unfiltered inclusion (`audit_02`), a heteroscedastic null (`audit_04`), and a t-copula (`audit_05`), all at \|z\|≥3 |
+| **Bilaterally symmetric** (no lateralization) | >50 dB tail: 38 right-worse / 31 left-worse, binomial *p* = 0.47; replicated in OHHR (`audit_03`, `audit_07`) |
+| **Binaural averaging erases it** | the extreme-contrast group collapses to noise when the two ears are averaged before clustering (`27`) |
+| Grip excess is Gaussian-only; vision is a clean negative control | grip fails the t-copula; vision within/below its null in the general population (`audit_05`, `audit_02`) |
+| Built with an adversarial self-audit | 8-task pre-commit audit walked back an earlier lateralized-trauma claim (`HANDOFF_PRECOMMIT_AUDIT.md`) |
 
 
 ## Web API
@@ -138,7 +141,9 @@ the_frequency_ml/
 
 | Document | Description |
 |----------|-------------|
-| **[Audit manuscript (v5)](docs/en/PAPER_DRAFT_v5_audit.md)** | **Current paper — reproducibility audit of phenotyping** |
+| **[Cross-system manuscript (v6)](docs/en/PAPER_DRAFT_v6_crosssystem.md)** | **Current paper — null-calibrated paired-organ asymmetry audit** |
+| [Pre-commit audit (8 tasks)](HANDOFF_PRECOMMIT_AUDIT.md) | Adversarial self-audit (`audit_01`–`audit_08`) that hardened the v6 claims |
+| [Audit manuscript (v5)](docs/en/PAPER_DRAFT_v5_audit.md) | Prior single-system reproducibility audit (history) |
 | [What changed & why](MUDANCA_v5_AUDITORIA.md) | The pivot from "discovery" to "audit" |
 | [Verification report](outputs/VERIFICATION_REPORT.md) | Independent re-run + numeric checks |
 | [Model Card](MODEL_CARD.md) | Formal ML documentation |
@@ -149,10 +154,12 @@ the_frequency_ml/
 
 ## How to cite
 
+See [`CITATION.cff`](CITATION.cff) (a Zenodo DOI will be minted on the first GitHub release).
+
 ```bibtex
 @software{the_frequency_ml_2026,
   author = {Gabriel Vinicius Nascimento},
-  title  = {The Frequency ML: A reproducibility audit of unsupervised audiometric phenotyping on NHANES},
+  title  = {The Frequency ML: a null-calibrated audit of interaural asymmetry in paired-organ measurements},
   year   = {2026},
   url    = {https://github.com/gabrielviniciusnascimento/the_frequency_ml}
 }
