@@ -4,6 +4,15 @@
 **Affiliation:** The Frequency Project, Brazil  
 **Status:** Complete Spinoff Note (Frente 1)  
 
+> **Post-audit reconciliation (2026-06-15).** This note's *methods* (LOPO, LOBO, dual-encoding) stand
+> unchanged. Its *framing of the worked example* is updated to match the later pre-commit audit
+> (`docs/PIPELINE_METHODS_AUDIT.md`, `meta_analysis.md`): the minority group is **not** a discrete
+> "right-ear phenotype." The inter-ear contrast is a **bilaterally symmetric tail of a continuum**
+> (either ear can be the affected one), the cluster's size is **hyperparameter-unstable** (N ∈ {9, 13, 24}
+> across an HDBSCAN sweep; distinct in only ~58% of cells), and no method family supports discrete
+> subtypes. Read this way the diagnostics are *more* compelling: applied honestly, they **downgrade a
+> putative minority cluster to a continuum tail** — which is exactly the failure mode they exist to catch.
+
 ---
 
 ## 1. Introduction: The Circularity Trap in Unsupervised Phenotyping Validation
@@ -20,17 +29,17 @@ We demonstrate these diagnostics using a real-world case study from **The Freque
 
 ---
 
-## 2. Worked Example: The NHANES Unilateral Right-Ear Asymmetry Cluster
-Using $N = 7,695$ adults with audiometric alteration from the NHANES database, our row-centered shape-space pipeline identified:
-* **Cluster 0 (Majority):** A heterogeneous continuous mass comprising $92.2\%$ ($N = 7,098$) of the population representing bilateral age-related hearing loss.
-* **Cluster 1 (Minority):** A tiny group of only **12 individuals** ($0.15\%$) presenting severe-to-profound unilateral right-ear hearing loss (median interaural contrast of 61 dB).
+## 2. Worked Example: A Putative Severe Inter-Ear Asymmetry "Cluster" in NHANES
+Using $N = 7,695$ adults with audiometric alteration from the NHANES database, our row-centered shape-space pipeline (HDBSCAN, min\_cluster\_size=10, min\_samples=5) returns a partition with:
+* **Majority label (Cluster 0):** A heterogeneous continuous mass comprising $92.2\%$ ($N = 7,098$) of the population — bilateral, broadly symmetric age-related loss.
+* **Minority label (Cluster 1):** A tiny group presenting severe-to-profound loss in **one ear** with the other near-normal (median interaural contrast ~61 dB). Its size is **unstable**: the diagnostics below were computed on an **$N = 12$ snapshot**, while the current canonical pipeline (mcs=10, ms=5) returns **$N = 13$** and an HDBSCAN sweep spans **9–24** (`audit_06`). At this snapshot the affected ear is the right; the broader distribution's asymmetry tail is **bilaterally symmetric**, so this is a *single-ear* tail, not a right-ear subtype.
 * **Noise:** $7.6\%$ ($N = 585$) outliers.
 
-A standard Stratified 5-Fold Cross-Validation surrogate Random Forest model trained on the cluster labels yields:
+A standard Stratified 5-Fold Cross-Validation surrogate Random Forest model trained on these labels yields:
 * **Mean AUC-ROC:** $1.0000$
 * **Mean Precision-Recall AUC (PR-AUC):** $1.0000$
 
-This perfect score is purely an artifact of circularity. To test if this $n=12$ cluster represents a stable, recognizable clinical signature or is just a collection of random outliers, we apply the three proposed diagnostics.
+This perfect score is purely an artifact of circularity. The real question is whether this minority label is a **stable, recognizable signature** or a **boundary region of a continuum** that the partition happened to fence off. We apply the three non-circular diagnostics — and, as it turns out, they point to the latter.
 
 ---
 
@@ -42,10 +51,10 @@ To prevent the surrogate model from simply memorizing the cluster's boundary in 
   3. Predict the probability of membership for the held-out positive instance $p$.
   4. If the predicted probability exceeds a balanced threshold (or the predicted class is 1), the instance is "recognized."
 
-### Empirical Results (NHANES Cluster 1):
+### Empirical Results (NHANES minority label):
 Our LOPO audit yielded a **recall of $75.0\%$ (9 out of 12 recognized)**:
-* **Recognized (9/12):** 9 individuals were classified back into Cluster 1 with high probability (ranging from $0.6567$ to $0.9467$). This proves that the cluster is not a "one-point artifact" carried by a single extreme outlier; instead, the members share a cohesive, recognizable feature profile.
-* **Borderline/Missed (3/12):** 3 individuals were misclassified as majority/noise (SEQN 12310: prob $0.4900$, SEQN 66373: prob $0.3633$, SEQN 88806: prob $0.1767$). These cases represent boundary-straddling individuals where the right-ear asymmetry is less extreme, highlighting the transition zone between the outlier mode and the continuum.
+* **Recognized (9/12):** 9 individuals were classified back into the minority label with high probability (ranging from $0.6567$ to $0.9467$). This shows the group is not a "one-point artifact" carried by a single extreme outlier; the members share a cohesive feature profile — i.e. the *extreme* end of the asymmetry tail is recognizable.
+* **Borderline/Missed (3/12):** 3 individuals were misclassified as majority/noise (SEQN 12310: prob $0.4900$, SEQN 66373: prob $0.3633$, SEQN 88806: prob $0.1767$). These are boundary-straddling individuals where the single-ear asymmetry is less extreme — direct evidence of a **transition zone** bleeding into the continuum rather than a clean gap. A genuinely discrete phenotype would not leak a quarter of its members across the boundary.
 
 ---
 
@@ -60,7 +69,7 @@ To determine if a minority cluster is a within-cohort artifact (e.g., specific t
 An ARI close to 1.0 indicates that the cluster structure is stable and generalizes across batches, whereas an ARI close to 0 indicates the structure is batch-dependent.
 
 ### Empirical Results (NHANES):
-The inter-cycle ARI for the HDBSCAN clustering model averaged **$0.27 \pm 0.10$** across cycles. This relatively low score reflects the extreme difficulty of stably recovering a group of size $n \approx 1.3$ per cycle (since 12 cases are spread across 9 cycles). However, when projecting the cycles, the asymmetry pattern was consistently recovered in the projected space, indicating that the feature representation itself is robust even when individual batch size is too small to trigger density-based clustering independently.
+The inter-cycle ARI for the HDBSCAN clustering model averaged **$0.27 \pm 0.10$** across cycles. This relatively low score reflects the extreme difficulty of stably recovering a group of size $n \approx 1.3$ per cycle (since 12 cases are spread across 9 cycles). However, when projecting the cycles, the asymmetry pattern was consistently recovered in the projected space, indicating that the feature representation itself is robust even when individual batch size is too small to trigger density-based clustering independently. This low partition-level ARI is consistent with the later hyperparameter sweep (`audit_06`), where the minority cluster's size and very existence are unstable (N ∈ {9, 13, 24}; distinct in ~58% of cells): the *partition* is fragile, even though the *shape direction* (asymmetry tail) is real.
 
 ---
 
@@ -75,7 +84,7 @@ We compared:
 * **Encoding A (Standard):** Special code `666` (no response) treated as NaN, projecting onto the row-centered zero-sum hyperplane using available pairwise frequencies.
 * **Encoding B (Severe):** Special code `666` imputed as $125\text{ dB HL}$ (extreme loss limit) before centering.
 
-The resulting partitions yielded an **ARI of $0.99$**. This near-perfect agreement proves that the unilateral right-ear asymmetry cluster is completely invariant to the censoring treatment, indicating that the structure is driven by the shape of the measured thresholds rather than mathematical artifacts of imputation choices.
+The resulting partitions yielded an **ARI of $0.99$**. This near-perfect agreement shows the severe-asymmetry tail is invariant to the censoring treatment: whatever structure exists is driven by the **shape of the measured thresholds**, not by imputation artifacts. (Note this is orthogonal to discreteness — it rules out an imputation artifact, not a continuum.)
 
 ---
 
@@ -84,3 +93,4 @@ When publishing clinical subtyping claims, particularly those involving small mi
 1. **Report LOPO Recall, not In-Sample AUC:** Never use in-sample or standard cross-validated classifier scores to assert cluster validity. Use Leave-One-Positive-Out recall to prove that minority cluster members are mutually recognizable.
 2. **Quantify Imputation Sensitivity:** Run a sensitivity analysis on censoring and missing data choices. A robust phenotype should yield an $\text{ARI} > 0.90$ across plausible encoding schemes.
 3. **Calibrate Against Null Models:** Always run the identical pipeline on a continuous null model (retaining marginals and rank correlations) to verify whether your cluster counts exceed what is expected by chance under continuous variation.
+4. **Test cluster *existence*, not just validity:** Before interpreting clusters, report whether discrete structure exists at all — hyperparameter-stability of cluster size, a unimodality test (Hartigan dip) on the principal axes, an OPTICS reachability profile, and a dendrogram height-gap. Convergent negatives across these (as here) mean the right object is a **continuum + tail**, and the honest deliverable is a calibrated distance/percentile along it — not a roster of "subtypes." See `docs/PIPELINE_METHODS_AUDIT.md`.

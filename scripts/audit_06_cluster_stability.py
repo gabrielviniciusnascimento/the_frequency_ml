@@ -16,15 +16,15 @@ cluster with the largest mean |PTA_R - PTA_L|; "distinct" if that mean gap > 30 
 Output: outputs/json/audit_06_cluster_stability.json
 """
 import json
+import sys
 from pathlib import Path
 import numpy as np
-import pandas as pd
-from sklearn.preprocessing import RobustScaler
-from sklearn.decomposition import PCA
 import hdbscan
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _shape_space import load_cohort, shape_embed, lib_versions
+
 ROOT = Path(__file__).resolve().parents[1]
-FEATURE = ROOT / "data/processed/frequencia_feature_matrix_v1.csv"
 OUT = ROOT / "outputs/json/audit_06_cluster_stability.json"
 FREQS = [500, 1000, 2000, 3000, 4000, 6000, 8000]
 R_COLS = [f"thr_R_{f}" for f in FREQS]; L_COLS = [f"thr_L_{f}" for f in FREQS]
@@ -36,19 +36,14 @@ DISTINCT_GAP_DB = 30.0
 
 
 def load():
-    df = pd.read_csv(FEATURE, low_memory=False)
-    age = pd.to_numeric(df["RIDAGEYR"], errors="coerce")
-    df = df[(age >= 20) & (age <= 69)].copy()
-    thr = df[COLS14].apply(pd.to_numeric, errors="coerce")
-    keep = thr.notna().sum(axis=1) >= 10
-    thr = thr[keep]; thr = thr[(thr > 25).any(axis=1)]
-    return thr.reset_index(drop=True)
+    """Coorte canônica (fonte única: scripts/_shape_space.py)."""
+    _, thr = load_cohort()
+    return thr
 
 
 def embed(thr, rs):
-    X = thr.sub(thr.mean(axis=1, skipna=True), axis=0).fillna(0.0).to_numpy(np.float64)
-    X = RobustScaler(quantile_range=(25, 75)).fit_transform(X)
-    return PCA(n_components=0.95, svd_solver="full", random_state=rs).fit_transform(X)
+    """row-center -> RobustScaler -> PCA(0.95, full) via módulo compartilhado."""
+    return shape_embed(thr, random_state=rs).X_pca
 
 
 def main():
@@ -109,7 +104,8 @@ def main():
         "script": "audit_06_cluster_stability.py", "task": "HANDOFF Task 6 — cluster stability sweep",
         "N": N, "grid": {"random_state": RS_GRID, "min_cluster_size": MCS_GRID, "min_samples": MS_GRID},
         "distinct_gap_threshold_db": DISTINCT_GAP_DB,
-        "summary": summary, "cells": cells, "status": "EXECUTED",
+        "summary": summary, "cells": cells,
+        "lib_versions": lib_versions(), "status": "EXECUTED",
     }, indent=2, ensure_ascii=False), encoding="utf-8")
 
     print(f"N={N}; {len(cells)} cells; distinct asym cluster in {len(distinct)} "

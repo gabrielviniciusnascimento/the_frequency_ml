@@ -1,6 +1,7 @@
 {
+  "review_decision_needed": "DECISÃO (Gabriel/Code): se o BIC do GMM tiver mínimo interior (k!=kmax) porém raso (bic_range_pct_of_mean pequeno), NÃO citar 'contínuo puro'. Decidir entre: (a) reportar mínimo raso + silhouette fraco como evidência de contínuo; (b) re-rodar BIC com mais n_init e covariance_type alternativos para checar robustez de k. Resolver antes de citar no paper.",
   "script": "26_method_comparison.py",
-  "claim_tested": "estrutura discreta dependente de algoritmo/seed; sob criterios internos ha continuo dominante + outliers raros",
+  "claim_tested": "estrutura discreta reportada na literatura é dependente de algoritmo/seed; sob critérios internos há um contínuo dominante + outliers raros",
   "random_state": 42,
   "n_seeds_kmeans": 12,
   "gap_B": 5,
@@ -122,53 +123,72 @@
     "bic_range_abs": 2734.2,
     "bic_range_pct_of_mean": 1.618,
     "bic_robustness_covariance": {
-      "method": "GMM BIC sweep, covariance in {full,tied,diag,spherical}, n_init=10, max_iter=500, random_state=42",
-      "n_init": 10,
-      "results": {
-        "full": {
-          "bic_min_k": 5,
-          "interior_minimum": true,
-          "bic_range_pct": 1.718,
-          "bic_by_k": {
-            "2": 171095.3,
-            "3": 168725.0,
-            "4": 168357.7,
-            "5": 168194.9,
-            "6": 168440.6,
-            "7": 168419.3,
-            "8": 168571.4,
-            "9": 168825.1,
-            "10": 169220.4
-          }
-        },
-        "tied": {
-          "bic_min_k": 10,
-          "interior_minimum": false,
-          "bic_range_pct": 3.809,
-          "bic_by_k": {
-            "2": 179685.0,
-            "3": 178411.4,
-            "4": 175456.0,
-            "5": 174824.6,
-            "6": 173936.5,
-            "7": 173254.2,
-            "8": 173337.6,
-            "9": 173192.6,
-            "10": 173019.1
-          }
-        },
-        "diag": {
-          "bic_min_k": 10,
-          "interior_minimum": false,
-          "bic_range_pct": 1.476
-        },
-        "spherical": {
-          "bic_min_k": 10,
-          "interior_minimum": false,
-          "bic_range_pct": 8.296
+      "full": {
+        "bic_min_k": 5,
+        "bic_range_pct": 1.718,
+        "interior_minimum": true,
+        "bic_by_k": {
+          "2": 171095.3,
+          "3": 168725.0,
+          "4": 168357.7,
+          "5": 168194.9,
+          "6": 168440.6,
+          "7": 168419.3,
+          "8": 168571.4,
+          "9": 168825.1,
+          "10": 169220.4
         }
       },
-      "conclusion": "Com n_init=10, mínimo interior de BIC SÓ em covariance='full' — e mesmo nele a posição é instável (k=4 com n_init=3 -> k=5 com n_init=10), com amplitude rasa (1.7%). tied/diag/spherical não têm mínimo interior (BIC decresce até k=10). O 'K natural' não é robusto à especificação de covariância nem ao n_init: confirma ausência de estrutura discreta bem definida."
+      "tied": {
+        "bic_min_k": 10,
+        "bic_range_pct": 3.809,
+        "interior_minimum": false,
+        "bic_by_k": {
+          "2": 179685.0,
+          "3": 178411.4,
+          "4": 175456.0,
+          "5": 174824.6,
+          "6": 173936.5,
+          "7": 173254.2,
+          "8": 173337.6,
+          "9": 173192.6,
+          "10": 173019.1
+        }
+      },
+      "diag": {
+        "bic_min_k": 10,
+        "bic_range_pct": 1.476,
+        "interior_minimum": false,
+        "bic_by_k": {
+          "2": 171391.2,
+          "3": 169990.6,
+          "4": 169800.7,
+          "5": 169695.4,
+          "6": 169620.2,
+          "7": 169411.9,
+          "8": 169220.5,
+          "9": 169094.0,
+          "10": 168886.5
+        }
+      },
+      "spherical": {
+        "bic_min_k": 10,
+        "bic_range_pct": 8.296,
+        "interior_minimum": false,
+        "bic_by_k": {
+          "2": 194861.3,
+          "3": 191076.0,
+          "4": 188835.1,
+          "5": 186161.9,
+          "6": 183510.6,
+          "7": 181850.0,
+          "8": 180891.4,
+          "9": 180187.3,
+          "10": 179496.6
+        }
+      },
+      "_conclusion": "Mínimo interior de BIC apenas em: ['full']. Se restrito a 'full', o 'K natural' não é robusto à especificação.",
+      "_n_init": 10
     }
   },
   "hdbscan": {
@@ -179,9 +199,15 @@
     "noise_fraction": 0.076,
     "largest_cluster_fraction": 0.9223
   },
-  "interpretation": "RESOLVIDO (favorável a contínuo, confirmado com n_init=10). Silhouette máx 0.28 em k=2 (separação fraca), caindo p/ k>=3; Gap-ótimo k=2; HDBSCAN = 2 clusters, 7.6% ruído, 1 cluster dominante (92.2%); K-means seed-instável em k=3-5. O único sinal de 'K natural' (GMM BIC com mínimo interior) aparece SÓ com covariance='full', é raso (~1.7%) e instável ao n_init (k=4->k=5); tied/diag/spherical não têm mínimo interior. CLAIM DEFENSÁVEL: sob critérios internos não há suporte robusto para múltiplos fenótipos bem separados; estrutura = contínuo dominante + outliers raros. Consistente com Allen & Eddins (2010).",
-  "review_note": "Confirmado n_init=10 (covariance sweep). silhouette<0.5 = sem estrutura substancial.",
-  "elapsed_s": 17.9,
-  "status": "EXECUTED",
-  "review_decision_needed": "RESOLVIDO com n_init=10: K natural não-robusto (só full, raso, k=4->k=5). Sem pendência."
+  "interpretation": "EVIDÊNCIA MISTA, INCLINADA A CONTÍNUO — não é veredito limpo. K-means: melhor silhouette=0.2819 em k=2 (separação fraca); cai para k>=3; Gap-ótimo k=2. HDBSCAN: 2 clusters, 7.6% ruído, maior cluster=92.2%. GMM: BIC mínimo em k=4 (mínimo INTERIOR — sugere K natural, MAS curva quase plana: amplitude 1.618% da média). Síntese: a literatura de 6-10 fenótipos bem separados NÃO é sustentada; afirmar 'contínuo puro' é forte demais se o BIC tem mínimo interior raso. Claim defensável: sob critérios internos não há suporte para múltiplos fenótipos bem separados — estrutura é contínuo dominante + outliers, com no máximo uma divisão grosseira fraca.",
+  "review_note": "Interpretação é heurística (silhouette<0.25=fraca; K natural exige mínimo de BIC interior ao grid). Conferir curvas brutas antes de citar.",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  },
+  "status": "EXECUTED"
 }

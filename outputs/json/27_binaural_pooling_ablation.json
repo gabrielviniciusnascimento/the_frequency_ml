@@ -136,5 +136,13 @@
   },
   "verdict": "POOLING APAGA A ASSIMETRIA",
   "interpretation": "Braço A (orelhas separadas) isola um cluster de assimetria unilateral (N=13, PTA direito 74.3 dB vs esquerdo 15.1 dB, diferença 59.2 dB). Sob média binaural (Braço B), a dimensão R-vs-L é removida do espaço de features; 2 dos 13 caem no cluster dominante e 11 viram ruído. Taxa de sobrevivência=0.0. Separabilidade do grupo (independente do HDBSCAN): silhouette 0.7207 (14D) -> 0.3785 (7D pooled); separação de centróides d=8.5388 -> 1.24. POOLING APAGA A ASSIMETRIA.",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  },
   "status": "EXECUTED"
 }

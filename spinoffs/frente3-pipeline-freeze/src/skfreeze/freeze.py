@@ -48,18 +48,25 @@ def freeze_pipeline(
     else:
         estimators = [pipeline]
         
-    # Find Scaler and PCA
+    # Find Scaler and PCA.
+    # Scaler center attribute differs by type: StandardScaler -> mean_,
+    # RobustScaler -> center_. Both expose scale_ and both serve as
+    # (X - center) / scale at inference (FrozenScorer.transform).
     scaler = None
     pca = None
     for est in estimators:
-        if hasattr(est, "mean_") and hasattr(est, "scale_"):
-            scaler = est
-        elif hasattr(est, "components_"):
+        if hasattr(est, "components_"):
             pca = est
-            
+        elif hasattr(est, "scale_") and (hasattr(est, "mean_") or hasattr(est, "center_")):
+            scaler = est
+
     if scaler is not None:
-        artifact["scaler_center"] = scaler.mean_.tolist()
-        artifact["scaler_scale"] = scaler.scale_.tolist()
+        center = getattr(scaler, "mean_", None)
+        if center is None:
+            center = getattr(scaler, "center_")  # RobustScaler
+        artifact["scaler_type"] = type(scaler).__name__
+        artifact["scaler_center"] = np.asarray(center).tolist()
+        artifact["scaler_scale"] = np.asarray(scaler.scale_).tolist()
         
     if pca is not None:
         artifact["pca_components"] = pca.components_.tolist()

@@ -1,0 +1,73 @@
+{
+  "script": "33_qa_prevalence_distribution.py",
+  "random_state": 42,
+  "n_samples": 7695,
+  "hdbscan": {
+    "min_cluster_size": 10,
+    "min_samples": 5
+  },
+  "weighted_prevalence": {
+    "available": true,
+    "weight_col": "WTMEC2YR",
+    "n": 7695,
+    "note": "proporção ponderada = Σw_grupo/Σw_total; o divisor de pooling por ciclo cancela. Variância de desenho (SDMVSTRA/PSU) não estimada aqui.",
+    "groups": {
+      "dominant": {
+        "n": 7097,
+        "unweighted_pct": 92.229,
+        "weighted_pct": 91.998
+      },
+      "minority": {
+        "n": 13,
+        "unweighted_pct": 0.169,
+        "weighted_pct": 0.139
+      },
+      "noise": {
+        "n": 585,
+        "unweighted_pct": 7.602,
+        "weighted_pct": 7.863
+      }
+    },
+    "max_abs_delta_pct": 0.261,
+    "robust_to_weighting": true
+  },
+  "distribution_qa": {
+    "raw_thresholds": {
+      "skew_min": 0.674,
+      "skew_max": 2.076,
+      "skew_by_col": {
+        "thr_R_500": 1.94,
+        "thr_R_1000": 1.984,
+        "thr_R_2000": 1.674,
+        "thr_R_3000": 1.289,
+        "thr_R_4000": 1.073,
+        "thr_R_6000": 1.076,
+        "thr_R_8000": 0.745,
+        "thr_L_500": 2.027,
+        "thr_L_1000": 2.076,
+        "thr_L_2000": 1.604,
+        "thr_L_3000": 1.16,
+        "thr_L_4000": 0.946,
+        "thr_L_6000": 0.945,
+        "thr_L_8000": 0.674
+      }
+    },
+    "pca_axes": {
+      "skew_PC1": -0.95,
+      "skew_PC2": 0.189,
+      "skew_abs_max": 0.95,
+      "kurtosis_PC1": 1.442
+    },
+    "power_transform_decision": "NÃO aplicar Box-Cox/log/Yeo-Johnson aos limiares. Justificativa: (1) dB HL já é escala logarítmica de pressão sonora — transformar de novo distorce a métrica clínica; (2) row-centering + RobustScaler(25,75) já controlam nível e outliers; (3) os PCs onde o clustering ocorre são ~simétricos (|skew|<1, ver acima), logo a geometria não é dominada por skew; (4) o null model (script 30) preserva o skew empírico por canal, então a significância das caudas NÃO é artefato de não-Gaussianidade. Limiares brutos são right-skewed (cauda de perda), o que é o sinal — não um defeito a corrigir."
+  },
+  "interpretation": "Prevalência ROBUSTA aos pesos amostrais (max Δ=0.261 pp): as proporções não-ponderadas podem ser citadas com a ressalva de serem amostrais. Clustering permanece não-ponderado por desenho (geometria de forma, não estimativa populacional). Sem transformação de potência (justificativa em distribution_qa).",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  },
+  "status": "EXECUTED"
+}

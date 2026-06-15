@@ -30,17 +30,18 @@ NOTA PARA REVISÃO (Gabriel / Claude Code):
 
 import json
 import logging
+import sys
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
-from sklearn.preprocessing import RobustScaler
-from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score, adjusted_rand_score
 
 import hdbscan
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _shape_space import load_cohort, shape_embed, lib_versions
 
 # ── Parâmetros ───────────────────────────────────────────────────────
 RANDOM_STATE = 42
@@ -52,13 +53,6 @@ PCA_VAR = 0.95                    # variância retida (igual ao pipeline princip
 HDBSCAN_MCS = 10
 HDBSCAN_MS = 5
 
-NHANES_FREQ_COLS = [
-    "thr_R_500", "thr_R_1000", "thr_R_2000", "thr_R_3000",
-    "thr_R_4000", "thr_R_6000", "thr_R_8000",
-    "thr_L_500", "thr_L_1000", "thr_L_2000", "thr_L_3000",
-    "thr_L_4000", "thr_L_6000", "thr_L_8000",
-]
-FEATURE = Path("data/processed/frequencia_feature_matrix_v1.csv")
 OUTPUT = Path("outputs/json/26_method_comparison.json")
 LOG = Path("outputs/logs/26_method_comparison.log")
 
@@ -72,22 +66,12 @@ log = logging.getLogger(__name__)
 
 
 def load_pca_space():
-    """Replica o pré-processamento do pipeline principal e retorna X em PCA."""
-    df = pd.read_csv(FEATURE, low_memory=False)
-    age = pd.to_numeric(df["RIDAGEYR"], errors="coerce")
-    df = df[(age >= 20) & (age <= 69)].copy()
-    thr = df[NHANES_FREQ_COLS].apply(pd.to_numeric, errors="coerce")
-    thr = thr[thr.notna().sum(axis=1) >= 10]
-    thr = thr[(thr > 25).any(axis=1)]
+    """Espaço de forma canônico (fonte única: scripts/_shape_space.py)."""
+    _, thr = load_cohort()
     log.info(f"NHANES ANY25: {len(thr)} indivíduos × {thr.shape[1]} limiares")
-
-    # Row-centering (isola forma, remove nível)
-    X = thr.sub(thr.mean(axis=1, skipna=True), axis=0).fillna(0.0).to_numpy(np.float64)
-    X = RobustScaler(quantile_range=(25, 75)).fit_transform(X)
-    pca = PCA(n_components=PCA_VAR, random_state=RANDOM_STATE)
-    Xp = pca.fit_transform(X)
-    log.info(f"PCA: {Xp.shape[1]} componentes (var={pca.explained_variance_ratio_.sum():.4f})")
-    return Xp.astype(np.float64)
+    emb = shape_embed(thr, pca_var=PCA_VAR, random_state=RANDOM_STATE)
+    log.info(f"PCA: {emb.n_components} componentes (var={emb.explained_variance:.4f})")
+    return emb.X_pca
 
 
 def gap_statistic(X, k, b=GAP_B, rng=None):
@@ -267,6 +251,7 @@ def main():
         "interpretation": interp,
         "review_note": ("Interpretação é heurística (silhouette<0.25=fraca; K natural exige "
                         "mínimo de BIC interior ao grid). Conferir curvas brutas antes de citar."),
+        "lib_versions": lib_versions(),
         "status": "EXECUTED",
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)

@@ -34,31 +34,24 @@ em dado populacional real, não a surpresa.
 
 import json
 import logging
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import RobustScaler
-from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_samples
 
 import hdbscan
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _shape_space import load_cohort, shape_embed, lib_versions, FREQS, R_COLS, L_COLS
+
 # ── Parâmetros (espelham scripts 18 e 26) ────────────────────────────
 RANDOM_STATE = 42
-AGE_MIN, AGE_MAX = 20, 69
-MIN_COMPLETENESS = 10
-ANY25_THRESHOLD_DB = 25.0
 PCA_VAR = 0.95
 HDBSCAN_MCS = 10
 HDBSCAN_MS = 5
 
-FREQS = [500, 1000, 2000, 3000, 4000, 6000, 8000]
-R_COLS = [f"thr_R_{f}" for f in FREQS]
-L_COLS = [f"thr_L_{f}" for f in FREQS]
-FREQ_COLS_14 = R_COLS + L_COLS
-
-FEATURE = Path("data/processed/frequencia_feature_matrix_v1.csv")
 OUTPUT = Path("outputs/json/27_binaural_pooling_ablation.json")
 LOG = Path("outputs/logs/27_binaural_pooling_ablation.log")
 
@@ -72,33 +65,22 @@ log = logging.getLogger(__name__)
 
 
 def load_filtered():
-    """Filtros idênticos ao pipeline principal. Retorna (df_alt, thr14)."""
-    df = pd.read_csv(FEATURE, low_memory=False)
-    age = pd.to_numeric(df["RIDAGEYR"], errors="coerce")
-    df = df[(age >= AGE_MIN) & (age <= AGE_MAX)].copy()
-
-    thr = df[FREQ_COLS_14].apply(pd.to_numeric, errors="coerce")
-    keep = thr.notna().sum(axis=1) >= MIN_COMPLETENESS
-    df, thr = df[keep].copy(), thr[keep].copy()
-
-    any25 = (thr > ANY25_THRESHOLD_DB).any(axis=1)
-    df, thr = df[any25].copy(), thr[any25].copy()
+    """Coorte canônica (fonte única: scripts/_shape_space.py). Retorna (df, thr14)."""
+    df, thr = load_cohort()
     log.info(f"ANY25: {len(df)} indivíduos × 14 limiares")
-    return df.reset_index(drop=True), thr.reset_index(drop=True)
+    return df, thr
 
 
 def cluster_space(thr_df):
-    """row-center -> RobustScaler -> PCA 95% -> HDBSCAN(mcs,ms).
+    """row-center -> RobustScaler -> PCA 95% [módulo] -> HDBSCAN(mcs,ms).
+    Aceita 14D (orelhas separadas) ou 7D (média binaural).
     Retorna (labels, n_componentes, embedding_PCA)."""
-    X = thr_df.sub(thr_df.mean(axis=1, skipna=True), axis=0).fillna(0.0).to_numpy(np.float64)
-    X = RobustScaler(quantile_range=(25, 75)).fit_transform(X)
-    pca = PCA(n_components=PCA_VAR, svd_solver="full", random_state=RANDOM_STATE)
-    Xp = pca.fit_transform(X)
+    emb = shape_embed(thr_df, pca_var=PCA_VAR, random_state=RANDOM_STATE)
     c = hdbscan.HDBSCAN(min_cluster_size=HDBSCAN_MCS, min_samples=HDBSCAN_MS,
                         metric="euclidean", cluster_selection_method="eom",
                         core_dist_n_jobs=-1)
-    labels = c.fit_predict(Xp)
-    return labels, int(Xp.shape[1]), Xp
+    labels = c.fit_predict(emb.X_pca)
+    return labels, emb.n_components, emb.X_pca
 
 
 def separability(Xp, asym_mask):
@@ -273,6 +255,7 @@ def main():
             f"separação de centróides d={sep_a.get('centroid_separation_d')} -> "
             f"{sep_b.get('centroid_separation_d')}. {verdict}."
         ),
+        "lib_versions": lib_versions(),
         "status": "EXECUTED",
     }
 
