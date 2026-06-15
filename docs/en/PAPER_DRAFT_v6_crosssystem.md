@@ -6,12 +6,7 @@
 **Date:** 2026-06-14
 **Status:** Draft v6 — cross-system reframe, full draft. Supersedes the audiometric-subtype framing of `PAPER_DRAFT_v5_audit.md` (retained for history). The v5 reproducibility audit is folded in here as one of three systems.
 
-> **Drafting note (2026-06-14, body reconciled with full pre-commit audit).** An adversarial pre-commit audit (`HANDOFF_PRECOMMIT_AUDIT.md`, scripts `audit_01`–`audit_08`) tested the central claims; the Abstract, §§2.3–2.4, 3.2–3.4, 4.1–4.4 and Table 1 have been **rewritten** to match its results. Net effect:
-> - **Withdrawn:** the lateralized-trauma reading. The auditory tail is bilaterally symmetric (>50 dB: 38 right-worse / 31 left-worse, binomial p = 0.47; `audit_03`), and the symmetry replicates in OHHR (`audit_07`); the "N = 13" group is one side of it. The gradient is now stated as one of *magnitude*, with no direction; Cox & Ford is uncited.
-> - **Hardened:** single-realization "X vs 0" counts replaced by a B = 2,000 Monte-Carlo envelope with empirical p (`audit_01`); the auditory far-tail excess is Bonferroni-significant and survives unfiltered inclusion (`audit_02`), a heteroscedastic measurement null (`audit_04`), and a tail-dependent t-copula (`audit_05`), all at |z|≥3. An injection control (`audit_08`) calibrates detector power (≥90% recall of ≥50 dB gaps at |z|>3).
-> - **Qualified:** §2.3 states per-system inclusion honestly; "vision below its null" scoped to the general population (`audit_02`); claims live at |z|≥3; **grip's excess is downgraded** — it survives the Gaussian null but not the t-copula (`audit_05`), so the firm limb is auditory only; the "N = 13" cluster is hyperparameter-fragile (`audit_06`), so the result is framed on the |z| threshold, not the cluster.
-> - **Survives intact:** auditory far-tail excess (robust to all three null families); the magnitude gradient auditory ≫ grip > vision; the sum/difference decomposition (`28`); binaural-averaging ablation; symmetry replicated externally (OHHR).
-> - **Still to do before submission:** reference page/DOI pass; venue decision (see `meta_analysis.md`). Figure 1 regenerated from the envelope (`audit_01b`). All handoff tasks 1–8 complete.
+> **Transparency & open-science statement.** Every number here is reproducible from the numbered scripts and saved JSON outputs in the public repository (https://github.com/gabrielviniciusnascimento/the_frequency_ml). The central claims were stress-tested by an adversarial pre-commit audit (scripts `audit_01`–`audit_08`): the auditory excess survived null resampling, inclusion criteria, and a level-dependent measurement-noise null, while an earlier *lateralized-trauma* interpretation was **withdrawn** once the tail proved bilaterally symmetric, and the grip limb was **downgraded** when it failed a tail-dependent null. The full record of claims tested, hardened, and corrected is in `CHANGELOG.md`.
 
 ---
 
@@ -117,8 +112,34 @@ The auditory extremes are genuine measurements, not collection artifacts: all 13
 
 We report the cross-system links only to close them. Of the 13 auditory extremes, 7 have valid grip data and none is also a grip extreme; of the same 13, only 2 have valid vision data and neither is a vision extreme. Critically, the grip and vision cycles **do not overlap in time** (grip 2011–2014, vision 1999–2002), so no participant contributes to both, and the triple intersection is empty by calendar rather than by biology. The gradient in this paper is therefore a property of the three *systems*, established on three (largely disjoint) populations — not a within-person phenomenon, and we make no within-person claim.
 
-**Table 1.** Consolidated cross-system audit (data and integrity; continuum diagnostics; asymmetry tail vs. the Monte-Carlo null envelope with empirical $p$), provided as `docs/en/table_crosssystem_asymmetry.tex` (numbers from `audit_01`/`audit_02`).
+**Table 1.** Consolidated cross-system audit (data and integrity; continuum diagnostics; asymmetry tail vs. the Monte-Carlo null envelope with empirical $p$). Numbers from `audit_01`/`audit_02`; a typeset version is in `docs/en/table_crosssystem_asymmetry.tex`.
+
+| | **Auditory** | **Grip** | **Vision** |
+|---|---|---|---|
+| NHANES component | Audiometry (AUX) | Grip strength (MGX) | Autorefraction (VIX) |
+| Cycles | 9 (1999–2020) | 2011–2014 | 1999–2002 |
+| *N* | 7,695 | 8,335 | 7,057 |
+| Side reconstruction | R/L direct | via MGATHAND | OD/OS direct |
+| Sanity of extremes | 13/13 genuine | 15/15 consistent | not audited |
+| Best silhouette (*k*) | 0.28 (2) | 0.24 (2) | 0.73 (3)† |
+| GMM BIC well depth | 1.5% | 0.60% | 1.49%† |
+| HDBSCAN dom. / noise | 92.2% / 7.6% | 9.8% / 90.0% | 14.2% / 1.3%† |
+| *R*–*L* correlation | — | 0.933 | 0.912 |
+| SD(*R*−*L*), native | 10.97 dB | 4.11 kg | 0.94 D |
+| \|z\|>3 real / null mean | **175 / 31.9** | 128 / 94.9 | 104 / 239 |
+| \|z\|>4 real / null mean | **92 / 2.5** | **35 / 7.2** | 64 / 96 |
+| \|z\|>5 real / null mean | **52 / 0.1** | **14 / 0.3** | 40 / 35 |
+| *p* at \|z\|>4 | **5×10⁻⁴** | **5×10⁻⁴** | ≈1 |
+| **Verdict** | far-tail excess, robust to 3 nulls, bilaterally symmetric | excess over Gaussian null only (fails t-copula) | within/below null (general pop.) |
+
+† Vision clustering is a 1-D lattice artifact, not comparable to the other two (see §3.1).
+
+![Figure 1](../../outputs/dashboards/audit_envelope_figure.png)
+
 **Figure 1.** Monte-Carlo null envelope vs. the real inter-side contrast tail at $|z|>4$ (the headline level) for the three systems: histogram of the $B = 2{,}000$ null tail-counts with a vertical line at the real count (`outputs/dashboards/audit_envelope_figure.png`; per-level data in `audit_01_mc_envelope.json`). The auditory and grip real counts sit far outside their null; the visual real count sits inside it. *Supersedes the earlier point-estimate ratio plot `dimensionless_asymmetry_figure.png`.*
+
+![Figure 2](../../outputs/dashboards/pooling_ablation_figure.png)
+
 **Figure 2 (auditory sub-result).** Binaural-pooling ablation: the extreme inter-ear contrast group is distinct with separate ears and dissolves under binaural averaging (`outputs/dashboards/pooling_ablation_figure.png`).
 
 ---
