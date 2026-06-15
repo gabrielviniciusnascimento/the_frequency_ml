@@ -6,7 +6,7 @@
 <title>The Frequency — Hear What Hearing Loss Sounds Like</title>
 <meta name="description" content="An interactive experience based on real data from 26,583 people. Discover how hearing loss changes the way the world sounds.">
 <meta property="og:title" content="The Frequency — Hear What Hearing Loss Sounds Like">
-<meta property="og:description" content="Based on real audiometric data from 26,583 people. Not a preset — a discovery.">
+<meta property="og:description" content="Based on real audiometric data from 26,583 people. Hear the loss that averaging hides.">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a0a;--card:#161616;--border:#222;--red:#e15759;--blue:#4e79a7;--gray:#888;--text:#e0e0e0;--dim:#aaa}
@@ -58,29 +58,30 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple
 
 <div class="hero">
 <h1>What does hearing loss <span>sound like</span>?</h1>
-<p>An interactive experience based on real data from 26,583 people. Not a preset — a discovery.</p>
+<p>An interactive experience based on real data from 26,583 people. Hearing loss isn't one thing — it's a continuum of shapes, and averaging hides the most striking ones.</p>
 </div>
 
 <div class="container">
 
 <!-- STEP 1: Choose profile -->
 <div class="section">
-<h2>1. Choose a <span>profile</span></h2>
+<h2>1. Choose an <span>example</span></h2>
+<p style="color:var(--gray);font-size:0.9em;margin-bottom:12px">Three illustrative points along the continuum of hearing-loss shapes — examples, not fixed categories.</p>
 <div class="cards">
 <div class="card" data-profile="0" onclick="selectProfile(0)">
-<h3>Cluster 0</h3>
-<div class="stat">7,098</div>
-<div class="label">people · mild-to-moderate sloping loss</div>
+<h3>Gradual sloping loss</h3>
+<div class="stat">most common</div>
+<div class="label">near-normal lows, worse toward the highs</div>
 </div>
 <div class="card" data-profile="1" onclick="selectProfile(1)">
-<h3>Cluster 1</h3>
-<div class="stat">12</div>
-<div class="label">people · severe right-ear asymmetry</div>
+<h3>Severe single-ear loss</h3>
+<div class="stat">61 dB</div>
+<div class="label">gap between ears · rare · either ear can be the affected one</div>
 </div>
 <div class="card" data-profile="2" onclick="selectProfile(2)">
-<h3>Outliers</h3>
-<div class="stat">585</div>
-<div class="label">people · atypical patterns</div>
+<h3>Steeper, more variable loss</h3>
+<div class="stat">more severe</div>
+<div class="label">steep high-frequency drop, high person-to-person variability</div>
 </div>
 </div>
 </div>
@@ -88,7 +89,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple
 <!-- STEP 2: See the audiogram -->
 <div class="section hidden" id="section-audiogram">
 <h2>2. See the <span>audiogram</span></h2>
-<p style="color:var(--gray);font-size:0.9em;margin-bottom:12px">This is the median hearing threshold for this profile. Higher = worse hearing at that frequency.</p>
+<p style="color:var(--gray);font-size:0.9em;margin-bottom:12px">Typical thresholds for this example, from real NHANES audiograms. Higher = worse hearing at that frequency.</p>
 <div class="audiogram-viz" id="audiogram-viz"></div>
 <div class="info" id="profile-info"></div>
 </div>
@@ -148,27 +149,27 @@ Built by Gabriel Vinicius Nascimento · childhood cancer survivor · cisplatin o
 // ═══════════════════════════════════════════════════════════════════
 const PROFILES = {
   0: {
-    name: "Mild-to-moderate sloping loss",
-    prevalence: "92.2% of people with hearing loss",
-    description: "The main body of hearing loss. Mild loss in low frequencies, gradually worsening in high frequencies. Bilateral, relatively symmetric.",
+    name: "Gradual sloping loss",
+    prevalence: "the most common shape",
+    description: "Near-normal in the low frequencies, gradually worsening toward the highs. Bilateral and roughly symmetric. Most people with measurable loss sit somewhere near this shape on the continuum.",
     thresholds: {
       R: [14.5, 14.5, 16.5, 24.1, 28.1, 31.2, 33.1],
       L: [14.6, 14.6, 16.6, 25.6, 30.6, 32.1, 33.6]
     }
   },
   1: {
-    name: "Severe unilateral right-ear asymmetry",
-    prevalence: "0.2% — only 12 people in 26,583",
-    description: "Severe loss in the right ear (70-90 dB), near-normal left ear (10-20 dB). Median asymmetry: 61 dB. Found across 4 NHANES cycles (2001-2016).",
+    name: "Severe single-ear loss",
+    prevalence: "rare — the severe-asymmetry tail of the data",
+    description: "One ear severe (70–90 dB), the other near-normal — on headphones the sound collapses to one side. This is the example that averaging the two ears together erases. The asymmetry tail is symmetric: either ear can be the affected one (shown here on the right).",
     thresholds: {
       R: [68.6, 70.0, 72.5, 77.5, 85.0, 85.0, 87.5],
       L: [10.0, 7.5, 12.5, 15.0, 22.5, 25.0, 32.5]
     }
   },
   2: {
-    name: "Atypical patterns (outliers)",
-    prevalence: "7.6% — 585 people",
-    description: "Heterogeneous patterns that don't fit the main clusters. Moderate-severe loss with high variability. 38% report tinnitus (2× the main cluster).",
+    name: "Steeper, more variable loss",
+    prevalence: "more severe, varied shapes",
+    description: "Moderate-to-severe loss with a steep high-frequency drop and high person-to-person variability — the heterogeneous part of the continuum. About 38% report tinnitus.",
     thresholds: {
       R: [26.9, 26.9, 28.9, 43.2, 53.2, 56.0, 53.2],
       L: [27.9, 27.9, 29.9, 46.0, 56.0, 58.7, 56.0]
@@ -312,9 +313,10 @@ function applyHearingLoss(source, thresholds) {
       const filter = ctx.createBiquadFilter();
       filter.type = 'peaking';
       filter.frequency.value = freq;
-      filter.Q.value = 1.2;
-      // Each dB of threshold loss → -0.8 dB gain (not 1:1 to avoid harsh clipping)
-      filter.gain.value = Math.max(-(thresholds[ear][i] * 0.8), -40);
+      filter.Q.value = 1.4; // ~1 octave per band
+      // Honest 1:1 mapping: each dB of threshold loss → -1 dB of audibility.
+      // No floor — severe loss should approach inaudibility, which is the point.
+      filter.gain.value = -thresholds[ear][i];
       lastNode.connect(filter);
       lastNode = filter;
       activeNodes.push(filter); // B8

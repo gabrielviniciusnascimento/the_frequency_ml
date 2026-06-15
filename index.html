@@ -367,11 +367,11 @@
         <header>
             <div class="badge-container">
                 <span class="badge badge-purple">⚡ 26,583 Audiograms</span>
-                <span class="badge badge-blue">🔬 HDBSCAN Clustering</span>
-                <span class="badge badge-pink">🏷️ v1.1.3 Stable</span>
+                <span class="badge badge-blue">🔬 Open & self-audited</span>
+                <span class="badge badge-pink">🏷️ Paper v6</span>
             </div>
             <h1>The Frequency ML</h1>
-            <p class="subtitle">An interactive experience and scientific analysis platform exploring data-driven hearing alteration phenotypes using unsupervised machine learning on NHANES bilateral audiometry data.</p>
+            <p class="subtitle">An open, self-audited analysis of NHANES bilateral audiometry: hearing-loss shape is a <em>continuum</em>, and there is a real inter-ear contrast that binaural averaging erases — with an interactive tool that lets you hear it.</p>
         </header>
 
         <!-- CATEGORY: SIMULATION -->
@@ -384,9 +384,9 @@
                             <div class="card-icon">🔊</div>
                             <span class="card-badge">Web Audio API</span>
                         </div>
-                        <h3 class="card-title">Bilateral Hearing Loss Simulator</h3>
+                        <h3 class="card-title">Hearing Loss Simulator</h3>
                         <p class="card-description">
-                            Experience firsthand how the discovered phenotypes affect auditory perception. Choose from Cluster 0 (sloping loss), Cluster 1 (severe right-ear asymmetry), or atypical outliers, and filter real-time audio samples (speech, music, ambient traffic) or use your own live microphone feed.
+                            Hear the loss that averaging hides. Pick an illustrative point on the continuum — gradual sloping loss, a severe single-ear asymmetry (on headphones the sound collapses to one side), or a steeper, more variable shape — and filter real audio (speech, music, ambient traffic) or your own live microphone feed.
                         </p>
                     </div>
                     <div class="card-footer">
@@ -420,37 +420,40 @@
 
         <!-- CATEGORY: DEEP DIVES -->
         <section class="category-section">
-            <h2 class="category-title"><span>03.</span> Phenomenon Deep Dives</h2>
+            <h2 class="category-title"><span>03.</span> Archived v4 Deep Dives</h2>
+            <p class="subtitle" style="text-align:left;margin:0 0 24px;max-width:none;font-size:0.95rem;">
+                ⚠️ <strong>Historical / superseded.</strong> These v4 explorations framed the asymmetry as a discrete "right-ear cluster (N=12)." The v6 pre-commit audit <strong>withdrew that lateralized-subtype claim</strong>: the inter-ear contrast is a real but <em>symmetric</em> tail of a continuum (either ear), not a discovered right-ear phenotype. Kept for transparency — read the v6 paper below for the current findings.
+            </p>
             <div class="grid">
                 <a href="outputs/dashboards/cluster1_deep_dive.html" class="card deepdive-card">
                     <div>
                         <div class="card-header">
-                            <div class="card-icon">🎯</div>
-                            <span class="card-badge">Asymmetry Analysis</span>
+                            <div class="card-icon">🗄️</div>
+                            <span class="card-badge">Archived v4</span>
                         </div>
-                        <h3 class="card-title">Cluster 1: Unilateral Right Asymmetry</h3>
+                        <h3 class="card-title">v4: Severe Inter-Ear Asymmetry (superseded)</h3>
                         <p class="card-description">
-                            A deep dive investigation into the rare asymmetric phenotype (N=12 in main cluster + 18 outliers = 30 total). Explores clinical relevance, right-ear asymmetry patterns (Shooter's Ear), demographic indicators, and its mathematical consistency across survey cycles.
+                            Original v4 investigation of the severe-asymmetry cases. Note: its "right-ear cluster" / "Shooter's Ear" framing was withdrawn in the v6 audit — the tail is symmetric (either ear). Retained as a record of the earlier analysis.
                         </p>
                     </div>
                     <div class="card-footer">
-                        Read Deep Dive <span>&rarr;</span>
+                        View Archived Analysis <span>&rarr;</span>
                     </div>
                 </a>
 
                 <a href="outputs/dashboards/outlier18_deep_dive.html" class="card deepdive-card">
                     <div>
                         <div class="card-header">
-                            <div class="card-icon">⚠️</div>
-                            <span class="card-badge">Outlier Analysis</span>
+                            <div class="card-icon">🗄️</div>
+                            <span class="card-badge">Archived v4</span>
                         </div>
-                        <h3 class="card-title">Outlier 18: Severe High-Frequency Loss</h3>
+                        <h3 class="card-title">v4: Steep High-Frequency Loss (superseded)</h3>
                         <p class="card-description">
-                            Detailed profile of a highly specific outlier group showing a steep sloping loss from normal thresholds at low frequencies to severe/profound loss at high frequencies. Includes correlation with reported tinnitus and occupational exposure.
+                            Original v4 profile of a steep sloping loss from normal low-frequency thresholds to severe/profound high-frequency loss, with reported tinnitus and occupational-exposure correlations. Framing now treated as one region of the continuum, not a fixed "outlier" category.
                         </p>
                     </div>
                     <div class="card-footer">
-                        Read Deep Dive <span>&rarr;</span>
+                        View Archived Analysis <span>&rarr;</span>
                     </div>
                 </a>
             </div>
@@ -498,15 +501,15 @@
         <section class="category-section">
             <h2 class="category-title"><span>05.</span> Academic Publications & Docs</h2>
             <div class="grid">
-                <a href="docs/en/PAPER_DRAFT_v4.html" class="card" style="--border-hover: rgba(0, 230, 118, 0.4); --glow-color: rgba(0, 230, 118, 0.15); --link-color: var(--accent-green);">
+                <a href="docs/en/preprint/the_frequency_v6_preprint.html" class="card" style="--border-hover: rgba(0, 230, 118, 0.4); --glow-color: rgba(0, 230, 118, 0.15); --link-color: var(--accent-green);">
                     <div>
                         <div class="card-header">
                             <div class="card-icon">📄</div>
-                            <span class="card-badge" style="background: rgba(0, 230, 118, 0.1); color: #81c784;">Preprint Draft v4</span>
+                            <span class="card-badge" style="background: rgba(0, 230, 118, 0.1); color: #81c784;">Preprint v6 (current)</span>
                         </div>
                         <h3 class="card-title">Scientific Paper (HTML Version)</h3>
                         <p class="card-description">
-                            Full text of the academic paper draft: "Data-driven hearing phenotypes via density-based clustering on 26,583 pure-tone audiograms". Complete with methodology, formulas, tables, and discussions.
+                            Full text of the current preprint: hearing-loss shape as a continuum, and a real bilaterally-symmetric inter-ear contrast erased by binaural averaging — survived an 8-task adversarial self-audit and external replication (OHHR). Methods, tables, and discussion included.
                         </p>
                     </div>
                     <div class="card-footer">
