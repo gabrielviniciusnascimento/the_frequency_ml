@@ -1,0 +1,48 @@
+{
+  "script": "audit_08_sensitivity_injection.py",
+  "task": "HANDOFF Task 8 — sensitivity injection",
+  "base": "Gaussian-copula null of real auditory data (no injected excess)",
+  "n": 7695,
+  "k_per_gap": 77,
+  "k_frac": 0.01,
+  "sd_native_db": 11.51,
+  "detectors": {
+    "A": "|z|>4 and |z|>3 on standardized contrast",
+    "B": "non-dominant HDBSCAN cluster"
+  },
+  "results_by_gap_db": {
+    "30": {
+      "injected_k": 77,
+      "mean_injected_z": 2.91,
+      "recall_z_gt4": 0.117,
+      "recall_z_gt3": 0.455,
+      "recall_clustering": 0.0,
+      "meets_0.90": false
+    },
+    "40": {
+      "injected_k": 77,
+      "mean_injected_z": 3.65,
+      "recall_z_gt4": 0.299,
+      "recall_z_gt3": 0.805,
+      "recall_clustering": 0.338,
+      "meets_0.90": false
+    },
+    "50": {
+      "injected_k": 77,
+      "mean_injected_z": 4.6,
+      "recall_z_gt4": 0.844,
+      "recall_z_gt3": 0.961,
+      "recall_clustering": 0.571,
+      "meets_0.90": false
+    },
+    "60": {
+      "injected_k": 77,
+      "mean_injected_z": 5.02,
+      "recall_z_gt4": 0.896,
+      "recall_z_gt3": 0.974,
+      "recall_clustering": 0.779,
+      "meets_0.90": false
+    }
+  },
+  "status": "EXECUTED"
+}

@@ -1,0 +1,168 @@
+{
+  "script": "audit_05_t_copula_null.py",
+  "task": "HANDOFF Task 5 — t-copula null (nu=4)",
+  "B": 2000,
+  "nu": 4,
+  "systems": {
+    "audicao": {
+      "n": 7695,
+      "z_cells": {
+        "2": {
+          "real": 408,
+          "null_mean": 303.05,
+          "null_ci95": [
+            268,
+            338
+          ],
+          "null_max": 356,
+          "ratio_real_over_nullmean": 1.35,
+          "p_emp": 0.0005,
+          "sig_bonf_0.01_over_12": true
+        },
+        "3": {
+          "real": 175,
+          "null_mean": 60.17,
+          "null_ci95": [
+            46,
+            76
+          ],
+          "null_max": 88,
+          "ratio_real_over_nullmean": 2.91,
+          "p_emp": 0.0005,
+          "sig_bonf_0.01_over_12": true
+        },
+        "4": {
+          "real": 92,
+          "null_mean": 13.3,
+          "null_ci95": [
+            7,
+            21
+          ],
+          "null_max": 26,
+          "ratio_real_over_nullmean": 6.92,
+          "p_emp": 0.0005,
+          "sig_bonf_0.01_over_12": true
+        },
+        "5": {
+          "real": 52,
+          "null_mean": 3.11,
+          "null_ci95": [
+            0,
+            7
+          ],
+          "null_max": 10,
+          "ratio_real_over_nullmean": 16.73,
+          "p_emp": 0.0005,
+          "sig_bonf_0.01_over_12": true
+        }
+      }
+    },
+    "grip": {
+      "n": 8335,
+      "z_cells": {
+        "2": {
+          "real": 559,
+          "null_mean": 641.77,
+          "null_ci95": [
+            595,
+            689
+          ],
+          "null_max": 719,
+          "ratio_real_over_nullmean": 0.87,
+          "p_emp": 1.0,
+          "sig_bonf_0.01_over_12": false
+        },
+        "3": {
+          "real": 128,
+          "null_mean": 168.11,
+          "null_ci95": [
+            143,
+            194
+          ],
+          "null_max": 213,
+          "ratio_real_over_nullmean": 0.76,
+          "p_emp": 1.0,
+          "sig_bonf_0.01_over_12": false
+        },
+        "4": {
+          "real": 35,
+          "null_mean": 49.24,
+          "null_ci95": [
+            36,
+            63
+          ],
+          "null_max": 78,
+          "ratio_real_over_nullmean": 0.71,
+          "p_emp": 0.98501,
+          "sig_bonf_0.01_over_12": false
+        },
+        "5": {
+          "real": 14,
+          "null_mean": 16.21,
+          "null_ci95": [
+            9,
+            24
+          ],
+          "null_max": 33,
+          "ratio_real_over_nullmean": 0.86,
+          "p_emp": 0.73663,
+          "sig_bonf_0.01_over_12": false
+        }
+      }
+    },
+    "visao": {
+      "n": 7057,
+      "z_cells": {
+        "2": {
+          "real": 235,
+          "null_mean": 539.49,
+          "null_ci95": [
+            496,
+            583
+          ],
+          "null_max": 622,
+          "ratio_real_over_nullmean": 0.44,
+          "p_emp": 1.0,
+          "sig_bonf_0.01_over_12": false
+        },
+        "3": {
+          "real": 104,
+          "null_mean": 194.38,
+          "null_ci95": [
+            168,
+            222
+          ],
+          "null_max": 237,
+          "ratio_real_over_nullmean": 0.54,
+          "p_emp": 1.0,
+          "sig_bonf_0.01_over_12": false
+        },
+        "4": {
+          "real": 64,
+          "null_mean": 84.33,
+          "null_ci95": [
+            68,
+            103
+          ],
+          "null_max": 116,
+          "ratio_real_over_nullmean": 0.76,
+          "p_emp": 0.9935,
+          "sig_bonf_0.01_over_12": false
+        },
+        "5": {
+          "real": 40,
+          "null_mean": 35.58,
+          "null_ci95": [
+            25,
+            48
+          ],
+          "null_max": 55,
+          "ratio_real_over_nullmean": 1.12,
+          "p_emp": 0.23988,
+          "sig_bonf_0.01_over_12": false
+        }
+      }
+    }
+  },
+  "status": "EXECUTED"
+}
