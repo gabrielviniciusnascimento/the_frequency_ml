@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Frequency — ouça a perda que a média esconde</title>
+<meta name="description" content="Uma ferramenta aberta e acessível, baseada em 26.583 audiogramas reais (NHANES): ouça como a perda auditiva muda o som — e veja o que a média entre as orelhas esconde.">
+<meta property="og:title" content="The Frequency — ouça a perda que a média esconde">
+<meta property="og:description" content="Baseado em dados audiométricos reais de 26.583 pessoas. Aberto, auditado, acessível.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15140f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%23f4efe6'/%3E%3Cpath%20d='M4%2022%20L11%2018%20L18%2012%20L28%206'%20fill='none'%20stroke='%238c2f2a'%20stroke-width='3'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe6; --paper-2:#ece4d6; --ink:#1c1a17; --ink-soft:#544e44;
+  --rule:#cbbfa9; --oxblood:#8c2f2a; --teal:#1f5e5b; --gold:#9a7b1f;
+  --focus:#1f5e5b; --max-w:900px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --paper:#15140f; --paper-2:#1d1b15; --ink:#efe7d6; --ink-soft:#b3a890;
+    --rule:#3a352a; --oxblood:#e2766f; --teal:#5fb6b0; --gold:#d6b352; --focus:#5fb6b0; }
+}
+*{box-sizing:border-box}
+html{overscroll-behavior-y:none} /* roda nativa, sem smooth global (evita scroll "preso/arrastado") */
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none !important; transition:none !important}
+  .js-anim main>section, .js-anim header.masthead>.wrap>*, .js-anim .examples .ex{opacity:1 !important;transform:none !important} }
+
+/* Build-in das seções ao entrar na viewport (sem JS / reduced-motion → já visível) */
+.js-anim main>section{opacity:0;transform:translateY(16px)}
+.js-anim main>section.in{opacity:1;transform:none;transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1)}
+/* Intro escalonada do cabeçalho — a primeira impressão "monta" linha a linha */
+.js-anim header.masthead>.wrap>*{opacity:0;transform:translateY(14px)}
+.js-anim header.masthead>.wrap.in>*{opacity:1;transform:none;transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+.js-anim header.masthead>.wrap.in>*:nth-child(1){transition-delay:.06s}
+.js-anim header.masthead>.wrap.in>*:nth-child(2){transition-delay:.18s}
+.js-anim header.masthead>.wrap.in>*:nth-child(3){transition-delay:.32s}
+.js-anim header.masthead>.wrap.in>*:nth-child(4){transition-delay:.46s}
+/* Cascata dos cards de exemplo quando a seção entra */
+.js-anim .examples .ex{opacity:0;transform:translateY(12px)}
+.js-anim section.in .examples .ex{opacity:1;transform:none;transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.js-anim section.in .examples .ex:nth-child(2){transition-delay:.09s}
+.js-anim section.in .examples .ex:nth-child(3){transition-delay:.18s}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Newsreader',Georgia,serif; font-size:18px; line-height:1.6;
+  background-image:radial-gradient(circle at 12% -5%, color-mix(in srgb, var(--teal) 7%, transparent) 0, transparent 38%),
+                   radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--oxblood) 6%, transparent) 0, transparent 34%);
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:10px 16px;z-index:50}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 22px}
+mono,.mono{font-family:'IBM Plex Mono',monospace}
+
+/* Masthead */
+header.masthead{padding:54px 0 28px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px}
+h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.6rem,7vw,4.6rem);line-height:.98;letter-spacing:-.02em;margin:0 0 14px}
+h1 em{font-style:italic;font-weight:400;color:var(--oxblood)}
+.dek{font-size:clamp(1.05rem,2.4vw,1.32rem);max-width:38ch;color:var(--ink-soft);margin:0}
+.byline{margin-top:22px;font-size:.92rem;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+.byline a{color:var(--teal);text-decoration-thickness:1px;text-underline-offset:3px}
+
+section{padding:42px 0;border-bottom:1px solid var(--rule)}
+.step-no{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:var(--oxblood);text-transform:uppercase}
+h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.05;margin:.2em 0 .5em}
+h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;margin:0 0 .3em}
+p{margin:.2em 0 1em}
+.muted{color:var(--ink-soft)}
+
+/* Headphone gate */
+.gate{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--gold);padding:18px 20px;border-radius:4px;margin:8px 0 0}
+.gate strong{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+
+/* Buttons */
+button{font-family:inherit;font-size:1rem;cursor:pointer;color:var(--ink);background:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;line-height:1;color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);background:var(--paper);padding:11px 18px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:.86rem;letter-spacing:.04em;transition:background .18s,color .18s,transform .09s ease,box-shadow .18s}
+@media (prefers-reduced-motion: no-preference){
+  .btn:active{transform:translateY(1px) scale(.985)}
+  .ex:active{transform:scale(.992)}
+  .term:active{transform:translateY(1px)}
+}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{background:var(--oxblood);border-color:var(--oxblood);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+
+/* Examples */
+.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:8px}
+.ex{text-align:left;border:1.5px solid var(--rule);background:var(--paper-2);border-radius:5px;padding:18px;display:flex;flex-direction:column;gap:6px;transition:border-color .18s,box-shadow .2s}
+.ex:hover{border-color:var(--ink);box-shadow:0 8px 24px -14px rgba(0,0,0,.4)}
+.ex[aria-pressed="true"]{border-color:var(--oxblood);box-shadow:inset 0 0 0 1.5px var(--oxblood)}
+.ex .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.ex .name{font-family:'Fraunces',serif;font-weight:600;font-size:1.22rem;line-height:1.1}
+.ex .desc{font-size:.92rem;color:var(--ink-soft);line-height:1.45}
+
+/* Player */
+.player{margin-top:10px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:14px 0}
+.nowplaying{font-family:'IBM Plex Mono',monospace;font-size:.84rem;color:var(--ink-soft);min-height:1.4em;margin-bottom:6px}
+.ab{margin-left:0}
+
+/* Speech-in-noise SNR control */
+.snr{border:1px solid var(--rule);background:var(--paper-2);border-radius:5px;padding:14px 16px;margin:12px 0 2px}
+.snr-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.snr-top h3{margin:0}
+.snr-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.snr-row label{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.snr-row input[type=range]{flex:1;min-width:170px;accent-color:var(--oxblood);height:26px}
+.snr-row input[type=range]:disabled{opacity:.4}
+.snr-val{font-family:'IBM Plex Mono',monospace;font-size:.92rem;font-weight:500;color:var(--ink);min-width:7ch;text-align:right}
+.snr-hint{font-family:'Newsreader',serif;font-size:.9rem;color:var(--ink-soft);margin:8px 0 0;min-height:1.3em}
+.snr-scale{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);margin-top:2px}
+
+/* Read-along transcript (also helps Deaf/HoH) */
+.transcript{font-family:'Newsreader',serif;font-size:1.02rem;line-height:1.5;background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--teal);border-radius:0 5px 5px 0;padding:12px 16px;margin:12px 0 0;color:var(--ink)}
+.transcript .tlabel{display:block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+.transcript .tsrc{display:block;color:var(--ink-soft);font-size:.82rem;margin-top:6px}
+
+/* Master volume (controls everything playing) */
+.vol{display:flex;align-items:center;gap:12px;margin:14px 0 2px;flex-wrap:wrap}
+.vol label{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.vol input[type=range]{flex:1;min-width:160px;accent-color:var(--teal);height:26px}
+.vol-val{font-family:'IBM Plex Mono',monospace;font-size:.9rem;font-weight:500;color:var(--ink);min-width:4ch;text-align:right}
+.vol-note{font-family:'Newsreader',serif;font-size:.92rem;line-height:1.5;background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:0 5px 5px 0;padding:11px 15px;margin:10px 0 0;color:var(--ink)}
+
+/* Glossário: termo com "?" + popover nativo (top-layer, nunca sai da tela, light-dismiss) */
+.term{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:help;border-bottom:1px dotted color-mix(in srgb,var(--ink) 38%,transparent);border-radius:2px;transition:background .15s ease,border-color .15s ease}
+.term::after{content:"?";font-family:'IBM Plex Mono',monospace;font-size:.6em;vertical-align:super;margin-left:1px;color:var(--ink-soft)}
+.term:hover,.term:focus-visible{background:color-mix(in srgb,var(--ink) 7%,transparent);border-bottom-color:var(--ink-soft)}
+.gl-pop{margin:0;border:1px solid color-mix(in srgb,var(--paper) 14%,var(--ink));padding:14px 17px;
+  width:max-content;min-width:240px;max-width:min(340px,88vw);
+  background:var(--ink);color:var(--paper);border-radius:10px;font-family:'Newsreader',serif;font-size:.9rem;line-height:1.55;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.55)}
+@supports (position-area: block-end){
+  .gl-pop{position-area:block-end center; position-try-fallbacks:flip-block, flip-inline, flip-block flip-inline; margin-block:9px}
+}
+@media (prefers-reduced-motion: no-preference){
+  .gl-pop{opacity:0;transform:translateY(-6px) scale(.98);
+    transition:opacity .2s ease, transform .22s cubic-bezier(.2,.8,.2,1), overlay .22s allow-discrete, display .22s allow-discrete}
+  .gl-pop:popover-open{opacity:1;transform:none}
+  @starting-style{ .gl-pop:popover-open{opacity:0;transform:translateY(-6px) scale(.98)} }
+}
+
+/* Audiogram hero (the visual diff) */
+.scope{border:1px solid var(--rule);border-radius:6px;background:var(--paper-2);padding:18px 16px 12px;margin-top:6px}
+.scope-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.legend{display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.74rem}
+.legend span{display:flex;align-items:center;gap:7px}
+.swatch{width:16px;height:12px;display:inline-block;border:1px solid var(--ink)}
+.sw-left{background:var(--teal)}
+.sw-right{background:repeating-linear-gradient(45deg,var(--oxblood) 0 3px,transparent 3px 6px);background-color:color-mix(in srgb,var(--oxblood) 22%,transparent)}
+.bars{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:end;height:220px;margin-top:6px}
+.fcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px}
+.pair{display:flex;gap:4px;align-items:flex-end;width:100%;justify-content:center;height:100%}
+.bar{width:14px;border-radius:2px 2px 0 0;transition:height .5s cubic-bezier(.2,.8,.2,1);position:relative}
+.bar.L{background:var(--teal)}
+.bar.R{background:repeating-linear-gradient(45deg,var(--oxblood) 0 3px,color-mix(in srgb,var(--oxblood) 35%,transparent) 3px 6px)}
+.flabel{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft)}
+.scope-axis{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-top:4px}
+.changed{font-size:.95rem;background:var(--paper);border-left:3px solid var(--teal);padding:12px 14px;border-radius:0 4px 4px 0;margin-top:14px}
+
+/* Disclaimer / info */
+.note{background:var(--paper-2);border:1px solid var(--rule);border-radius:5px;padding:16px 18px;font-size:.95rem;line-height:1.55}
+.note.warn{border-left:4px solid var(--gold)}
+.note h3{margin-top:0}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+footer{padding:40px 0 60px;color:var(--ink-soft);font-size:.86rem}
+footer .mono{font-size:.78rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+</style>
+<script>document.documentElement.classList.add('js-anim');</script>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">The Frequency · 26.583 audiogramas · NHANES · aberto e auditado</p>
+    <h1>Ouça a perda que <em>a média esconde</em>.</h1>
+    <p class="dek">A perda auditiva não é uma coisa só — é um contínuo de formas. Quando se faz a média das duas orelhas, as mais marcantes desaparecem. Aqui você ouve e <strong>vê</strong> isso.</p>
+    <p class="byline">
+      <span>Por Gabriel V. Nascimento — sobrevivente, com perda auditiva neural por ototoxicidade.</span>
+      <a href="../docs/en/preprint/the_frequency_v6_preprint.html">Ler o preprint v6 →</a>
+    </p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- 1. Fones -->
+  <section aria-labelledby="s1">
+    <p class="step-no">Passo 01</p>
+    <h2 id="s1">Coloque fones de ouvido</h2>
+    <p class="muted">O ponto central — uma orelha que perde e a outra não — só funciona em fones. Em alto-falante, as duas orelhas se misturam e o efeito some.</p>
+    <div class="gate" role="group" aria-labelledby="gate-t">
+      <strong id="gate-t">Verificação</strong>
+      <p style="margin:.4em 0 .8em">Ajuste o volume num nível confortável <em>com o som normal</em> antes de começar — a perda severa fica perto do silêncio, e isso é proposital.</p>
+      <button class="btn primary" id="confirm-hp" aria-pressed="false">Estou de fones — liberar</button>
+      <span id="hp-status" class="mono" style="margin-left:10px;font-size:.8rem;color:var(--ink-soft)" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <!-- 2. Escolher exemplo -->
+  <section aria-labelledby="s2">
+    <p class="step-no">Passo 02</p>
+    <h2 id="s2">Escolha um exemplo</h2>
+    <p class="muted">Três pontos ao longo de um contínuo — <em>exemplos, não categorias fixas</em>. São limiares de <button type="button" class="term" popovertarget="gl-audiograma" style="anchor-name:--gl1">audiogramas</button><span popover id="gl-audiograma" class="gl-pop" role="tooltip" style="position-anchor:--gl1">O audiograma é o gráfico do exame de audição: mostra, em cada frequência, o quão alto um som precisa estar para você começar a ouvir. Quanto maior o número (em dB), maior a perda.</span> reais do <button type="button" class="term" popovertarget="gl-nhanes" style="anchor-name:--gl2">NHANES</button><span popover id="gl-nhanes" class="gl-pop" role="tooltip" style="position-anchor:--gl2">Pesquisa de saúde dos EUA (CDC) com exames feitos em milhares de pessoas — dados públicos. Aqui usamos a audiometria de 26.583 pessoas.</span>.</p>
+    <div class="examples" role="group" aria-label="Exemplos de perda auditiva">
+      <button class="ex" data-p="0" aria-pressed="false">
+        <span class="tag">forma mais comum</span>
+        <span class="name">Perda gradual nos agudos</span>
+        <span class="desc">Quase normal nos graves, pior conforme sobe a frequência. Bilateral e aproximadamente simétrica.</span>
+      </button>
+      <button class="ex" data-p="1" aria-pressed="false">
+        <span class="tag">cauda rara · qualquer orelha</span>
+        <span class="name">Perda severa em uma orelha</span>
+        <span class="desc">Uma orelha severa, a outra quase normal — em fones, o som colapsa para um lado. É o que a média binaural apaga.</span>
+      </button>
+      <button class="ex" data-p="2" aria-pressed="false">
+        <span class="tag">mais severa, variável</span>
+        <span class="name">Queda acentuada nos agudos</span>
+        <span class="desc">Perda moderada-a-severa com queda íngreme nas altas frequências e muita variabilidade entre pessoas.</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. Ouvir + ver -->
+  <section aria-labelledby="s3">
+    <p class="step-no">Passo 03</p>
+    <h2 id="s3">Ouça — e veja</h2>
+    <div class="player">
+      <p class="nowplaying" id="nowplaying" aria-live="polite">Escolha um exemplo acima para começar.</p>
+      <div class="controls" role="group" aria-label="Reprodução">
+        <button class="btn" id="b-voice" data-s="voice" disabled>▶ Conversa</button>
+        <button class="btn" id="b-sin" disabled>▶ Fala no ruído</button>
+        <button class="btn" id="b-music" data-s="music" disabled>▶ Música</button>
+        <button class="btn" id="b-street" data-s="street" disabled>▶ Rua</button>
+        <button class="btn" id="b-mic" disabled>🎤 Seu microfone</button>
+        <button class="btn ab" id="b-ab" aria-pressed="false" disabled>Comparar: normal ↔ com perda</button>
+      </div>
+
+      <!-- Volume mestre: controla tudo que estiver tocando -->
+      <div class="vol" role="group" aria-label="Volume">
+        <label for="vol">Volume</label>
+        <input type="range" id="vol" min="0" max="100" step="1" value="70" aria-valuetext="70%">
+        <span class="vol-val" id="vol-val">70%</span>
+      </div>
+      <p class="vol-note" id="vol-note" hidden aria-live="polite"></p>
+
+      <!-- Transcrição da fala (read-along + acessibilidade) -->
+      <p class="transcript" id="transcript" hidden aria-live="polite"></p>
+
+      <!-- Fala no ruído: SNR ajustável ao vivo (só aparece nesse modo) -->
+      <div class="snr" id="snrPanel" role="group" aria-labelledby="snr-t" hidden>
+        <div class="snr-top">
+          <h3 id="snr-t">Fala no ruído</h3>
+          <span class="muted" style="font-size:.86rem">Toque “Fala no ruído” e arraste — a fala emerge ou afunda no barulho.</span>
+        </div>
+        <div class="snr-row">
+          <label for="snr">Fala vs. ruído</label>
+          <input type="range" id="snr" min="-12" max="15" step="1" value="3"
+                 aria-describedby="snr-hint" aria-valuetext="+3 decibéis" disabled>
+          <span class="snr-val" id="snr-val">+3 dB</span>
+        </div>
+        <div class="snr-scale" aria-hidden="true"><span>−12 dB · só ruído</span><span>+2 dB · audição normal ouve ~50%</span><span>+15 dB · só fala</span></div>
+        <p class="snr-hint" id="snr-hint" aria-live="polite">Quanto menor o número, mais o ruído cobre a fala. Com perda auditiva, o mesmo nível fica muito mais difícil — compare com “normal ↔ com perda”.</p>
+        <p class="snr-ref muted" style="font-size:.84rem;line-height:1.45;margin:.6em 0 0;border-top:1px dashed var(--rule);padding-top:.7em">
+          <strong style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)">Referência pública — QuickSIN</strong><br>
+          A audição normal entende ~50% das palavras com a fala só <strong>+2 dB</strong> acima de um ruído de <strong>4 vozes</strong>. A “perda de SNR” mede quantos dB a mais alguém precisa: <strong>3–7</strong> leve · <strong>7–15</strong> moderada · <strong>&gt;15</strong> severa (Killion et al., 2004).
+          <span style="display:block;margin-top:.4em">E um ponto honesto: essa perda de SNR <strong>não se prevê pelo audiograma</strong> — costuma ser pior. Na minha perda <em>neural</em>, muito pior. Por isso este controle é uma <strong>referência</strong>, não uma medida do que cada pessoa viveria.</span>
+        </p>
+      </div>
+
+      <!-- Visual diff = audiograma por orelha -->
+      <div class="scope" role="img" aria-labelledby="scope-desc">
+        <div class="scope-head">
+          <h3 style="margin:0">O que muda em cada orelha</h3>
+          <div class="legend" aria-hidden="true">
+            <span><i class="swatch sw-left"></i> Esquerda (E)</span>
+            <span><i class="swatch sw-right"></i> Direita (D)</span>
+          </div>
+        </div>
+        <div class="bars" id="bars"></div>
+        <p class="scope-axis" aria-hidden="true">500 · 1k · 2k · 3k · 4k · 6k · 8k Hz — barra mais alta = mais perda (menos audível) naquela banda</p>
+        <p id="scope-desc" class="sr-only">Audiograma por orelha. A altura de cada barra mostra a perda em decibéis por banda de frequência, da esquerda (graves) à direita (agudos).</p>
+        <p class="changed" id="changed" aria-live="polite">Nenhum exemplo selecionado ainda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Entender -->
+  <section aria-labelledby="s4">
+    <p class="step-no">Passo 04</p>
+    <h2 id="s4">Entenda — com honestidade</h2>
+    <div class="note warn">
+      <h3>O que esta simulação mostra (e o que não mostra)</h3>
+      <p style="margin-bottom:.4em">Ela aproxima só a <strong>perda de audibilidade por frequência</strong> — o aspecto mais básico. Perda real também envolve <strong>distorção, zumbido, fadiga e dificuldade de entender fala no ruído</strong>, que filtros simples não reproduzem. É uma aproximação educacional baseada em dados reais, não um exame clínico.</p>
+      <p class="muted" style="margin-bottom:0">Nota do autor: minha própria perda é <strong>neural</strong> (retrococlear), não coclear — exatamente o tipo que este modelo de limiar <em>não</em> representa. A ferramenta não é o meu audiograma. Eu sei a diferença.</p>
+    </div>
+    <p style="margin-top:18px">Por que três exemplos e não “tipos”? Porque a audição varia num <strong>contínuo</strong> — não em caixinhas separadas. Pegando dados públicos e passando por vários algoritmos de <button type="button" class="term" popovertarget="gl-ml" style="anchor-name:--gl3">aprendizado de máquina</button><span popover id="gl-ml" class="gl-pop" role="tooltip" style="position-anchor:--gl3">Aprendizado de máquina = o computador acha padrões nos dados sozinho, sem a gente rotular. Aqui, cinco famílias de método independentes (silhueta, GMM-BIC, HDBSCAN, OPTICS e o dip de Hartigan) convergem no mesmo veredito: um contínuo dominante, sem subtipos bem separados. O passo a passo está na auditoria de métodos.</span>, todos chegam ao mesmo resultado. E a perda forte em uma só orelha existe — mas pode ser em <strong>qualquer</strong> uma, não num lado fixo.</p>
+    <p class="muted" style="font-size:.9rem">Dados públicos que embasam esta página: os limiares dos exemplos vêm do <a href="https://wwwn.cdc.gov/nchs/nhanes/" style="color:var(--teal)">NHANES</a> (audiometria, domínio público dos EUA); a escala de fala-no-ruído usa as normas do <a href="https://www.interacoustics.com/academy/audiometry-training/speech-audiometry/quicksin" style="color:var(--teal)">QuickSIN</a> (Killion, Niquette, Gudmundsen, Revit &amp; Banerjee, <em>JASA</em> 116(4), 2004): limiar normal ~+2 dB, perda de SNR 3–7/7–15/&gt;15 dB para leve/moderada/severa. Todo o áudio são gravações reais e abertas: fala das <a href="https://www.voiptroubleshooter.com/open_speech/american.html" style="color:var(--teal)">Harvard/OSR sentences</a>; ruído de restaurante e de rua do <a href="https://zenodo.org/records/1227121" style="color:var(--teal)">DEMAND</a> (CC BY 4.0); e música da <a href="https://commons.wikimedia.org/wiki/File:Sousa%27s_%22The_Stars_and_Stripes_Forever%22_-_United_States_Marine_Band_(2017).ogg" style="color:var(--teal)">U.S. Marine Band</a> (domínio público) — com licenças e trechos exatos em <a href="audio/CREDITS.md" style="color:var(--teal)">audio/CREDITS.md</a>.</p>
+    <div class="links">
+      <a class="btn" href="../docs/en/preprint/the_frequency_v6_preprint.html">Preprint v6</a>
+      <a class="btn" href="../docs/PIPELINE_METHODS_AUDIT.md">Auditoria de métodos</a>
+      <a class="btn" href="https://github.com/gabrielviniciusnascimento/the_frequency_ml">Código (MIT)</a>
+    </div>
+  </section>
+
+  <!-- 5. Apoiar -->
+  <section aria-labelledby="s5" style="border-bottom:none">
+    <p class="step-no">Passo 05</p>
+    <h2 id="s5">Ajude outros a entender</h2>
+    <p class="muted">Este é um projeto aberto, feito por uma pessoa que vive a condição. Se foi útil, compartilhe ou apoie o trabalho.</p>
+    <div class="links">
+      <button class="btn" id="b-share">Compartilhar</button>
+      <a class="btn" href="https://github.com/gabrielviniciusnascimento/the_frequency_ml">Apoiar / colaborar</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p class="mono">The Frequency · 26.583 audiogramas · 0 rótulos clínicos no treino · sem diagnóstico.<br>
+  Construído por Gabriel Vinícius Nascimento. Simula audibilidade, não distorção/zumbido/fala-no-ruído.</p>
+</footer>
+
+<script src="logic.js"></script>
+<script>
+"use strict";
+// Dados (limiares NHANES) + regras puras vêm de logic.js (window.TF), testadas em
+// tests/app_logic.test.js. Aqui fica só o que toca DOM/Web Audio.
+const {FREQS,FLABELS,PROFILES,MASTER_GAIN,Q}=TF;
+
+let ctx=null, analyser=null, profile=null, type=null, src=null, src2=null, mic=null;
+let playing=false, normal=false, nodes=[], headphones=false;
+let snr=3, speechGain=null, noiseGain=null;
+let masterNode=null, userVol=TF.volGain(70); // volume mestre persistente; 70% inicial (logic.js)
+const cache={};
+const $=id=>document.getElementById(id);
+
+// Rótulos dos botões de reprodução (▶ tocar / ⏸ pausar quando ativo)
+const PLAY_LABELS={voice:"Conversa",sin:"Fala no ruído",music:"Música",street:"Rua"};
+function resetPlayLabels(){ for(const k in PLAY_LABELS){ const b=$("b-"+k); if(b) b.textContent="▶ "+PLAY_LABELS[k]; } }
+
+// ── Áudio ──
+function audio(){ if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)();
+  analyser=ctx.createAnalyser(); analyser.fftSize=2048;
+  masterNode=ctx.createGain(); masterNode.gain.value=userVol;
+  // Limiter no master: segura picos pra dar volume alto (tipo YouTube) sem clipar.
+  // Não levanta o sinal atenuado da perda — então o contraste perda↔normal se preserva.
+  const lim=ctx.createDynamicsCompressor();
+  lim.threshold.value=-2; lim.knee.value=0; lim.ratio.value=20; lim.attack.value=0.003; lim.release.value=0.25;
+  analyser.connect(masterNode); masterNode.connect(lim); lim.connect(ctx.destination);} return ctx; }
+
+// Carrega fala (Harvard/OSR) e ruído (DEMAND, restaurante real) — públicos e atribuídos
+// em audio/CREDITS.md. Chamado no 1º gesto. Falha silenciosa → cai pro sintético.
+let realLoading=false;
+function preloadReal(){
+  if(realLoading || (cache.voice_real && cache.babble_real)) return;
+  let c; try{ c=audio(); }catch(e){ return; } // sem gesto ainda? tenta no próximo
+  realLoading=true;
+  const dec=u=>fetch(u).then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()})
+    .then(b=>new Promise((res,rej)=>c.decodeAudioData(b,res,rej)));
+  dec("audio/speech_harvard_osr.wav").then(b=>cache.voice_real=b).catch(()=>{});
+  dec("audio/babble_demand_presto.wav").then(b=>cache.babble_real=b).catch(()=>{});
+  dec("audio/street_demand_straffic.wav").then(b=>cache.street_real=b).catch(()=>{});
+  dec("audio/music_sousa_usmb.ogg").then(b=>cache.music_real=b).catch(()=>{});
+}
+function bufFor(kind){ // real quando disponível, senão sintético (decisão em logic.js → TF.useReal)
+  const has={voice:!!cache.voice_real, babble:!!cache.babble_real, street:!!cache.street_real, music:!!cache.music_real};
+  if(TF.useReal(kind,has)) return (kind==="voice"||kind==="voice_l") ? cache.voice_real : cache[kind+"_real"];
+  const k = kind==="voice_l" ? "voice_l" : kind;
+  if(!cache[k]) cache[k]=gen(k==="voice_l"?"voice":k, kind==="voice_l"||kind==="babble");
+  return cache[k];
+}
+
+// Transcrição da fala (Harvard List 1 / OSR) — só mostra quando a fala REAL toca
+const SPEECH_TEXT = "“The birch canoe slid on the smooth planks. Glue the sheet to the dark blue background. It’s easy to tell the depth of a well.”";
+function setTranscript(on){
+  const el=$("transcript");
+  if(on && cache.voice_real){
+    el.innerHTML = '<span class="tlabel">O que está sendo dito</span>'+SPEECH_TEXT+
+      '<span class="tsrc">Frases padrão de Harvard (Lista 1), voz feminina — Open Speech Repository.</span>';
+    el.hidden=false;
+  } else { el.hidden=true; el.textContent=""; }
+}
+
+function teardown(){
+  if(src){ src.onended=null; try{src.stop()}catch(e){} try{src.disconnect()}catch(e){} src=null; }
+  if(src2){ src2.onended=null; try{src2.stop()}catch(e){} try{src2.disconnect()}catch(e){} src2=null; }
+  if(mic){ mic.getTracks().forEach(t=>t.stop()); mic=null; $("b-mic").textContent="🎤 Seu microfone"; $("b-mic").setAttribute("aria-pressed","false"); }
+  nodes.forEach(n=>{try{n.disconnect()}catch(e){}}); nodes=[];
+  speechGain=null; noiseGain=null;
+  playing=false; type=null;
+  document.querySelectorAll(".controls .btn").forEach(b=>b.setAttribute("aria-pressed","false"));
+  resetPlayLabels();
+}
+function applyLoss(source,th){
+  const c=audio(); const master=c.createGain(); master.gain.value=MASTER_GAIN; nodes.push(master);
+  const merger=c.createChannelMerger(2); nodes.push(merger);
+  [["R",1],["L",0]].forEach(([ear,ch])=>{
+    let last=source;
+    FREQS.forEach((f,i)=>{ const flt=c.createBiquadFilter(); flt.type="peaking"; flt.frequency.value=f; flt.Q.value=Q;
+      flt.gain.value=-th[ear][i]; last.connect(flt); last=flt; nodes.push(flt); });
+    last.connect(merger,0,ch);
+  });
+  merger.connect(master); master.connect(analyser);
+}
+function applyNormal(source){ const c=audio(); const g=c.createGain(); g.gain.value=MASTER_GAIN; nodes.push(g); source.connect(g); g.connect(analyser); }
+
+function gen(kind,seamless){ const c=audio(),dur=8,sr=c.sampleRate,len=sr*dur,buf=c.createBuffer(2,len,sr),
+  dR=buf.getChannelData(0),dL=buf.getChannelData(1);
+  for(let i=0;i<len;i++){ const t=i/sr; const env=seamless?1:Math.sin(Math.PI*t/dur); let s=0;
+    if(kind==="voice"){ const f0=150;
+      // envelope silábico (~4 Hz) — dá estrutura de sílaba p/ o ruído poder mascarar
+      const syl=0.35+0.65*Math.max(0,Math.sin(2*Math.PI*4*t));
+      s+=0.3*Math.sin(2*Math.PI*f0*t)+0.2*Math.sin(2*Math.PI*2*f0*t)+0.15*Math.sin(2*Math.PI*3*f0*t)
+        +0.1*Math.sin(2*Math.PI*5*f0*t)+0.08*Math.sin(2*Math.PI*2500*t)+0.05*Math.sin(2*Math.PI*3500*t)+0.03*(Math.random()*2-1);
+      s*=0.5*syl; }
+    else if(kind==="babble"){ // ruído de 4 vozes (mesmo formato do QuickSIN)
+      for(let k=0;k<4;k++){ const f0=110+k*22+8*Math.sin(2*Math.PI*(0.3+0.1*k)*t);
+        const syl=0.4+0.6*Math.max(0,Math.sin(2*Math.PI*(3+0.7*k)*t+k));
+        s+=syl*(0.1*Math.sin(2*Math.PI*f0*t+k)+0.07*Math.sin(2*Math.PI*2*f0*t)+0.05*Math.sin(2*Math.PI*(2000+120*k)*t+k)); }
+      s+=0.03*(Math.random()*2-1); s*=0.3; }
+    else if(kind==="music"){ const fr=[261.6,329.6,392,523.3,659.3,784,1047,1319,1568],am=[.15,.12,.1,.08,.06,.05,.03,.02,.015];
+      fr.forEach((f,j)=>s+=am[j]*Math.sin(2*Math.PI*f*t)); s*=(Math.sin(2*Math.PI*2*t)>0?1:.7)*0.6; }
+    else { s+=0.2*Math.sin(2*Math.PI*80*t)+0.15*Math.sin(2*Math.PI*120*t)+0.1*Math.sin(2*Math.PI*250*t)
+        +0.08*Math.sin(2*Math.PI*1000*t)+0.05*Math.sin(2*Math.PI*3000*t)+0.03*(Math.random()*2-1); }
+    dR[i]=dL[i]=s*env; }
+  return buf; }
+
+function play(kind){
+  if(profile===null) return;
+  if(playing && type===kind){ teardown(); $("nowplaying").textContent="Parado. Clique para tocar de novo."; return; }
+  teardown();
+  $("snrPanel").hidden=true; setTranscript(kind==="voice");
+  const c=audio(); src=c.createBufferSource(); src.buffer=bufFor(kind); type=kind;
+  if(normal) applyNormal(src); else applyLoss(src,PROFILES[profile]);
+  const names={voice:"Conversa",music:"Música",street:"Rua"};
+  $("nowplaying").textContent=`${normal?"NORMAL":PROFILES[profile].name} — ${names[kind]}`;
+  $("b-"+kind).setAttribute("aria-pressed","true"); $("b-"+kind).textContent="⏸ "+PLAY_LABELS[kind];
+  const cap=src; src.onended=()=>{ if(cap!==src) return; playing=false; type=null;
+    $("nowplaying").textContent="Fim. Clique para tocar de novo.";
+    document.querySelectorAll(".controls .btn").forEach(b=>b.setAttribute("aria-pressed","false")); resetPlayLabels(); };
+  const start=()=>{ src.start(); playing=true; };
+  if(c.state==="suspended") c.resume().then(start); else start();
+}
+
+// ── Fala no ruído (SNR ajustável ao vivo) ──
+const snrToGain=TF.snrToGain; // ruído relativo à fala (logic.js)
+const SIN_HINTS={
+  easy:"Folga grande sobre o limite da audição normal (~+2 dB) — fácil para quase todos.",
+  comfort:"Confortável para audição normal; quem tem perda de SNR já começa a remar.",
+  edge:"Perto do limite da audição normal (~+2 dB). Uma perda de SNR leve (3–7 dB) já derruba a compreensão aqui.",
+  below:"Abaixo do limite normal: até a audição normal perde palavras. Com perda, inviável.",
+  noise:"Ruído dominando. Ninguém acompanha — e quem tem perda chegou nesse ponto muito antes.",
+};
+function sinHint(){ $("snr-hint").textContent=SIN_HINTS[TF.sinHintKey(snr)]; }
+function playSIN(){
+  if(profile===null) return;
+  if(playing && type==="sin"){ teardown(); $("nowplaying").textContent="Parado. Clique para tocar de novo."; return; }
+  teardown();
+  $("snrPanel").hidden=false; setTranscript(true);
+  const c=audio();
+  const sp=c.createBufferSource(); sp.buffer=bufFor("voice_l"); sp.loop=true;
+  const ns=c.createBufferSource(); ns.buffer=bufFor("babble"); ns.loop=true;
+  src=sp; src2=ns; type="sin";
+  speechGain=c.createGain(); speechGain.gain.value=1.0; nodes.push(speechGain);
+  noiseGain=c.createGain(); noiseGain.gain.value=snrToGain(snr); nodes.push(noiseGain);
+  const mix=c.createGain(); mix.gain.value=0.9; nodes.push(mix);
+  sp.connect(speechGain); speechGain.connect(mix);
+  ns.connect(noiseGain); noiseGain.connect(mix);
+  if(normal) applyNormal(mix); else applyLoss(mix,PROFILES[profile]);
+  $("nowplaying").textContent=`${normal?"NORMAL":PROFILES[profile].name} — Fala no ruído (${snr>=0?"+":""}${snr} dB)`;
+  $("b-sin").setAttribute("aria-pressed","true"); $("b-sin").textContent="⏸ Fala no ruído";
+  const start=()=>{ sp.start(); ns.start(); playing=true; };
+  if(c.state==="suspended") c.resume().then(start); else start();
+}
+
+function toggleMic(){
+  if(mic){ teardown(); $("nowplaying").textContent="Microfone parado."; return; }
+  $("snrPanel").hidden=true; setTranscript(false);
+  // Áudio CRU: desliga o processamento do navegador (supressão de ruído + AGC +
+  // cancelamento de eco), que picotava o sinal e matava o "falar alto".
+  navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(stream=>{
+    mic=stream; const c=audio(); const s=c.createMediaStreamSource(stream); src=s; type="mic";
+    if(!normal) applyLoss(s,PROFILES[profile]); else s.connect(analyser);
+    $("b-mic").textContent="🎤 Parar microfone"; $("b-mic").setAttribute("aria-pressed","true");
+    $("nowplaying").textContent=`${normal?"NORMAL":PROFILES[profile].name} — Microfone ao vivo`; playing=true;
+  }).catch(()=>{ $("nowplaying").textContent="Acesso ao microfone negado. A ferramenta funciona sem ele."; });
+}
+
+// ── Visual diff: audiograma por orelha + descrição textual ──
+function drawBars(th){
+  const el=$("bars"); el.innerHTML=""; const max=100; const grow=[];
+  FREQS.forEach((f,i)=>{
+    const col=document.createElement("div"); col.className="fcol";
+    const pair=document.createElement("div"); pair.className="pair";
+    const hL=Math.min(th.L[i]/max,1)*100, hR=Math.min(th.R[i]/max,1)*100;
+    const bL=document.createElement("div"); bL.className="bar L"; bL.style.height="0%"; bL.title=`Esq ${FLABELS[i]}Hz: ${th.L[i]} dB`;
+    const bR=document.createElement("div"); bR.className="bar R"; bR.style.height="0%"; bR.title=`Dir ${FLABELS[i]}Hz: ${th.R[i]} dB`;
+    grow.push([bL,hL],[bR,hR]);
+    pair.append(bL,bR);
+    const lab=document.createElement("div"); lab.className="flabel"; lab.textContent=FLABELS[i];
+    col.append(pair,lab); el.append(col);
+  });
+  // cresce do zero (build-in); CSS desliga a transição em prefers-reduced-motion
+  requestAnimationFrame(()=>requestAnimationFrame(()=>grow.forEach(([b,h])=>{b.style.height=h+"%";})));
+}
+function describe(th){
+  const worstEar = th.R.reduce((a,b)=>a+b,0) > th.L.reduce((a,b)=>a+b,0) ? "direita" : "esquerda";
+  const gap = Math.round(Math.abs(th.R.reduce((a,b)=>a+b,0)-th.L.reduce((a,b)=>a+b,0))/7);
+  const hi = Math.round((th.R[5]+th.L[5])/2);
+  let txt;
+  if(gap>=25) txt=`Forte assimetria: a orelha ${worstEar} perde ~${gap} dB a mais, em média. Em fones, o som pende fortemente para o lado melhor — é exatamente isso que a média entre as orelhas apagaria.`;
+  else txt=`Perda aproximadamente simétrica; nos agudos (6 kHz) a perda média é de ~${hi} dB, então consoantes como s, f e t somem primeiro — a fala soa abafada.`;
+  $("changed").textContent=txt;
+}
+
+// ── Seleção / eventos ──
+function select(p){
+  profile=p; const th=PROFILES[p];
+  document.querySelectorAll(".ex").forEach(b=>b.setAttribute("aria-pressed", b.dataset.p==String(p)?"true":"false"));
+  drawBars(th); describe(th);
+  ["b-voice","b-sin","b-music","b-street","b-ab","b-mic"].forEach(id=>$(id).disabled=false);
+  $("snr").disabled=false;
+  $("nowplaying").textContent=`Exemplo: ${th.name}. Toque um som.`;
+}
+function gateOn(){ headphones=true; $("confirm-hp").setAttribute("aria-pressed","true");
+  $("confirm-hp").textContent="Fones confirmados ✓"; $("hp-status").textContent="liberado"; preloadReal(); }
+
+document.querySelectorAll(".ex").forEach(b=>b.addEventListener("click",()=>{
+  if(!headphones){ gateOn(); } select(Number(b.dataset.p)); }));
+$("confirm-hp").addEventListener("click",gateOn);
+["voice","music","street"].forEach(k=>$("b-"+k).addEventListener("click",()=>play(k)));
+$("b-sin").addEventListener("click",playSIN);
+$("b-mic").addEventListener("click",toggleMic);
+$("snr").addEventListener("input",e=>{
+  snr=Number(e.target.value);
+  $("snr-val").textContent=(snr>=0?"+":"")+snr+" dB";
+  e.target.setAttribute("aria-valuetext",(snr>=0?"+":"")+snr+" decibéis");
+  if(noiseGain) noiseGain.gain.setTargetAtTime(snrToGain(snr), audio().currentTime, 0.03);
+  if(type==="sin") $("nowplaying").textContent=`${normal?"NORMAL":PROFILES[profile].name} — Fala no ruído (${snr>=0?"+":""}${snr} dB)`;
+  sinHint();
+});
+$("vol").addEventListener("input",e=>{
+  const pct=Number(e.target.value); userVol = TF.volGain(pct); // limiter protege o pico (logic.js)
+  $("vol-val").textContent=pct+"%"; e.target.setAttribute("aria-valuetext",pct+"%");
+  if(masterNode && ctx) masterNode.gain.setTargetAtTime(userVol, ctx.currentTime, 0.02);
+  volDisclaimer(pct);
+});
+// Disclaimer ancorado nos dados: acima de ~80% do volume, o ato de buscar volume
+// espelha o que quem tem perda faz — e o limite (audibilidade ≠ clareza) é real.
+function volDisclaimer(pct){
+  const el=$("vol-note");
+  if(TF.showDisclaimer(pct, profile!==null, normal)){ // não mostra em escuta NORMAL (logic.js)
+    const th=PROFILES[profile]; const maxL=Math.round(TF.maxLossDb(th));
+    el.innerHTML='<strong>Esse impulso de subir o volume é o ponto.</strong> É o que se faz com perda auditiva. '+
+      'Mas este exemplo tem ~<strong>'+maxL+' dB</strong> de perda na pior banda (limiares reais do NHANES): mais volume '+
+      'devolve <em>audibilidade</em>, não <em>clareza</em> — a perda também distorce. Passado certo ponto vira só esforço '+
+      'e desconforto, sem entender melhor. Esse teto, buscado todo dia, é parte do que se vive.';
+    el.hidden=false;
+  } else { el.hidden=true; el.textContent=""; }
+}
+$("b-ab").addEventListener("click",()=>{
+  normal=!normal; const b=$("b-ab"); b.setAttribute("aria-pressed",String(normal));
+  b.textContent = normal? "Comparar: ouvindo NORMAL" : "Comparar: normal ↔ com perda";
+  volDisclaimer(Number($("vol").value)); // some em normal, reaparece na perda se volume alto
+  if(type==="sin") playSIN();
+  else if(type && type!=="mic") play(type);
+});
+$("b-share").addEventListener("click",()=>{
+  const data={title:"The Frequency",text:"Ouça a perda que a média esconde — baseado em 26.583 audiogramas reais.",url:location.href};
+  if(navigator.share) navigator.share(data); else { navigator.clipboard?.writeText(location.href); $("b-share").textContent="Link copiado ✓"; }
+});
+
+// Pré-seleciona o exemplo-manchete (assimetria severa) para o visual aparecer de
+// cara — só desenha o audiograma; o áudio continua exigindo um clique de play.
+select(1);
+$("nowplaying").textContent="Exemplo: Perda severa em uma orelha. Confirme os fones e toque um som.";
+// Começa a baixar+decodificar o áudio real já no load (decode roda em contexto suspenso),
+// pra não cair no sintético quando o 1º exemplo é tocado. Se o navegador bloquear a
+// criação do contexto sem gesto, preloadReal sai limpo e o gateOn tenta de novo.
+preloadReal();
+
+// Build-in sutil das seções ao entrar na viewport (CSS cuida de reduced-motion / sem-JS).
+(function(){
+  const els=[...document.querySelectorAll('main>section, header.masthead>.wrap')];
+  if(!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+  const io=new IntersectionObserver((ents)=>{ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });},
+    {rootMargin:'0px 0px 14% 0px', threshold:0}); // pré-revela antes de entrar (sem "blank" ao rolar)
+  els.forEach(e=>io.observe(e));
+})();
+</script>
+</body>
+</html>

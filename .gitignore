@@ -55,3 +55,8 @@ RELATORIO_PROCESSO_COMPLETO.md
 # Python Virtual Environment
 .venv/
 
+
+app/_preview.png
+
+# Raw audio downloads (large; bundled clips are trimmed into app/audio/ — see CREDITS.md)
+_audio_src/
