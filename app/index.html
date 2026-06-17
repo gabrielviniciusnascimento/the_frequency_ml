@@ -8,15 +8,15 @@
 <meta property="og:title" content="The Frequency — ouça a perda que a média esconde">
 <meta property="og:description" content="Baseado em dados audiométricos reais de 26.583 pessoas. Aberto, auditado, acessível.">
 <meta property="og:type" content="website">
-<!-- og:image relativo até o deploy; trocar por URL absoluta (com og:url) ao publicar -->
-<meta property="og:image" content="og.png">
+<meta property="og:url" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/">
+<meta property="og:image" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Frequency — Ouça a perda que a média esconde">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Frequency — ouça a perda que a média esconde">
 <meta name="twitter:description" content="Baseado em dados audiométricos reais de 26.583 pessoas. Aberto, auditado, acessível.">
-<meta name="twitter:image" content="og.png">
+<meta name="twitter:image" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/og.png">
 <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15140f" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%23f4efe6'/%3E%3Cpath%20d='M4%2022%20L11%2018%20L18%2012%20L28%206'%20fill='none'%20stroke='%238c2f2a'%20stroke-width='3'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -195,7 +195,7 @@ footer .mono{font-size:.78rem}
     <p class="dek">A perda auditiva não é uma coisa só — é um contínuo de formas. Quando se faz a média das duas orelhas, as mais marcantes desaparecem. Aqui você ouve e <strong>vê</strong> isso.</p>
     <p class="byline">
       <span>Por Gabriel V. Nascimento — sobrevivente, com perda auditiva neural por ototoxicidade.</span>
-      <a href="../docs/en/preprint/the_frequency_v6_preprint.html">Ler o preprint v6 →</a>
+      <a href="docs/en/preprint/the_frequency_v6_preprint.html">Ler o preprint v6 →</a>
     </p>
   </div>
 </header>
@@ -313,10 +313,10 @@ footer .mono{font-size:.78rem}
       <p class="muted" style="margin-bottom:0">Nota do autor: minha própria perda é <strong>neural</strong> (retrococlear), não coclear — exatamente o tipo que este modelo de limiar <em>não</em> representa. A ferramenta não é o meu audiograma. Eu sei a diferença.</p>
     </div>
     <p style="margin-top:18px">Por que três exemplos e não “tipos”? Porque a audição varia num <strong>contínuo</strong> — não em caixinhas separadas. Pegando dados públicos e passando por vários algoritmos de <button type="button" class="term" popovertarget="gl-ml" style="anchor-name:--gl3">aprendizado de máquina</button><span popover id="gl-ml" class="gl-pop" role="tooltip" style="position-anchor:--gl3">Aprendizado de máquina = o computador acha padrões nos dados sozinho, sem a gente rotular. Aqui, cinco famílias de método independentes (silhueta, GMM-BIC, HDBSCAN, OPTICS e o dip de Hartigan) convergem no mesmo veredito: um contínuo dominante, sem subtipos bem separados. O passo a passo está na auditoria de métodos.</span>, todos chegam ao mesmo resultado. E a perda forte em uma só orelha existe — mas pode ser em <strong>qualquer</strong> uma, não num lado fixo.</p>
-    <p class="muted" style="font-size:.9rem">Dados públicos que embasam esta página: os limiares dos exemplos vêm do <a href="https://wwwn.cdc.gov/nchs/nhanes/" style="color:var(--teal)">NHANES</a> (audiometria, domínio público dos EUA); a escala de fala-no-ruído usa as normas do <a href="https://www.interacoustics.com/academy/audiometry-training/speech-audiometry/quicksin" style="color:var(--teal)">QuickSIN</a> (Killion, Niquette, Gudmundsen, Revit &amp; Banerjee, <em>JASA</em> 116(4), 2004): limiar normal ~+2 dB, perda de SNR 3–7/7–15/&gt;15 dB para leve/moderada/severa. Todo o áudio são gravações reais e abertas: fala das <a href="https://www.voiptroubleshooter.com/open_speech/american.html" style="color:var(--teal)">Harvard/OSR sentences</a>; ruído de restaurante e de rua do <a href="https://zenodo.org/records/1227121" style="color:var(--teal)">DEMAND</a> (CC BY 4.0); e música da <a href="https://commons.wikimedia.org/wiki/File:Sousa%27s_%22The_Stars_and_Stripes_Forever%22_-_United_States_Marine_Band_(2017).ogg" style="color:var(--teal)">U.S. Marine Band</a> (domínio público) — com licenças e trechos exatos em <a href="audio/CREDITS.md" style="color:var(--teal)">audio/CREDITS.md</a>.</p>
+    <p class="muted" style="font-size:.9rem">Dados públicos que embasam esta página: os limiares dos exemplos vêm do <a href="https://wwwn.cdc.gov/nchs/nhanes/" style="color:var(--teal)">NHANES</a> (audiometria, domínio público dos EUA); a escala de fala-no-ruído usa as normas do <a href="https://www.interacoustics.com/academy/audiometry-training/speech-audiometry/quicksin" style="color:var(--teal)">QuickSIN</a> (Killion, Niquette, Gudmundsen, Revit &amp; Banerjee, <em>JASA</em> 116(4), 2004): limiar normal ~+2 dB, perda de SNR 3–7/7–15/&gt;15 dB para leve/moderada/severa. Todo o áudio são gravações reais e abertas: fala das <a href="https://www.voiptroubleshooter.com/open_speech/american.html" style="color:var(--teal)">Harvard/OSR sentences</a>; ruído de restaurante e de rua do <a href="https://zenodo.org/records/1227121" style="color:var(--teal)">DEMAND</a> (CC BY 4.0); e música da <a href="https://commons.wikimedia.org/wiki/File:Sousa%27s_%22The_Stars_and_Stripes_Forever%22_-_United_States_Marine_Band_(2017).ogg" style="color:var(--teal)">U.S. Marine Band</a> (domínio público) — com licenças e trechos exatos em <a href="https://github.com/gabrielviniciusnascimento/the_frequency_ml/blob/main/app/audio/CREDITS.md" style="color:var(--teal)">audio/CREDITS.md</a>.</p>
     <div class="links">
-      <a class="btn" href="../docs/en/preprint/the_frequency_v6_preprint.html">Preprint v6</a>
-      <a class="btn" href="../docs/PIPELINE_METHODS_AUDIT.md">Auditoria de métodos</a>
+      <a class="btn" href="docs/en/preprint/the_frequency_v6_preprint.html">Preprint v6</a>
+      <a class="btn" href="https://github.com/gabrielviniciusnascimento/the_frequency_ml/blob/main/docs/PIPELINE_METHODS_AUDIT.md">Auditoria de métodos</a>
       <a class="btn" href="https://github.com/gabrielviniciusnascimento/the_frequency_ml">Código (MIT)</a>
     </div>
   </section>

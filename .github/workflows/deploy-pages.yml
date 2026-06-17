@@ -20,7 +20,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying static content
   deploy:
     environment:
       name: github-pages
@@ -29,13 +28,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build curated _site (empathy tool as root)
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          # The empathy tool is the public site root.
+          cp -r app/. _site/
+          # Self-contained preprint the tool links to (docs/en/preprint/...).
+          mkdir -p _site/docs/en/preprint
+          cp docs/en/preprint/the_frequency_v6_preprint.html _site/docs/en/preprint/
+          ls -R _site
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository (excluding git/etc)
-          path: '.'
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
