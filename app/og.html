@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<!-- Fonte do og.png (1200x630). Regenerar: headless screenshot desta página. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,900&family=Newsreader:opsz,wght@6..72,400&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe6;--ink:#1c1a17;--ink-soft:#544e44;--rule:#cbbfa9;--oxblood:#8c2f2a;--teal:#1f5e5b}
+*{margin:0;box-sizing:border-box}
+html,body{width:1200px;height:630px}
+body{background:var(--paper);color:var(--ink);font-family:'Newsreader',serif;
+  background-image:radial-gradient(circle at 8% -10%, color-mix(in srgb,var(--teal) 10%,transparent) 0, transparent 42%),
+                   radial-gradient(circle at 96% 8%, color-mix(in srgb,var(--oxblood) 9%,transparent) 0, transparent 40%);
+  padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:18px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:'Fraunces',serif;font-weight:900;font-size:92px;line-height:.96;letter-spacing:-.02em;margin:26px 0 22px}
+h1 em{font-style:italic;font-weight:400;color:var(--oxblood)}
+.dek{font-size:30px;line-height:1.4;color:var(--ink-soft);max-width:30ch}
+.foot{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;border-top:2px solid var(--ink);padding-top:20px}
+.by{font-family:'IBM Plex Mono',monospace;font-size:19px;color:var(--ink)}
+.by b{color:var(--oxblood)}
+.bars{display:flex;align-items:flex-end;gap:9px;height:120px}
+.pair{display:flex;align-items:flex-end;gap:3px;height:100%}
+.bar{width:11px;border-radius:2px 2px 0 0}
+.bar.l{background:var(--teal)}
+.bar.r{background:repeating-linear-gradient(45deg,var(--oxblood) 0 3px,color-mix(in srgb,var(--oxblood) 30%,transparent) 3px 6px)}
+</style></head>
+<body>
+  <div>
+    <p class="kicker">The Frequency · ferramenta de empatia · aberta e auditada</p>
+    <h1>Ouça a perda que <em>a média esconde</em>.</h1>
+    <p class="dek">Simulação binaural por orelha, a partir de 26.583 audiogramas reais do NHANES. Ouça — e veja — o que a média entre as orelhas apaga.</p>
+  </div>
+  <div class="foot">
+    <p class="by">por <b>Gabriel V. Nascimento</b> · the_frequency_ml</p>
+    <div class="bars" id="bars" aria-hidden="true"></div>
+  </div>
+<script>
+// motif de audiograma: queda nos agudos, com contraste entre orelhas
+const L=[16,18,22,34,50,60,72], R=[18,20,26,40,58,70,86], el=document.getElementById('bars');
+L.forEach((l,i)=>{const p=document.createElement('div');p.className='pair';
+  const bl=document.createElement('div');bl.className='bar l';bl.style.height=l+'%';
+  const br=document.createElement('div');br.className='bar r';br.style.height=R[i]+'%';
+  p.append(bl,br);el.append(p);});
+</script>
+</body></html>
