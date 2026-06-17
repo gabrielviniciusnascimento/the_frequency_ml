@@ -131,8 +131,6 @@ the_frequency_ml/
 │   └── fr/                           # French
 ├── MODEL_CARD.md                     # Formal ML model card
 ├── LITERATURA_REVIEW.md              # Literature review (18 references)
-├── RELATORIO_PROCESSO_COMPLETO.md    # Full process report
-├── MAPA_CARREIRA.md                  # Career/funding opportunities
 ├── LICENSE                           # MIT
 └── requirements.txt
 ```

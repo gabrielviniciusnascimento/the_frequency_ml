@@ -60,3 +60,8 @@ app/_preview.png
 
 # Raw audio downloads (large; bundled clips are trimmed into app/audio/ — see CREDITS.md)
 _audio_src/
+
+# Internal strategy / monetization / viability notes (kept local, not public)
+ANALISE_PROJETO_GIT.md
+docs/STRATEGY_RESEARCH_2026-06-15.md
+docs/gemini_viability.md.md

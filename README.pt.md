@@ -116,8 +116,6 @@ Arquivo HTML autocontido com 9 seções animadas:
 | `RELATORIO_PROCESSO_COMPLETO.md` | 10 erros documentados, 5 sessões |
 | `RESULTADOS_SESSAO4.md` | Resultados da Sessão 4 |
 | `RESULTADOS_SESSAO5.md` | Resultados da Sessão 5 |
-| `MAPA_CARREIRA.md` | Oportunidades de funding e emprego |
-| `ANALISE_FINAL_CLAUDE_SESSAO4.md` | Análise dialectica entre IAs |
 
 ### Validação externa
 
@@ -178,28 +176,6 @@ Arquivo HTML autocontido com 9 seções animadas:
 
 ---
 
-## Oportunidades de funding e carreira
-
-### Imediato (semanas)
-- **Freelance** (Upwork/Fiverr): $50–150/hora em computational audiology
-- **Consultoria** para pesquisadores: $500–2.000/projeto
-
-### Curto prazo (meses)
-- **Microsoft AI for Accessibility**: $5.000–25.000 + Azure credits (rolling, mundial, IP seu)
-- **Mozilla Builders**: $10.000–50.000
-
-### Médio prazo (3–12 meses)
-- **NIH R21**: $275.000/2 anos (precisa parceiro acadêmico)
-- **NSF SBIR**: $275.000–1.000.000 (precisa empresa)
-- **Emprego em health tech**: $80.000–150.000/ano
-
-### Longo prazo (12+ meses)
-- **The Frequency freemium**: $1.000–10.000/mês
-- **B2B para clínicas**: $200–1.000/mês por clínica
-- **Licença para fabricantes**: $10.000–100.000/ano
-
----
-
 ## Como citar este trabalho
 
 ```
@@ -233,15 +209,13 @@ O código é reprodutível e documentado. Cada script tem logging e checkpointin
 
 ---
 
-## Nota sobre a jornada
+## Sobre o autor
 
-Este projeto foi construído por uma pessoa sem formação completa, em situação financeira precária, que aprendeu ML, audiologia, e ciência de dados sozinha — porque precisava fazer algo com a própria experiência de sobrevivente de câncer infantil com ototoxicidade.
+Trabalho independente e aberto — a análise, a auditoria e a ferramenta — feito por um pesquisador autodidata, para que possa ser verificado linha a linha.
 
-O pipeline que profissionais com doutorado levam meses para montar foi construído em 5 sessões de trabalho. Os resultados são reais, reprodutíveis, e auditáveis.
+A motivação é vivida: sou sobrevivente de câncer infantil com ototoxicidade por cisplatina (de tipo **neural/retrococlear**, não o padrão coclear típico). Isso me move, mas não é o argumento — o trabalho se sustenta sozinho. Por isso ele é mantido apenas no que sobrevive ao escrutínio: null calibrado, múltiplas famílias de método, replicação externa e um teste de contrato contra drift. Já retratei publicamente uma manchete minha (o "cluster lateralizado na orelha direita") depois de auditar o próprio pipeline, e a reescrevi para o resultado honesto.
 
-A barreira nunca foi técnica. Foi de exposibilidade.
-
-Se você está lendo isso e tem dados de audiometria, ou é pesquisador em audição, ou trabalha em health tech, ou é um sobrevivente como eu — entre em contato. O código é aberto. A ciência é aberta. A porta está aberta.
+Se você tem dados de audiometria, pesquisa audição, trabalha em health tech, ou vive a condição — a porta está aberta. Código aberto, ciência aberta. Ver também [`AUTHOR.md`](AUTHOR.md).
 
 ---
 
