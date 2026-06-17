@@ -2,8 +2,12 @@
 """
 Contract / drift guard for the canonical shape-space pipeline.
 
-Plain-assert (no pytest dependency, like spinoffs/.../test_roundtrip.py); run with:
-    python tests/test_pipeline_contract.py
+Plain-assert (no pytest dependency, like spinoffs/.../test_roundtrip.py).
+Run in the pinned env that produced the goldens (see tests/README.md):
+    .venv/Scripts/python.exe tests/test_pipeline_contract.py   # Windows
+    .venv/bin/python        tests/test_pipeline_contract.py     # Unix
+The exact-value asserts below require the locked versions in requirements-lock.txt
+(HDBSCAN cluster counts and PCA variance drift across library versions).
 
 Guards the invariants that a refactor or a dependency bump must NOT silently change
 (this is exactly the failure we hit: a committed JSON drifted from its script). If any
