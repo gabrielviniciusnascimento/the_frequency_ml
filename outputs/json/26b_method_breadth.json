@@ -1,0 +1,286 @@
+{
+  "script": "26b_method_breadth.py",
+  "purpose": "Method-breadth robustness for 'continuum, not clusters' + explicit multiple-testing accounting; disqualifies degenerate outlier-peeling splits.",
+  "cohort_n": 7695,
+  "results": {
+    "kmeans": {
+      "2": {
+        "silhouette": 0.2812,
+        "n_clusters": 2,
+        "min_frac": 0.2723,
+        "sizes": [
+          5600,
+          2095
+        ]
+      },
+      "3": {
+        "silhouette": 0.1558,
+        "n_clusters": 3,
+        "min_frac": 0.2073,
+        "sizes": [
+          4164,
+          1936,
+          1595
+        ]
+      },
+      "4": {
+        "silhouette": 0.1501,
+        "n_clusters": 4,
+        "min_frac": 0.1211,
+        "sizes": [
+          3688,
+          1668,
+          1407,
+          932
+        ]
+      },
+      "5": {
+        "silhouette": 0.1743,
+        "n_clusters": 5,
+        "min_frac": 0.0264,
+        "sizes": [
+          4223,
+          1902,
+          1000,
+          367,
+          203
+        ]
+      }
+    },
+    "dbscan": {
+      "0.5": {
+        "silhouette": null,
+        "n_clusters": 0,
+        "min_frac": null,
+        "sizes": [],
+        "noise_frac": 1.0
+      },
+      "1.0": {
+        "silhouette": null,
+        "n_clusters": 1,
+        "min_frac": null,
+        "sizes": [
+          2748
+        ],
+        "noise_frac": 0.643
+      },
+      "1.5": {
+        "silhouette": 0.1201,
+        "n_clusters": 3,
+        "min_frac": 0.0008,
+        "sizes": [
+          6133,
+          6,
+          6
+        ],
+        "noise_frac": 0.201
+      },
+      "2.0": {
+        "silhouette": 0.4143,
+        "n_clusters": 2,
+        "min_frac": 0.0018,
+        "sizes": [
+          7231,
+          14
+        ],
+        "noise_frac": 0.058
+      },
+      "3.0": {
+        "silhouette": null,
+        "n_clusters": 1,
+        "min_frac": null,
+        "sizes": [
+          7662
+        ],
+        "noise_frac": 0.004
+      }
+    },
+    "spectral_subsampled": {
+      "subsample_n": 4000,
+      "by_k": {
+        "2": {
+          "silhouette": 0.3112,
+          "n_clusters": 2,
+          "min_frac": 0.2597,
+          "sizes": [
+            2961,
+            1039
+          ]
+        },
+        "3": {
+          "silhouette": 0.3092,
+          "n_clusters": 3,
+          "min_frac": 0.01,
+          "sizes": [
+            2937,
+            1023,
+            40
+          ]
+        },
+        "4": {
+          "silhouette": 0.3154,
+          "n_clusters": 4,
+          "min_frac": 0.0085,
+          "sizes": [
+            2952,
+            949,
+            65,
+            34
+          ]
+        },
+        "5": {
+          "silhouette": 0.2422,
+          "n_clusters": 5,
+          "min_frac": 0.0085,
+          "sizes": [
+            2660,
+            731,
+            510,
+            65,
+            34
+          ]
+        }
+      }
+    },
+    "agglomerative_subsampled": {
+      "subsample_n": 4000,
+      "complete": {
+        "2": {
+          "silhouette": 0.1106,
+          "n_clusters": 2,
+          "min_frac": 0.4303,
+          "sizes": [
+            2279,
+            1721
+          ]
+        },
+        "3": {
+          "silhouette": 0.1221,
+          "n_clusters": 3,
+          "min_frac": 0.0532,
+          "sizes": [
+            2066,
+            1721,
+            213
+          ]
+        },
+        "4": {
+          "silhouette": 0.1247,
+          "n_clusters": 4,
+          "min_frac": 0.0083,
+          "sizes": [
+            2066,
+            1688,
+            213,
+            33
+          ]
+        },
+        "5": {
+          "silhouette": 0.1141,
+          "n_clusters": 5,
+          "min_frac": 0.0083,
+          "sizes": [
+            2010,
+            1688,
+            213,
+            56,
+            33
+          ]
+        }
+      },
+      "average": {
+        "2": {
+          "silhouette": 0.6721,
+          "n_clusters": 2,
+          "min_frac": 0.0003,
+          "sizes": [
+            3999,
+            1
+          ]
+        },
+        "3": {
+          "silhouette": 0.5176,
+          "n_clusters": 3,
+          "min_frac": 0.0003,
+          "sizes": [
+            3990,
+            9,
+            1
+          ]
+        },
+        "4": {
+          "silhouette": 0.4079,
+          "n_clusters": 4,
+          "min_frac": 0.0003,
+          "sizes": [
+            3928,
+            62,
+            9,
+            1
+          ]
+        },
+        "5": {
+          "silhouette": 0.3748,
+          "n_clusters": 5,
+          "min_frac": 0.0003,
+          "sizes": [
+            3843,
+            85,
+            62,
+            9,
+            1
+          ]
+        }
+      }
+    }
+  },
+  "multiple_testing": {
+    "n_partition_comparisons": 18,
+    "max_silhouette_overall": {
+      "method": "agglomerative_subsampled.average.2",
+      "silhouette": 0.6721,
+      "n_clusters": 2,
+      "min_frac": 0.0003,
+      "sizes": [
+        3999,
+        1
+      ]
+    },
+    "substantial_threshold": 0.5,
+    "min_balance_for_real_subtype": 0.05,
+    "balanced_substantial_splits": [],
+    "degenerate_substantial_splits_outlier_peeling": [
+      {
+        "method": "agglomerative_subsampled.average.2",
+        "silhouette": 0.6721,
+        "n_clusters": 2,
+        "min_frac": 0.0003,
+        "sizes": [
+          3999,
+          1
+        ]
+      },
+      {
+        "method": "agglomerative_subsampled.average.3",
+        "silhouette": 0.5176,
+        "n_clusters": 3,
+        "min_frac": 0.0003,
+        "sizes": [
+          3990,
+          9,
+          1
+        ]
+      }
+    ],
+    "note": "Reporting the MAX silhouette over the WHOLE grid is the conservative, multiple-comparison-aware statistic. High silhouettes from average/single linkage are outlier-peeling: the minority cluster is <5% of N (see min_frac/sizes), which is a tail being shaved off, not a subtype."
+  },
+  "verdict": "continuum_robust_to_method_choice",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  }
+}

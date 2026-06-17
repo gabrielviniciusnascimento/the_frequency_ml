@@ -1,0 +1,216 @@
+{
+  "script": "34_tinnitus_reexamination.py",
+  "purpose": "Re-examine the v1-v4 tinnitus '38% vs 18%' claim under current scrutiny; defensible unit = |z| asymmetry tail + continuous severity, not the cluster.",
+  "random_state": 42,
+  "cohort_n": 7695,
+  "tinnitus_nonmissing_n": 4713,
+  "tinnitus_overall_rate": 0.1964778272862296,
+  "cluster_based_reproduction": {
+    "hdbscan_sizes": {
+      "0": 13,
+      "1": 7097
+    },
+    "minority": {
+      "n_nonmissing": 9,
+      "yes": 4,
+      "rate": 0.4444444444444444
+    },
+    "dominant": {
+      "n_nonmissing": 4396,
+      "yes": 805,
+      "rate": 0.18312101910828024
+    },
+    "noise": {
+      "n_nonmissing": 308,
+      "yes": 117,
+      "rate": 0.37987012987012986
+    },
+    "note": "Original v1-v4 claim was cluster-based; the cluster is hyperparameter-fragile (audit_06), so this is reported for provenance, not as the test."
+  },
+  "asymmetry_tail_test": {
+    "|z|>2": {
+      "n_in_tail": 411,
+      "tail": {
+        "n_nonmissing": 245,
+        "yes": 88,
+        "rate": 0.35918367346938773
+      },
+      "body": {
+        "n_nonmissing": 4468,
+        "yes": 838,
+        "rate": 0.18755595344673232
+      },
+      "rate_ratio_tail_over_body": 1.915074764989528,
+      "fisher_p_greater": 6.979094589050904e-10,
+      "bootstrap_ratio_ci95": [
+        1.5975105385417092,
+        2.260803152621334
+      ],
+      "permutation_null": {
+        "observed_diff": 0.17162772002265542,
+        "p_emp": 0.0004997501249375312
+      }
+    },
+    "|z|>3": {
+      "n_in_tail": 181,
+      "tail": {
+        "n_nonmissing": 117,
+        "yes": 55,
+        "rate": 0.4700854700854701
+      },
+      "body": {
+        "n_nonmissing": 4596,
+        "yes": 871,
+        "rate": 0.18951261966927763
+      },
+      "rate_ratio_tail_over_body": 2.480496923665695,
+      "fisher_p_greater": 1.173742243994111e-11,
+      "bootstrap_ratio_ci95": [
+        2.0111474695759153,
+        3.007015710302786
+      ],
+      "permutation_null": {
+        "observed_diff": 0.28057285041619245,
+        "p_emp": 0.0004997501249375312
+      }
+    },
+    "|z|>4": {
+      "n_in_tail": 91,
+      "tail": {
+        "n_nonmissing": 60,
+        "yes": 26,
+        "rate": 0.43333333333333335
+      },
+      "body": {
+        "n_nonmissing": 4653,
+        "yes": 900,
+        "rate": 0.19342359767891681
+      },
+      "rate_ratio_tail_over_body": 2.2403333333333335,
+      "fisher_p_greater": 2.1736034722677407e-05,
+      "bootstrap_ratio_ci95": [
+        1.5774736453145481,
+        2.9659286774603992
+      ],
+      "permutation_null": {
+        "observed_diff": 0.23990973565441653,
+        "p_emp": 0.0004997501249375312
+      }
+    }
+  },
+  "severity_gradient_test": {
+    "pointbiserial_tinnitus_vs_pta_high": {
+      "r": 0.23312824110816185,
+      "p": 3.3925052417883914e-59,
+      "note": "non-novel main effect (tinnitus~hearing-loss severity); does NOT establish the asymmetry-specific claim."
+    },
+    "rate_by_pta_high_quintile": [
+      {
+        "quintile": 0,
+        "n": 1037,
+        "rate": 0.09932497589199614
+      },
+      {
+        "quintile": 1,
+        "n": 888,
+        "rate": 0.13175675675675674
+      },
+      {
+        "quintile": 2,
+        "n": 919,
+        "rate": 0.17410228509249184
+      },
+      {
+        "quintile": 3,
+        "n": 928,
+        "rate": 0.22952586206896552
+      },
+      {
+        "quintile": 4,
+        "n": 941,
+        "rate": 0.3538788522848034
+      }
+    ],
+    "asymmetry_within_severity_quintiles": [
+      {
+        "severity_quintile": 0,
+        "pta_high_range": [
+          0.625,
+          18.125
+        ],
+        "tail_n": 3,
+        "tail_rate": 0.3333333333333333,
+        "body_n": 1034,
+        "body_rate": 0.09864603481624758,
+        "ratio": 3.3790849673202614
+      },
+      {
+        "severity_quintile": 1,
+        "pta_high_range": [
+          18.75,
+          23.125
+        ],
+        "tail_n": 6,
+        "tail_rate": 0.16666666666666666,
+        "body_n": 882,
+        "body_rate": 0.13151927437641722,
+        "ratio": 1.267241379310345
+      },
+      {
+        "severity_quintile": 2,
+        "pta_high_range": [
+          23.75,
+          30.625
+        ],
+        "tail_n": 19,
+        "tail_rate": 0.2631578947368421,
+        "body_n": 900,
+        "body_rate": 0.17222222222222222,
+        "ratio": 1.5280135823429541
+      },
+      {
+        "severity_quintile": 3,
+        "pta_high_range": [
+          31.25,
+          43.75
+        ],
+        "tail_n": 78,
+        "tail_rate": 0.2948717948717949,
+        "body_n": 850,
+        "body_rate": 0.2235294117647059,
+        "ratio": 1.3191632928475034
+      },
+      {
+        "severity_quintile": 4,
+        "pta_high_range": [
+          44.375,
+          114.375
+        ],
+        "tail_n": 139,
+        "tail_rate": 0.4172661870503597,
+        "body_n": 802,
+        "body_rate": 0.3428927680798005,
+        "ratio": 1.2168999345977762
+      }
+    ],
+    "asymmetry_severity_adjusted_mantel_haenszel": {
+      "mh_or": 1.4328744541325187,
+      "ci95": [
+        1.0795825110387267,
+        1.9017807164457796
+      ],
+      "chi2": 6.282677917773258,
+      "chi2_p": 0.01219237237449749,
+      "strata_used": 5
+    }
+  },
+  "verdict": "asymmetry_assoc_survives_severity_adjusted",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "script": "35_row_centering_ablation.py",
+  "purpose": "Pre-validate row-centering: does 'continuum, not discrete clusters' survive toggling the centering step? Asymmetry tail is centering-invariant.",
+  "cohort_n": 7695,
+  "row_centered": {
+    "n_components": 10,
+    "kmeans_silhouette_by_k": {
+      "2": 0.2812246917487784,
+      "3": 0.1558163160819246,
+      "4": 0.15009446783023014,
+      "5": 0.17428173050706494,
+      "6": 0.15892938092308365
+    },
+    "best_silhouette": 0.2812246917487784,
+    "best_k": 2,
+    "hartigan_dip_pc1": {
+      "stat": 0.0016880923693210642,
+      "p": 1.0
+    },
+    "hdbscan": {
+      "n_clusters": 2,
+      "sizes": [
+        13,
+        7097
+      ],
+      "noise_fraction": 0.076
+    }
+  },
+  "no_row_centering": {
+    "n_components": 9,
+    "kmeans_silhouette_by_k": {
+      "2": 0.4237398260698073,
+      "3": 0.28282227611390326,
+      "4": 0.21722858384036253,
+      "5": 0.22359107021647176,
+      "6": 0.2147343663312884
+    },
+    "best_silhouette": 0.4237398260698073,
+    "best_k": 2,
+    "hartigan_dip_pc1": {
+      "stat": 0.0020195888397313007,
+      "p": 0.9996018027352468
+    },
+    "hdbscan": {
+      "n_clusters": 2,
+      "sizes": [
+        16,
+        7253
+      ],
+      "noise_fraction": 0.0554
+    }
+  },
+  "asymmetry_tail_centering_invariant": {
+    "|z|>2": 411,
+    "|z|>3": 181,
+    "|z|>4": 91
+  },
+  "continuum_holds_under_row_centering": true,
+  "note": "Without centering the space mixes level+shape, so any structure there reflects a severity gradient (itself a continuum), not discrete shape subtypes. The shape-continuum claim is the row-centered result.",
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  }
+}

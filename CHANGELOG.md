@@ -3,6 +3,36 @@
 All notable changes to The Frequency ML. This project documents science as much as code,
 so entries record what was *claimed*, *tested*, and *withdrawn*, not only what was built.
 
+## [2.1.0] — 2026-06-17
+
+Consolidation + scrutiny-leveling. Adds the canonical **Scientific Dossier** and brings the
+previously lower-scrutiny analyses up to the standard of the auditory/continuum claims.
+
+### Added
+- **`docs/en/SCIENTIFIC_DOSSIER.md`** — single authoritative record: inventory, evolution of
+  focus (evidence- vs strategy-driven), claims×evidence truth table, scrutiny matrix, and the
+  honesty-log completion below. Supersedes `meta_analysis.md` and the scattered session logs.
+- **New guards** (all deterministic, seed 42, committed JSON):
+  - `26b_method_breadth.py` — continuum test extended to DBSCAN / Spectral / Agglomerative
+    (complete+average) with explicit multiple-testing accounting; degenerate outlier-peeling
+    splits (high silhouette from a `[n-1,1]` shave) disqualified via a declared ≥5%-minority rule.
+  - `35_row_centering_ablation.py` — pre-validates the row-centering choice; the continuum holds
+    with and without it (asymmetry tail is centering-invariant).
+  - `vis_04_sanity_extremes.py` — per-case audit of vision |OD-OS| extremes (64/64 in
+    physiological range), parity with audio (13/13) and grip (15/15); closes a Table 1 footnote.
+  - `36_triplet_overlap_audit.py` — formalizes cross-system SEQN/calendar overlap (0 extreme
+    overlap across all pairs and the triple) as a committed artifact, not prose.
+
+### Withdrawn / corrected (honesty log)
+- **Tinnitus association (v1–v4, dropped silently in v5) — re-examined and reinstated, reframed.**
+  The original 38%-vs-18% was cluster-based. `34_tinnitus_reexamination.py`: the severity main
+  effect (r=0.23) is real but non-novel; the asymmetry-specific effect, **severity-adjusted
+  (Mantel–Haenszel), is modest — OR 1.43, 95% CI [1.08, 1.90], CMH p=0.012**. Reinstated as a
+  continuum gradient, quoting the adjusted OR≈1.4, never the univariate 2.48.
+- **Cisplatin framing (v1–v4, dropped silently).** Recorded; the apparent left/right tension is
+  **moot** — the auditory tail is bilaterally symmetric (`audit_03`), so there is no directional
+  finding to contradict. Remains the personal motivation for the product, not a manuscript claim.
+
 ## [2.0.0] — 2026-06-15
 
 Major reframe: from a single-system "audiometric phenotyping audit" (v5) to a measure-agnostic,

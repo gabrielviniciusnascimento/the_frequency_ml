@@ -1,5 +1,9 @@
 # Meta-análise — The Frequency ML (pós-pivô cross-system)
 
+> **SUPERSEDED (2026-06-17):** consolidado em `docs/en/SCIENTIFIC_DOSSIER.md` (o registro
+> canônico: inventário, evolução do foco, matriz de escrutínio, honesty log). Mantido como
+> trilha de proveniência; não citar como estado atual.
+
 **Atualizado:** 2026-06-13
 **Supersede:** a versão anterior (2026-06-12) era pré-pivô (inventário de spinoffs skfreeze/clusterauditor). Esta reflete o estado real depois da reconstrução de grip/visão e da camada adimensional.
 
