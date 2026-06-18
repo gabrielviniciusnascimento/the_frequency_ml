@@ -14,8 +14,10 @@ previously lower-scrutiny analyses up to the standard of the auditory/continuum 
   honesty-log completion below. Supersedes `meta_analysis.md` and the scattered session logs.
 - **New guards** (all deterministic, seed 42, committed JSON):
   - `26b_method_breadth.py` — continuum test extended to DBSCAN / Spectral / Agglomerative
-    (complete+average) with explicit multiple-testing accounting; degenerate outlier-peeling
-    splits (high silhouette from a `[n-1,1]` shave) disqualified via a declared ≥5%-minority rule.
+    (complete+average), scored by the conservative max-silhouette-over-the-whole-grid statistic
+    (multiple-comparison-aware, not a formal Bonferroni/FDR p-value — silhouette has no null here);
+    degenerate outlier-peeling splits (high silhouette from a `[n-1,1]` shave) disqualified via a
+    declared ≥5%-minority rule.
   - `35_row_centering_ablation.py` — pre-validates the row-centering choice; the continuum holds
     with and without it (asymmetry tail is centering-invariant).
   - `vis_04_sanity_extremes.py` — per-case audit of vision |OD-OS| extremes (64/64 in

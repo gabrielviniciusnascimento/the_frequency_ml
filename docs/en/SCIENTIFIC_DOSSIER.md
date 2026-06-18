@@ -94,9 +94,9 @@ is not auditing anything.
 | **A** continuum | BIC-sim calibration, 5-family tendency battery, method comparison **+ method breadth (`26b`)**, null-vs-synthetic (`30`), LOPO/LOBO/dual-encoding, **row-centering ablation (`35`)** | None material |
 | **B** asymmetry real | Gaussian / heteroscedastic / t-copula nulls (MC B=2,000), side-symmetry binomial, sum-vs-diff decomposition, per-case sanity (13/13), injection-recall, OHHR replication | None material |
 | **C** method-robust | Contract test (golden values, parity 1e-13), hyperparameter sweep (`audit_06`), skfreeze round-trip, shared canonical loader, pinned lock | Minor: CI not yet wired (local gate) |
-| **D** cross-system gradient | Per-system Gaussian null, grip t-copula (fails), **vision case-audit (`vis_04`)**, inclusion-policy robustness (`audit_02`), **triplet-overlap audit (`36`)** | **Known & stated:** 3 points; post-hoc; no within-person link (cohorts disjoint by calendar — `36` confirms 0 overlap). Framed as methods demonstration. |
+| **D** cross-system gradient | Per-system Gaussian null, grip t-copula (fails), **vision case-audit (`vis_04`)**, inclusion-policy robustness (`audit_02`), **triplet-overlap audit (`36`)** | **Known & stated:** 3 points; post-hoc; no within-person link — `36` confirms **0 extreme-case overlap across all pairs**, and grip×vision (and the full triple) are calendar-disjoint at the cohort level (audio shares cohort members with each, but no shared *extremes*). Framed as methods demonstration. |
 
-**New guards added by this dossier:** `26b` (method breadth + multiple-testing accounting),
+**New guards added by this dossier:** `26b` (method breadth + conservative max-silhouette-over-grid statistic),
 `35` (row-centering ablation), `vis_04` (vision extreme case-audit, 64/64 in physiological
 range — parity with audio 13/13 and grip 15/15), `36` (cross-system SEQN/calendar overlap,
 formalizing what was previously prose), `34` (tinnitus re-examination, §5). After these,
