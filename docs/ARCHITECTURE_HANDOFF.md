@@ -98,7 +98,7 @@ Tudo em disco, com SEQN rastreável. Não está no README nem no front:
 - **Método cross-system de assimetria** (audição/grip/visão), calibrado por null + métrica adimensional — `scripts/27–30`, `grip_*`, `vis_*`, `cmp_dimensionless_asymmetry.py`.
 - **O caso unilateral é real, não artefato** — vive no subespaço de diferença, some no de soma; a média binaural o apaga (13/13→0/13). É a base científica da feature-assinatura. (`27_*`, `28_*`)
 - **Contínuo, não subtipos** — mata a UI de "3 perfis", motiva sliders.
-- **Visão = controle negativo** (abaixo do null até 4σ) — valida que o aparato não inventa excesso.
+- **Visão = controle negativo** (abaixo do null até 4σ pela métrica primária e sob MCD) — valida que o aparato não inventa excesso. Nuance: um scorer robusto (MAD) mostra uma folga fina em |z|>5 (~1,2×, `audit_09`) — controle **fraco, não nulo**; é o eco da anisometropia real, uma ordem de grandeza abaixo da audição.
 - **Integridade como assinatura:** mapeamento anatômico via MGATHAND (grip), sanity de extremos, correção de flag de esforço.
 - **Paper v6** (`docs/en/PAPER_DRAFT_v6_crosssystem.md`) + **tabela** (`docs/en/table_crosssystem_asymmetry.tex`) + **figura** (`outputs/dashboards/dimensionless_asymmetry_figure.png`).
 - **Ponte produto↔ciência:** `docs/VISION_full_circle.md` (spec da simulação binaural).

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>The Frequency v6 preprint</title>
+  <title>PAPER_DRAFT_v6_crosssystem</title>
   <style>
 
 html {
@@ -172,9 +172,6 @@ vertical-align: middle;
 </style>
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">The Frequency v6 preprint</h1>
-</header>
 <h1 id="signal-or-artifact-a-null-calibrated-cross-system-audit-of-interaural-asymmetry-in-paired-organ-measurements-nhanes-auditory-motor-visual">Signal
 or Artifact? A Null-Calibrated, Cross-System Audit of Interaural
 Asymmetry in Paired-Organ Measurements (NHANES: Auditory, Motor,
@@ -656,6 +653,33 @@ but <strong>not</strong> at
 The moderate shoulder is therefore consistent with measurement noise;
 the defensible claim is the far tail,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">|z|\ge3</annotation></semantics></math>.</p>
+<p><em>Robust to the outlier definition, not only the metric.</em> The
+far tail above is defined by a standard-deviation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-score;
+to check it is not an artifact of that one scaling, we re-scored the
+same inter-ear contrast with two robust outlier definitions — a
+median/MAD
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mo stretchy="false" form="prefix">|</mo><mi>c</mi><mo>−</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">n</mi></mrow><mo stretchy="false" form="prefix">|</mo><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>1.4826</mn><mo>⋅</mo><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi></mrow><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">|z| = |c - \mathrm{median}|/(1.4826\cdot\mathrm{MAD})</annotation></semantics></math>)
+and a Mahalanobis distance from a Minimum-Covariance-Determinant fit on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mover><mi>R</mi><mo accent="true">¯</mo></mover><mo>,</mo><mover><mi>L</mi><mo accent="true">¯</mo></mover><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\overline{R}, \overline{L})</annotation></semantics></math>
+— each wrapped in its own
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mn>2</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">B = 2{,}000</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>-copula
+null (<code>audit_09</code>). The auditory tail survives
+<strong>both</strong> at every cutoff, the real count landing outside
+the null 95% band throughout (real/null-mean ratio ≈ 4.0–7.3 for the MAD
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo><mo>&gt;</mo><mn>4</mn><mi>…</mi><mn>5</mn></mrow><annotation encoding="application/x-tex">|z| &gt; 4\ldots5</annotation></semantics></math>,
+≈ 2.4–5.1 for the Mahalanobis distance at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>&gt;</mo><mn>4</mn><mi>…</mi><mn>6</mn></mrow><annotation encoding="application/x-tex">d &gt; 4\ldots6</annotation></semantics></math>).
+The raw <em>counts</em> differ between scorers — a MAD or Mahalanobis
+cutoff is not a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
+cutoff, so it selects a different number of cases — but the <em>survival
+against the null</em> does not: the excess is a property of the
+contrast, not of the standard-deviation scaling used to expose it.</p>
 <p><em>Bilaterally symmetric, not lateralized.</em> The HDBSCAN
 &quot;cluster&quot; of 13 extreme cases is unanimously right-worse, which earlier
 drafts read as a lateralized signal. It is not: of the 69 cases with a
@@ -867,6 +891,20 @@ ears and dissolves under binaural averaging
 <h2 id="4-discussion">4. Discussion</h2>
 <h3 id="41-a-reproducible-magnitude-gradient--without-a-direction">4.1 A
 reproducible magnitude gradient — without a direction</h3>
+<p>Two results carry the paper, and the second earns the first. The
+<strong>positive</strong>: binaural averaging — a routine curation step
+for paired organs — deletes a contrast that is real in the raw
+thresholds, dropping difference-subspace recovery of the extreme group
+from 0.92 to 0.0 and collapsing its separation from 8.5σ to 1.2σ (§3.4).
+The <strong>control that licenses reading that as signal rather than
+method</strong>: the identical pipeline, run unchanged on a paired
+system where strong central coupling makes a large real excess
+biologically unlikely, returns a visual tail within or below its own
+null (§3.2, §4.2) — a pipeline that fabricated asymmetry could not
+produce a sub-null result. The contribution is therefore best read as a
+<em>calibrated instrument</em>: a null-calibrated audit whose negative
+control earns its positive, with the cross-system gradient below the
+magnitude statement those two results support.</p>
 <p>Run with identical modelling code on three NHANES paired-organ
 systems, the same audit returns a strict, monotone, null-calibrated
 gradient in the <em>magnitude</em> of the non-Gaussian inter-side
@@ -904,6 +942,25 @@ appear. The negative control is therefore the <em>unselected</em> visual
 system, not refraction per se; used that way, it is exactly the
 no-excess baseline the method needs, and the reason its non-comparable
 clustering (§3.1) can be set aside.</p>
+<p>A robustness cross-check sharpens this boundary without overturning
+it (<code>audit_09</code>). Under the primary metric and under a
+Minimum-Covariance-Determinant scorer, the general-population visual
+tail stays within or below its null at every level — a clean control —
+while a robust median/MAD scorer surfaces a single thin excess at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo><mo>&gt;</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|z| &gt; 5</annotation></semantics></math>
+(real/null ≈ 1.2×,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.0015</mn></mrow><annotation encoding="application/x-tex">p = 0.0015</annotation></semantics></math>,
+surviving Bonferroni over the 24-cell scorer grid, roughly an order of
+magnitude below the auditory ratios at the same scorer). That thin
+excess is most naturally read not as fabricated asymmetry but as the
+same anisometropic signal §3.3 isolates when the cohort is restricted to
+abnormal refraction — here faintly visible in the <em>unselected</em>
+population because a robust scorer is more sensitive to the few genuine
+anisometropes. The negative control is thus better stated as a
+<strong>sensitivity gradient</strong>: the apparatus registers real
+anisometropia thinly, the real auditory contrast strongly, and rejects
+grip under a tail-dependent null — which is what a calibrated instrument
+should do, and a stronger validation than a flat null would be.</p>
 <h3 id="43-the-artifact-traps-and-why-the-contribution-is-methodological">4.3
 The artifact traps, and why the contribution is methodological</h3>
 <p>Each of the artifact traps named in the Introduction would,
@@ -946,13 +1003,32 @@ eyes (§3.3, §4.2). We calibrate against three null families — Gaussian
 copula, heteroscedastic measurement, and a tail-dependent Student-t
 copula — and the auditory excess survives all three; but no finite
 battery excludes <em>every</em> conceivable dependence structure, so
-&quot;excess over the null&quot; means excess over those families. The grip limb
-is weaker on exactly this point: its far-tail excess survives the
-Gaussian null but <strong>not</strong> the t-copula, so it is consistent
-with bilateral tail dependence and we do not claim a genuine grip excess
-(§3.2). The far-tail counts are rare-outlier tails, not population
-strata; the often-cited &quot;N = 13&quot; auditory group is one (right-worse)
-side of a bilaterally symmetric tail, not a lateralized subgroup, and is
+&quot;excess over the null&quot; means excess over those families — though the far
+tail is also robust to the <em>outlier definition</em> itself, surviving
+robust MAD and Minimum-Covariance-Determinant scorers as well as the
+standard-deviation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+(§3.4, <code>audit_09</code>). A second measurement-side concern we can
+bound but not fully exclude is a test-order or protocol asymmetry (e.g.
+systematic differences from the ear tested first across nine survey
+cycles): a <em>directional</em> order effect would impose a preferred
+side, but the far tail is bilaterally symmetric (§3.4;
+<code>audit_03</code>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo><mo>&gt;</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">|z|&gt;4</annotation></semantics></math>
+split 46/45,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>1.0</mn></mrow><annotation encoding="application/x-tex">p = 1.0</annotation></semantics></math>),
+which excludes any directional artifact. What remains conceivable is
+only a <em>non-directional, per-subject heteroscedastic</em> measurement
+asymmetry; NHANES carries no recorded test-order variable to probe it
+directly (<code>audit_03</code>, <code>note_test_order</code>), and such
+an effect would itself be a finding about measurement rather than a
+refutation of the contrast. The grip limb is weaker on exactly this
+point: its far-tail excess survives the Gaussian null but
+<strong>not</strong> the t-copula, so it is consistent with bilateral
+tail dependence and we do not claim a genuine grip excess (§3.2). The
+far-tail counts are rare-outlier tails, not population strata; the
+often-cited &quot;N = 13&quot; auditory group is one (right-worse) side of a
+bilaterally symmetric tail, not a lateralized subgroup, and is
 hyperparameter-fragile (§3.4), which is why we frame the result on the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>z</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|z|</annotation></semantics></math>
 threshold rather than the cluster. Most importantly, the gradient is

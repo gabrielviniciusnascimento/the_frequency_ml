@@ -76,7 +76,7 @@ No clustering criterion supports stable discrete subtypes on the row-centered sh
 | C | Result is robust to method / hyperparameter / seed | ✅ Supported | `tests/test_pipeline_contract.py`, `audit_06`, `26b`, frente3 freeze |
 | D | Cross-system *gradient* (auditory ≫ grip > vision) | ⚠️ Methods demo, not discovery | `cmp_dimensionless_asymmetry.json`, `audit_02` |
 | — | Grip carries a genuine excess | ❌ **Withdrawn** → "Gaussian-null excess only" (fails t-copula) | `audit_05` |
-| — | Vision shows asymmetry | ➖ **Weak negative control** — within/below null under every scorer *except* a ~1.2× excess at MAD\|z\|>5 (235 vs null CI[168,222], p=0.0015, survives Bonferroni over the 8 vision cells); an order of magnitude below audition's 5–7× | `vis_03`, `vis_04`, `audit_09` |
+| — | Vision shows asymmetry | ➖ **Weak negative control** — within/below null under every scorer *except* a ~1.2× excess at MAD\|z\|>5 (235 vs null CI[168,222], p=0.0015, survives Bonferroni over the 24-cell scorer grid); an order of magnitude below audition's 5–7× | `vis_03`, `vis_04`, `audit_09` |
 | — | Lateralized-trauma etiology | ❌ **Withdrawn** (tail is bilaterally symmetric) | `audit_03` |
 | — | Cluster-1 is a validated phenotype | ⬇️ **Downgraded** to a continuum tail | `audit_06`, frente1 |
 | — | PTA does not predict speech-in-noise (r≈0.015) | ❌ **Corrected** (ingestion bug; r=0.85) | `CORRECOES_2026-06-01.md` |

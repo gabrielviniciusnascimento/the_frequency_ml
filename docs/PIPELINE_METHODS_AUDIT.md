@@ -52,7 +52,7 @@ idade 20–69 → completude ≥10/14 → ANY25 (>25 dB em alguma banda) → **r
 | 8 | `METHODS_NOTE.md` usava "Cluster 1 / right-ear / N=12" pré-audit | dívida de integridade (mesma família do fix do produto) | **resolvido**: reconciliado p/ cauda single-ear simétrica, N instável (snapshot 12 / canônico 13 / sweep 9–24), + recomendação de testar *existência* |
 
 **No padrão (forte, mantido):** `RANDOM_STATE` único; logging+checkpoint; campos honestos de revisão;
-null calibrado (`30`, `audit_01/04/05`) + controle negativo (`vis_*`); disk-truth com SEQN;
+null calibrado (`30`, `audit_01/04/05`) + controle negativo (`vis_*`, fraco-não-nulo via `audit_09`); disk-truth com SEQN;
 diagnósticos não-circulares (LOPO/LOBO/dual-encoding, `METHODS_NOTE.md`).
 
 ---
