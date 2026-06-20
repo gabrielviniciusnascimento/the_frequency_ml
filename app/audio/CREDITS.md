@@ -83,5 +83,16 @@ signal-to-noise ratio loss in normal-hearing and hearing-impaired listeners,"*
 
 ## Audiogram data
 
-The example thresholds in the tool are derived from **NHANES** audiometry (US public
-domain) — see the repository's methods audit and preprint.
+The three example thresholds in the tool are the **per-frequency medians** of the three
+geometric groups found in **NHANES** audiometry (US public domain), as committed in
+`outputs/json/20_outlier_analysis.json` (`threshold_medians_db`). They are derived from the
+**analyzed cohort (N = 7,695** — ages 20–69, ≥10/14 thresholds present, at least one band
+> 25 dB), **not** the raw 26,583-record pool. The values are regenerated deterministically by
+`scripts/app_profiles.py` → `app/profiles.json`; `app/logic.js` mirrors that file and
+`tests/app_logic.test.js` locks the parity, so the audible profiles trace back to a committed
+artifact rather than hand-transcribed numbers.
+
+Honest caveat: the "Perda severa em uma orelha" profile is the median of a **rare tail group
+(n = 12)** — an *exemplar* of extreme inter-ear asymmetry, **not** a validated clinical
+phenotype (it is downgraded to a continuum tail in the audit; see `audit_06` and the dossier).
+See the repository's methods audit and preprint for the full chain.

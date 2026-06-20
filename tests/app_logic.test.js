@@ -4,6 +4,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const TF = require("../app/logic.js");
+const PROFILES_JSON = require("../app/profiles.json");
 
 test("snrToGain: +SNR abaixa o ruído, 0 dB = paridade, -SNR levanta", () => {
   assert.equal(TF.snrToGain(0), 1);
@@ -26,8 +27,8 @@ test("showDisclaimer: só com perfil, em perda e volume >= limiar", () => {
 });
 
 test("maxLossDb: pega a pior banda entre as duas orelhas", () => {
-  assert.equal(TF.maxLossDb(TF.PROFILES[1]), 87.5); // orelha direita severa
-  assert.equal(TF.maxLossDb(TF.PROFILES[0]), 33.6);
+  assert.equal(TF.maxLossDb(TF.PROFILES[1]), 80.0); // orelha direita severa (mediana cluster_1)
+  assert.equal(TF.maxLossDb(TF.PROFILES[0]), 35.0); // mediana cluster_0
 });
 
 test("sinHintKey: fronteiras ancoradas no ~+2 dB do QuickSIN", () => {
@@ -56,5 +57,21 @@ test("PROFILES: estrutura válida (7 bandas por orelha, alinhadas às FREQS)", (
     assert.equal(p.L.length, 7, `L do perfil ${k}`);
     assert.equal(typeof p.name, "string");
     p.R.concat(p.L).forEach((v) => assert.ok(v >= 0 && v <= 120, "limiar em faixa plausível"));
+  }
+});
+
+test("PROFILES: paridade com a fonte de verdade (app/profiles.json, gerado por app_profiles.py)", () => {
+  // Trava o espelho inline contra o artefato gerado das medianas commitadas do NHANES.
+  const src = PROFILES_JSON.profiles;
+  assert.equal(TF.FREQS.join(","), PROFILES_JSON.freqs_hz.join(","), "ordem das frequências");
+  assert.deepEqual(
+    Object.keys(TF.PROFILES).sort(),
+    Object.keys(src).sort(),
+    "mesmos slots de perfil"
+  );
+  for (const k of Object.keys(src)) {
+    assert.equal(TF.PROFILES[k].name, src[k].name, `nome do perfil ${k}`);
+    assert.deepEqual(TF.PROFILES[k].R, src[k].R, `curva R do perfil ${k}`);
+    assert.deepEqual(TF.PROFILES[k].L, src[k].L, `curva L do perfil ${k}`);
   }
 });

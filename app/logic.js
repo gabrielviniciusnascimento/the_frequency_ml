@@ -1,6 +1,9 @@
 /* Lógica pura da ferramenta — sem DOM, sem Web Audio. Isolada aqui para ser
    testável (tests/app_logic.test.js) e reusada pelo index.html (window.TF).
-   Os limiares dos PROFILES são derivados do NHANES (ver app/audio/CREDITS.md e o preprint). */
+   Os limiares dos PROFILES são as MEDIANAS por frequência dos grupos geométricos do
+   NHANES (threshold_medians_db em outputs/json/20_outlier_analysis.json, coorte N=7.695).
+   Fonte de verdade: app/profiles.json, gerado por scripts/app_profiles.py; estes valores
+   inline espelham esse arquivo e tests/app_logic.test.js trava a paridade. NÃO editar à mão. */
 (function (root) {
   "use strict";
 
@@ -8,11 +11,11 @@
   const FLABELS = ["500", "1k", "2k", "3k", "4k", "6k", "8k"];
   const PROFILES = {
     0: { name: "Perda gradual nos agudos",
-         R: [14.5, 14.5, 16.5, 24.1, 28.1, 31.2, 33.1], L: [14.6, 14.6, 16.6, 25.6, 30.6, 32.1, 33.6] },
+         R: [10.0, 10.0, 15.0, 20.0, 20.0, 30.0, 30.0], L: [10.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0] },
     1: { name: "Perda severa em uma orelha",
-         R: [68.6, 70.0, 72.5, 77.5, 85.0, 85.0, 87.5], L: [10.0, 7.5, 12.5, 15.0, 22.5, 25.0, 32.5] },
+         R: [70.0, 67.5, 72.5, 80.0, 75.0, 77.5, 77.5], L: [12.5, 5.0, 10.0, 10.0, 10.0, 12.5, 15.0] },
     2: { name: "Queda acentuada nos agudos",
-         R: [26.9, 26.9, 28.9, 43.2, 53.2, 56.0, 53.2], L: [27.9, 27.9, 29.9, 46.0, 56.0, 58.7, 56.0] },
+         R: [15.0, 20.0, 25.0, 45.0, 55.0, 60.0, 65.0], L: [15.0, 15.0, 30.0, 50.0, 55.0, 60.0, 65.0] },
   };
   const Q = 1.4, MASTER_GAIN = 0.3, VOL_MAX_GAIN = 4.0, DISCLAIMER_PCT = 80;
 

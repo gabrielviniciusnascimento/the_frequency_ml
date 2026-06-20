@@ -1,0 +1,102 @@
+{
+  "_comment": "GERADO por scripts/app_profiles.py — não editar à mão. Fonte de verdade dos perfis audíveis; app/logic.js espelha estes valores e tests/app_logic.test.js trava a paridade.",
+  "generated_by": "scripts/app_profiles.py",
+  "source": "outputs/json/20_outlier_analysis.json",
+  "statistic": "threshold_medians_db (mediana por frequência de cada grupo)",
+  "freqs_hz": [
+    500,
+    1000,
+    2000,
+    3000,
+    4000,
+    6000,
+    8000
+  ],
+  "provenance": {
+    "cohort": "NHANES analisada: idade 20–69, >=10/14 limiares, ANY25 (>25 dB em >=1 banda)",
+    "n_analyzed": 7695,
+    "caveat": "cluster_1 (n=12) é exemplar de cauda, não fenótipo clínico validado."
+  },
+  "profiles": {
+    "0": {
+      "name": "Perda gradual nos agudos",
+      "source_cluster": "cluster_0",
+      "n": 7098,
+      "R": [
+        10.0,
+        10.0,
+        15.0,
+        20.0,
+        20.0,
+        30.0,
+        30.0
+      ],
+      "L": [
+        10.0,
+        10.0,
+        15.0,
+        20.0,
+        25.0,
+        30.0,
+        35.0
+      ],
+      "note": "Grupo mais comum (n grande): perda leve/gradual, bilateral e quase simétrica."
+    },
+    "1": {
+      "name": "Perda severa em uma orelha",
+      "source_cluster": "cluster_1",
+      "n": 12,
+      "R": [
+        70.0,
+        67.5,
+        72.5,
+        80.0,
+        75.0,
+        77.5,
+        77.5
+      ],
+      "L": [
+        12.5,
+        5.0,
+        10.0,
+        10.0,
+        10.0,
+        12.5,
+        15.0
+      ],
+      "note": "Cauda rara (n=12): EXEMPLAR de assimetria extrema, NÃO um fenótipo validado (rebaixado a cauda de continuum — ver dossiê §2 e audit_06)."
+    },
+    "2": {
+      "name": "Queda acentuada nos agudos",
+      "source_cluster": "outliers",
+      "n": 585,
+      "R": [
+        15.0,
+        20.0,
+        25.0,
+        45.0,
+        55.0,
+        60.0,
+        65.0
+      ],
+      "L": [
+        15.0,
+        15.0,
+        30.0,
+        50.0,
+        55.0,
+        60.0,
+        65.0
+      ],
+      "note": "Perda acentuada nos agudos, aproximadamente simétrica entre as orelhas."
+    }
+  },
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  }
+}

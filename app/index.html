@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Frequency — ouça a perda que a média esconde</title>
-<meta name="description" content="Uma ferramenta aberta e acessível, baseada em 26.583 audiogramas reais (NHANES): ouça como a perda auditiva muda o som — e veja o que a média entre as orelhas esconde.">
+<meta name="description" content="Uma ferramenta aberta e acessível, baseada em 7.695 audiogramas reais (NHANES): ouça como a perda auditiva muda o som — e veja o que a média entre as orelhas esconde.">
 <meta property="og:title" content="The Frequency — ouça a perda que a média esconde">
-<meta property="og:description" content="Baseado em dados audiométricos reais de 26.583 pessoas. Aberto, auditado, acessível.">
+<meta property="og:description" content="Baseado em dados audiométricos reais de 7.695 pessoas. Aberto, auditado, acessível.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/">
 <meta property="og:image" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/og.png">
@@ -15,7 +15,7 @@
 <meta property="og:image:alt" content="The Frequency — Ouça a perda que a média esconde">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Frequency — ouça a perda que a média esconde">
-<meta name="twitter:description" content="Baseado em dados audiométricos reais de 26.583 pessoas. Aberto, auditado, acessível.">
+<meta name="twitter:description" content="Baseado em dados audiométricos reais de 7.695 pessoas. Aberto, auditado, acessível.">
 <meta name="twitter:image" content="https://gabrielviniciusnascimento.github.io/the_frequency_ml/og.png">
 <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15140f" media="(prefers-color-scheme: dark)">
@@ -190,7 +190,7 @@ footer .mono{font-size:.78rem}
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">The Frequency · 26.583 audiogramas · NHANES · aberto e auditado</p>
+    <p class="kicker">The Frequency · 7.695 audiogramas · NHANES · aberto e auditado</p>
     <h1>Ouça a perda que <em>a média esconde</em>.</h1>
     <p class="dek">A perda auditiva não é uma coisa só — é um contínuo de formas. Quando se faz a média das duas orelhas, as mais marcantes desaparecem. Aqui você ouve e <strong>vê</strong> isso.</p>
     <p class="byline">
@@ -219,7 +219,7 @@ footer .mono{font-size:.78rem}
   <section aria-labelledby="s2">
     <p class="step-no">Passo 02</p>
     <h2 id="s2">Escolha um exemplo</h2>
-    <p class="muted">Três pontos ao longo de um contínuo — <em>exemplos, não categorias fixas</em>. São limiares de <button type="button" class="term" popovertarget="gl-audiograma" style="anchor-name:--gl1">audiogramas</button><span popover id="gl-audiograma" class="gl-pop" role="tooltip" style="position-anchor:--gl1">O audiograma é o gráfico do exame de audição: mostra, em cada frequência, o quão alto um som precisa estar para você começar a ouvir. Quanto maior o número (em dB), maior a perda.</span> reais do <button type="button" class="term" popovertarget="gl-nhanes" style="anchor-name:--gl2">NHANES</button><span popover id="gl-nhanes" class="gl-pop" role="tooltip" style="position-anchor:--gl2">Pesquisa de saúde dos EUA (CDC) com exames feitos em milhares de pessoas — dados públicos. Aqui usamos a audiometria de 26.583 pessoas.</span>.</p>
+    <p class="muted">Três pontos ao longo de um contínuo — <em>exemplos, não categorias fixas</em>. São limiares de <button type="button" class="term" popovertarget="gl-audiograma" style="anchor-name:--gl1">audiogramas</button><span popover id="gl-audiograma" class="gl-pop" role="tooltip" style="position-anchor:--gl1">O audiograma é o gráfico do exame de audição: mostra, em cada frequência, o quão alto um som precisa estar para você começar a ouvir. Quanto maior o número (em dB), maior a perda.</span> reais do <button type="button" class="term" popovertarget="gl-nhanes" style="anchor-name:--gl2">NHANES</button><span popover id="gl-nhanes" class="gl-pop" role="tooltip" style="position-anchor:--gl2">Pesquisa de saúde dos EUA (CDC) com exames feitos em milhares de pessoas — dados públicos. Aqui usamos a audiometria de 7.695 pessoas.</span>.</p>
     <div class="examples" role="group" aria-label="Exemplos de perda auditiva">
       <button class="ex" data-p="0" aria-pressed="false">
         <span class="tag">forma mais comum</span>
@@ -334,7 +334,7 @@ footer .mono{font-size:.78rem}
 </main>
 
 <footer class="wrap">
-  <p class="mono">The Frequency · 26.583 audiogramas · 0 rótulos clínicos no treino · sem diagnóstico.<br>
+  <p class="mono">The Frequency · 7.695 audiogramas · 0 rótulos clínicos no treino · sem diagnóstico.<br>
   Construído por Gabriel Vinícius Nascimento. Simula audibilidade, não distorção/zumbido/fala-no-ruído.</p>
 </footer>
 
@@ -584,7 +584,7 @@ $("b-ab").addEventListener("click",()=>{
   else if(type && type!=="mic") play(type);
 });
 $("b-share").addEventListener("click",()=>{
-  const data={title:"The Frequency",text:"Ouça a perda que a média esconde — baseado em 26.583 audiogramas reais.",url:location.href};
+  const data={title:"The Frequency",text:"Ouça a perda que a média esconde — baseado em 7.695 audiogramas reais.",url:location.href};
   if(navigator.share) navigator.share(data); else { navigator.clipboard?.writeText(location.href); $("b-share").textContent="Link copiado ✓"; }
 });
 
