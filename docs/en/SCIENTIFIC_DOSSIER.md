@@ -76,7 +76,7 @@ No clustering criterion supports stable discrete subtypes on the row-centered sh
 | C | Result is robust to method / hyperparameter / seed | ✅ Supported | `tests/test_pipeline_contract.py`, `audit_06`, `26b`, frente3 freeze |
 | D | Cross-system *gradient* (auditory ≫ grip > vision) | ⚠️ Methods demo, not discovery | `cmp_dimensionless_asymmetry.json`, `audit_02` |
 | — | Grip carries a genuine excess | ❌ **Withdrawn** → "Gaussian-null excess only" (fails t-copula) | `audit_05` |
-| — | Vision shows asymmetry | ➖ **Negative control** (within/below null in general pop.) | `vis_03`, `vis_04` |
+| — | Vision shows asymmetry | ➖ **Weak negative control** — within/below null under every scorer *except* a ~1.2× excess at MAD\|z\|>5 (235 vs null CI[168,222], p=0.0015, survives Bonferroni over the 8 vision cells); an order of magnitude below audition's 5–7× | `vis_03`, `vis_04`, `audit_09` |
 | — | Lateralized-trauma etiology | ❌ **Withdrawn** (tail is bilaterally symmetric) | `audit_03` |
 | — | Cluster-1 is a validated phenotype | ⬇️ **Downgraded** to a continuum tail | `audit_06`, frente1 |
 | — | PTA does not predict speech-in-noise (r≈0.015) | ❌ **Corrected** (ingestion bug; r=0.85) | `CORRECOES_2026-06-01.md` |
@@ -92,14 +92,17 @@ is not auditing anything.
 | Claim | Guards | Residual gap |
 |---|---|---|
 | **A** continuum | BIC-sim calibration, 5-family tendency battery, method comparison **+ method breadth (`26b`)**, null-vs-synthetic (`30`), LOPO/LOBO/dual-encoding, **row-centering ablation (`35`)** | None material |
-| **B** asymmetry real | Gaussian / heteroscedastic / t-copula nulls (MC B=2,000), side-symmetry binomial, sum-vs-diff decomposition, per-case sanity (13/13), injection-recall, OHHR replication | None material |
+| **B** asymmetry real | Gaussian / heteroscedastic / t-copula nulls (MC B=2,000), side-symmetry binomial, sum-vs-diff decomposition, **scorer-breadth (`audit_09`: MAD-z + MCD, each in its own B=2,000 null — tail survives at 4–7×)**, per-case sanity (13/13), injection-recall, OHHR replication | **Bounded:** directional ear-order/protocol effects are excluded by far-tail bilateral symmetry (`audit_03`: \|z\|>4 split 46/45, p=1.0); only a *non-directional, per-subject heteroscedastic* measurement asymmetry stays unseparable from NHANES alone (no test-order variable in the processed matrix) — and that would itself be a finding about measurement, not a refutation of the signal. |
 | **C** method-robust | Contract test (golden values, parity 1e-13), hyperparameter sweep (`audit_06`), skfreeze round-trip, shared canonical loader, pinned lock | Minor: CI not yet wired (local gate) |
 | **D** cross-system gradient | Per-system Gaussian null, grip t-copula (fails), **vision case-audit (`vis_04`)**, inclusion-policy robustness (`audit_02`), **triplet-overlap audit (`36`)** | **Known & stated:** 3 points; post-hoc; no within-person link — `36` confirms **0 extreme-case overlap across all pairs**, and grip×vision (and the full triple) are calendar-disjoint at the cohort level (audio shares cohort members with each, but no shared *extremes*). Framed as methods demonstration. |
 
-**New guards added by this dossier:** `26b` (method breadth + conservative max-silhouette-over-grid statistic),
-`35` (row-centering ablation), `vis_04` (vision extreme case-audit, 64/64 in physiological
-range — parity with audio 13/13 and grip 15/15), `36` (cross-system SEQN/calendar overlap,
-formalizing what was previously prose), `34` (tinnitus re-examination, §5). After these,
+**New guards added by this dossier:** `26b` (method breadth for *clustering*, Claim A —
+conservative max-silhouette-over-grid statistic), `audit_09` (scorer-breadth for the
+*asymmetry tail*, Claim B — MAD-z + MCD each wrapped in its own B=2,000 null; auditory
+survives at 4–7×, vision is the weak control above), `35` (row-centering ablation),
+`vis_04` (vision extreme case-audit, 64/64 in physiological range — parity with audio 13/13
+and grip 15/15), `36` (cross-system SEQN/calendar overlap, formalizing what was previously
+prose), `34` (tinnitus re-examination, §5). After these,
 **no claim is held to a visibly weaker standard than the others without that being stated and bounded.**
 
 ---

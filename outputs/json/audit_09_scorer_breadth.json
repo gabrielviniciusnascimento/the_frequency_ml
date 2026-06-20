@@ -1,0 +1,349 @@
+{
+  "script": "audit_09_scorer_breadth.py",
+  "purpose": "Robustness of the inter-side contrast tail to the OUTLIER DEFINITION, each scorer wrapped in the same B=2000 t-copula null. Certainty is real-vs-null, not scorer agreement. Vision is the negative control under scorer swap.",
+  "B": 2000,
+  "nu": 4,
+  "mad_levels": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "mcd_levels_mahalanobis_2d": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "p_def": "(#{null>=real}+1)/(B+1) — probability the null produces AT LEAST the real count",
+  "systems": {
+    "audicao": {
+      "n": 7695,
+      "mad_z": {
+        "2": {
+          "real": 904,
+          "null_mean": 763.55,
+          "null_ci95": [
+            700,
+            823
+          ],
+          "null_max": 888,
+          "ratio_real_over_nullmean": 1.18,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "3": {
+          "real": 469,
+          "null_mean": 227.98,
+          "null_ci95": [
+            194,
+            262
+          ],
+          "null_max": 291,
+          "ratio_real_over_nullmean": 2.06,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "4": {
+          "real": 282,
+          "null_mean": 71.22,
+          "null_ci95": [
+            54,
+            90
+          ],
+          "null_max": 102,
+          "ratio_real_over_nullmean": 3.96,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "5": {
+          "real": 173,
+          "null_mean": 23.56,
+          "null_ci95": [
+            14,
+            34
+          ],
+          "null_max": 43,
+          "ratio_real_over_nullmean": 7.34,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        }
+      },
+      "mcd_mahalanobis": {
+        "3": {
+          "real": 1327,
+          "null_mean": 767.67,
+          "null_ci95": [
+            704,
+            828
+          ],
+          "null_max": 905,
+          "ratio_real_over_nullmean": 1.73,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "4": {
+          "real": 766,
+          "null_mean": 319.57,
+          "null_ci95": [
+            279,
+            360
+          ],
+          "null_max": 398,
+          "ratio_real_over_nullmean": 2.4,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "5": {
+          "real": 454,
+          "null_mean": 131.97,
+          "null_ci95": [
+            107,
+            160
+          ],
+          "null_max": 180,
+          "ratio_real_over_nullmean": 3.44,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "6": {
+          "real": 271,
+          "null_mean": 53.53,
+          "null_ci95": [
+            38,
+            70
+          ],
+          "null_max": 84,
+          "ratio_real_over_nullmean": 5.06,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        }
+      }
+    },
+    "grip": {
+      "n": 8335,
+      "mad_z": {
+        "2": {
+          "real": 711,
+          "null_mean": 896.24,
+          "null_ci95": [
+            815,
+            965
+          ],
+          "null_max": 1026,
+          "ratio_real_over_nullmean": 0.79,
+          "p_emp_excess": 1.0,
+          "above_null_ci95": false
+        },
+        "3": {
+          "real": 194,
+          "null_mean": 307.26,
+          "null_ci95": [
+            259,
+            349
+          ],
+          "null_max": 385,
+          "ratio_real_over_nullmean": 0.63,
+          "p_emp_excess": 1.0,
+          "above_null_ci95": false
+        },
+        "4": {
+          "real": 72,
+          "null_mean": 109.61,
+          "null_ci95": [
+            86,
+            134
+          ],
+          "null_max": 160,
+          "ratio_real_over_nullmean": 0.66,
+          "p_emp_excess": 0.999,
+          "above_null_ci95": false
+        },
+        "5": {
+          "real": 26,
+          "null_mean": 42.22,
+          "null_ci95": [
+            29,
+            57
+          ],
+          "null_max": 70,
+          "ratio_real_over_nullmean": 0.62,
+          "p_emp_excess": 0.9925,
+          "above_null_ci95": false
+        }
+      },
+      "mcd_mahalanobis": {
+        "3": {
+          "real": 552,
+          "null_mean": 422.45,
+          "null_ci95": [
+            366,
+            480
+          ],
+          "null_max": 524,
+          "ratio_real_over_nullmean": 1.31,
+          "p_emp_excess": 0.0005,
+          "above_null_ci95": true
+        },
+        "4": {
+          "real": 143,
+          "null_mean": 114.56,
+          "null_ci95": [
+            91,
+            139
+          ],
+          "null_max": 154,
+          "ratio_real_over_nullmean": 1.25,
+          "p_emp_excess": 0.01149,
+          "above_null_ci95": true
+        },
+        "5": {
+          "real": 42,
+          "null_mean": 37.64,
+          "null_ci95": [
+            25,
+            51
+          ],
+          "null_max": 63,
+          "ratio_real_over_nullmean": 1.12,
+          "p_emp_excess": 0.27586,
+          "above_null_ci95": false
+        },
+        "6": {
+          "real": 16,
+          "null_mean": 14.33,
+          "null_ci95": [
+            7,
+            23
+          ],
+          "null_max": 36,
+          "ratio_real_over_nullmean": 1.12,
+          "p_emp_excess": 0.36882,
+          "above_null_ci95": false
+        }
+      }
+    },
+    "visao": {
+      "n": 7057,
+      "mad_z": {
+        "2": {
+          "real": 1176,
+          "null_mean": 1298.49,
+          "null_ci95": [
+            1234,
+            1361
+          ],
+          "null_max": 1424,
+          "ratio_real_over_nullmean": 0.91,
+          "p_emp_excess": 1.0,
+          "above_null_ci95": false
+        },
+        "3": {
+          "real": 601,
+          "null_mean": 621.57,
+          "null_ci95": [
+            575,
+            668
+          ],
+          "null_max": 714,
+          "ratio_real_over_nullmean": 0.97,
+          "p_emp_excess": 0.81009,
+          "above_null_ci95": false
+        },
+        "4": {
+          "real": 371,
+          "null_mean": 363.68,
+          "null_ci95": [
+            329,
+            400
+          ],
+          "null_max": 434,
+          "ratio_real_over_nullmean": 1.02,
+          "p_emp_excess": 0.36932,
+          "above_null_ci95": false
+        },
+        "5": {
+          "real": 235,
+          "null_mean": 194.62,
+          "null_ci95": [
+            168,
+            222
+          ],
+          "null_max": 238,
+          "ratio_real_over_nullmean": 1.21,
+          "p_emp_excess": 0.0015,
+          "above_null_ci95": true
+        }
+      },
+      "mcd_mahalanobis": {
+        "3": {
+          "real": 1590,
+          "null_mean": 1696.05,
+          "null_ci95": [
+            1621,
+            1773
+          ],
+          "null_max": 1841,
+          "ratio_real_over_nullmean": 0.94,
+          "p_emp_excess": 0.9955,
+          "above_null_ci95": false
+        },
+        "4": {
+          "real": 1087,
+          "null_mean": 1178.96,
+          "null_ci95": [
+            1107,
+            1252
+          ],
+          "null_max": 1312,
+          "ratio_real_over_nullmean": 0.92,
+          "p_emp_excess": 0.995,
+          "above_null_ci95": false
+        },
+        "5": {
+          "real": 742,
+          "null_mean": 815.57,
+          "null_ci95": [
+            746,
+            885
+          ],
+          "null_max": 929,
+          "ratio_real_over_nullmean": 0.91,
+          "p_emp_excess": 0.98301,
+          "above_null_ci95": false
+        },
+        "6": {
+          "real": 520,
+          "null_mean": 560.04,
+          "null_ci95": [
+            504,
+            618
+          ],
+          "null_max": 657,
+          "ratio_real_over_nullmean": 0.93,
+          "p_emp_excess": 0.91654,
+          "above_null_ci95": false
+        }
+      }
+    }
+  },
+  "verdict": {
+    "auditory_survives_mad": true,
+    "auditory_survives_mcd": true,
+    "vision_control_holds_mad_at4": true,
+    "vision_control_holds_mad_at5": false,
+    "vision_control_holds_mcd_at5": true,
+    "summary": "Auditory far tail survives BOTH robust scorers (real far outside the null 95% band at every cutoff) - Claim B robust to the outlier definition. Vision is a WEAK negative control: at/below null under MCD (all cutoffs) and under MAD through |z|>4, but with a modest genuine excess at MAD|z|>5 (real outside the null band) - an order of magnitude weaker than auditory, consistent with real anisometropia (vis_04), not fabricated signal."
+  },
+  "runtime_sec": 6083.8,
+  "lib_versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2",
+    "diptest": "0.11.0"
+  },
+  "status": "EXECUTED",
+  "verdict_note": "Verdict recomputed 2026-06-18 from the committed (deterministic, seeded) cells after fixing a threshold bug: the original code tested p_emp_excess < 0.01/24 = 0.000417, below the B=2000 empirical-p floor of 0.0005, so it was unsatisfiable by construction. Criterion is now the threshold-free 'real outside the null 95% band'. Cells are unchanged."
+}
