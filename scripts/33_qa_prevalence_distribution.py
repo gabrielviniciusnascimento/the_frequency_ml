@@ -1,3 +1,5 @@
+
+
 #!/usr/bin/env python3
 """
 Nome: 33_qa_prevalence_distribution.py
@@ -6,9 +8,11 @@ Tarefa: Dois QAs que faltavam, ambos no espaço canônico (scripts/_shape_space.
   (A) PREVALÊNCIA PONDERADA vs NÃO-PONDERADA. O clustering é geométrico
       (não-ponderado, de propósito — é sobre forma, não estimativa populacional),
       mas qualquer afirmação de PREVALÊNCIA ("92% / 0.2%") deve ser checada com os
-      pesos amostrais do NHANES (WTMEC2YR). Para PROPORÇÕES o divisor de pooling por
-      nº de ciclos cancela, então a proporção ponderada é válida como sensibilidade
-      (variância de desenho com SDMVSTRA/PSU fica fora deste QA pontual).
+      pesos amostrais corretos do NHANES nos 5 ciclos com audiometria 20-69:
+      WTSAU4YR*(2/5) em 1999-2002 (meia-amostra AUX), WTSAU2YR*(1/5) em 2003-2004
+      (meia-amostra AUX) e WTMEC2YR*(1/5) em 2011-2012 e 2015-2016 (MEC completo).
+      Usar WTMEC2YR puro subpondera 1999-2004 pela metade (42,9% vs 60,0%) porque a
+      fração amostral mudou de 1/2 para 1 entre eras; o divisor NÃO cancela com WTMEC2YR.
 
   (B) QA DE DISTRIBUIÇÃO (skewness/kurtose) dos limiares brutos e dos PCs, para
       justificar por escrito a AUSÊNCIA de transformação de potência (Box-Cox/log):
@@ -21,6 +25,7 @@ Output: outputs/json/33_qa_prevalence_distribution.json
 Dependências: scripts/_shape_space.py
 """
 
+import argparse
 import json
 import logging
 import sys
@@ -37,7 +42,14 @@ from _shape_space import load_cohort, shape_embed, lib_versions, FREQ_COLS_14
 RANDOM_STATE = 42
 HDBSCAN_MCS = 10
 HDBSCAN_MS = 5
-WEIGHT_COL = "WTMEC2YR"
+REQUIRED_WEIGHT_COLS = ("WTSAU4YR", "WTSAU2YR", "WTMEC2YR")
+POOLING_SPEC_5CYCLES = {
+    "1999-2000": ("WTSAU4YR", 2.0 / 5.0),
+    "2001-2002": ("WTSAU4YR", 2.0 / 5.0),
+    "2003-2004": ("WTSAU2YR", 1.0 / 5.0),
+    "2011-2012": ("WTMEC2YR", 1.0 / 5.0),
+    "2015-2016": ("WTMEC2YR", 1.0 / 5.0),
+}
 OUTPUT = ROOT / "outputs" / "json" / "33_qa_prevalence_distribution.json"
 LOG = ROOT / "outputs" / "logs" / "33_qa_prevalence_distribution.log"
 
@@ -50,8 +62,23 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
+def build_5cycle_aux_weight(df) -> np.ndarray:
+    """Constrói o peso composto NCHS para os 5 ciclos de audiometria 20-69 anos."""
+    cycles = df["cycle"].astype(str)
+    unknown = sorted(set(cycles.unique()) - set(POOLING_SPEC_5CYCLES))
+    if unknown:
+        raise ValueError(f"Ciclos fora da especificação 20-69 de 5 ciclos: {unknown}")
+    w = np.zeros(len(df), dtype=np.float64)
+    for cyc, (col, factor) in POOLING_SPEC_5CYCLES.items():
+        mask = (cycles == cyc).to_numpy()
+        if mask.any():
+            vals = df.loc[mask, col].astype(float).fillna(0.0).to_numpy()
+            w[mask] = vals * factor
+    return w
+
+
 def weighted_prevalence(df, labels):
-    """Proporções não-ponderadas vs ponderadas (WTMEC2YR) por grupo da partição."""
+    """Proporções não-ponderadas vs ponderadas (peso composto NCHS 5 ciclos) por grupo."""
     n = len(labels)
     sizes = {int(c): int((labels == c).sum()) for c in np.unique(labels[labels != -1])}
     dominant = max(sizes, key=sizes.get) if sizes else None
@@ -59,14 +86,26 @@ def weighted_prevalence(df, labels):
 
     groups = {"dominant": labels == dominant, "minority": labels == minority,
               "noise": labels == -1}
-    if WEIGHT_COL not in df.columns:
-        return {"available": False, "reason": f"{WEIGHT_COL} ausente"}
-    w = df[WEIGHT_COL].astype(float).to_numpy()
+    missing_cols = [c for c in REQUIRED_WEIGHT_COLS if c not in df.columns]
+    if missing_cols:
+        return {"available": False, "reason": f"Colunas de peso ausentes: {missing_cols}"}
+    w = build_5cycle_aux_weight(df)
     w_total = float(w.sum())
+    if w_total <= 0.0:
+        return {"available": False, "reason": "Soma de pesos composta <= 0"}
 
-    out = {"available": True, "weight_col": WEIGHT_COL, "n": n,
-           "note": ("proporção ponderada = Σw_grupo/Σw_total; o divisor de pooling por "
-                    "ciclo cancela. Variância de desenho (SDMVSTRA/PSU) não estimada aqui."),
+    out = {"available": True,
+           "weight_formula": "WTSAU4YR*(2/5) [1999-2002] + WTSAU2YR*(1/5) [2003-2004] + WTMEC2YR*(1/5) [2011-2012, 2015-2016]",
+           "n": n,
+           "n_positive_weight": int((w > 0).sum()),
+           "n_zero_or_missing_weight": int((w <= 0).sum()),
+           "note": (
+               "Proporção ponderada = Σw_grupo/Σw_total usando os pesos de subamostra de audiometria "
+               "(WTSAU4YR em 99-02, WTSAU2YR em 03-04) combinados com WTMEC2YR (11-12, 15-16). "
+               "Com WTMEC2YR puro o divisor de ciclos NÃO cancela, pois 1999-2004 era meia-amostra "
+               "(subponderada em 3*0.5/3.5 = 42,9% em vez de 3/5 = 60,0%) e sem ajuste de não-resposta AUX. "
+               "Variância de desenho (SDMVSTRA/SDMVPSU) não estimada neste QA pontual."
+           ),
            "groups": {}}
     for name, mask in groups.items():
         out["groups"][name] = {
@@ -74,7 +113,6 @@ def weighted_prevalence(df, labels):
             "unweighted_pct": round(float(mask.sum() / n * 100), 3),
             "weighted_pct": round(float(w[mask].sum() / w_total * 100), 3),
         }
-    # maior divergência absoluta unweighted->weighted
     deltas = {k: abs(v["unweighted_pct"] - v["weighted_pct"]) for k, v in out["groups"].items()}
     out["max_abs_delta_pct"] = round(max(deltas.values()), 3)
     out["robust_to_weighting"] = bool(out["max_abs_delta_pct"] < 2.0)
@@ -112,6 +150,13 @@ def distribution_qa(thr, X_pca):
 
 
 def main():
+    ap = argparse.ArgumentParser(description="QA de prevalência ponderada NCHS (5 ciclos) e distribuição.")
+    ap.add_argument("--force", action="store_true", help="Reexecutar mesmo se o JSON já existir.")
+    args, _ = ap.parse_known_args()
+    if OUTPUT.exists() and not args.force:
+        log.info(f"Output já existe em {OUTPUT}. Use --force para regerar.")
+        return json.loads(OUTPUT.read_text(encoding="utf-8"))
+
     df, thr = load_cohort()
     emb = shape_embed(thr)
     labels = hdbscan.HDBSCAN(
@@ -151,3 +196,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
