@@ -55,6 +55,7 @@ SPEECH_FREQS = np.array([500, 1000, 2000, 4000], dtype=np.int32)
 MID_FREQS = np.array([1000, 2000, 3000, 4000], dtype=np.int32)
 ULTRA_PROXY_FREQS = np.array([6000, 8000], dtype=np.int32)
 RELIABILITY_WARNING_DB = 10.0
+SAS_ZERO_EPS = 1e-12
 
 # ── Logging padronizado ──────────────────────────────────────────────
 LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -82,11 +83,19 @@ def add_features(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     out = pd.DataFrame({"SEQN": df["SEQN"].astype("int64"), "cycle": df["cycle"].astype("string")})
     feature_dict: dict[str, str] = {}
 
-    # IDs/contexto mínimo
-    for col in ["RIDAGEYR", "RIAGENDR", "RIDRETH1", "RIDRETH3", "INDFMPIR", "SDMVSTRA", "SDMVPSU", "WTMEC2YR", "WTSAU2YR", "WTMECPRP"]:
+    # IDs/contexto mínimo e pesos amostrais (pesos em float64 com limpeza de underflow IBM)
+    for col in ["RIDAGEYR", "RIAGENDR", "RIDRETH1", "RIDRETH3", "INDFMPIR", "SDMVSTRA", "SDMVPSU"]:
         if col in df.columns:
-            out[col] = pd.to_numeric(df[col], errors="coerce").astype("float32")
+            v = pd.to_numeric(df[col], errors="coerce")
+            v = v.mask(v.abs() < SAS_ZERO_EPS, 0.0)
+            out[col] = v.astype("float32")
             feature_dict[col] = f"Contexto NHANES original: {col}"
+    for wcol in ["WTMEC2YR", "WTSAU2YR", "WTSAU4YR", "WTMECPRP"]:
+        if wcol in df.columns:
+            v = pd.to_numeric(df[wcol], errors="coerce")
+            v = v.mask(v.abs() < SAS_ZERO_EPS, 0.0)
+            out[wcol] = v.astype("float64")
+            feature_dict[wcol] = f"Peso amostral NHANES original (float64, IBM underflow zerado): {wcol}"
 
     # Thresholds limpos e flags brutas
     for ear in ["R", "L"]:
@@ -161,11 +170,33 @@ def add_features(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
             out[col] = pd.to_numeric(df[col], errors="coerce").astype("float32")
             feature_dict[col] = f"Timpanometria/qualidade original: {col}"
 
+    # Metadados determinísticos de era do questionário AUQ (derivados apenas de `cycle`, sem ler valores de desfecho)
+    cycle_str = out["cycle"].astype(str)
+    out["auq_era"] = pd.Series(
+        np.select(
+            [
+                cycle_str.isin(["1999-2000", "2001-2002", "2003-2004"]),
+                cycle_str.isin(["2005-2006", "2007-2008", "2009-2010"]),
+                cycle_str.isin(["2011-2012", "2015-2016"]),
+                cycle_str.isin(["2017-2018", "2017-Mar2020"]),
+            ],
+            ["1999-2004", "2005-2010", "2011-2016", "2017-Mar2020"],
+            default="unknown",
+        ),
+        index=out.index,
+        dtype="string",
+    )
+    out["auq100_noise_era_available"] = cycle_str.isin(["2011-2012", "2015-2016"]).astype("int8")
+    feature_dict["auq_era"] = "Era estrutural do instrumento AUQ derivada apenas do calendário do ciclo (1999-2004: AUQ130/AUQ190/AUQ200; 2011-2016: AUQ054/AUQ100/AUQ191; 2017-Mar2020: AUQ101)"
+    feature_dict["auq100_noise_era_available"] = "Flag estrutural (0/1 por ciclo) indicando disponibilidade de AUQ100 no instrumento"
+
     # AUQ sintomas/contexto — preservar código original, sem inverter sim/não sem codebook por ciclo.
-    for col in ["AUQ054", "AUQ100", "AUQ101", "AUQ110", "AUQ191", "AUQ250", "AUQ255", "AUQ260", "AUQ270", "AUQ280", "AUQ300", "AUQ310", "AUQ320", "AUQ330", "AUQ340", "AUQ350", "AUQ360", "AUQ370", "AUQ380", "AUQ400", "AUQ410E", "AUQ410e", "AUQ480", "AUQ490", "AUQ500"]:
+    for col in ["AUQ054", "AUQ100", "AUQ101", "AUQ110", "AUQ130", "AUQ190", "AUQ191", "AUQ200", "AUQ250", "AUQ255", "AUQ260", "AUQ270", "AUQ280", "AUQ300", "AUQ310", "AUQ320", "AUQ330", "AUQ340", "AUQ350", "AUQ360", "AUQ370", "AUQ380", "AUQ400", "AUQ410E", "AUQ410e", "AUQ480", "AUQ490", "AUQ500"]:
         if col in df.columns:
-            out[col] = pd.to_numeric(df[col], errors="coerce").astype("float32")
-            feature_dict[col] = f"Código original AUQ preservado para interpretação pós-cluster: {col}"
+            v = pd.to_numeric(df[col], errors="coerce")
+            v = v.mask(v.abs() < SAS_ZERO_EPS, 0.0)
+            out[col] = v.astype("float32")
+            feature_dict[col] = f"Código original AUQ preservado (era em auq_era): {col}"
 
     # Contagem por linha de 666/888 em frequências principais
     no_response_cols = [c for c in out.columns if c.endswith("_no_response")]
