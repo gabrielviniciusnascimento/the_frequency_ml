@@ -50,16 +50,19 @@ PROCESSED_DIR = Path("data/processed")
 FREQUENCIA_BRUTO_CSV = PROCESSED_DIR / "frequencia_bruto.csv"
 FREQUENCIA_BRUTO_PARQUET = PROCESSED_DIR / "frequencia_bruto.parquet"
 COLUMN_PRESENCE_CSV = Path("outputs/json/nhanes_column_presence_v1.csv")
+SAS_ZERO_EPS = 1e-12
 
+# WTSAU2YR e WTSAU4YR residem em AUX*.xpt (1999-2004), já ingeridos em 01_ingest_aux.py.
 DEMO_KEEP = [
     "SEQN", "RIAGENDR", "RIDAGEYR", "RIDRETH1", "RIDRETH3", "DMDEDUC2", "DMDEDUC3",
-    "INDFMPIR", "SDMVSTRA", "SDMVPSU", "WTMEC2YR", "WTINT2YR", "WTSAU2YR", "WTSAU4YR",
+    "INDFMPIR", "SDMVSTRA", "SDMVPSU", "WTMEC2YR", "WTINT2YR",
     "WTMECPRP", "WTINTPRP"
 ]
 AUQ_KEEP = [
     "SEQN", "AUQ054", "AUQ060", "AUQ070", "AUQ080", "AUQ090", "AUQ100", "AUQ101", "AUQ110",
-    "AUQ136", "AUQ138", "AUQ139", "AUQ144", "AUQ146", "AUD148", "AUQ147", "AUQ149A", "AUQ149B",
-    "AUQ149C", "AUQ149a", "AUQ149b", "AUQ149c", "AUQ152", "AUQ153", "AUQ154", "AUQ156", "AUQ191",
+    "AUQ130", "AUQ136", "AUQ138", "AUQ139", "AUQ144", "AUQ146", "AUD148", "AUQ147", "AUQ149A", "AUQ149B",
+    "AUQ149C", "AUQ149a", "AUQ149b", "AUQ149c", "AUQ152", "AUQ153", "AUQ154", "AUQ156",
+    "AUQ190", "AUQ191", "AUQ200",
     "AUQ250", "AUQ255", "AUQ260", "AUQ270", "AUQ280", "AUQ300", "AUQ310", "AUQ320", "AUQ330",
     "AUQ340", "AUQ350", "AUQ360", "AUQ370", "AUQ380", "AUQ395", "AUQ400", "AUQ410A", "AUQ410B",
     "AUQ410C", "AUQ410D", "AUQ410E", "AUQ410F", "AUQ410G", "AUQ410H", "AUQ410I", "AUQ410J",
@@ -83,9 +86,18 @@ if OUTPUT_PATH.exists():
     raise SystemExit(0)
 
 
+def scrub_ibm_underflow(df: pd.DataFrame, eps: float = SAS_ZERO_EPS) -> pd.DataFrame:
+    num_cols = df.select_dtypes(include=[np.number]).columns
+    if len(num_cols) > 0:
+        vals = df[num_cols].to_numpy(copy=True)
+        vals[np.isfinite(vals) & (np.abs(vals) < eps)] = 0.0
+        df[num_cols] = vals
+    return df
+
+
 def read_sas_xpt(path: Path) -> pd.DataFrame:
     log.info(f"Lendo XPT contexto: {path}")
-    df = pd.read_sas(path, format="xport")
+    df = scrub_ibm_underflow(pd.read_sas(path, format="xport"))
     log.info(f"Shape {path.name}: {df.shape}")
     return df
 
@@ -111,7 +123,7 @@ def merge_one_cycle(cycle: str, base: pd.DataFrame, lookup: dict) -> tuple[pd.Da
     demo_key = (cycle, "demo")
     if demo_key in lookup:
         demo = read_sas_xpt(lookup[demo_key])
-        keep = select_existing(demo, DEMO_KEEP)
+        keep = ["SEQN"] + [c for c in select_existing(demo, DEMO_KEEP) if c != "SEQN" and c not in out.columns]
         events.append({"cycle": cycle, "component": "demo", "path": str(lookup[demo_key]), "n_cols_kept": len(keep), "cols_kept": keep})
         out = out.merge(demo[keep], on="SEQN", how="left", validate="many_to_one")
         log.info(f"Após DEMO {cycle}: {out.shape}")

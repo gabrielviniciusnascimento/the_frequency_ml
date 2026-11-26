@@ -1,0 +1,3378 @@
+{
+  "script": "37_viability_matrix.py",
+  "random_state": 42,
+  "lockbox_guarantee": "Nenhuma associação entre limiares audiométricos e variáveis externas foi calculada neste script; apenas contagens de cobertura por SEQN, ausência e pesos amostrais.",
+  "base_cohort_audit": {
+    "n_raw_20_69_5cycles": 14824,
+    "n_complete10_20_69_5cycles": 13433,
+    "n_any25_20_69_5cycles": 7695,
+    "counts_by_cycle_raw_20_69": {
+      "1999-2000": 1807,
+      "2001-2002": 2046,
+      "2003-2004": 1889,
+      "2011-2012": 4500,
+      "2015-2016": 4582
+    },
+    "weight_columns_location_by_cycle": {
+      "1999-2000": {
+        "aux_wt_cols": [
+          "WTSAU01",
+          "WTSAU02",
+          "WTSAU03",
+          "WTSAU04",
+          "WTSAU05",
+          "WTSAU06",
+          "WTSAU07",
+          "WTSAU08",
+          "WTSAU09",
+          "WTSAU10",
+          "WTSAU11",
+          "WTSAU12",
+          "WTSAU13",
+          "WTSAU14",
+          "WTSAU15",
+          "WTSAU16",
+          "WTSAU17",
+          "WTSAU18",
+          "WTSAU19",
+          "WTSAU20",
+          "WTSAU21",
+          "WTSAU22",
+          "WTSAU23",
+          "WTSAU24",
+          "WTSAU25",
+          "WTSAU26",
+          "WTSAU27",
+          "WTSAU28",
+          "WTSAU29",
+          "WTSAU2YR",
+          "WTSAU30",
+          "WTSAU31",
+          "WTSAU32",
+          "WTSAU33",
+          "WTSAU34",
+          "WTSAU35",
+          "WTSAU36",
+          "WTSAU37",
+          "WTSAU38",
+          "WTSAU39",
+          "WTSAU40",
+          "WTSAU41",
+          "WTSAU42",
+          "WTSAU43",
+          "WTSAU44",
+          "WTSAU45",
+          "WTSAU46",
+          "WTSAU47",
+          "WTSAU48",
+          "WTSAU49",
+          "WTSAU4YR",
+          "WTSAU50",
+          "WTSAU51",
+          "WTSAU52"
+        ],
+        "demo_wt_cols": [
+          "WTINT2YR",
+          "WTINT4YR",
+          "WTIREP01",
+          "WTIREP02",
+          "WTIREP03",
+          "WTIREP04",
+          "WTIREP05",
+          "WTIREP06",
+          "WTIREP07",
+          "WTIREP08",
+          "WTIREP09",
+          "WTIREP10",
+          "WTIREP11",
+          "WTIREP12",
+          "WTIREP13",
+          "WTIREP14",
+          "WTIREP15",
+          "WTIREP16",
+          "WTIREP17",
+          "WTIREP18",
+          "WTIREP19",
+          "WTIREP20",
+          "WTIREP21",
+          "WTIREP22",
+          "WTIREP23",
+          "WTIREP24",
+          "WTIREP25",
+          "WTIREP26",
+          "WTIREP27",
+          "WTIREP28",
+          "WTIREP29",
+          "WTIREP30",
+          "WTIREP31",
+          "WTIREP32",
+          "WTIREP33",
+          "WTIREP34",
+          "WTIREP35",
+          "WTIREP36",
+          "WTIREP37",
+          "WTIREP38",
+          "WTIREP39",
+          "WTIREP40",
+          "WTIREP41",
+          "WTIREP42",
+          "WTIREP43",
+          "WTIREP44",
+          "WTIREP45",
+          "WTIREP46",
+          "WTIREP47",
+          "WTIREP48",
+          "WTIREP49",
+          "WTIREP50",
+          "WTIREP51",
+          "WTIREP52",
+          "WTMEC2YR",
+          "WTMEC4YR",
+          "WTMREP01",
+          "WTMREP02",
+          "WTMREP03",
+          "WTMREP04",
+          "WTMREP05",
+          "WTMREP06",
+          "WTMREP07",
+          "WTMREP08",
+          "WTMREP09",
+          "WTMREP10",
+          "WTMREP11",
+          "WTMREP12",
+          "WTMREP13",
+          "WTMREP14",
+          "WTMREP15",
+          "WTMREP16",
+          "WTMREP17",
+          "WTMREP18",
+          "WTMREP19",
+          "WTMREP20",
+          "WTMREP21",
+          "WTMREP22",
+          "WTMREP23",
+          "WTMREP24",
+          "WTMREP25",
+          "WTMREP26",
+          "WTMREP27",
+          "WTMREP28",
+          "WTMREP29",
+          "WTMREP30",
+          "WTMREP31",
+          "WTMREP32",
+          "WTMREP33",
+          "WTMREP34",
+          "WTMREP35",
+          "WTMREP36",
+          "WTMREP37",
+          "WTMREP38",
+          "WTMREP39",
+          "WTMREP40",
+          "WTMREP41",
+          "WTMREP42",
+          "WTMREP43",
+          "WTMREP44",
+          "WTMREP45",
+          "WTMREP46",
+          "WTMREP47",
+          "WTMREP48",
+          "WTMREP49",
+          "WTMREP50",
+          "WTMREP51",
+          "WTMREP52"
+        ]
+      },
+      "2001-2002": {
+        "aux_wt_cols": [
+          "WTSAU2YR",
+          "WTSAU4YR"
+        ],
+        "demo_wt_cols": [
+          "WTINT2YR",
+          "WTINT4YR",
+          "WTMEC2YR",
+          "WTMEC4YR"
+        ]
+      },
+      "2003-2004": {
+        "aux_wt_cols": [
+          "WTSAU2YR"
+        ],
+        "demo_wt_cols": [
+          "WTINT2YR",
+          "WTMEC2YR"
+        ]
+      },
+      "2011-2012": {
+        "aux_wt_cols": [],
+        "demo_wt_cols": [
+          "WTINT2YR",
+          "WTMEC2YR"
+        ]
+      },
+      "2015-2016": {
+        "aux_wt_cols": [],
+        "demo_wt_cols": [
+          "WTINT2YR",
+          "WTMEC2YR"
+        ]
+      }
+    },
+    "repo_existing_files_check": {
+      "feature_csv_exists": false,
+      "bruto_csv_exists": false
+    }
+  },
+  "components": [
+    {
+      "component": "auq_self_report",
+      "description": "Questionário Auditivo (AUQ054/AUQ010 geral, AUQ101/AUQ100 ruído, AUQ191/AUQ190 zumbido)",
+      "lockbox_regime": "CONTAMINATED_POSTHOC",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14823,
+      "n_valid_complete10_20_69": 13432,
+      "n_valid_any25_20_69": 7694,
+      "pct_missing_in_eligible_cycles_age": 0.01,
+      "pct_missing_of_all_5cycles_20_69": 0.01,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14499,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": null,
+      "n_replication_valid": null,
+      "marginal_feasibility_counts": {
+        "total_auq_general_valid": 14821,
+        "total_auq_noise_valid": 9073,
+        "total_auq_tinnitus_valid": 14814
+      },
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "embedded_in_auq"
+          },
+          "structure": {
+            "raw_rows": 9493,
+            "unique_seqn": 9493,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "auq_cols_found": {
+              "general": [
+                "AUQ130"
+              ],
+              "speech_in_noise": [],
+              "tinnitus": [
+                "AUQ190"
+              ]
+            }
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1806,
+          "pct_missing_within_age_eligible": 0.06,
+          "n_auq_general_valid": 1806,
+          "n_auq_noise_valid": 0,
+          "n_auq_tinnitus_valid": 1806
+        },
+        "2001-2002": {
+          "download": {
+            "status": "embedded_in_auq"
+          },
+          "structure": {
+            "raw_rows": 10470,
+            "unique_seqn": 10470,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "auq_cols_found": {
+              "general": [
+                "AUQ130"
+              ],
+              "speech_in_noise": [],
+              "tinnitus": [
+                "AUQ190"
+              ]
+            }
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 2046,
+          "pct_missing_within_age_eligible": 0.0,
+          "n_auq_general_valid": 2046,
+          "n_auq_noise_valid": 0,
+          "n_auq_tinnitus_valid": 2044
+        },
+        "2003-2004": {
+          "download": {
+            "status": "embedded_in_auq"
+          },
+          "structure": {
+            "raw_rows": 9645,
+            "unique_seqn": 9645,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "auq_cols_found": {
+              "general": [
+                "AUQ130"
+              ],
+              "speech_in_noise": [],
+              "tinnitus": [
+                "AUQ190"
+              ]
+            }
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1889,
+          "pct_missing_within_age_eligible": 0.0,
+          "n_auq_general_valid": 1889,
+          "n_auq_noise_valid": 0,
+          "n_auq_tinnitus_valid": 1887
+        },
+        "2011-2012": {
+          "download": {
+            "status": "embedded_in_auq"
+          },
+          "structure": {
+            "raw_rows": 9364,
+            "unique_seqn": 9364,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "auq_cols_found": {
+              "general": [
+                "AUQ054"
+              ],
+              "speech_in_noise": [
+                "AUQ100"
+              ],
+              "tinnitus": [
+                "AUQ191"
+              ]
+            }
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4500,
+          "pct_missing_within_age_eligible": 0.0,
+          "n_auq_general_valid": 4498,
+          "n_auq_noise_valid": 4496,
+          "n_auq_tinnitus_valid": 4496
+        },
+        "2015-2016": {
+          "download": {
+            "status": "embedded_in_auq"
+          },
+          "structure": {
+            "raw_rows": 9575,
+            "unique_seqn": 9575,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "auq_cols_found": {
+              "general": [
+                "AUQ054"
+              ],
+              "speech_in_noise": [
+                "AUQ100"
+              ],
+              "tinnitus": [
+                "AUQ191"
+              ]
+            }
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4582,
+          "pct_missing_within_age_eligible": 0.0,
+          "n_auq_general_valid": 4582,
+          "n_auq_noise_valid": 4577,
+          "n_auq_tinnitus_valid": 4581
+        }
+      },
+      "notes": "Já explorado em 16, 23, 34 e virada prévia; audita harmonização 1999-2004 vs 2011-2016."
+    },
+    {
+      "component": "auxtym_summary_in_aux",
+      "description": "Timpanometria — variáveis escalares já embutidas em AUX (complacência, pressão, volume, largura)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 13502,
+      "n_valid_complete10_20_69": 13267,
+      "n_valid_any25_20_69": 7568,
+      "pct_missing_in_eligible_cycles_age": 8.92,
+      "pct_missing_of_all_5cycles_20_69": 8.92,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13502,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7437,
+      "n_replication_valid": 6065,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "embedded_in_aux"
+          },
+          "structure": {
+            "raw_rows": 1807,
+            "unique_seqn": 1807,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "target_cols_found": [
+              "AUXTCOMR",
+              "AUXTCOML",
+              "AUXTMEPR",
+              "AUXTMEPL",
+              "AUXTPVR",
+              "AUXTPVL",
+              "AUXTWIDR",
+              "AUXTWIDL"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1679,
+          "pct_missing_within_age_eligible": 7.08
+        },
+        "2001-2002": {
+          "download": {
+            "status": "embedded_in_aux"
+          },
+          "structure": {
+            "raw_rows": 2046,
+            "unique_seqn": 2046,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "target_cols_found": [
+              "AUXTCOMR",
+              "AUXTCOML",
+              "AUXTMEPR",
+              "AUXTMEPL",
+              "AUXTPVR",
+              "AUXTPVL",
+              "AUXTWIDR",
+              "AUXTWIDL"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1902,
+          "pct_missing_within_age_eligible": 7.04
+        },
+        "2003-2004": {
+          "download": {
+            "status": "embedded_in_aux"
+          },
+          "structure": {
+            "raw_rows": 1889,
+            "unique_seqn": 1889,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR"
+            ],
+            "target_cols_found": [
+              "AUXTCOMR",
+              "AUXTCOML",
+              "AUXTMEPR",
+              "AUXTMEPL",
+              "AUXTPVR",
+              "AUXTPVL",
+              "AUXTWIDR",
+              "AUXTWIDL"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1780,
+          "pct_missing_within_age_eligible": 5.77
+        },
+        "2011-2012": {
+          "download": {
+            "status": "embedded_in_aux"
+          },
+          "structure": {
+            "raw_rows": 4500,
+            "unique_seqn": 4500,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "AUXTCOMR",
+              "AUXTCOML",
+              "AUXTMEPR",
+              "AUXTMEPL",
+              "AUXTPVR",
+              "AUXTPVL",
+              "AUXTWIDR",
+              "AUXTWIDL"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 3856,
+          "pct_missing_within_age_eligible": 14.31
+        },
+        "2015-2016": {
+          "download": {
+            "status": "embedded_in_aux"
+          },
+          "structure": {
+            "raw_rows": 4582,
+            "unique_seqn": 4582,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "AUXTCOMR",
+              "AUXTCOML",
+              "AUXTMEPR",
+              "AUXTMEPL",
+              "AUXTPVR",
+              "AUXTPVL",
+              "AUXTWIDR",
+              "AUXTWIDL"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4285,
+          "pct_missing_within_age_eligible": 6.48
+        }
+      },
+      "notes": "Ingeridas em 01/03 mas nunca cruzadas com desfechos; filtro para perda condutiva."
+    },
+    {
+      "component": "auxtym_curves",
+      "description": "Timpanometria — séries brutas de pressão-complacência (.xpt separado)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 13502,
+      "n_valid_complete10_20_69": 13268,
+      "n_valid_any25_20_69": 7565,
+      "pct_missing_in_eligible_cycles_age": 8.92,
+      "pct_missing_of_all_5cycles_20_69": 8.92,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13502,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7438,
+      "n_replication_valid": 6064,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXTYM",
+            "path": "data/raw/nhanes/1999/AUXTYM.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/AUXTYM.xpt",
+            "size_bytes": 2496720,
+            "sha256": "c48d643bad2228db81c09b6bc009413e2d690924102a52b07c17b366b38daac4"
+          },
+          "structure": {
+            "raw_rows": 1807,
+            "unique_seqn": 1807,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 168,
+            "sample_cols_head": [
+              "AUDTYR01",
+              "AUDTYR02",
+              "AUDTYR03",
+              "AUDTYR04",
+              "AUDTYR05",
+              "AUDTYR06",
+              "AUDTYR07",
+              "AUDTYR08",
+              "AUDTYR09",
+              "AUDTYR10"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1685,
+          "pct_missing_within_age_eligible": 6.75
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXTYM_B",
+            "path": "data/raw/nhanes/2001/AUXTYM_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/AUXTYM_B.xpt",
+            "size_bytes": 2823680,
+            "sha256": "dd01fa7dc7cbd402fdc45969be8ddcca8c6cc3500fdd11b62952cea66b47c502"
+          },
+          "structure": {
+            "raw_rows": 2046,
+            "unique_seqn": 2046,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 168,
+            "sample_cols_head": [
+              "AUDTYR01",
+              "AUDTYR02",
+              "AUDTYR03",
+              "AUDTYR04",
+              "AUDTYR05",
+              "AUDTYR06",
+              "AUDTYR07",
+              "AUDTYR08",
+              "AUDTYR09",
+              "AUDTYR10"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1899,
+          "pct_missing_within_age_eligible": 7.18
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXTYM_C",
+            "path": "data/raw/nhanes/2003/AUXTYM_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/AUXTYM_C.xpt",
+            "size_bytes": 2593600,
+            "sha256": "ab882f8c6b1ca8ca626391baece2929940ca415cf2018a525b1525ef005cfdcc"
+          },
+          "structure": {
+            "raw_rows": 1889,
+            "unique_seqn": 1889,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 168,
+            "sample_cols_head": [
+              "AUDTYR01",
+              "AUDTYR02",
+              "AUDTYR03",
+              "AUDTYR04",
+              "AUDTYR05",
+              "AUDTYR06",
+              "AUDTYR07",
+              "AUDTYR08",
+              "AUDTYR09",
+              "AUDTYR10"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1779,
+          "pct_missing_within_age_eligible": 5.82
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXTYM_G",
+            "path": "data/raw/nhanes/2011/AUXTYM_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/AUXTYM_G.xpt",
+            "size_bytes": 6108400,
+            "sha256": "ed8f30d3a7bcbfa3a3e579d19a3250ef50de78b8f5ec44d8cbfb992727a68227"
+          },
+          "structure": {
+            "raw_rows": 4500,
+            "unique_seqn": 4500,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 168,
+            "sample_cols_head": [
+              "AUDTYR01",
+              "AUDTYR02",
+              "AUDTYR03",
+              "AUDTYR04",
+              "AUDTYR05",
+              "AUDTYR06",
+              "AUDTYR07",
+              "AUDTYR08",
+              "AUDTYR09",
+              "AUDTYR10"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 3854,
+          "pct_missing_within_age_eligible": 14.36
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXTYM_I",
+            "path": "data/raw/nhanes/2015/AUXTYM_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/AUXTYM_I.xpt",
+            "size_bytes": 34897280,
+            "sha256": "ef347301d972796b7d73970cffcc21b2f11adb2105fd1af05b15c6d43f516e54"
+          },
+          "structure": {
+            "raw_rows": 8469,
+            "unique_seqn": 4285,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": [],
+            "rows_per_seqn_median": 2.0,
+            "rows_per_seqn_max": 2,
+            "n_numeric_signal_cols": 513,
+            "sample_cols_head": [
+              "TYXPEAR",
+              "TYXP001",
+              "TYXP002",
+              "TYXP003",
+              "TYXP004",
+              "TYXP005",
+              "TYXP006",
+              "TYXP007",
+              "TYXP008",
+              "TYXP009"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4285,
+          "n_valid_intersection": 4285,
+          "pct_missing_within_age_eligible": 6.48
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "auxar_waveform",
+      "description": "Reflexo Acústico Estapediano — séries temporais brutas 1 kHz / 2 kHz (.xpt separado)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 13522,
+      "n_valid_complete10_20_69": 13287,
+      "n_valid_any25_20_69": 7582,
+      "pct_missing_in_eligible_cycles_age": 8.78,
+      "pct_missing_of_all_5cycles_20_69": 8.78,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13522,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7437,
+      "n_replication_valid": 6085,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXAR",
+            "path": "data/raw/nhanes/1999/AUXAR.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/AUXAR.xpt",
+            "size_bytes": 4948880,
+            "sha256": "57a7a45ef7ff6138b7f48520e0a99c3cb05d7454d3aac862def288bbebf15f60"
+          },
+          "structure": {
+            "raw_rows": 1807,
+            "unique_seqn": 1807,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 336,
+            "sample_cols_head": [
+              "AUXRR101",
+              "AUXRR102",
+              "AUXRR103",
+              "AUXRR104",
+              "AUXRR105",
+              "AUXRR106",
+              "AUXRR107",
+              "AUXRR108",
+              "AUXRR109",
+              "AUXRR110"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1685,
+          "pct_missing_within_age_eligible": 6.75
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXAR_B",
+            "path": "data/raw/nhanes/2001/AUXAR_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/AUXAR_B.xpt",
+            "size_bytes": 5597040,
+            "sha256": "5e3c01b4771af597092ffe06035bb29d3dfb9dde30cfee76566f21496edab135"
+          },
+          "structure": {
+            "raw_rows": 2046,
+            "unique_seqn": 2046,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR",
+              "WTSAU4YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 336,
+            "sample_cols_head": [
+              "AUXRR101",
+              "AUXRR102",
+              "AUXRR103",
+              "AUXRR104",
+              "AUXRR105",
+              "AUXRR106",
+              "AUXRR107",
+              "AUXRR108",
+              "AUXRR109",
+              "AUXRR110"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1898,
+          "pct_missing_within_age_eligible": 7.23
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXAR_C",
+            "path": "data/raw/nhanes/2003/AUXAR_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/AUXAR_C.xpt",
+            "size_bytes": 5156000,
+            "sha256": "fa731f4e1ff82c760993a5f2ac82a61452185dbe33a8b5fdffb647fbcf506590"
+          },
+          "structure": {
+            "raw_rows": 1889,
+            "unique_seqn": 1889,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSAU2YR"
+            ],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 336,
+            "sample_cols_head": [
+              "AUXRR101",
+              "AUXRR102",
+              "AUXRR103",
+              "AUXRR104",
+              "AUXRR105",
+              "AUXRR106",
+              "AUXRR107",
+              "AUXRR108",
+              "AUXRR109",
+              "AUXRR110"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1779,
+          "pct_missing_within_age_eligible": 5.82
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXAR_G",
+            "path": "data/raw/nhanes/2011/AUXAR_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/AUXAR_G.xpt",
+            "size_bytes": 12179920,
+            "sha256": "2ccc52abef434a192020166abeb9fa3d931d175da4cd89287df7a5e0a1f4ff6a"
+          },
+          "structure": {
+            "raw_rows": 4500,
+            "unique_seqn": 4500,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "rows_per_seqn_median": 1.0,
+            "rows_per_seqn_max": 1,
+            "n_numeric_signal_cols": 336,
+            "sample_cols_head": [
+              "AUXRR101",
+              "AUXRR102",
+              "AUXRR103",
+              "AUXRR104",
+              "AUXRR105",
+              "AUXRR106",
+              "AUXRR107",
+              "AUXRR108",
+              "AUXRR109",
+              "AUXRR110"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 3854,
+          "pct_missing_within_age_eligible": 14.36
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "AUXAR_I",
+            "path": "data/raw/nhanes/2015/AUXAR_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/AUXAR_I.xpt",
+            "size_bytes": 140610080,
+            "sha256": "052ef31f6770c7998e99c4fd71fd3b4149c976816033153b55989919773ea993"
+          },
+          "structure": {
+            "raw_rows": 51076,
+            "unique_seqn": 4306,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": [],
+            "rows_per_seqn_median": 12.0,
+            "rows_per_seqn_max": 12,
+            "n_numeric_signal_cols": 343,
+            "sample_cols_head": [
+              "RFXSEAR",
+              "RFXLEVEL",
+              "RFXRFXDC",
+              "RFXT001",
+              "RFXT002",
+              "RFXT003",
+              "RFXT004",
+              "RFXT005",
+              "RFXT006",
+              "RFXT007"
+            ],
+            "rfx_levels_per_seqn_dist": {
+              "1": 2,
+              "2": 2,
+              "3": 2,
+              "4": 1,
+              "5": 4,
+              "6": 4295
+            },
+            "n_seqn_with_12_curves": 4172
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4306,
+          "n_valid_intersection": 4306,
+          "pct_missing_within_age_eligible": 6.02
+        }
+      },
+      "notes": "Triagem em nível único (105 dB HL, pulso curto); pista fisiológica, não reflex decay de 10 s."
+    },
+    {
+      "component": "auxwbr_wideband",
+      "description": "Reflectância/absorvância de banda larga (Titan, só 2015-2016) — AUXWBR_I",
+      "lockbox_regime": "SINGLE_CYCLE_EXPLORATORY",
+      "age_band": "20-69",
+      "cycles_present": [
+        "2015-2016"
+      ],
+      "n_cycles": 1,
+      "n_aux_eligible_in_present_cycles": 4582,
+      "n_valid_raw_20_69": 4307,
+      "n_valid_complete10_20_69": 4235,
+      "n_valid_any25_20_69": 2434,
+      "pct_missing_in_eligible_cycles_age": 6.0,
+      "pct_missing_of_all_5cycles_20_69": 70.95,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "2015-2016": "WTMEC2YR * (1/1)"
+      },
+      "n_positive_pooled_weight": 4307,
+      "n_strata": 15,
+      "n_psu": 30,
+      "design_df": 15,
+      "n_discovery_valid": null,
+      "n_replication_valid": null,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "status": "not_configured"
+        },
+        "2001-2002": {
+          "status": "not_configured"
+        },
+        "2003-2004": {
+          "status": "not_configured"
+        },
+        "2011-2012": {
+          "status": "not_configured"
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_downloaded",
+            "stem": "AUXWBR_I",
+            "path": "data/raw/nhanes/2015/AUXWBR_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/AUXWBR_I.xpt",
+            "size_bytes": 22149600,
+            "sha256": "bebf546623c56c0cde948b4131dec35f290cdc8c4f5ca767d93fc333017bab6e"
+          },
+          "structure": {
+            "raw_rows": 8554,
+            "unique_seqn": 4307,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": [],
+            "rows_per_seqn_median": 2.0,
+            "rows_per_seqn_max": 2,
+            "n_numeric_signal_cols": 322,
+            "sample_cols_head": [
+              "WBXFEAR",
+              "WBXF001",
+              "WBXF002",
+              "WBXF003",
+              "WBXF004",
+              "WBXF005",
+              "WBXF006",
+              "WBXF007",
+              "WBXF008",
+              "WBXF009"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4307,
+          "n_valid_intersection": 4307,
+          "pct_missing_within_age_eligible": 6.0
+        }
+      },
+      "notes": "Adicionado na revisão: medida de orelha média de banda larga, só em 2015-16."
+    },
+    {
+      "component": "bax_balance",
+      "description": "Exame de Equilíbrio / Romberg modificado incl. Condição 4 em espuma (BAX)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "40-69",
+      "cycles_present": [
+        "2001-2002",
+        "2003-2004"
+      ],
+      "n_cycles": 2,
+      "n_aux_eligible_in_present_cycles": 2176,
+      "n_valid_raw_20_69": 1737,
+      "n_valid_complete10_20_69": 1688,
+      "n_valid_any25_20_69": 1262,
+      "pct_missing_in_eligible_cycles_age": 20.17,
+      "pct_missing_of_all_5cycles_20_69": 88.28,
+      "weight_status": "WARNING_DUAL_SUBSAMPLE: 2001-2002:AUX_half_x_WTSBA4YR",
+      "weight_spec_by_cycle": {
+        "2001-2002": "WTSAU2YR * (1/2)",
+        "2003-2004": "WTSAU2YR * (1/2)"
+      },
+      "n_positive_pooled_weight": 1710,
+      "n_strata": 30,
+      "n_psu": 60,
+      "design_df": 30,
+      "n_discovery_valid": 906,
+      "n_replication_valid": 831,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BAX",
+            "path": "data/raw/nhanes/1999/BAX.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/BAX.xpt",
+            "size_bytes": 626080,
+            "sha256": "07806b2f68ed195c711fde3582714f45ef1174d650200b7b9daee78265928cf9"
+          },
+          "structure": {
+            "raw_rows": 1011,
+            "unique_seqn": 1011,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSBA2YR",
+              "WTSBA4YR"
+            ],
+            "target_cols_found": [
+              "BAXPFC41",
+              "BAXPFC42"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1016,
+          "n_seqn_in_component_file": 0,
+          "n_valid_intersection": 0,
+          "pct_missing_within_age_eligible": 100.0
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BAX_B",
+            "path": "data/raw/nhanes/2001/BAX_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/BAX_B.xpt",
+            "size_bytes": 589920,
+            "sha256": "6a0fab12bb76c9a4dc492d18e33aae75fd5bff5173bdae273855de06e6a3ec59"
+          },
+          "structure": {
+            "raw_rows": 3184,
+            "unique_seqn": 3184,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSBA4YR"
+            ],
+            "target_cols_found": [
+              "BAXPFC41",
+              "BAXPFC42"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 1131,
+          "n_seqn_in_component_file": 1131,
+          "n_valid_intersection": 906,
+          "pct_missing_within_age_eligible": 19.89
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BAX_C",
+            "path": "data/raw/nhanes/2003/BAX_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/BAX_C.xpt",
+            "size_bytes": 547040,
+            "sha256": "74ffd58ea09fbe1866922ba54c9099249b86ec7615bd9fc8838ef424d43796b3"
+          },
+          "structure": {
+            "raw_rows": 3086,
+            "unique_seqn": 3086,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BAXPFC41",
+              "BAXPFC42"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1045,
+          "n_seqn_in_component_file": 1045,
+          "n_valid_intersection": 831,
+          "pct_missing_within_age_eligible": 20.48
+        },
+        "2011-2012": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "BAX_G:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2015-2016": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "BAX_I:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "mgx_grip",
+      "description": "Força de Preensão Manual com lado anatômico via MGATHAND (MGX)",
+      "lockbox_regime": "SINGLE_CYCLE_EXPLORATORY",
+      "age_band": "20-69",
+      "cycles_present": [
+        "2011-2012"
+      ],
+      "n_cycles": 1,
+      "n_aux_eligible_in_present_cycles": 4500,
+      "n_valid_raw_20_69": 3974,
+      "n_valid_complete10_20_69": 3593,
+      "n_valid_any25_20_69": 2071,
+      "pct_missing_in_eligible_cycles_age": 11.69,
+      "pct_missing_of_all_5cycles_20_69": 73.19,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "2011-2012": "WTMEC2YR * (1/1)"
+      },
+      "n_positive_pooled_weight": 3974,
+      "n_strata": 14,
+      "n_psu": 31,
+      "design_df": 17,
+      "n_discovery_valid": null,
+      "n_replication_valid": null,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "MGX:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2001-2002": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "MGX_B:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2003-2004": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "MGX_C:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MGX_G",
+            "path": "data/raw/nhanes/2011/MGX_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/MGX_G.xpt",
+            "size_bytes": 1756560,
+            "sha256": "a91826169503b45efe605d5b51a7b0937e9cda2400011e38a6216a73200ed783"
+          },
+          "structure": {
+            "raw_rows": 7821,
+            "unique_seqn": 7821,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MGATHAND",
+              "MGXH1T1",
+              "MGXH2T1"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 3974,
+          "pct_missing_within_age_eligible": 11.69
+        },
+        "2015-2016": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "MGX_I:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        }
+      },
+      "notes": "Marginais auditadas em grip_00-04; apenas 2011-2012 cruza com AUX 20-69."
+    },
+    {
+      "component": "vix_vision",
+      "description": "Refração Ocular Objetiva / Acuidade Visual (VIX)",
+      "lockbox_regime": "CONTAMINATED_POSTHOC",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004"
+      ],
+      "n_cycles": 3,
+      "n_aux_eligible_in_present_cycles": 5742,
+      "n_valid_raw_20_69": 5171,
+      "n_valid_complete10_20_69": 4928,
+      "n_valid_any25_20_69": 2716,
+      "pct_missing_in_eligible_cycles_age": 9.94,
+      "pct_missing_of_all_5cycles_20_69": 65.12,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/3)",
+        "2001-2002": "WTSAU4YR * (2/3)",
+        "2003-2004": "WTSAU2YR * (1/3)"
+      },
+      "n_positive_pooled_weight": 5019,
+      "n_strata": 43,
+      "n_psu": 87,
+      "design_df": 44,
+      "n_discovery_valid": null,
+      "n_replication_valid": null,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "VIX",
+            "path": "data/raw/nhanes/1999/VIX.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/VIX.xpt",
+            "size_bytes": 3090400,
+            "sha256": "2ce0f725f162d6c6659391cb891261ade785a36d831cfe5c61700ef7fbe0945e"
+          },
+          "structure": {
+            "raw_rows": 6758,
+            "unique_seqn": 6758,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "VIXORSM",
+              "VIXOLSM"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1647,
+          "pct_missing_within_age_eligible": 8.85
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "VIX_B",
+            "path": "data/raw/nhanes/2001/VIX_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/VIX_B.xpt",
+            "size_bytes": 3403680,
+            "sha256": "753ac073ce081c5d259b78f37b679ac9cc3ef23107c9e05cce078784d936e7d8"
+          },
+          "structure": {
+            "raw_rows": 7445,
+            "unique_seqn": 7445,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "VIXORSM",
+              "VIXOLSM"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1862,
+          "pct_missing_within_age_eligible": 8.99
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "VIX_C",
+            "path": "data/raw/nhanes/2003/VIX_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/VIX_C.xpt",
+            "size_bytes": 3196160,
+            "sha256": "a4dd5bf88a3e93a62881312306ffc6a95f7509123394f98a2e08e7bd0f5f9014"
+          },
+          "structure": {
+            "raw_rows": 6990,
+            "unique_seqn": 6990,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "VIXORSM",
+              "VIXOLSM"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1662,
+          "pct_missing_within_age_eligible": 12.02
+        },
+        "2011-2012": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "VIX_G:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2015-2016": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "VIX_I:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        }
+      },
+      "notes": "1999-2002 já auditados em vis_00-04; VIX_C (2003-2004) nunca havia sido baixado."
+    },
+    {
+      "component": "rxq_rx_meds",
+      "description": "Medicamentos Prescritos nos últimos 30 dias — tabela 1:N (RXQ_RX)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14811,
+      "n_valid_complete10_20_69": 13423,
+      "n_valid_any25_20_69": 7686,
+      "pct_missing_in_eligible_cycles_age": 0.09,
+      "pct_missing_of_all_5cycles_20_69": 0.09,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14489,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8347,
+      "n_replication_valid": 6464,
+      "marginal_feasibility_counts": {
+        "total_any_rx_30d": 7340,
+        "total_loop_diuretic_30d": 254,
+        "total_aminoglycoside_30d": 22,
+        "total_platinum_30d": 0
+      },
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "RXQ_RX",
+            "path": "data/raw/nhanes/1999/RXQ_RX.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/RXQ_RX.xpt",
+            "size_bytes": 3178480,
+            "sha256": "fa4268e92c76d62f9b759db9c29a944336e29a90a9e99dfaeb8bf315e7446f1d"
+          },
+          "structure": {
+            "raw_rows": 15643,
+            "unique_seqn": 9965,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1803,
+          "pct_missing_within_age_eligible": 0.22,
+          "n_any_rx_30d": 833,
+          "n_loop_diuretic_30d": 32,
+          "n_aminoglycoside_30d": 4,
+          "n_platinum_30d": 0
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "RXQ_RX_B",
+            "path": "data/raw/nhanes/2001/RXQ_RX_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/RXQ_RX_B.xpt",
+            "size_bytes": 3594240,
+            "sha256": "221450bde49dbcf22383b7d9df04bf9beddb62e4e363fb4ff7c63e484129ef40"
+          },
+          "structure": {
+            "raw_rows": 18418,
+            "unique_seqn": 11039,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 2046,
+          "pct_missing_within_age_eligible": 0.0,
+          "n_any_rx_30d": 979,
+          "n_loop_diuretic_30d": 34,
+          "n_aminoglycoside_30d": 4,
+          "n_platinum_30d": 0
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "RXQ_RX_C",
+            "path": "data/raw/nhanes/2003/RXQ_RX_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/RXQ_RX_C.xpt",
+            "size_bytes": 2945920,
+            "sha256": "777e1e3d7dab3639d9c9841f5340fa13aca3933b7339628b8f2f2e1500c58503"
+          },
+          "structure": {
+            "raw_rows": 18401,
+            "unique_seqn": 10122,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1885,
+          "pct_missing_within_age_eligible": 0.21,
+          "n_any_rx_30d": 962,
+          "n_loop_diuretic_30d": 37,
+          "n_aminoglycoside_30d": 2,
+          "n_platinum_30d": 0
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "RXQ_RX_G",
+            "path": "data/raw/nhanes/2011/RXQ_RX_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/RXQ_RX_G.xpt",
+            "size_bytes": 2994400,
+            "sha256": "4dd72348270f4f818ffcf6a0b0d49e5c471e2a9673a03562bb06c0e4dad93bc6"
+          },
+          "structure": {
+            "raw_rows": 18704,
+            "unique_seqn": 9756,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4498,
+          "pct_missing_within_age_eligible": 0.04,
+          "n_any_rx_30d": 2264,
+          "n_loop_diuretic_30d": 77,
+          "n_aminoglycoside_30d": 6,
+          "n_platinum_30d": 0
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "RXQ_RX_I",
+            "path": "data/raw/nhanes/2015/RXQ_RX_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/RXQ_RX_I.xpt",
+            "size_bytes": 9629600,
+            "sha256": "a148b3c38e6823f3750b5835385a85ac1d65aeeefd8d8b351ba8ad9c9f6095aa"
+          },
+          "structure": {
+            "raw_rows": 19647,
+            "unique_seqn": 9971,
+            "cardinality_observed": "1:N",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4579,
+          "pct_missing_within_age_eligible": 0.07,
+          "n_any_rx_30d": 2302,
+          "n_loop_diuretic_30d": 74,
+          "n_aminoglycoside_30d": 6,
+          "n_platinum_30d": 0
+        }
+      },
+      "notes": "Reduzido 1:N -> 1:1 por SEQN; audita N marginal de diuréticos de alça, aminoglicosídeos e platinas."
+    },
+    {
+      "component": "mcq_cancer",
+      "description": "Condições Médicas — Histórico de Câncer MCQ220/MCQ230 (MCQ)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14807,
+      "n_valid_complete10_20_69": 13417,
+      "n_valid_any25_20_69": 7684,
+      "pct_missing_in_eligible_cycles_age": 0.11,
+      "pct_missing_of_all_5cycles_20_69": 0.11,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14483,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8344,
+      "n_replication_valid": 6463,
+      "marginal_feasibility_counts": {
+        "total_cancer_yes_marginal": 851
+      },
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MCQ",
+            "path": "data/raw/nhanes/1999/MCQ.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/MCQ.xpt",
+            "size_bytes": 12706880,
+            "sha256": "3bf45a296282a80baa23b4651c655cf422a235a08a142aa2ab5dd7ca963a2e5a"
+          },
+          "structure": {
+            "raw_rows": 9493,
+            "unique_seqn": 9493,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MCQ220"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1805,
+          "pct_missing_within_age_eligible": 0.11,
+          "n_cancer_yes_marginal": 92
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MCQ_B",
+            "path": "data/raw/nhanes/2001/MCQ_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/MCQ_B.xpt",
+            "size_bytes": 12417920,
+            "sha256": "6e31c8d78e1ab0d1aaa8f012411641d6b51bc9601c2237d999d0acdddd04de01"
+          },
+          "structure": {
+            "raw_rows": 10470,
+            "unique_seqn": 10470,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MCQ220"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 2044,
+          "pct_missing_within_age_eligible": 0.1,
+          "n_cancer_yes_marginal": 131
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MCQ_C",
+            "path": "data/raw/nhanes/2003/MCQ_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/MCQ_C.xpt",
+            "size_bytes": 11904960,
+            "sha256": "42487737067c5dbdf533bb91b5f752d1fff1dfa9eed91c7ae54ab5e49b65b019"
+          },
+          "structure": {
+            "raw_rows": 9645,
+            "unique_seqn": 9645,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MCQ220"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1884,
+          "pct_missing_within_age_eligible": 0.26,
+          "n_cancer_yes_marginal": 115
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MCQ_G",
+            "path": "data/raw/nhanes/2011/MCQ_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/MCQ_G.xpt",
+            "size_bytes": 6905520,
+            "sha256": "7538eb86c72b81fd5e76b56120fcb068ed38149d44650e9e750670ad58658d52"
+          },
+          "structure": {
+            "raw_rows": 9364,
+            "unique_seqn": 9364,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MCQ220"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4495,
+          "pct_missing_within_age_eligible": 0.11,
+          "n_cancer_yes_marginal": 248
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "MCQ_I",
+            "path": "data/raw/nhanes/2015/MCQ_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/MCQ_I.xpt",
+            "size_bytes": 6907360,
+            "sha256": "8b2bd62f5bcd5820d6aac380e4bad233d22ecab42fcf4a3a9a023ffc6b9f4002"
+          },
+          "structure": {
+            "raw_rows": 9575,
+            "unique_seqn": 9575,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "MCQ220"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4579,
+          "pct_missing_within_age_eligible": 0.07,
+          "n_cancer_yes_marginal": 265
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "dpq_phq9",
+      "description": "Sintomas Depressivos PHQ-9 e Fadiga DPQ040 (DPQ)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 2,
+      "n_aux_eligible_in_present_cycles": 9082,
+      "n_valid_raw_20_69": 8029,
+      "n_valid_complete10_20_69": 7551,
+      "n_valid_any25_20_69": 4402,
+      "pct_missing_in_eligible_cycles_age": 11.59,
+      "pct_missing_of_all_5cycles_20_69": 45.84,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "2011-2012": "WTMEC2YR * (1/2)",
+        "2015-2016": "WTMEC2YR * (1/2)"
+      },
+      "n_positive_pooled_weight": 8029,
+      "n_strata": 29,
+      "n_psu": 61,
+      "design_df": 32,
+      "n_discovery_valid": 3929,
+      "n_replication_valid": 4100,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "DPQ:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2001-2002": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "DPQ_B:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2003-2004": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "DPQ_C:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "DPQ_G",
+            "path": "data/raw/nhanes/2011/DPQ_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/DPQ_G.xpt",
+            "size_bytes": 496480,
+            "sha256": "38c3e2cb303c6f635330bcbbb0534df90e20ccedee23cf7622ca1ccbc6811844"
+          },
+          "structure": {
+            "raw_rows": 5615,
+            "unique_seqn": 5615,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "DPQ010",
+              "DPQ020",
+              "DPQ030",
+              "DPQ040",
+              "DPQ050",
+              "DPQ060",
+              "DPQ070",
+              "DPQ080",
+              "DPQ090"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 3929,
+          "pct_missing_within_age_eligible": 12.69
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "DPQ_I",
+            "path": "data/raw/nhanes/2015/DPQ_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/DPQ_I.xpt",
+            "size_bytes": 507040,
+            "sha256": "6f4561aab077b9fd199a414fc516d6fedf40967266b81f1ab7b7d75afb72232d"
+          },
+          "structure": {
+            "raw_rows": 5735,
+            "unique_seqn": 5735,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "DPQ010",
+              "DPQ020",
+              "DPQ030",
+              "DPQ040",
+              "DPQ050",
+              "DPQ060",
+              "DPQ070",
+              "DPQ080",
+              "DPQ090"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4100,
+          "pct_missing_within_age_eligible": 10.52
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "cfq_cognition",
+      "description": "Função Cognitiva — Digit Symbol Substitution Test CFDDS (CFQ)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "60-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2011-2012"
+      ],
+      "n_cycles": 3,
+      "n_aux_eligible_in_present_cycles": 1600,
+      "n_valid_raw_20_69": 1424,
+      "n_valid_complete10_20_69": 1285,
+      "n_valid_any25_20_69": 1196,
+      "pct_missing_in_eligible_cycles_age": 11.0,
+      "pct_missing_of_all_5cycles_20_69": 90.39,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/3)",
+        "2001-2002": "WTSAU4YR * (2/3)",
+        "2011-2012": "WTMEC2YR * (1/3)"
+      },
+      "n_positive_pooled_weight": 1401,
+      "n_strata": 42,
+      "n_psu": 88,
+      "design_df": 46,
+      "n_discovery_valid": 642,
+      "n_replication_valid": 782,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "CFQ",
+            "path": "data/raw/nhanes/1999/CFQ.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/CFQ.xpt",
+            "size_bytes": 119280,
+            "sha256": "a55f05f64cc87511754fcd74d05db6c016c43fc84509dced742fc7de6ea11a79"
+          },
+          "structure": {
+            "raw_rows": 1834,
+            "unique_seqn": 1834,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "CFDRIGHT"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 397,
+          "n_seqn_in_component_file": 397,
+          "n_valid_intersection": 332,
+          "pct_missing_within_age_eligible": 16.37
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "CFQ_B",
+            "path": "data/raw/nhanes/2001/CFQ_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/CFQ_B.xpt",
+            "size_bytes": 121680,
+            "sha256": "2d12a35c46d06e3e85bfa66be40c5943b53066c85ce159071f2fdb4bfbc38925"
+          },
+          "structure": {
+            "raw_rows": 1872,
+            "unique_seqn": 1872,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "CFDRIGHT"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 335,
+          "n_seqn_in_component_file": 335,
+          "n_valid_intersection": 310,
+          "pct_missing_within_age_eligible": 7.46
+        },
+        "2003-2004": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "CFQ_C:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "CFQ_G",
+            "path": "data/raw/nhanes/2011/CFQ_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/CFQ_G.xpt",
+            "size_bytes": 259920,
+            "sha256": "086c0c5a1bcfe965671ec0ff1cd607d6924ce4ddee82610d21eea69bfbf353e7"
+          },
+          "structure": {
+            "raw_rows": 1687,
+            "unique_seqn": 1687,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "CFDDS"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 868,
+          "n_seqn_in_component_file": 868,
+          "n_valid_intersection": 782,
+          "pct_missing_within_age_eligible": 9.91
+        },
+        "2015-2016": {
+          "download": {
+            "status": "not_published_404",
+            "stem": null,
+            "path": null,
+            "url": null,
+            "errors": [
+              "CFQ_I:404"
+            ]
+          },
+          "n_valid_20_69": 0
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "ocq_occupation",
+      "description": "Ocupação e Situação Laboral (OCQ)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14813,
+      "n_valid_complete10_20_69": 13422,
+      "n_valid_any25_20_69": 7691,
+      "pct_missing_in_eligible_cycles_age": 0.07,
+      "pct_missing_of_all_5cycles_20_69": 0.07,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14489,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8352,
+      "n_replication_valid": 6461,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "OCQ",
+            "path": "data/raw/nhanes/1999/OCQ.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/OCQ.xpt",
+            "size_bytes": 2106720,
+            "sha256": "8dc6804010996138035fc5b7764f8c453431a5ceb82f8e1de3c1554185d7f48f"
+          },
+          "structure": {
+            "raw_rows": 7295,
+            "unique_seqn": 7295,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "OCQ150"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1807,
+          "pct_missing_within_age_eligible": 0.0
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "OCQ_B",
+            "path": "data/raw/nhanes/2001/OCQ_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/OCQ_B.xpt",
+            "size_bytes": 1331040,
+            "sha256": "0776c2f772991695dce7b5cc214a8aa40afa9b7a73c807a8291f278265bafbad"
+          },
+          "structure": {
+            "raw_rows": 6634,
+            "unique_seqn": 6634,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "OCD150"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 2046,
+          "pct_missing_within_age_eligible": 0.0
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "OCQ_C",
+            "path": "data/raw/nhanes/2003/OCQ_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/OCQ_C.xpt",
+            "size_bytes": 1246880,
+            "sha256": "9d4f7ebf37312da46ef2ddc8f6395e0cc0f5bdce80545985d2b7a8bdbc9359aa"
+          },
+          "structure": {
+            "raw_rows": 6213,
+            "unique_seqn": 6213,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "OCD150"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1888,
+          "pct_missing_within_age_eligible": 0.05
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "OCQ_G",
+            "path": "data/raw/nhanes/2011/OCQ_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/OCQ_G.xpt",
+            "size_bytes": 1090640,
+            "sha256": "be42b1e17614626149d27fb15477c7b7936589eb8b337d95b2beba658ac4524e"
+          },
+          "structure": {
+            "raw_rows": 6175,
+            "unique_seqn": 6175,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "OCD150"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4499,
+          "pct_missing_within_age_eligible": 0.02
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "OCQ_I",
+            "path": "data/raw/nhanes/2015/OCQ_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/OCQ_I.xpt",
+            "size_bytes": 711360,
+            "sha256": "71bd89dc4b8b63e0e7e1e27e4428193437a35819d03ceeeb287ca6b965e1494d"
+          },
+          "structure": {
+            "raw_rows": 6327,
+            "unique_seqn": 6327,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "OCD150"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4573,
+          "pct_missing_within_age_eligible": 0.2
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "lab_ghb",
+      "description": "Laboratório — Hemoglobina Glicada HbA1c LBXGH (LAB10 / L10 / GHB)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14080,
+      "n_valid_complete10_20_69": 12877,
+      "n_valid_any25_20_69": 7416,
+      "pct_missing_in_eligible_cycles_age": 5.02,
+      "pct_missing_of_all_5cycles_20_69": 5.02,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13824,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7917,
+      "n_replication_valid": 6163,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "LAB10",
+            "path": "data/raw/nhanes/1999/LAB10.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/LAB10.xpt",
+            "size_bytes": 109200,
+            "sha256": "af0f1ef9c342f085e9b699115f92745f70e9cee1a0142fbc968d806d7656a553"
+          },
+          "structure": {
+            "raw_rows": 6758,
+            "unique_seqn": 6758,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXGH"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1719,
+          "pct_missing_within_age_eligible": 4.87
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L10_B",
+            "path": "data/raw/nhanes/2001/L10_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/L10_B.xpt",
+            "size_bytes": 120160,
+            "sha256": "39ce5bbda8caed4246c89687b7e0f2853c8311274e301821593d631308108fd3"
+          },
+          "structure": {
+            "raw_rows": 7445,
+            "unique_seqn": 7445,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXGH"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1941,
+          "pct_missing_within_age_eligible": 5.13
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L10_C",
+            "path": "data/raw/nhanes/2003/L10_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/L10_C.xpt",
+            "size_bytes": 112880,
+            "sha256": "423d73cdd3d37e07b6bbd506bd3d2f39ce5700eebd495fc59e57337a07e122b3"
+          },
+          "structure": {
+            "raw_rows": 6990,
+            "unique_seqn": 6990,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXGH"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1804,
+          "pct_missing_within_age_eligible": 4.5
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "GHB_G",
+            "path": "data/raw/nhanes/2011/GHB_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/GHB_G.xpt",
+            "size_bytes": 105840,
+            "sha256": "8ff7cc95461fdfd47d2c9640b944a2bcd45926a3c0e64c98a09a4cef6c0f88d7"
+          },
+          "structure": {
+            "raw_rows": 6549,
+            "unique_seqn": 6549,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXGH"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4257,
+          "pct_missing_within_age_eligible": 5.4
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "GHB_I",
+            "path": "data/raw/nhanes/2015/GHB_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/GHB_I.xpt",
+            "size_bytes": 108960,
+            "sha256": "e4bc626cd12f6057c7806aef4f85874c9bf1407a7480d6621a4af142260addd2"
+          },
+          "structure": {
+            "raw_rows": 6744,
+            "unique_seqn": 6744,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXGH"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4359,
+          "pct_missing_within_age_eligible": 4.87
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "lab_biopro_creatinine",
+      "description": "Laboratório — Bioquímica Padrão / Creatinina Sérica LBXSCR/LBDSCR (LAB18 / L40 / BIOPRO)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 13849,
+      "n_valid_complete10_20_69": 12683,
+      "n_valid_any25_20_69": 7280,
+      "pct_missing_in_eligible_cycles_age": 6.58,
+      "pct_missing_of_all_5cycles_20_69": 6.58,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13601,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7747,
+      "n_replication_valid": 6102,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "LAB18",
+            "path": "data/raw/nhanes/1999/LAB18.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/LAB18.xpt",
+            "size_bytes": 2223120,
+            "sha256": "36dc6f02045ceb61e146885bb04400fd580c9c35cc3bfc4269e314f0e06fe9c0"
+          },
+          "structure": {
+            "raw_rows": 6758,
+            "unique_seqn": 6758,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXSCR"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1687,
+          "pct_missing_within_age_eligible": 6.64
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L40_B",
+            "path": "data/raw/nhanes/2001/L40_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/L40_B.xpt",
+            "size_bytes": 2448480,
+            "sha256": "16f907f3a945cc24d053a9492a3f90edd3e0335f70ba047bbd9952ba6a00e182"
+          },
+          "structure": {
+            "raw_rows": 7445,
+            "unique_seqn": 7445,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBDSCR"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1902,
+          "pct_missing_within_age_eligible": 7.04
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L40_C",
+            "path": "data/raw/nhanes/2003/L40_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/L40_C.xpt",
+            "size_bytes": 2074960,
+            "sha256": "a5642b8aa6e90ee0961562572f7152d47df67a318dd41cb164e3a2fe4aaaae4d"
+          },
+          "structure": {
+            "raw_rows": 6990,
+            "unique_seqn": 6990,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXSCR"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1782,
+          "pct_missing_within_age_eligible": 5.66
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BIOPRO_G",
+            "path": "data/raw/nhanes/2011/BIOPRO_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/BIOPRO_G.xpt",
+            "size_bytes": 1997040,
+            "sha256": "8c3a0b1bea79ff79c5600ad6a76c4206a7d689479f94ae81da6360058eda5d05"
+          },
+          "structure": {
+            "raw_rows": 6549,
+            "unique_seqn": 6549,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXSCR"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4158,
+          "pct_missing_within_age_eligible": 7.6
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BIOPRO_I",
+            "path": "data/raw/nhanes/2015/BIOPRO_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BIOPRO_I.xpt",
+            "size_bytes": 2056320,
+            "sha256": "1c6dd63f97db81f50891a0327c2b0f90d889c991518fea5ac2113cbf8e1a94ac"
+          },
+          "structure": {
+            "raw_rows": 6744,
+            "unique_seqn": 6744,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXSCR"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4320,
+          "pct_missing_within_age_eligible": 5.72
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "lab_alb_cr",
+      "description": "Laboratório — Albumina e Creatinina Urinárias URXUMA/URXUCR (LAB16 / L16 / ALB_CR)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14537,
+      "n_valid_complete10_20_69": 13278,
+      "n_valid_any25_20_69": 7612,
+      "pct_missing_in_eligible_cycles_age": 1.94,
+      "pct_missing_of_all_5cycles_20_69": 1.94,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14274,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8196,
+      "n_replication_valid": 6341,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "LAB16",
+            "path": "data/raw/nhanes/1999/LAB16.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/LAB16.xpt",
+            "size_bytes": 314240,
+            "sha256": "93e47660c2c647d368549b1ff940eee4aa12015906395cfa432721fc4c00feea"
+          },
+          "structure": {
+            "raw_rows": 7819,
+            "unique_seqn": 7819,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "URXUMA",
+              "URXUCR"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1777,
+          "pct_missing_within_age_eligible": 1.66
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L16_B",
+            "path": "data/raw/nhanes/2001/L16_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/L16_B.xpt",
+            "size_bytes": 347360,
+            "sha256": "730e2cf809f940ef7240187006bc11542996692305ce1ae27cc6471f1369167e"
+          },
+          "structure": {
+            "raw_rows": 8647,
+            "unique_seqn": 8647,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "URXUMA",
+              "URXUCR"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1991,
+          "pct_missing_within_age_eligible": 2.69
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L16_C",
+            "path": "data/raw/nhanes/2003/L16_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/L16_C.xpt",
+            "size_bytes": 320720,
+            "sha256": "577f7ca1af1b146c9eba640b8a5a2b33de731d97cb40de91d07b49df9b1545b4"
+          },
+          "structure": {
+            "raw_rows": 7982,
+            "unique_seqn": 7982,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "URXUMA",
+              "URXUCR"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1843,
+          "pct_missing_within_age_eligible": 2.44
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "ALB_CR_G",
+            "path": "data/raw/nhanes/2011/ALB_CR_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/ALB_CR_G.xpt",
+            "size_bytes": 377040,
+            "sha256": "46c5733d0bdb1d4bbe841614a3e6ef6b9dab8501f455af4f841cc43a312e579d"
+          },
+          "structure": {
+            "raw_rows": 7821,
+            "unique_seqn": 7821,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "URXUMA",
+              "URXUCR"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4428,
+          "pct_missing_within_age_eligible": 1.6
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "ALB_CR_I",
+            "path": "data/raw/nhanes/2015/ALB_CR_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/ALB_CR_I.xpt",
+            "size_bytes": 552800,
+            "sha256": "af61c16db8d9e96549bf0fb446049ff0631ae1ccf7e2dcd017d28edba84dbe3d"
+          },
+          "structure": {
+            "raw_rows": 8608,
+            "unique_seqn": 8608,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "URXUMA",
+              "URXUCR"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4498,
+          "pct_missing_within_age_eligible": 1.83
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "exam_bpx",
+      "description": "Exame Físico — Pressão Arterial Sistólica/Diastólica (BPX)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14145,
+      "n_valid_complete10_20_69": 13081,
+      "n_valid_any25_20_69": 7514,
+      "pct_missing_in_eligible_cycles_age": 4.58,
+      "pct_missing_of_all_5cycles_20_69": 4.58,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 13944,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7942,
+      "n_replication_valid": 6203,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BPX",
+            "path": "data/raw/nhanes/1999/BPX.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/BPX.xpt",
+            "size_bytes": 2232640,
+            "sha256": "ab99dc870f4d5fbec80642ad4b72bde73cb50d0ae630f01c9e74de5a309759f4"
+          },
+          "structure": {
+            "raw_rows": 9282,
+            "unique_seqn": 9282,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BPXSY1",
+              "BPXSY2",
+              "BPXSY3"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1738,
+          "pct_missing_within_age_eligible": 3.82
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BPX_B",
+            "path": "data/raw/nhanes/2001/BPX_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/BPX_B.xpt",
+            "size_bytes": 2519440,
+            "sha256": "d4214e708ccd12816a00e681f310e1e0eca14ac933c3b1cab21b1e000b871ad8"
+          },
+          "structure": {
+            "raw_rows": 10477,
+            "unique_seqn": 10477,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BPXSY1",
+              "BPXSY2",
+              "BPXSY3"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1911,
+          "pct_missing_within_age_eligible": 6.6
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BPX_C",
+            "path": "data/raw/nhanes/2003/BPX_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/BPX_C.xpt",
+            "size_bytes": 2319280,
+            "sha256": "4df5a7dbd9e3b882b34ad516e80d09abbd0688a46d011711e7f9cdecf53ece36"
+          },
+          "structure": {
+            "raw_rows": 9643,
+            "unique_seqn": 9643,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BPXSY1",
+              "BPXSY2",
+              "BPXSY3"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1761,
+          "pct_missing_within_age_eligible": 6.78
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BPX_G",
+            "path": "data/raw/nhanes/2011/BPX_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/BPX_G.xpt",
+            "size_bytes": 2021600,
+            "sha256": "1dd66110f41465d601cd54f1e3c6010baafb9375f09fbcaa3aef2536876146fd"
+          },
+          "structure": {
+            "raw_rows": 9338,
+            "unique_seqn": 9338,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BPXSY1",
+              "BPXSY2",
+              "BPXSY3"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4293,
+          "pct_missing_within_age_eligible": 4.6
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BPX_I",
+            "path": "data/raw/nhanes/2015/BPX_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BPX_I.xpt",
+            "size_bytes": 1607120,
+            "sha256": "45d5c9fa101ccc6da82241bd45c99611595e699665eed2cfed232e9070b52cc1"
+          },
+          "structure": {
+            "raw_rows": 9544,
+            "unique_seqn": 9544,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BPXSY1",
+              "BPXSY2",
+              "BPXSY3"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4442,
+          "pct_missing_within_age_eligible": 3.06
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "exam_bmx",
+      "description": "Exame Físico — Antropometria / IMC BMXBMI (BMX)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14590,
+      "n_valid_complete10_20_69": 13314,
+      "n_valid_any25_20_69": 7620,
+      "pct_missing_in_eligible_cycles_age": 1.58,
+      "pct_missing_of_all_5cycles_20_69": 1.58,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14320,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8205,
+      "n_replication_valid": 6385,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BMX",
+            "path": "data/raw/nhanes/1999/BMX.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/BMX.xpt",
+            "size_bytes": 2827840,
+            "sha256": "6b9bc4d998c0004fc42b213cc7f5bf347df937707f46d6d25fab926723a60500"
+          },
+          "structure": {
+            "raw_rows": 9282,
+            "unique_seqn": 9282,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BMXBMI"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1792,
+          "pct_missing_within_age_eligible": 0.83
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BMX_B",
+            "path": "data/raw/nhanes/2001/BMX_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/BMX_B.xpt",
+            "size_bytes": 2183680,
+            "sha256": "55715d4387960f88e48a2adf44da0b270a83290b1edf7c8e4ecc0eb2c29c59cf"
+          },
+          "structure": {
+            "raw_rows": 10477,
+            "unique_seqn": 10477,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BMXBMI"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1965,
+          "pct_missing_within_age_eligible": 3.96
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BMX_C",
+            "path": "data/raw/nhanes/2003/BMX_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/BMX_C.xpt",
+            "size_bytes": 2551120,
+            "sha256": "b3d3e431b5964ea8b5807035044322fcf32f3878d814d4a844204e51c793f090"
+          },
+          "structure": {
+            "raw_rows": 9643,
+            "unique_seqn": 9643,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BMXBMI"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1851,
+          "pct_missing_within_age_eligible": 2.01
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BMX_G",
+            "path": "data/raw/nhanes/2011/BMX_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/BMX_G.xpt",
+            "size_bytes": 1946720,
+            "sha256": "4814bfc3047ed400b9d43d285f8c3ea7c940ac6489404a9b699579715d158ec3"
+          },
+          "structure": {
+            "raw_rows": 9338,
+            "unique_seqn": 9338,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BMXBMI"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4448,
+          "pct_missing_within_age_eligible": 1.16
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "BMX_I",
+            "path": "data/raw/nhanes/2015/BMX_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BMX_I.xpt",
+            "size_bytes": 1989600,
+            "sha256": "d31da84e14212b4e58e8340598a5b8e2144fac83333563e966eb1b332e4141d6"
+          },
+          "structure": {
+            "raw_rows": 9544,
+            "unique_seqn": 9544,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "BMXBMI"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4534,
+          "pct_missing_within_age_eligible": 1.05
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "lab_pbcd_metals",
+      "description": "Laboratório — Chumbo e Cádmio Sanguíneos LBXBPB/LBXBCD (LAB06 / L06 / L06BMT_C / PBCD)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 11909,
+      "n_valid_complete10_20_69": 10841,
+      "n_valid_any25_20_69": 6237,
+      "pct_missing_in_eligible_cycles_age": 19.66,
+      "pct_missing_of_all_5cycles_20_69": 19.66,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTSH2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 11653,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 7926,
+      "n_replication_valid": 3983,
+      "marginal_feasibility_counts": {},
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "LAB06",
+            "path": "data/raw/nhanes/1999/LAB06.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/LAB06.xpt",
+            "size_bytes": 2903440,
+            "sha256": "5ae7ee4a4b7be64b044af9a2f2987129790524c682db0b2b9b2e1672b74012e5"
+          },
+          "structure": {
+            "raw_rows": 8832,
+            "unique_seqn": 8832,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXBPB",
+              "LBXBCD"
+            ]
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1721,
+          "pct_missing_within_age_eligible": 4.76
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L06_B",
+            "path": "data/raw/nhanes/2001/L06_B.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/L06_B.xpt",
+            "size_bytes": 1751360,
+            "sha256": "92e31c9dc039a973dcd769852010cc78984a6a235fa0d2f802aa5e76b4cca051"
+          },
+          "structure": {
+            "raw_rows": 9929,
+            "unique_seqn": 9929,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXBPB",
+              "LBXBCD"
+            ]
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 1941,
+          "pct_missing_within_age_eligible": 5.13
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "L06BMT_C",
+            "path": "data/raw/nhanes/2003/L06BMT_C.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/L06BMT_C.xpt",
+            "size_bytes": 662960,
+            "sha256": "0c57f6a5e800a0f2a72191596f5725ee452365a194d49b689af6c66dfab1bf29"
+          },
+          "structure": {
+            "raw_rows": 9179,
+            "unique_seqn": 9179,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXBPB",
+              "LBXBCD"
+            ]
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1804,
+          "pct_missing_within_age_eligible": 4.5
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "PBCD_G",
+            "path": "data/raw/nhanes/2011/PBCD_G.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/PBCD_G.xpt",
+            "size_bytes": 1149360,
+            "sha256": "996cc3daaae69bf043785b274b02d4921dd2e49ec819c528707752d675ebd191"
+          },
+          "structure": {
+            "raw_rows": 8956,
+            "unique_seqn": 8956,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [],
+            "target_cols_found": [
+              "LBXBPB",
+              "LBXBCD"
+            ]
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4264,
+          "pct_missing_within_age_eligible": 5.24
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "stem": "PBCD_I",
+            "path": "data/raw/nhanes/2015/PBCD_I.xpt",
+            "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/PBCD_I.xpt",
+            "size_bytes": 794000,
+            "sha256": "7556d180dbe580ebf439b22201b02db408ee995640e29946e7e60f43f583aa9d"
+          },
+          "structure": {
+            "raw_rows": 5815,
+            "unique_seqn": 5815,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": [
+              "WTSH2YR"
+            ],
+            "target_cols_found": [
+              "LBXBPB",
+              "LBXBCD"
+            ]
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 2296,
+          "n_valid_intersection": 2179,
+          "pct_missing_within_age_eligible": 52.44
+        }
+      },
+      "notes": ""
+    },
+    {
+      "component": "lmf_mortality",
+      "description": "NCHS Public-Use Linked Mortality Files (.dat largura fixa — seguimento de óbito)",
+      "lockbox_regime": "UNTOUCHED_LOCKBOX_VALID",
+      "age_band": "20-69",
+      "cycles_present": [
+        "1999-2000",
+        "2001-2002",
+        "2003-2004",
+        "2011-2012",
+        "2015-2016"
+      ],
+      "n_cycles": 5,
+      "n_aux_eligible_in_present_cycles": 14824,
+      "n_valid_raw_20_69": 14794,
+      "n_valid_complete10_20_69": 13410,
+      "n_valid_any25_20_69": 7680,
+      "pct_missing_in_eligible_cycles_age": 0.2,
+      "pct_missing_of_all_5cycles_20_69": 0.2,
+      "weight_status": "OK_NCHS_COMPLIANT",
+      "weight_spec_by_cycle": {
+        "1999-2000": "WTSAU4YR * (2/5)",
+        "2001-2002": "WTSAU4YR * (2/5)",
+        "2003-2004": "WTSAU2YR * (1/5)",
+        "2011-2012": "WTMEC2YR * (1/5)",
+        "2015-2016": "WTMEC2YR * (1/5)"
+      },
+      "n_positive_pooled_weight": 14470,
+      "n_strata": 72,
+      "n_psu": 148,
+      "design_df": 76,
+      "n_discovery_valid": 8339,
+      "n_replication_valid": 6455,
+      "marginal_feasibility_counts": {
+        "total_is_deceased_marginal": 1207
+      },
+      "per_cycle": {
+        "1999-2000": {
+          "download": {
+            "status": "ok_cache",
+            "path": "data/raw/nhanes/mortality/NHANES_1999_2000_MORT_2019_PUBLIC.dat",
+            "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality/NHANES_1999_2000_MORT_2019_PUBLIC.dat",
+            "size_bytes": 487666,
+            "sha256": "562bd367107add0b2b40fed36a062d8b194fca31e11aab897a0efad4bebc8b26"
+          },
+          "structure": {
+            "raw_rows": 9965,
+            "unique_seqn": 9965,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 1807,
+          "n_aux_age_eligible": 1807,
+          "n_seqn_in_component_file": 1807,
+          "n_valid_intersection": 1806,
+          "pct_missing_within_age_eligible": 0.06,
+          "n_is_deceased_marginal": 339
+        },
+        "2001-2002": {
+          "download": {
+            "status": "ok_cache",
+            "path": "data/raw/nhanes/mortality/NHANES_2001_2002_MORT_2019_PUBLIC.dat",
+            "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality/NHANES_2001_2002_MORT_2019_PUBLIC.dat",
+            "size_bytes": 540362,
+            "sha256": "2788c8c8a02995ea5686882b5fe65b4b9cd415016031525f8a3c1a3646c47f1b"
+          },
+          "structure": {
+            "raw_rows": 11039,
+            "unique_seqn": 11039,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 2046,
+          "n_aux_age_eligible": 2046,
+          "n_seqn_in_component_file": 2046,
+          "n_valid_intersection": 2043,
+          "pct_missing_within_age_eligible": 0.15,
+          "n_is_deceased_marginal": 299
+        },
+        "2003-2004": {
+          "download": {
+            "status": "ok_cache",
+            "path": "data/raw/nhanes/mortality/NHANES_2003_2004_MORT_2019_PUBLIC.dat",
+            "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality/NHANES_2003_2004_MORT_2019_PUBLIC.dat",
+            "size_bytes": 495722,
+            "sha256": "639f6b3292a55b112fbfc842954af3d8d32bcce287cd8ae49319e5aca1c033c0"
+          },
+          "structure": {
+            "raw_rows": 10122,
+            "unique_seqn": 10122,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 1889,
+          "n_aux_age_eligible": 1889,
+          "n_seqn_in_component_file": 1889,
+          "n_valid_intersection": 1887,
+          "pct_missing_within_age_eligible": 0.11,
+          "n_is_deceased_marginal": 243
+        },
+        "2011-2012": {
+          "download": {
+            "status": "ok_cache",
+            "path": "data/raw/nhanes/mortality/NHANES_2011_2012_MORT_2019_PUBLIC.dat",
+            "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality/NHANES_2011_2012_MORT_2019_PUBLIC.dat",
+            "size_bytes": 475574,
+            "sha256": "ff98b6c87172643426b1c6d20f76495592bebd618ea18f742d98a44b84456b30"
+          },
+          "structure": {
+            "raw_rows": 9756,
+            "unique_seqn": 9756,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 4500,
+          "n_aux_age_eligible": 4500,
+          "n_seqn_in_component_file": 4500,
+          "n_valid_intersection": 4490,
+          "pct_missing_within_age_eligible": 0.22,
+          "n_is_deceased_marginal": 232
+        },
+        "2015-2016": {
+          "download": {
+            "status": "ok_cache",
+            "path": "data/raw/nhanes/mortality/NHANES_2015_2016_MORT_2019_PUBLIC.dat",
+            "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality/NHANES_2015_2016_MORT_2019_PUBLIC.dat",
+            "size_bytes": 484288,
+            "sha256": "f392baaf9c20a4c75bc9936775ba956e64528fa5ada5102b08f86f64e41e84a0"
+          },
+          "structure": {
+            "raw_rows": 9971,
+            "unique_seqn": 9971,
+            "cardinality_observed": "1:1",
+            "component_subsample_wt_cols": []
+          },
+          "n_aux_20_69": 4582,
+          "n_aux_age_eligible": 4582,
+          "n_seqn_in_component_file": 4582,
+          "n_valid_intersection": 4568,
+          "pct_missing_within_age_eligible": 0.31,
+          "n_is_deceased_marginal": 94
+        }
+      },
+      "notes": "Reporta apenas elegibilidade e total marginal de óbitos na coorte (sem estratificar por AUX)."
+    }
+  ],
+  "summary_csv": "outputs/json/37_viability_matrix_summary.csv",
+  "lib_versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1"
+  }
+}

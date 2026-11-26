@@ -55,6 +55,8 @@ VALID_THRESHOLD_MIN_DB = -10.0
 VALID_THRESHOLD_MAX_DB = 130.0
 NO_RESPONSE_CODE = 666.0
 COULD_NOT_OBTAIN_CODE = 888.0
+SAS_ZERO_EPS = 1e-12
+AUX_WEIGHT_COLS = ["WTSAU2YR", "WTSAU4YR"]
 
 FREQS = np.array([500, 1000, 2000, 3000, 4000, 6000, 8000], dtype=np.int32)
 RIGHT_COLS = {
@@ -101,9 +103,18 @@ def clean_threshold_nan(s: pd.Series) -> pd.Series:
     return x.astype("float32")
 
 
+def scrub_ibm_underflow(df: pd.DataFrame, eps: float = SAS_ZERO_EPS) -> pd.DataFrame:
+    num_cols = df.select_dtypes(include=[np.number]).columns
+    if len(num_cols) > 0:
+        vals = df[num_cols].to_numpy(copy=True)
+        vals[np.isfinite(vals) & (np.abs(vals) < eps)] = 0.0
+        df[num_cols] = vals
+    return df
+
+
 def read_sas_xpt(path: Path) -> pd.DataFrame:
     log.info(f"Lendo XPT: {path}")
-    df = pd.read_sas(path, format="xport")
+    df = scrub_ibm_underflow(pd.read_sas(path, format="xport"))
     log.info(f"Shape bruto {path.name}: {df.shape}")
     return df
 
@@ -149,6 +160,10 @@ def build_wide_one(record: dict) -> tuple[pd.DataFrame | None, list[dict]]:
                 t1 = clean_threshold_nan(aux[c1])
                 t2 = clean_threshold_nan(aux[c2])
                 out[f"retest1000_absdiff_{ear}"] = (t1 - t2).abs().astype("float32")
+
+        for wcol in AUX_WEIGHT_COLS:
+            if wcol in aux.columns:
+                out[wcol] = pd.to_numeric(aux[wcol], errors="coerce").astype("float64")
 
         for col in QA_COLS:
             if col in aux.columns:
