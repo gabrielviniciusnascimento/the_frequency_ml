@@ -1,0 +1,2116 @@
+{
+  "script": "38_codebook_checks.py",
+  "lockbox_guarantee": "Leitura exclusiva de documentação .htm oficial do CDC; nenhum dado individual .xpt foi lido.",
+  "files": [
+    {
+      "cycle": "1999-2000",
+      "stem": "AUQ",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUQ.htm",
+      "url": null,
+      "size_bytes": 41191,
+      "sha256": "892c650bb2fffd677d3f6c16518ba7e335220651c3a31cad24a6ac1dc98e9d15",
+      "n_sections_parsed": 2,
+      "n_variables_parsed": 13
+    },
+    {
+      "cycle": "2001-2002",
+      "stem": "AUQ_B",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUQ_B.htm",
+      "url": null,
+      "size_bytes": 43360,
+      "sha256": "dc8f751ee574a550d89fc9104deee814429e66230eca2babdce6baf1e9e4df5e",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 13
+    },
+    {
+      "cycle": "2003-2004",
+      "stem": "AUQ_C",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUQ_C.htm",
+      "url": null,
+      "size_bytes": 44668,
+      "sha256": "1ac0eebc424f5b6c1fff1894fcf5cb18beb09be2d42583056e52f275101f4c41",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 13
+    },
+    {
+      "cycle": "1999-2000",
+      "stem": "AUXAR",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUXAR.htm",
+      "url": null,
+      "size_bytes": 643436,
+      "sha256": "4b71fdf86c84e2a1469764efca8016195d358b4bffd4a0bc332f1bcfd886412e",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 339
+    },
+    {
+      "cycle": "2001-2002",
+      "stem": "AUXAR_B",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUXAR_B.htm",
+      "url": null,
+      "size_bytes": 643417,
+      "sha256": "f0d2914b89bfab3eb485f81efcbdb37bedb19afb5b9cfe5467e1e33a45348301",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 339
+    },
+    {
+      "cycle": "2003-2004",
+      "stem": "AUXAR_C",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUXAR_C.htm",
+      "url": null,
+      "size_bytes": 641521,
+      "sha256": "8c37c9f9de024dfce8fb9e312b97f790befbe8a5cb78e62a0b7097163c7afe15",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 338
+    },
+    {
+      "cycle": "2011-2012",
+      "stem": "AUXAR_G",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/AUXAR_G.htm",
+      "url": null,
+      "size_bytes": 639295,
+      "sha256": "0d13ea52e6599d66719227d6e2a7f4c4528252398b9ea5d2b812302d7bd014be",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 337
+    },
+    {
+      "cycle": "1999-2000",
+      "stem": "BAX",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/BAX.htm",
+      "url": null,
+      "size_bytes": 158360,
+      "sha256": "97406d3f00e556dba514aa6bda3604b541c30fc0d191f3e3e6425565758845e0",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 76
+    },
+    {
+      "cycle": "2001-2002",
+      "stem": "BAX_B",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/BAX_B.htm",
+      "url": null,
+      "size_bytes": 59299,
+      "sha256": "7f454deaa90b8ea3a61d924515f1545ee03f81802b28435e568f259cfc960155",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 23
+    },
+    {
+      "cycle": "2003-2004",
+      "stem": "BAX_C",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/BAX_C.htm",
+      "url": null,
+      "size_bytes": 59750,
+      "sha256": "4d15f05ee313d7f8da7754ec22ee1613c032ba841be317d7cea72270a36836bb",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 22
+    },
+    {
+      "cycle": "1999-2000",
+      "stem": "VIX",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/VIX.htm",
+      "url": null,
+      "size_bytes": 154755,
+      "sha256": "3ae82ef6a0067ce8432de7d70e15d84b78ddb899671393a2cc4b8f55ea061542",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 57
+    },
+    {
+      "cycle": "2001-2002",
+      "stem": "VIX_B",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/VIX_B.htm",
+      "url": null,
+      "size_bytes": 154886,
+      "sha256": "55922dc52c473e55f2dc36cfa49966ab55077ce58344ebfc893bd6a0f692c824",
+      "n_sections_parsed": 6,
+      "n_variables_parsed": 57
+    },
+    {
+      "cycle": "2003-2004",
+      "stem": "VIX_C",
+      "source": "local_cache",
+      "path": "data/raw/nhanes/codebooks/VIX_C.htm",
+      "url": null,
+      "size_bytes": 150250,
+      "sha256": "fa99d95c8c48839b41d5e3e370dd5f6fab6cead388bd639f0b8020340432dda1",
+      "n_sections_parsed": 4,
+      "n_variables_parsed": 57
+    }
+  ],
+  "auq_tinnitus_frequency": {
+    "auq200_codes_identical_across_1999_2004": true,
+    "auq200_canonical_categories": [
+      {
+        "code": "1",
+        "description": "Almost always,"
+      },
+      {
+        "code": "2",
+        "description": "At least once a day,"
+      },
+      {
+        "code": "3",
+        "description": "At least once a week,"
+      },
+      {
+        "code": "4",
+        "description": "At least once a month, or"
+      },
+      {
+        "code": "5",
+        "description": "Less frequently than once a month?"
+      },
+      {
+        "code": "7",
+        "description": "Refused"
+      },
+      {
+        "code": "9",
+        "description": "Don't know"
+      },
+      {
+        "code": ".",
+        "description": "Missing"
+      }
+    ],
+    "per_cycle": {
+      "1999-2000": {
+        "stem": "AUQ",
+        "AUQ190": {
+          "variable": "AUQ190",
+          "title": "AUQ190 - Ears ringing, roaring, buzzing past year",
+          "sas_label": "Ears ringing, roaring, buzzing past year",
+          "english_text": "In the past 12 months, {have you/has SP} ever had ringing, roaring, or buzzing in {your/his/her} ears?",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 120 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Yes",
+              "count": 1161,
+              "cumulative": 1161,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "No",
+              "count": 3696,
+              "cumulative": 4857,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 3,
+              "cumulative": 4860,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 17,
+              "cumulative": 4877,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 4616,
+              "cumulative": 9493,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "AUQ200": {
+          "variable": "AUQ200",
+          "title": "AUQ200 - How often ringing, roaring, buzzing",
+          "sas_label": "How often ringing, roaring, buzzing",
+          "english_text": "How often did this happen? Would you say . . .",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 120 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Almost always,",
+              "count": 263,
+              "cumulative": 263,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "At least once a day,",
+              "count": 106,
+              "cumulative": 369,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "At least once a week,",
+              "count": 170,
+              "cumulative": 539,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "At least once a month, or",
+              "count": 205,
+              "cumulative": 744,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Less frequently than once a month?",
+              "count": 402,
+              "cumulative": 1146,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 0,
+              "cumulative": 1146,
+              "skip_to_item": null
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 15,
+              "cumulative": 1161,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 8332,
+              "cumulative": 9493,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "has_duration_5min_or_bother_item": false
+      },
+      "2001-2002": {
+        "stem": "AUQ_B",
+        "AUQ190": {
+          "variable": "AUQ190",
+          "title": "AUQ190 - Ears ringing, roaring, buzzing past year",
+          "sas_label": "Ears ringing, roaring, buzzing past year",
+          "english_text": "In the past 12 months, {have you/has SP} ever had ringing, roaring, or buzzing in {your/his/her} ears?",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Yes",
+              "count": 1277,
+              "cumulative": 1277,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "No",
+              "count": 4116,
+              "cumulative": 5393,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 2,
+              "cumulative": 5395,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 12,
+              "cumulative": 5407,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 5063,
+              "cumulative": 10470,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "AUQ200": {
+          "variable": "AUQ200",
+          "title": "AUQ200 - How often ringing, roaring, buzzing",
+          "sas_label": "How often ringing, roaring, buzzing",
+          "english_text": "How often did this happen? Would you say . . .",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Almost always,",
+              "count": 284,
+              "cumulative": 284,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "At least once a day,",
+              "count": 87,
+              "cumulative": 371,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "At least once a week,",
+              "count": 189,
+              "cumulative": 560,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "At least once a month, or",
+              "count": 252,
+              "cumulative": 812,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Less frequently than once a month?",
+              "count": 456,
+              "cumulative": 1268,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 0,
+              "cumulative": 1268,
+              "skip_to_item": null
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 9,
+              "cumulative": 1277,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 9193,
+              "cumulative": 10470,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "has_duration_5min_or_bother_item": false
+      },
+      "2003-2004": {
+        "stem": "AUQ_C",
+        "AUQ190": {
+          "variable": "AUQ190",
+          "title": "AUQ190 - Ears ringing, roaring, buzzing past year",
+          "sas_label": "Ears ringing, roaring, buzzing past year",
+          "english_text": "In the past 12 months, {have you/has SP} ever had ringing, roaring, or buzzing in {your/his/her} ears?",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Yes",
+              "count": 1315,
+              "cumulative": 1315,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "No",
+              "count": 3714,
+              "cumulative": 5029,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 0,
+              "cumulative": 5029,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 11,
+              "cumulative": 5040,
+              "skip_to_item": "AUQ210"
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 4605,
+              "cumulative": 9645,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "AUQ200": {
+          "variable": "AUQ200",
+          "title": "AUQ200 - How often ringing, roaring, buzzing",
+          "sas_label": "How often ringing, roaring, buzzing",
+          "english_text": "How often did this happen? Would you say . . .",
+          "english_instructions": null,
+          "target": "Both males and females 20 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Almost always,",
+              "count": 315,
+              "cumulative": 315,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "At least once a day,",
+              "count": 99,
+              "cumulative": 414,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "At least once a week,",
+              "count": 155,
+              "cumulative": 569,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "At least once a month, or",
+              "count": 232,
+              "cumulative": 801,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Less frequently than once a month?",
+              "count": 509,
+              "cumulative": 1310,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "Refused",
+              "count": 0,
+              "cumulative": 1310,
+              "skip_to_item": null
+            },
+            {
+              "code": "9",
+              "description": "Don't know",
+              "count": 5,
+              "cumulative": 1315,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 8330,
+              "cumulative": 9645,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "has_duration_5min_or_bother_item": false
+      }
+    }
+  },
+  "auxar_earscan_protocol": {
+    "summary_stimulus_level_in_htm": "não consta",
+    "per_cycle": {
+      "1999-2000": {
+        "stem": "AUXAR",
+        "stimulus_level_db": "não consta",
+        "stimulus_frequencies_hz": [
+          1000,
+          2000
+        ],
+        "stimulation_duration_ms": 500,
+        "post_stimulation_duration_ms": 1000,
+        "total_window_seconds": 1.5,
+        "n_points_per_curve": 84,
+        "instrument_clause_in_htm": "the same Interacoustics Model AD226 audiometer used for pure tone audiometry testing",
+        "procedures_manual_url": null,
+        "protocol_excerpt": "All acoustic reflex tests were performed by a trained examiner on examinees in a dedicated, sound-isolating room in the mobile examination center (MEC). Acoustic reflex testing is performed by putting a small probe into the ear that presents standardized sound stimului at 1000 Hz and 2000 Hz. The resulting changes in the compliance of the ear drum are then measured over a period of 1.5 seconds. Please see the NHANES Audiometry/Tympanometry Procedures Manual for further information on Acoustic Reflex testing.",
+        "analytic_notes_excerpt": "The acoustic reflex data files (AUXAR) represent the raw data as it was collected. They contain a total of 336 variables, 168 representing the right and left ear acoustic reflex curve data at 1000 Hz (the variables AUXRR101 to AUXRR184; and AUXLR101 to AUXLR184, respectively) and 168 variables representing the right and left ear acoustic reflex curve data at 2000 Hz (the variables AUXRR201 to AUXRR284; and AUXLR201 to AUXLR284, respectively). The data points represent equivalent volume (compliance) data in daPa during the ½ second (500 msec) period of stimulation and in the one second period post-simulation. As with the tympanometry raw data, the responses for each individual ear are contained in a series of 84 equally spaced sequential measurement variables, in this case the intervals between variables representing sequential time units. The average time between each numbered variable is 1500 msec/84 or 17.9 msec. In each series of variables, the 1st variable (AUXRR101, AUXLR101, AUXRR201 or AUXLR201) represents the start point for testing, and the successive variables in turn represent the entire 1.5 second testing interval. These data can be used to create acoustic reflex graphs at each frequency in each ear. The acoustic reflex examination was administered to a ½ sample of participants in the MEC. Therefore, the Audiometry sub-sample weights should be used for data analysis. For more information on the use of sample weights in current NHANES data analysis and for combining weighted data across multiple NHANES survey years, please refer to the current NHANES Analytic and Reporting Guidelines. Acoustic reflex data analysis is a complex procedure and requires a thorough knowledge of the specialty content area for valid results to be obtained. If an analyst does not have professional experience in this area, it is recommended that audiologic consultation be obtained to help formulate and review the results of the analysis."
+      },
+      "2001-2002": {
+        "stem": "AUXAR_B",
+        "stimulus_level_db": "não consta",
+        "stimulus_frequencies_hz": [
+          1000,
+          2000
+        ],
+        "stimulation_duration_ms": 500,
+        "post_stimulation_duration_ms": 1000,
+        "total_window_seconds": 1.5,
+        "n_points_per_curve": 84,
+        "instrument_clause_in_htm": "the same Interacoustics Model AD226 audiometer used for pure tone audiometry testing",
+        "procedures_manual_url": null,
+        "protocol_excerpt": "All acoustic reflex tests were performed by a trained examiner on examinees in a dedicated, sound-isolating room in the mobile examination center (MEC). Acoustic reflex testing is performed by putting a small probe into the ear that presents standardized sound stimului at 1000 Hz and 2000 Hz. The resulting changes in the compliance of the ear drum are then measured over a period of 1.5 seconds. Please see the NHANES Audiometry/Tympanometry Procedures Manual for further information on Acoustic Reflex testing.",
+        "analytic_notes_excerpt": "The acoustic reflex data files (AUXAR_B) represent the raw data as it was collected. They contain a total of 336 variables, 168 representing the right and left ear acoustic reflex curve data at 1000 Hz (the variables AUXRR101 to AUXRR184; and AUXLR101 to AUXLR184, respectively) and 168 variables representing the right and left ear acoustic reflex curve data at 2000 Hz (the variables AUXRR201 to AUXRR284; and AUXLR201 to AUXLR284, respectively). The data points represent equivalent volume (compliance) data in daPa during the ½ second (500 msec) period of stimulation and in the one second period post-simulation. As with the tympanometry raw data, the responses for each individual ear are contained in a series of 84 equally spaced sequential measurement variables, in this case the intervals between variables representing sequential time units. The average time between each numbered variable is 1500 msec/84 or 17.9 msec. In each series of variables, the 1st variable (AUXRR101, AUXLR101, AUXRR201 or AUXLR201) represents the start point for testing, and the successive variables in turn represent the entire 1.5 second testing interval. These data can be used to create acoustic reflex graphs at each frequency in each ear. The acoustic reflex examination was administered to a ½ sample of participants in the MEC. Therefore, the Audiometry sub-sample weights should be used for data analysis. For more information on the use of sample weights in current NHANES data analysis and for combining weighted data across multiple NHANES survey years, please refer to the current NHANES Analytic and Reporting Guidelines. Acoustic reflex data analysis is a complex procedure and requires a thorough knowledge of the specialty content area for valid results to be obtained. If an analyst does not have professional experience in this area, it is recommended that audiologic consultation be obtained to help formulate and review the results of the analysis."
+      },
+      "2003-2004": {
+        "stem": "AUXAR_C",
+        "stimulus_level_db": "não consta",
+        "stimulus_frequencies_hz": [
+          1000,
+          2000
+        ],
+        "stimulation_duration_ms": 500,
+        "post_stimulation_duration_ms": 1000,
+        "total_window_seconds": 1.5,
+        "n_points_per_curve": 84,
+        "instrument_clause_in_htm": "the same Interacoustics Model AD226 audiometer used for pure tone audiometry testing",
+        "procedures_manual_url": null,
+        "protocol_excerpt": "All acoustic reflex tests were performed by a trained examiner on examinees in a dedicated, sound-isolating room in the mobile examination center (MEC). Acoustic reflex testing is performed by putting a small probe into the ear that presents standardized sound stimului at 1000 Hz and 2000 Hz. The resulting changes in the compliance of the ear drum are then measured over a period of 1.5 seconds. Please see the NHANES Audiometry/Tympanometry Procedures Manual for further information on Acoustic Reflex testing.",
+        "analytic_notes_excerpt": "The acoustic reflex data files (AUXAR_C) represent the raw data as it was collected. They contain a total of 336 variables, 168 representing the right and left ear acoustic reflex curve data at 1000 Hz (the variables AUXRR101 to AUXRR184; and AUXLR101 to AUXLR184, respectively) and 168 variables representing the right and left ear acoustic reflex curve data at 2000 Hz (the variables AUXRR201 to AUXRR284; and AUXLR201 to AUXLR284, respectively). The data points represent equivalent volume (compliance) data in daPa during the ½ second (500 msec) period of stimulation and in the one second period post-simulation. As with the tympanometry raw data, the responses for each individual ear are contained in a series of 84 equally spaced sequential measurement variables, in this case the intervals between variables representing sequential time units. The average time between each numbered variable is 1500 msec/84 or 17.9 msec. In each series of variables, the 1st variable (AUXRR101, AUXLR101, AUXRR201 or AUXLR201) represents the start point for testing, and the successive variables in turn represent the entire 1.5 second testing interval. These data can be used to create acoustic reflex graphs at each frequency in each ear. The acoustic reflex examination was administered to a ½ sample of participants in the MEC. Therefore, the Audiometry sub-sample weights should be used for data analysis. For more information on the use of sample weights in current NHANES data analysis and for combining weighted data across multiple NHANES survey years, please refer to the current NHANES Analytic and Reporting Guidelines. Acoustic reflex data analysis is a complex procedure and requires a thorough knowledge of the specialty content area for valid results to be obtained. If an analyst does not have professional experience in this area, it is recommended that audiologic consultation be obtained to help formulate and review the results of the analysis."
+      },
+      "2011-2012": {
+        "stem": "AUXAR_G",
+        "stimulus_level_db": "não consta",
+        "stimulus_frequencies_hz": [
+          1000,
+          2000
+        ],
+        "stimulation_duration_ms": 500,
+        "post_stimulation_duration_ms": 1000,
+        "total_window_seconds": 1.5,
+        "n_points_per_curve": 84,
+        "instrument_clause_in_htm": "the same Micro Audiometrics Earscan™ Acoustic Impedance Tympanometer used for tympanometry testing",
+        "procedures_manual_url": null,
+        "protocol_excerpt": "All acoustic reflex tests were performed by a trained examiner on participants in a dedicated, sound-isolating room in the mobile examination center (MEC). Acoustic reflex testing is performed by putting a small probe into the ear that presents standardized sound stimuli at 1000 Hz and 2000 Hz. The resulting changes in the compliance of the ear drum are then measured over a period of 1.5 seconds. Please see the NHANES Audiometry/Tympanometry Procedures Manual for further information on Acoustic Reflex testing.",
+        "analytic_notes_excerpt": "The acoustic reflex data files (AUXAR_G) represent the raw data as it was collected. They contain a total of 336 variables, 168 representing the right and left ear acoustic reflex curve data at 1000 Hz (the variables AUXRR101 to AUXRR184; and AUXLR101 to AUXLR184, respectively) and 168 variables representing the right and left ear acoustic reflex curve data at 2000 Hz (the variables AUXRR201 to AUXRR284; and AUXLR201 to AUXLR284, respectively). The data points represent equivalent volume (compliance) data in dekapascal during the ½ second (500 msec) period of stimulation and in the one second period post-simulation. As with the tympanometry raw data, the responses for each individual ear are contained in a series of 84 equally spaced sequential measurement variables, in this case the intervals between variables representing sequential time units. The average time between each numbered variable is 1500 msec/84 or 17.9 msec. In each series of variables, the 1st variable (AUXRR101, AUXLR101, AUXRR201 or AUXLR201) represents the start point for testing, and the successive variables in turn represent the entire 1.5 second testing interval. These data can be used to create acoustic reflex graphs at each frequency in each ear. The acoustic reflex examination for 2011-2012 was administered to a full sample of participants in the MEC. Therefore, the NHANES MEC examination weights should be used for data analysis. For more information on the use of sample weights in current NHANES data analysis and for combining weighted data across multiple NHANES survey years please refer to the NHANES Analytic Guidelines and the on-line NHANES Tutorial for further details on the use of sample weights and other analytic issues. Acoustic reflex data analysis is a complex procedure and requires a thorough knowledge of the specialty content area for valid results to be obtained. If an analyst does not have professional experience in this area, it is recommended that audiologist consultation be obtained to help formulate and review the results of the analysis."
+      }
+    }
+  },
+  "bax_exam_status_comments": {
+    "baaexcmt_consolidated_codes": {
+      "1": {
+        "description": "Safety exclusion",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 84,
+          "2001-2002": 302,
+          "2003-2004": 279
+        }
+      },
+      "2": {
+        "description": "SP refusal",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 19,
+          "2001-2002": 96,
+          "2003-2004": 145
+        }
+      },
+      "3": {
+        "description": "No time",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 1,
+          "2001-2002": 11,
+          "2003-2004": 6
+        }
+      },
+      "4": {
+        "description": "Physical limitation",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 14,
+          "2001-2002": 52,
+          "2003-2004": 66
+        }
+      },
+      "5": {
+        "description": "Communication problem",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 2,
+          "2001-2002": 8,
+          "2003-2004": 3
+        }
+      },
+      "7": {
+        "description": "SP ill/emergency",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 2,
+          "2001-2002": 20,
+          "2003-2004": 8
+        }
+      },
+      "56": {
+        "description": "Came late/left early",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 31,
+          "2001-2002": 124
+        }
+      },
+      "99": {
+        "description": "Other, specify",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 11,
+          "2001-2002": 73,
+          "2003-2004": 137
+        }
+      },
+      ".": {
+        "description": "Missing",
+        "cycles_present": [
+          "1999-2000",
+          "2001-2002",
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "1999-2000": 847,
+          "2001-2002": 2498,
+          "2003-2004": 2429
+        }
+      },
+      "72": {
+        "description": "Error (technician/software/supply)",
+        "cycles_present": [
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "2003-2004": 1
+        }
+      },
+      "84": {
+        "description": "SP With Child",
+        "cycles_present": [
+          "2003-2004"
+        ],
+        "counts_by_cycle": {
+          "2003-2004": 12
+        }
+      }
+    },
+    "per_cycle": {
+      "1999-2000": {
+        "stem": "BAX",
+        "BAAEXSTS": {
+          "variable": "BAAEXSTS",
+          "title": "BAAEXSTS - Status of a MEC exam",
+          "sas_label": "Status of a MEC exam",
+          "english_text": "Status of a MEC exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 69 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Complete",
+              "count": 847,
+              "cumulative": 847,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "Partial",
+              "count": 18,
+              "cumulative": 865,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "Not done",
+              "count": 146,
+              "cumulative": 1011,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 0,
+              "cumulative": 1011,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "BAAEXCMT": {
+          "variable": "BAAEXCMT",
+          "title": "BAAEXCMT - Comment code for an exam",
+          "sas_label": "Comment code for an exam",
+          "english_text": "Comment code for an exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 69 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Safety exclusion",
+              "count": 84,
+              "cumulative": 84,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "SP refusal",
+              "count": 19,
+              "cumulative": 103,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "No time",
+              "count": 1,
+              "cumulative": 104,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "Physical limitation",
+              "count": 14,
+              "cumulative": 118,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Communication problem",
+              "count": 2,
+              "cumulative": 120,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "SP ill/emergency",
+              "count": 2,
+              "cumulative": 122,
+              "skip_to_item": null
+            },
+            {
+              "code": "56",
+              "description": "Came late/left early",
+              "count": 31,
+              "cumulative": 153,
+              "skip_to_item": null
+            },
+            {
+              "code": "99",
+              "description": "Other, specify",
+              "count": 11,
+              "cumulative": 164,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 847,
+              "cumulative": 1011,
+              "skip_to_item": null
+            }
+          ]
+        }
+      },
+      "2001-2002": {
+        "stem": "BAX_B",
+        "BAAEXSTS": {
+          "variable": "BAAEXSTS",
+          "title": "BAAEXSTS - Status of a MEC exam",
+          "sas_label": "Status of a MEC exam",
+          "english_text": "Status of a MEC exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Complete",
+              "count": 2498,
+              "cumulative": 2498,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "Partial",
+              "count": 85,
+              "cumulative": 2583,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "Not done",
+              "count": 601,
+              "cumulative": 3184,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 0,
+              "cumulative": 3184,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "BAAEXCMT": {
+          "variable": "BAAEXCMT",
+          "title": "BAAEXCMT - Comment code for an exam",
+          "sas_label": "Comment code for an exam",
+          "english_text": "Comment code for an exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Safety exclusion",
+              "count": 302,
+              "cumulative": 302,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "SP refusal",
+              "count": 96,
+              "cumulative": 398,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "No time",
+              "count": 11,
+              "cumulative": 409,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "Physical limitation",
+              "count": 52,
+              "cumulative": 461,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Communication problem",
+              "count": 8,
+              "cumulative": 469,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "SP ill/emergency",
+              "count": 20,
+              "cumulative": 489,
+              "skip_to_item": null
+            },
+            {
+              "code": "56",
+              "description": "Came late/left early",
+              "count": 124,
+              "cumulative": 613,
+              "skip_to_item": null
+            },
+            {
+              "code": "99",
+              "description": "Other, specify",
+              "count": 73,
+              "cumulative": 686,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 2498,
+              "cumulative": 3184,
+              "skip_to_item": null
+            }
+          ]
+        }
+      },
+      "2003-2004": {
+        "stem": "BAX_C",
+        "BAAEXSTS": {
+          "variable": "BAAEXSTS",
+          "title": "BAAEXSTS - Status of a MEC exam",
+          "sas_label": "Status of a MEC exam",
+          "english_text": "Status of a MEC exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Complete",
+              "count": 2429,
+              "cumulative": 2429,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "Partial",
+              "count": 74,
+              "cumulative": 2503,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "Not done",
+              "count": 583,
+              "cumulative": 3086,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 0,
+              "cumulative": 3086,
+              "skip_to_item": null
+            }
+          ]
+        },
+        "BAAEXCMT": {
+          "variable": "BAAEXCMT",
+          "title": "BAAEXCMT - Comment code for an exam",
+          "sas_label": "Comment code for an exam",
+          "english_text": "Comment code for an exam",
+          "english_instructions": null,
+          "target": "Both males and females 40 YEARS - 150 YEARS",
+          "categories": [
+            {
+              "code": "1",
+              "description": "Safety exclusion",
+              "count": 279,
+              "cumulative": 279,
+              "skip_to_item": null
+            },
+            {
+              "code": "2",
+              "description": "SP refusal",
+              "count": 145,
+              "cumulative": 424,
+              "skip_to_item": null
+            },
+            {
+              "code": "3",
+              "description": "No time",
+              "count": 6,
+              "cumulative": 430,
+              "skip_to_item": null
+            },
+            {
+              "code": "4",
+              "description": "Physical limitation",
+              "count": 66,
+              "cumulative": 496,
+              "skip_to_item": null
+            },
+            {
+              "code": "5",
+              "description": "Communication problem",
+              "count": 3,
+              "cumulative": 499,
+              "skip_to_item": null
+            },
+            {
+              "code": "7",
+              "description": "SP ill/emergency",
+              "count": 8,
+              "cumulative": 507,
+              "skip_to_item": null
+            },
+            {
+              "code": "72",
+              "description": "Error (technician/software/supply)",
+              "count": 1,
+              "cumulative": 508,
+              "skip_to_item": null
+            },
+            {
+              "code": "84",
+              "description": "SP With Child",
+              "count": 12,
+              "cumulative": 520,
+              "skip_to_item": null
+            },
+            {
+              "code": "99",
+              "description": "Other, specify",
+              "count": 137,
+              "cumulative": 657,
+              "skip_to_item": null
+            },
+            {
+              "code": ".",
+              "description": "Missing",
+              "count": 2429,
+              "cumulative": 3086,
+              "skip_to_item": null
+            }
+          ]
+        }
+      }
+    }
+  },
+  "vix_visual_acuity_encoding": {
+    "snellen_encoding_rule": "Código inteiro igual ao denominador de Snellen (20/X -> código X); logMAR = log10(X / 20).",
+    "presenting_valid_denominators": [
+      20,
+      25,
+      30,
+      40,
+      50,
+      60,
+      80,
+      200
+    ],
+    "objective_refraction_valid_denominators": [
+      25,
+      30,
+      40,
+      50,
+      60,
+      80,
+      200
+    ],
+    "special_codes": {
+      "666": "20/200+",
+      "888": "Could not obtain"
+    },
+    "objective_refraction_skip_rule": "VIDROVA e VIDLOVA só foram medidos em olhos com acuidade apresentada (VIDRVA/VIDLVA) igual a 20/30 ou pior (códigos >= 30); olhos com 20/20 ou 20/25 ficam Missing (.) por protocolo.",
+    "per_cycle": {
+      "1999-2000": {
+        "stem": "VIX",
+        "variables": {
+          "VIDRVA": {
+            "variable": "VIDRVA",
+            "title": "VIDRVA - Right visual acuity, presenting",
+            "sas_label": "Right visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the right eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 2928,
+                "cumulative": 2928,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1552,
+                "cumulative": 4480,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 533,
+                "cumulative": 5013,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 294,
+                "cumulative": 5307,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 601,
+                "cumulative": 5908,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 96,
+                "cumulative": 6004,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 103,
+                "cumulative": 6107,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 140,
+                "cumulative": 6247,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 109,
+                "cumulative": 6356,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 6356,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 402,
+                "cumulative": 6758,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLVA": {
+            "variable": "VIDLVA",
+            "title": "VIDLVA - Left visual acuity, presenting",
+            "sas_label": "Left visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the left eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 2952,
+                "cumulative": 2952,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1525,
+                "cumulative": 4477,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 553,
+                "cumulative": 5030,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 294,
+                "cumulative": 5324,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 611,
+                "cumulative": 5935,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 82,
+                "cumulative": 6017,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 106,
+                "cumulative": 6123,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 127,
+                "cumulative": 6250,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 112,
+                "cumulative": 6362,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 6362,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 396,
+                "cumulative": 6758,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDROVA": {
+            "variable": "VIDROVA",
+            "title": "VIDROVA - Right visual acuity, w/ obj. refraction",
+            "sas_label": "Right visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the right eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1315,
+                "cumulative": 1315,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 93,
+                "cumulative": 1408,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 76,
+                "cumulative": 1484,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 187,
+                "cumulative": 1671,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 14,
+                "cumulative": 1685,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 21,
+                "cumulative": 1706,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 47,
+                "cumulative": 1753,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 43,
+                "cumulative": 1796,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 1796,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 4962,
+                "cumulative": 6758,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLOVA": {
+            "variable": "VIDLOVA",
+            "title": "VIDLOVA - Left visual acuity, w/ obj. refraction",
+            "sas_label": "Left visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the left eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1317,
+                "cumulative": 1317,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 108,
+                "cumulative": 1425,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 77,
+                "cumulative": 1502,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 195,
+                "cumulative": 1697,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 14,
+                "cumulative": 1711,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 24,
+                "cumulative": 1735,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 45,
+                "cumulative": 1780,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 34,
+                "cumulative": 1814,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 1814,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 4944,
+                "cumulative": 6758,
+                "skip_to_item": null
+              }
+            ]
+          }
+        }
+      },
+      "2001-2002": {
+        "stem": "VIX_B",
+        "variables": {
+          "VIDRVA": {
+            "variable": "VIDRVA",
+            "title": "VIDRVA - Right visual acuity, presenting",
+            "sas_label": "Right visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the right eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 3241,
+                "cumulative": 3241,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1717,
+                "cumulative": 4958,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 585,
+                "cumulative": 5543,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 348,
+                "cumulative": 5891,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 646,
+                "cumulative": 6537,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 88,
+                "cumulative": 6625,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 93,
+                "cumulative": 6718,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 168,
+                "cumulative": 6886,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 96,
+                "cumulative": 6982,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 6982,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 463,
+                "cumulative": 7445,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLVA": {
+            "variable": "VIDLVA",
+            "title": "VIDLVA - Left visual acuity, presenting",
+            "sas_label": "Left visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the left eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 3322,
+                "cumulative": 3322,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1598,
+                "cumulative": 4920,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 644,
+                "cumulative": 5564,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 278,
+                "cumulative": 5842,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 719,
+                "cumulative": 6561,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 79,
+                "cumulative": 6640,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 88,
+                "cumulative": 6728,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 164,
+                "cumulative": 6892,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 90,
+                "cumulative": 6982,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 6982,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 463,
+                "cumulative": 7445,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDROVA": {
+            "variable": "VIDROVA",
+            "title": "VIDROVA - Right visual acuity, w/ obj. refraction",
+            "sas_label": "Right visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the right eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1429,
+                "cumulative": 1429,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 95,
+                "cumulative": 1524,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 108,
+                "cumulative": 1632,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 195,
+                "cumulative": 1827,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 14,
+                "cumulative": 1841,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 25,
+                "cumulative": 1866,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 48,
+                "cumulative": 1914,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 41,
+                "cumulative": 1955,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 1955,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 5490,
+                "cumulative": 7445,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLOVA": {
+            "variable": "VIDLOVA",
+            "title": "VIDLOVA - Left visual acuity, w/ obj. refraction",
+            "sas_label": "Left visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the left eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1475,
+                "cumulative": 1475,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 89,
+                "cumulative": 1564,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 90,
+                "cumulative": 1654,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 198,
+                "cumulative": 1852,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 15,
+                "cumulative": 1867,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 25,
+                "cumulative": 1892,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 47,
+                "cumulative": 1939,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 44,
+                "cumulative": 1983,
+                "skip_to_item": null
+              },
+              {
+                "code": "888",
+                "description": "Could not obtain",
+                "count": 0,
+                "cumulative": 1983,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 5462,
+                "cumulative": 7445,
+                "skip_to_item": null
+              }
+            ]
+          }
+        }
+      },
+      "2003-2004": {
+        "stem": "VIX_C",
+        "variables": {
+          "VIDRVA": {
+            "variable": "VIDRVA",
+            "title": "VIDRVA - Right visual acuity, presenting",
+            "sas_label": "Right visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the right eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 2776,
+                "cumulative": 2776,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1638,
+                "cumulative": 4414,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 613,
+                "cumulative": 5027,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 320,
+                "cumulative": 5347,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 666,
+                "cumulative": 6013,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 104,
+                "cumulative": 6117,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 85,
+                "cumulative": 6202,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 161,
+                "cumulative": 6363,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 85,
+                "cumulative": 6448,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 542,
+                "cumulative": 6990,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLVA": {
+            "variable": "VIDLVA",
+            "title": "VIDLVA - Left visual acuity, presenting",
+            "sas_label": "Left visual acuity, presenting",
+            "english_text": "The presenting visual acuity of the left eye with usual correction.",
+            "english_instructions": "Usual correction could be: eyeglasses, contacts, eyeglasses and contacts, or no correction depending on what the SP wore (or brought with them) to view distant objects on the day they visited the MEC (see VIQ230 and VIQ240).",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "20",
+                "description": "20/20",
+                "count": 2818,
+                "cumulative": 2818,
+                "skip_to_item": null
+              },
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1566,
+                "cumulative": 4384,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 643,
+                "cumulative": 5027,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 312,
+                "cumulative": 5339,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 685,
+                "cumulative": 6024,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 78,
+                "cumulative": 6102,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 81,
+                "cumulative": 6183,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 160,
+                "cumulative": 6343,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 104,
+                "cumulative": 6447,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 543,
+                "cumulative": 6990,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDROVA": {
+            "variable": "VIDROVA",
+            "title": "VIDROVA - Right visual acuity, w/ obj. refraction",
+            "sas_label": "Right visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the right eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1356,
+                "cumulative": 1356,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 122,
+                "cumulative": 1478,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 120,
+                "cumulative": 1598,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 221,
+                "cumulative": 1819,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 15,
+                "cumulative": 1834,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 28,
+                "cumulative": 1862,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 42,
+                "cumulative": 1904,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 31,
+                "cumulative": 1935,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 5055,
+                "cumulative": 6990,
+                "skip_to_item": null
+              }
+            ]
+          },
+          "VIDLOVA": {
+            "variable": "VIDLOVA",
+            "title": "VIDLOVA - Left visual acuity, w/ obj. refraction",
+            "sas_label": "Left visual acuity, w/ obj. refraction",
+            "english_text": "The visual acuity with objective refraction of the left eye.",
+            "english_instructions": "This is the visual acuity reported by the SP after the autorefractor inserted what it deemed, based on the objective refraction, to be the most appropriate lens (if any) to allow the eye to see 20/25 or better. This test was only performed on eyes whose presenting visual acuity was 20/30 or worse.",
+            "target": "Both males and females 12 YEARS - 150 YEARS",
+            "categories": [
+              {
+                "code": "25",
+                "description": "20/25",
+                "count": 1396,
+                "cumulative": 1396,
+                "skip_to_item": null
+              },
+              {
+                "code": "30",
+                "description": "20/30",
+                "count": 142,
+                "cumulative": 1538,
+                "skip_to_item": null
+              },
+              {
+                "code": "40",
+                "description": "20/40",
+                "count": 95,
+                "cumulative": 1633,
+                "skip_to_item": null
+              },
+              {
+                "code": "50",
+                "description": "20/50",
+                "count": 197,
+                "cumulative": 1830,
+                "skip_to_item": null
+              },
+              {
+                "code": "60",
+                "description": "20/60",
+                "count": 21,
+                "cumulative": 1851,
+                "skip_to_item": null
+              },
+              {
+                "code": "80",
+                "description": "20/80",
+                "count": 38,
+                "cumulative": 1889,
+                "skip_to_item": null
+              },
+              {
+                "code": "200",
+                "description": "20/200",
+                "count": 39,
+                "cumulative": 1928,
+                "skip_to_item": null
+              },
+              {
+                "code": "666",
+                "description": "20/200+",
+                "count": 51,
+                "cumulative": 1979,
+                "skip_to_item": null
+              },
+              {
+                "code": ".",
+                "description": "Missing",
+                "count": 5011,
+                "cumulative": 6990,
+                "skip_to_item": null
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "lib_versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1"
+  },
+  "status": "EXECUTED"
+}
