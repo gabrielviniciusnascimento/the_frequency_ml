@@ -1,0 +1,196 @@
+
+
+preregistration_version: "1.0.0"
+project: "the_frequency_ml"
+status: "READY_TO_FREEZE_BEFORE_REGIME2_OUTCOME_JOINS"
+structural_audit_artifacts:
+  viability_matrix: "outputs/json/37_viability_matrix.json"
+  codebook_checks: "outputs/json/38_codebook_checks.json"
+  frozen_shape_space: "outputs/json/frozen_shape_pipeline.json"
+
+epistemic_rules_and_prohibitions:
+  prohibited_claims_and_methods:
+    - "Clusterização discreta ou rotulagem de subtipos nomeados (ex.: coclear, assimétrico, neural)"
+    - "Linguagem causal a partir de associações transversais ou números de 'custo humano' acoplados ao simulador"
+    - "Expressões de certeza diagnóstica ('fica provado', 'prova fisiológica') a partir de filtros de timpanometria/WBR"
+    - "Reivindicar como novidade efeitos principais já publicados no NHANES: HF-PTA vs queixa percebida (DOI 10.1055/a-2095-7002), PTA vs PHQ-9 (Li et al. 2014; Scinicariello et al. 2019; Lin & Bhatt 2020), PTA vs DSST (Lin 2011), PTA vs Romberg C4 (Agrawal et al. 2009), PTA vs diabetes (Bainbridge et al. 2008), frequência vs mortalidade bruta (Feng et al. 2022) ou prevalência dicotômica de assimetria (Suen et al. 2021)"
+    - "Uso de Fator de Bayes marginal integrado sobre pseudo-verossimilhança ponderada por pesos amostrais"
+    - "Impor fronteira numérica em 'L' de portarias administrativas sobre a Lei 14.126/2021 como se estivesse no texto legal (ADI 6850/STF)"
+  canonical_audiogram_parametrization:
+    module: "scripts/_shape_space.py + outputs/json/frozen_shape_pipeline.json"
+    continuous_coordinates:
+      level_mean_14: "Média aritmética dos limiares válidos (500-8000 Hz, R e L)"
+      shape_pcs: "Projeção transform() nos 10 eixos PCA congelados (sem novo fit)"
+      abs_z_contrast: "|mean(R) - mean(L)| / SD_ref (magnitude contínua sem sinal; sem hipótese direcional de lado)"
+      L_lei_better: "min(mean_R(500,1000,2000,3000), mean_L(500,1000,2000,3000))"
+      A_lei_abs: "|mean_R(500,1000,2000,3000) - mean_L(500,1000,2000,3000)|"
+      H_excess_same_ear: "Para a orelha com maior mean(4000,6000,8000): mean_e(4000,6000,8000) - mean_e(500,1000,2000,3000), calculado DENTRO DA MESMA orelha e"
+      H_definition_note: >
+        Substitui H_excess_worse = max_e HF - min_e PTA_lei (misturava orelhas: em 36,5% dos adultos 2011-16 a pior
+        orelha nos agudos não é a pior na faixa da lei; corr(H_excess_worse, A_lei_abs) = 0,49). Com H dentro da mesma
+        orelha, corr(H, A_lei_abs) = 0,07 (verificação numérica nov/2026).
+  mandatory_design_and_confounding_guards:
+    age_sex_adjustment: "restricted_cubic_spline(RIDAGEYR, knots_quantiles=[0.05, 0.35, 0.65, 0.95]) * RIAGENDR"
+    variance_estimation: "Linearização em série de Taylor via SDMVSTRA e SDMVPSU com estimação de subdomínio (quantil t com design_df = n_psu - n_strata)"
+    unmeasured_ehf_limit: "NHANES não mede EHF (>8 kHz; Motlagh Zadeh et al. 2019); o piso residual de ~20% de queixa em audiogramas limpos é declarado como resíduo composto não-identificável (EHF + via neural + estilo de resposta)"
+
+contamination_inventory:
+  already_inspected_in_repo_or_prior_sessions:
+    - component: "AUX (limiares 500-8000 Hz, reteste 1 kHz) nos 5 ciclos 20-69"
+      where: "scripts 01..36, audit_01..09 (N_raw=14824, N_complete10=13433, N_any25=7695)"
+    - component: "AUQ2011-2016 (AUQ054, AUQ100 fala no ruído, AUQ191 zumbido)"
+      where: "scripts 16, 23, 34 e análise descritiva pós-hoc de orientação (N_AUQ100=9073)"
+    - component: "DEMO (RIDAGEYR, RIAGENDR, RIDRETH1, INDFMPIR, WTMEC2YR)"
+      where: "scripts 02, 14, 15, 33"
+    - component: "MGX (2011-2014) e VIX equivalente esférico (1999-2002)"
+      where: "grip_00..04, vis_00..04, audit_01..09, 36_triplet_overlap_audit"
+    - component: "OHHR (N=581 / 574)"
+      where: "scripts 25 e audit_07"
+    - component: "AUX x AUQ100 (2011-2016) — análises exploratórias de nov/2026"
+      where: >
+        (1) Descritiva ponderada: entre não-PcD pela regra bilateral, queixa no ruído sobe de ~21% (agudos <20 dB)
+        para ~47-49% (agudos >=40 dB) dentro de cada faixa etária; assimetria 27% -> 46%; piso ~20% com audiograma limpo.
+        (2) Ajuste exploratório do modelo de canais (Hill, pseudo-MLE ponderado): gamma ~0,31 (estável entre ciclos e
+        sexos: 0,30-0,39); massa >3 kHz ~0,28 porém INSTÁVEL entre subgrupos (0,15-0,65). Controle positivo: estimador
+        recupera gamma=0 e gamma=0,5, mas colapsa gamma=1/6 para ~0 (sem resolução na faixa baixa). Controle negativo:
+        coeficiente ~0 com desfecho embaralhado. (3) Conformal binária com p_hat real: a 95% só 0,6% recebem {1}.
+      consequence: "Todos os achados acima são pós-hoc; confirmação só em P_AUX/P_AUQ (70+) ou coorte externa (KNHANES)."
+  structural_counts_only_no_outcome_join:
+    - component: "Todos os 20 blocos de 37_viability_matrix.py e codebooks de 38_codebook_checks.py"
+      guarantee: "Apenas contagens marginais de cobertura por SEQN, códigos de status/comentário e pesos"
+
+regimes:
+  regime_1_posthoc_and_calibration:
+    description: "Sem cofre interno no NHANES 20-69; estimação completa transparente com variância de Taylor e validação externa."
+    analyses:
+      - id: "R1_CONDUCTIVE_SENSITIVITY_V6"
+        purpose: "Testar se o excesso da cauda |z|>=3 do Paper v6 é estatisticamente consistente com origem coclear/retrococlear após excluir alterações mecânicas observáveis de orelha média"
+        cohorts:
+          tym_5cycles: {cycles: ["1999-2000", "2001-2002", "2003-2004", "2011-2012", "2015-2016"], n_complete10: 13267, n_any25: 7568, filter_ref: "McManus & Humes 2023 (DOI 10.1044/2023_AJA-23-00092)"}
+          wbr_2015_2016: {cycles: ["2015-2016"], n_complete10: 4235, n_any25: 2434, filter_ref: "Humes 2023 percentis 10-90 (DOI 10.1044/2023_JSLHR-23-00313)"}
+
+      - id: "R1_ISOPREVALENCE_AND_BAYESIAN_CHANNEL_MODEL"
+        cycles: ["2011-2012", "2015-2016"]
+        n_valid_raw: 9073
+        design_df: 32
+        weight_rule: "WTMEC2YR * (1/2)"
+        models:
+          - "Superfície frequentista de isoprevalência padronizada por idade/sexo/ciclo ancorada em (L=41 dB, H=0, A=0)"
+          - "Modelo de canais com função de ligação MONOTÔNICA (potência ou spline monotônica de grau baixo, escala fixada), pesos por BLOCO no simplex (0.5-1k, 2-3k, 4-8k) com prior w ~ Dirichlet(kappa * alpha_SII_Voronoi) e peso da pior orelha gamma in [0, 1] definido BANDA A BANDA: d_k = (1-gamma)*f(min_e T_ek) + gamma*f(max_e T_ek)"
+          - "Hill (K, S) descartado: K não identificável em 2011-16 (IC95 bootstrap PSU de K: 42 a 2.299 dB; degenerescência K x escala do coeficiente)"
+          - "Conflito prior-dado contra a prior degenerada da Lei 14.768 via PPC ponderado por PSU, massa posterior de (w_4k+w_6k+w_8k, gamma) e validação cruzada por blocos de estrato-PSU"
+          - "Triagem conformal ponderada por PSU (ordinal em AUQ100 + controle conformal de FNR) que propõe critério de encaminhamento ao § 2º da Lei 14.768"
+        external_holdout: "P_AUX + P_AUQ (2017-Mar2020, AUQ101, 70+ anos, WTMECPRP)"
+        mandatory_model_controls_before_reporting_any_parameter:
+          positive_control: "Plantar desfecho sintético com (w, gamma) conhecidos sobre o X real: gamma em {0, 1/6, 1/3, 1/2} x pesos {lei, SII}; >= 20 réplicas por célula; reportar viés e cobertura. Intervalos de gamma calibrados por simulação, não por bootstrap ingênuo."
+          negative_control: "Desfecho embaralhado dentro de ciclo x sexo x faixa etária (>= 20 réplicas): o coeficiente do audiograma deve cair para ~0; nenhum peso por banda/bloco é reportado se o modelo real não superar a distribuição nula do coeficiente."
+          specificity: "Reestimar por ciclo (2011-12 vs 2015-16) e por sexo; parâmetro instável entre subgrupos não é reportado como estimativa populacional."
+          exploratory_result_already_seen: "Ver contamination_inventory (ajuste exploratório do modelo de canais em nov/2026)."
+
+      - id: "R1_TINNITUS_CONSTRUCT_HARMONIZATION"
+        note: "AUQ190 (1999-2004: qualquer episódio em 12m, ~23,9%) != AUQ191 (2011-2016: incomodado >=5 min, ~14,6%). Avaliação de robustez de construto, NÃO replicação direta."
+        verified_auq200_codes_from_38:
+          "1": "Almost always"
+          "2": "At least once a day"
+          "3": "At least once a week"
+          "4": "At least once a month"
+          "5": "Less frequently than once a month"
+          "7": "Refused (-> NaN)"
+          "9": "Don't know (-> NaN)"
+        definitions_1999_2004:
+          n_valid_raw: 5737
+          weight_rule: "WTSAU4YR * (2/3) [1999-2002] + WTSAU2YR * (1/3) [2003-2004]"
+          primary_prevalence_matched_monthly: "1 se (AUQ190 == 1 e AUQ200 in {1, 2, 3, 4}); 0 se (AUQ190 == 2 ou (AUQ190 == 1 e AUQ200 == 5)); NaN caso contrário"
+          primary_rationale: "Equalização de prevalência: 14,2% em 1999-2004 (20-69, não ponderado) vs 14,7% de AUQ191 em 2011-16. Pressupõe ordenação latente comum entre frequência (AUQ200) e incômodo/duração (AUQ191) — premissa declarada, não verificada."
+          secondary_frequent_weekly: "1 se (AUQ190 == 1 e AUQ200 in {1, 2, 3}); 0 se (AUQ190 == 2 ou (AUQ190 == 1 e AUQ200 in {4, 5})); NaN caso contrário (9,4%)"
+          tertiary_loose_any12m: "1 se AUQ190 == 1; 0 se AUQ190 == 2; NaN caso contrário"
+        pooling_constraint: "Estratificação obrigatória por auq_era x quintil de severidade no Mantel-Haenszel e em modelos contínuos."
+
+      - id: "R1_LEGAL_ASYMMETRY_PARTIAL_ISOMORPHISM"
+        note: >
+          Contraste institucional entre a Lei 14.126/2021 + Decreto 10.654/2021 (sem corte numérico no texto legal;
+          ADI 6850/STF exige avaliação biopsicossocial) e a Lei 14.768/2023 (§ 1º fixa régua numérica explícita 500-3000 Hz >= 41 dB,
+          relegando demais casos ao § 2º). Usa VIDRVA/VIDLVA e VIDROVA/VIDLOVA em VIX 1999-2004 (N_intersection_AUX=5171).
+
+  regime_2_cycle_split_lockbox:
+    description: >
+      Componentes nunca cruzados com AUX. Todos os modelos testam EXCLUSIVAMENTE associação incremental
+      de forma (shape_pcs / H_excess_same_ear) e magnitude de assimetria (abs_z_contrast / A_lei_abs)
+      condicional a L_lei_better (ou level_mean_14) e splines de idade*sexo.
+    multiple_testing_guard: "FDR Benjamini-Hochberg q < 0.05 por família temática na Descoberta; execução única com especificação congelada na Replicação."
+    families:
+      - id: "R2_DPQ_INCREMENTAL_AND_ZERO_DEPRESSION_STRATUM"
+        discovery: {cycles: ["2011-2012"], n_valid_raw: 3929}
+        replication: {cycles: ["2015-2016"], n_valid_raw: 4100}
+        n_complete10_total: 7551
+        design_df: 32
+        weight_rule: "WTMEC2YR * (1/2)"
+        tests:
+          - "T1: Associação incremental de H_excess_same_ear e abs_z_contrast com escore PHQ-9 e item de fadiga DPQ040 condicional a L_lei_better"
+          - "T2: Persistência da superfície de isoprevalência em AUQ100 restrita ao subgrupo PHQ-9 <= 4 (controle de variância de método comum)"
+
+      - id: "R2_BAX_VESTIBULAR_COMPOSITE_ENDPOINT"
+        age_band: "40-69"
+        discovery: {cycles: ["2001-2002"], n_eligible: 1131, n_c4_valid: 906}
+        replication: {cycles: ["2003-2004"], n_eligible: 1045, n_c4_valid: 831}
+        n_c4_complete10_total: 1688
+        design_df: 30
+        weight_rule: "WTSAU2YR * (1/2) em 2001-2002 e 2003-2004 (BAX_B e BAX_C são amostra MEC completa 40+)"
+        verified_baaexcmt_classification_from_38:
+          physical_or_safety_impairment_candidates:
+            "1": "Safety exclusion (cruzar com BAQ para distinguir tontura/instabilidade de gravidez/peso/cirurgia)"
+            "4": "Physical limitation"
+          administrative_or_logistic_noninformative:
+            "2": "SP refusal"
+            "3": "No time"
+            "5": "Communication problem"
+            "7": "SP ill/emergency"
+            "56": "Came late/left early (2001-2002)"
+            "72": "Error (technician/software/supply) (2003-2004)"
+            "84": "SP With Child (2003-2004)"
+          ambiguous_sensitivity_only:
+            "99": "Other, specify"
+        endpoints:
+          primary_composite: "Falha em C4 (BAXPFC41==2 e BAXPFC42==2), falha precoce em C1-C3 OU BAAEXSTS==3 com BAAEXCMT in {1, 4} acompanhado de queixa de equilíbrio/tontura em BAQ; ausências logísticas {2,3,5,7,56,72,84} tratadas por IPW"
+          secondary_complete_case_ipw: "Apenas testados em C1-C4 ponderados por IPW para não-resposta"
+
+      - id: "R2_MORTALITY_INCREMENTAL_DAG_M1_M2"
+        discovery: {cycles: ["1999-2000", "2001-2002", "2011-2012"], n_valid_raw: 8339, deaths: 870}
+        replication: {cycles: ["2003-2004", "2015-2016"], n_valid_raw: 6455, deaths: 337}
+        n_complete10_total: 13410
+        design_df: 76
+        weight_rule: "WTSAU4YR*(2/5) [99-02] + WTSAU2YR*(1/5) [03-04] + WTMEC2YR*(1/5) [11-12, 15-16]"
+        dag_models:
+          M1_minimal_total_incremental: "Cox ponderado estratificado por ciclo ajustado apenas por C0 (splines(RIDAGEYR)*RIAGENDR, RIDRETH1, escolaridade, INDFMPIR, tabagismo) + L_lei_better (evita bloqueio de mediadores e viés de colisor)"
+          M2_extended_cardiometabolic_attenuation: "M1 + Z_m (BMXBMI, BPX sistólica, LBXGH, eGFR calibrado, log(URXUMA/URXUCR)); reporta atenuação (beta_M1 - beta_M2)/beta_M1 sem atribuir direção causal entre confundimento e mediação"
+
+      - id: "R2_CARDIORENAL_AND_PBCD_CONTROL"
+        discovery_cycles: ["1999-2000", "2001-2002", "2011-2012"]
+        replication_cycles: ["2003-2004", "2015-2016"]
+        design_df: 76
+        outcomes:
+          lab_alb_cr: {n_complete10: 13278, weight_2015_16: "WTMEC2YR * (1/5)"}
+          lab_ghb: {n_complete10: 12877, weight_2015_16: "WTMEC2YR * (1/5)"}
+          lab_biopro_creatinine: {n_complete10: 12683, weight_2015_16: "WTMEC2YR * (1/5)"}
+          lab_pbcd_metals: {n_complete10: 10841, weight_2015_16: "WTSH2YR * (1/5)", role: "Controle positivo metodológico"}
+          rxq_loop_diuretics: {n_complete10: 13423, exposed_disc: 143, exposed_repl: 111, role: "Subanálise farmacológica de baixa potência"}
+
+      - id: "R2_AUXAR_EARSCAN_SL_CONDITIONED"
+        verified_htm_protocol_from_38:
+          stimulus_level_in_htm: "não consta (remete ao manual PDF au.pdf; exige condicionamento empírico a T_{i,e,f} intra-aparelho)"
+          window_structure: "84 pontos em 1,5 s (500 ms de estimulação + 1000 ms pós-estimulação, passo ~17,9 ms, sem janela pré-estímulo documentada no .htm)"
+        discovery: {cycles: ["1999-2000", "2001-2002", "2011-2012"], n_valid_raw: 7437}
+        replication_same_device: {cycles: ["2003-2004"], n_valid_raw: 1779}
+        sl_conditioning_rule: "Toda feature de amplitude/área do reflexo em 1 kHz e 2 kHz é condicionada de forma não-linear ao limiar tonal homolateral T_{i,e,f} e restrita a orelhas com timpanometria normal e limiar compatível com nível de sensação adequado (ex.: T_{i,e,f} <= 75 dB HL)."
+
+  regime_3_single_cycle_frozen:
+    - id: "R3_TITAN_3STAGE_CASCADE_2015_2016"
+      cycles: ["2015-2016"]
+      n_12_curves: 4172
+      n_wbr: 4307
+      design_df: 15
+      weight_rule: "WTMEC2YR"
+      sl_conditioning_rule: "Avaliar presença/crescimento do reflexo (85/95/105 dB HL em 1 e 2 kHz) estritamente condicionado a SL_{i,e,f}(ell) = ell - T_{i,e,f} >= 25 dB SL e absorvância AUXWBR_I dentro dos percentis 10-90 de Humes (2023)."
+      external_hardware_holdout: "P_AUX + P_AUXWBR + P_AUXAR (2017-Mar2020, 12-19 e 70+ anos, WTMECPRP)"
+
+
