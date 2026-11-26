@@ -1,7 +1,7 @@
 {
   "script": "vis_00_download_vision.py",
-  "n_files": 4,
-  "n_ok": 4,
+  "n_files": 6,
+  "n_ok": 6,
   "n_error": 0,
   "results": [
     {
@@ -10,7 +10,7 @@
       "component": "vix",
       "file": "VIX",
       "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/VIX.xpt",
-      "path": "data\\raw\\nhanes\\1999\\VIX.xpt",
+      "path": "data/raw/nhanes/1999/VIX.xpt",
       "status": "ok",
       "size_bytes": 3090400,
       "sha256": "2ce0f725f162d6c6659391cb891261ade785a36d831cfe5c61700ef7fbe0945e",
@@ -22,7 +22,7 @@
       "component": "demo",
       "file": "DEMO",
       "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/1999/DataFiles/DEMO.xpt",
-      "path": "data\\raw\\nhanes\\1999\\DEMO.xpt",
+      "path": "data/raw/nhanes/1999/DEMO.xpt",
       "status": "ok",
       "size_bytes": 11500560,
       "sha256": "a17bd1ebfd6007b8dc93f16259cb090678eb6c467a39363b7e932bba15febf89",
@@ -34,7 +34,7 @@
       "component": "vix",
       "file": "VIX_B",
       "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/VIX_B.xpt",
-      "path": "data\\raw\\nhanes\\2001\\VIX_B.xpt",
+      "path": "data/raw/nhanes/2001/VIX_B.xpt",
       "status": "ok",
       "size_bytes": 3403680,
       "sha256": "753ac073ce081c5d259b78f37b679ac9cc3ef23107c9e05cce078784d936e7d8",
@@ -46,10 +46,34 @@
       "component": "demo",
       "file": "DEMO_B",
       "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2001/DataFiles/DEMO_B.xpt",
-      "path": "data\\raw\\nhanes\\2001\\DEMO_B.xpt",
+      "path": "data/raw/nhanes/2001/DEMO_B.xpt",
       "status": "ok",
       "size_bytes": 3273520,
       "sha256": "6458dc2307cee244ab6ba26f70ec78c7b842ffc68e668bc43f0ab6b9737937d9",
+      "error": null
+    },
+    {
+      "cycle": "2003-2004",
+      "year": "2003",
+      "component": "vix",
+      "file": "VIX_C",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/VIX_C.xpt",
+      "path": "data/raw/nhanes/2003/VIX_C.xpt",
+      "status": "ok",
+      "size_bytes": 3196160,
+      "sha256": "a4dd5bf88a3e93a62881312306ffc6a95f7509123394f98a2e08e7bd0f5f9014",
+      "error": null
+    },
+    {
+      "cycle": "2003-2004",
+      "year": "2003",
+      "component": "demo",
+      "file": "DEMO_C",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2003/DataFiles/DEMO_C.xpt",
+      "path": "data/raw/nhanes/2003/DEMO_C.xpt",
+      "status": "ok",
+      "size_bytes": 3569840,
+      "sha256": "2a2fdb88263337bfa06f0516bfb419631595f0a0ee88fb96069bed13d1857c6f",
       "error": null
     }
   ]

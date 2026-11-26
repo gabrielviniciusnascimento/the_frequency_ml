@@ -1,22 +1,65 @@
 {
   "script": "vis_01_ingest.py",
+  "cycles_ingested": [
+    "1999-2000",
+    "2001-2002",
+    "2003-2004"
+  ],
+  "ibm_underflow_eps": 1e-12,
   "spherical_equivalent_rule": "SE = sphere + cylinder/2; vis_R=OD, vis_L=OS (anatômicos diretos)",
-  "special_codes": "88=could not obtain -> NaN; fora de faixa -> NaN",
-  "n_total_rows": 14203,
+  "visual_acuity_logmar_rule": "logMAR = log10(code / 20) para denominadores Snellen {20,25,30,40,50,60,80,200}; 666 (20/200+) -> NaN + flag *_gt200_666; 888 (Could not obtain) -> NaN + flag *_could_not_obtain_888; VIDROVA/VIDLOVA medidos apenas quando VIDxVA >= 30 (flag *_skipped_20_25).",
+  "n_total_rows": 21193,
   "per_cycle": {
     "1999-2000": {
       "n_total": 6758,
-      "n_both_eyes_valid": 6159,
-      "n_could_not_obtain_88": 241,
+      "n_both_eyes_SE_valid": 6159,
+      "n_could_not_obtain_88_SE": 241,
       "median_SE_OD": -0.12,
-      "median_SE_OS": -0.12
+      "median_SE_OS": -0.12,
+      "n_VIDRVA_logmar_valid": 6247,
+      "n_VIDLVA_logmar_valid": 6250,
+      "n_VIDRVA_gt200_666": 109,
+      "n_VIDLVA_gt200_666": 112,
+      "n_VIDROVA_logmar_valid": 1753,
+      "n_VIDLOVA_logmar_valid": 1780,
+      "n_VIDROVA_gt200_666": 43,
+      "n_VIDLOVA_gt200_666": 34,
+      "n_VIDROVA_skipped_20_25": 4480,
+      "n_VIDLOVA_skipped_20_25": 4477
     },
     "2001-2002": {
       "n_total": 7445,
-      "n_both_eyes_valid": 6709,
-      "n_could_not_obtain_88": 302,
+      "n_both_eyes_SE_valid": 6709,
+      "n_could_not_obtain_88_SE": 302,
       "median_SE_OD": -0.25,
-      "median_SE_OS": -0.25
+      "median_SE_OS": -0.25,
+      "n_VIDRVA_logmar_valid": 6886,
+      "n_VIDLVA_logmar_valid": 6892,
+      "n_VIDRVA_gt200_666": 96,
+      "n_VIDLVA_gt200_666": 90,
+      "n_VIDROVA_logmar_valid": 1914,
+      "n_VIDLOVA_logmar_valid": 1939,
+      "n_VIDROVA_gt200_666": 41,
+      "n_VIDLOVA_gt200_666": 44,
+      "n_VIDROVA_skipped_20_25": 4958,
+      "n_VIDLOVA_skipped_20_25": 4920
+    },
+    "2003-2004": {
+      "n_total": 6990,
+      "n_both_eyes_SE_valid": 6171,
+      "n_could_not_obtain_88_SE": 322,
+      "median_SE_OD": -0.25,
+      "median_SE_OS": -0.17,
+      "n_VIDRVA_logmar_valid": 6363,
+      "n_VIDLVA_logmar_valid": 6343,
+      "n_VIDRVA_gt200_666": 85,
+      "n_VIDLVA_gt200_666": 104,
+      "n_VIDROVA_logmar_valid": 1904,
+      "n_VIDLOVA_logmar_valid": 1928,
+      "n_VIDROVA_gt200_666": 31,
+      "n_VIDLOVA_gt200_666": 51,
+      "n_VIDROVA_skipped_20_25": 4414,
+      "n_VIDLOVA_skipped_20_25": 4384
     }
   },
   "example_rows": [
@@ -29,53 +72,64 @@
       "OS_cyl": 1.5,
       "vis_R_SE": 2.25,
       "vis_L_SE": 2.5,
-      "asym_RL": -0.25
+      "asym_RL": -0.25,
+      "VIDRVA_logmar": 0.0969,
+      "VIDLVA_logmar": 0.0
     },
     {
-      "SEQN": 5,
+      "SEQN": 6136,
       "cycle": "1999-2000",
-      "OD_sphere": 0.25,
+      "OD_sphere": 0.0,
       "OD_cyl": 0.5,
-      "OS_sphere": 0.25,
-      "OS_cyl": 0.75,
-      "vis_R_SE": 0.5,
-      "vis_L_SE": 0.62,
-      "asym_RL": -0.12
+      "OS_sphere": -0.25,
+      "OS_cyl": 0.5,
+      "vis_R_SE": 0.25,
+      "vis_L_SE": 0.0,
+      "asym_RL": 0.25,
+      "VIDRVA_logmar": 0.0,
+      "VIDLVA_logmar": 0.0
     },
     {
-      "SEQN": 6,
-      "cycle": "1999-2000",
-      "OD_sphere": -12.5,
-      "OD_cyl": 1.0,
-      "OS_sphere": -13.75,
-      "OS_cyl": 2.0,
-      "vis_R_SE": -12.0,
-      "vis_L_SE": -12.75,
-      "asym_RL": 0.75
-    },
-    {
-      "SEQN": 20999,
+      "SEQN": 12418,
       "cycle": "2001-2002",
-      "OD_sphere": 2.0,
-      "OD_cyl": 1.5,
-      "OS_sphere": -1.5,
-      "OS_cyl": 2.0,
-      "vis_R_SE": 2.75,
+      "OD_sphere": 0.0,
+      "OD_cyl": 0.25,
+      "OS_sphere": -1.25,
+      "OS_cyl": 1.5,
+      "vis_R_SE": 0.12,
       "vis_L_SE": -0.5,
-      "asym_RL": 3.25
+      "asym_RL": 0.62,
+      "VIDRVA_logmar": null,
+      "VIDLVA_logmar": null
     },
     {
-      "SEQN": 21004,
+      "SEQN": 18606,
       "cycle": "2001-2002",
-      "OD_sphere": -2.25,
-      "OD_cyl": 2.25,
+      "OD_sphere": -1.75,
+      "OD_cyl": 2.75,
       "OS_sphere": -1.0,
-      "OS_cyl": 0.75,
-      "vis_R_SE": -1.12,
-      "vis_L_SE": -0.62,
-      "asym_RL": -0.5
+      "OS_cyl": 2.5,
+      "vis_R_SE": -0.38,
+      "vis_L_SE": 0.25,
+      "asym_RL": -0.62,
+      "VIDRVA_logmar": 0.0969,
+      "VIDLVA_logmar": 0.0969
+    },
+    {
+      "SEQN": 24870,
+      "cycle": "2003-2004",
+      "OD_sphere": -0.5,
+      "OD_cyl": 0.0,
+      "OS_sphere": -0.75,
+      "OS_cyl": 0.5,
+      "vis_R_SE": -0.5,
+      "vis_L_SE": -0.5,
+      "asym_RL": 0.0,
+      "VIDRVA_logmar": 0.0,
+      "VIDLVA_logmar": 0.0
     }
   ],
-  "output_csv": "data\\processed\\vis_feature_matrix.csv",
-  "status": "EXECUTED — STOP-GATE: revisar 5 linhas antes dos passos 3-5"
+  "output_csv_frozen_paper_v6": "data/processed/vis_feature_matrix.csv",
+  "output_csv_v2_full": "data/processed/vis_feature_matrix_v2.csv",
+  "status": "EXECUTED"
 }

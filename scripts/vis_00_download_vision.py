@@ -1,25 +1,29 @@
+
+
 #!/usr/bin/env python3
 """
 Nome: vis_00_download_vision.py
-Tarefa: Baixar com cache os arquivos NHANES de Vision (autorefração objetiva) + DEMO,
+Tarefa: Baixar com cache os arquivos NHANES de Vision (autorefração + acuidade) + DEMO,
         via HTTP real ao CDC. Espelha scripts/00_download_nhanes.py / grip_00.
 
-Ciclos com autorefração objetiva e nomes de variável idênticos (verificado no codebook):
-  1999-2000 (VIX, N=6758) e 2001-2002 (VIX_B, N=7445).
-Variáveis: VIXORSM/VIXORCM (OD esfera/cilindro), VIXOLSM/VIXOLCM (OS). 88=could not obtain.
+Ciclos com autorefração objetiva e acuidade visual (nomes de variável idênticos no codebook):
+  1999-2000 (VIX, N=6758), 2001-2002 (VIX_B, N=7445) e 2003-2004 (VIX_C, N=6990).
+Variáveis: VIXORSM/VIXORCM (OD esfera/cilindro), VIXOLSM/VIXOLCM (OS),
+           VIDRVA/VIDLVA (acuidade apresentada), VIDROVA/VIDLOVA (pós-refração objetiva).
 Output: outputs/json/vis_00_download_vision.json; .xpt em data/raw/nhanes/.
 """
 
-import logging
-import json
-from pathlib import Path
-import time
+import argparse
 import hashlib
-import requests
+import json
+import logging
+import multiprocessing as mp
+import time
+from pathlib import Path
 
 import numpy as np
+import requests
 from joblib import Parallel, delayed
-import multiprocessing as mp
 
 N_JOBS = max(mp.cpu_count() - 1, 1)
 REQUEST_TIMEOUT_SECONDS = 60
@@ -32,19 +36,11 @@ LOG_PATH = Path("outputs/logs/vis_00_download_vision.log")
 VISION_MANIFEST = {
     "1999-2000": {"year": "1999", "files": {"vix": "VIX", "demo": "DEMO"}},
     "2001-2002": {"year": "2001", "files": {"vix": "VIX_B", "demo": "DEMO_B"}},
+    "2003-2004": {"year": "2003", "files": {"vix": "VIX_C", "demo": "DEMO_C"}},
 }
 
-LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s",
-                    handlers=[logging.FileHandler(LOG_PATH, encoding="utf-8"), logging.StreamHandler()])
-log = logging.getLogger(__name__)
 
-if OUTPUT_PATH.exists():
-    log.info(f"Output já existe em {OUTPUT_PATH}. Pulando.")
-    raise SystemExit(0)
-
-
-def validar_conteudo(path: Path) -> None:
+def validar_conteudo(path: Path, log: logging.Logger) -> None:
     content = path.read_bytes()[:512]
     low = content.lower()
     if b"<html" in low or b"<!doctype" in low:
@@ -64,31 +60,41 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def fetch_com_cache(url: str, path_local: Path) -> Path:
+def fetch_com_cache(url: str, path_local: Path, log: logging.Logger) -> Path:
     path = Path(path_local)
     if path.exists():
-        log.info(f"Cache hit: {path_local} ({path.stat().st_size/1024:.1f} KB)")
-        validar_conteudo(path)
+        log.info(f"Cache hit: {path_local} ({path.stat().st_size / 1024:.1f} KB)")
+        validar_conteudo(path, log)
         return path
     log.info(f"Fetch: {url}")
     r = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
     r.raise_for_status()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(r.content)
-    log.info(f"Salvo: {path_local} ({len(r.content)/1024:.1f} KB)")
-    validar_conteudo(path)
+    log.info(f"Salvo: {path_local} ({len(r.content) / 1024:.1f} KB)")
+    validar_conteudo(path, log)
     time.sleep(REQUEST_SLEEP_SECONDS)
     return path
 
 
-def download_one(cycle, year, component, file_stem) -> dict:
+def download_one(cycle: str, year: str, component: str, file_stem: str) -> dict:
+    log = logging.getLogger(__name__)
     url = BASE_URL.format(year=year, file=file_stem)
     local_path = RAW_ROOT / year / f"{file_stem}.xpt"
-    result = {"cycle": cycle, "year": year, "component": component, "file": file_stem,
-              "url": url, "path": str(local_path), "status": "pending",
-              "size_bytes": None, "sha256": None, "error": None}
+    result = {
+        "cycle": cycle,
+        "year": year,
+        "component": component,
+        "file": file_stem,
+        "url": url,
+        "path": str(local_path),
+        "status": "pending",
+        "size_bytes": None,
+        "sha256": None,
+        "error": None,
+    }
     try:
-        path = fetch_com_cache(url, local_path)
+        path = fetch_com_cache(url, local_path, log)
         result.update({"status": "ok", "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
     except Exception as exc:
         log.exception(f"Falha: {cycle}/{component}/{file_stem}")
@@ -96,22 +102,56 @@ def download_one(cycle, year, component, file_stem) -> dict:
     return result
 
 
-def main():
-    jobs = [(c, s["year"], comp, stem) for c, s in VISION_MANIFEST.items()
-            for comp, stem in s["files"].items()]
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Download com cache dos arquivos VIX/DEMO (1999-2004).")
+    ap.add_argument("--force", action="store_true", help="Reexecutar mesmo se o JSON de saída existir.")
+    args = ap.parse_args()
+
+    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[logging.FileHandler(LOG_PATH, encoding="utf-8"), logging.StreamHandler()],
+    )
+    log = logging.getLogger(__name__)
+
+    if OUTPUT_PATH.exists() and not args.force:
+        log.info(f"Output já existe em {OUTPUT_PATH}. Use --force para regerar. Pulando.")
+        raise SystemExit(0)
+
+    jobs = [
+        (c, s["year"], comp, stem)
+        for c, s in VISION_MANIFEST.items()
+        for comp, stem in s["files"].items()
+    ]
     resultados = Parallel(n_jobs=N_JOBS, verbose=1)(
-        delayed(download_one)(c, y, comp, stem) for c, y, comp, stem in jobs)
+        delayed(download_one)(c, y, comp, stem) for c, y, comp, stem in jobs
+    )
     n_ok = int(np.sum([r["status"] == "ok" for r in resultados]))
     n_error = int(np.sum([r["status"] == "error" for r in resultados]))
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(
-        {"script": "vis_00_download_vision.py", "n_files": len(resultados),
-         "n_ok": n_ok, "n_error": n_error, "results": resultados}, indent=2, default=str), encoding="utf-8")
+    OUTPUT_PATH.write_text(
+        json.dumps(
+            {
+                "script": "vis_00_download_vision.py",
+                "n_files": len(resultados),
+                "n_ok": n_ok,
+                "n_error": n_error,
+                "results": resultados,
+            },
+            indent=2,
+            default=str,
+        ),
+        encoding="utf-8",
+    )
     log.info(f"Concluído. OK={n_ok}, ERROS={n_error}.")
     for r in resultados:
-        print(f"  [{r['status']}] {r['cycle']} {r['component']:5} {r['file']:8} "
-              f"{(r['size_bytes'] or 0)/1024:8.1f} KB  sha256={str(r['sha256'])[:16]}...")
+        print(
+            f"  [{r['status']}] {r['cycle']} {r['component']:5} {r['file']:8} "
+            f"{(r['size_bytes'] or 0) / 1024:8.1f} KB  sha256={str(r['sha256'])[:16]}..."
+        )
 
 
 if __name__ == "__main__":
     main()
+
