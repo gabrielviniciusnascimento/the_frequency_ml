@@ -2,6 +2,10 @@
 """
 Nome: 16_tinnitus_audit.py
 Tarefa: Auditar disponibilidade/distribuição de tinnitus AUQ191 e correlação com pta_high/hf_lf_contrast.
+        Também audita a disponibilidade do zumbido de 1999-2004 (AUQ190 + AUQ200) e a
+        prevalência harmonizada por ciclo (scripts/_nhanes_survey.py), ponderada nos 5
+        ciclos com audiometria 20-69. As CORRELAÇÕES com o audiograma continuam só no
+        AUQ191: o zumbido de 1999-2004 não é cruzado com audiograma aqui (lockbox_v1).
 Input: data/processed/frequencia_bruto.csv; data/processed/frequencia_feature_matrix_v1.csv.
 Output: outputs/json/tinnitus_audit_v1.json.
 Dependências: 03_features_v1.py.
@@ -9,6 +13,7 @@ Dependências: 03_features_v1.py.
 
 import logging
 import json
+import sys
 from pathlib import Path
 
 # Núcleo científico — sempre presente
@@ -40,6 +45,12 @@ from joblib import Parallel, delayed
 import multiprocessing as mp
 N_JOBS = max(mp.cpu_count() - 1, 1)
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _nhanes_survey import (  # noqa: E402
+    POOLING_SPEC_5CYCLES, TINNITUS_DEFINITIONS, build_5cycle_aux_weight,
+    tinnitus_harmonized, weighted_rate,
+)
+
 RANDOM_STATE = 42
 BRUTO_CSV = Path("data/processed/frequencia_bruto.csv")
 FEATURE_CSV = Path("data/processed/frequencia_feature_matrix_v1.csv")
@@ -69,7 +80,8 @@ def main():
     bruto_cols = pd.read_csv(BRUTO_CSV, nrows=1).columns.tolist()
     has_auq191 = "AUQ191" in bruto_cols
     has_auq500 = "AUQ500" in bruto_cols
-    usecols = ["SEQN", "cycle"] + [c for c in ["AUQ191", "AUQ500"] if c in bruto_cols]
+    extra = ["AUQ191", "AUQ500", "AUQ190", "AUQ200", "WTSAU4YR", "WTSAU2YR", "WTMEC2YR"]
+    usecols = ["SEQN", "cycle"] + [c for c in extra if c in bruto_cols]
     bruto = pd.read_csv(BRUTO_CSV, usecols=usecols, low_memory=False)
     feat = pd.read_csv(FEATURE_CSV, usecols=["SEQN", "cycle", "pta_high_mean_binaural", "hf_lf_contrast_mean"], low_memory=False)
     df = bruto.merge(feat, on=["SEQN", "cycle"], how="left", validate="one_to_one")
@@ -95,6 +107,32 @@ def main():
             "tinnitus_yes_rate_among_nonmissing": float(t.mean(skipna=True)) if t.notna().sum() else None,
         })
 
+    # Zumbido harmonizado entre eras: só disponibilidade e prevalência, sem audiograma
+    harmonized = None
+    if {"AUQ190", "AUQ200"} <= set(bruto_cols):
+        in5 = df["cycle"].astype(str).isin(POOLING_SPEC_5CYCLES).to_numpy()
+        w = np.zeros(len(df))
+        w[in5] = build_5cycle_aux_weight(df[in5])
+        cyc = df["cycle"].astype(str).to_numpy()
+        harmonized = {
+            "AUQ190_raw_counts_by_cycle": {str(c): {str(k): int(v) for k, v in g["AUQ190"].value_counts(dropna=False).items()}
+                                            for c, g in df.groupby("cycle")},
+            "AUQ200_raw_counts_by_cycle": {str(c): {str(k): int(v) for k, v in g["AUQ200"].value_counts(dropna=False).items()}
+                                            for c, g in df.groupby("cycle")},
+            "prevalence_by_definition": {},
+            "note": "rate_weighted só nos 5 ciclos com audiometria 20-69 (peso composto NCHS); "
+                    "fora deles o peso é 0 e só a taxa não ponderada aparece em 'unweighted_all'.",
+        }
+        for name in TINNITUS_DEFINITIONS:
+            t_h = tinnitus_harmonized(df, name)
+            harmonized["prevalence_by_definition"][name] = {
+                str(c): {**weighted_rate(t_h, w, cyc == c),
+                         "unweighted_all": (float(np.nanmean(t_h[cyc == c])) if np.isfinite(t_h[cyc == c]).any() else None),
+                         "n_nonmissing_all": int(np.isfinite(t_h[cyc == c]).sum())}
+                for c in sorted(np.unique(cyc))
+            }
+
+    # Correlações com o audiograma: SOMENTE AUQ191 (tinnitus_any), como antes
     corrs = [
         corr_pair(df, "tinnitus_any", "pta_high_mean_binaural"),
         corr_pair(df, "tinnitus_any", "hf_lf_contrast_mean"),
@@ -107,7 +145,7 @@ N: {df.shape[0]}
 Output salvo: {OUTPUT_PATH}
 Status: PRELIMINAR — auditoria de variável, sem interpretação clínica
 """)
-    output = {"script": "16_tinnitus_audit.py", "random_state": RANDOM_STATE, "has_AUQ191": has_auq191, "has_AUQ500": has_auq500, "by_cycle": by_cycle, "correlations": corrs}
+    output = {"script": "16_tinnitus_audit.py", "random_state": RANDOM_STATE, "has_AUQ191": has_auq191, "has_AUQ500": has_auq500, "by_cycle": by_cycle, "correlations": corrs, "harmonized_tinnitus": harmonized}
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_PATH.open("w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False, default=str)

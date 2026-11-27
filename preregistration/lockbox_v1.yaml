@@ -105,6 +105,15 @@ regimes:
           secondary_frequent_weekly: "1 se (AUQ190 == 1 e AUQ200 in {1, 2, 3}); 0 se (AUQ190 == 2 ou (AUQ190 == 1 e AUQ200 in {4, 5})); NaN caso contrário (9,4%)"
           tertiary_loose_any12m: "1 se AUQ190 == 1; 0 se AUQ190 == 2; NaN caso contrário"
         pooling_constraint: "Estratificação obrigatória por auq_era x quintil de severidade no Mantel-Haenszel e em modelos contínuos."
+        execution:
+          status: "NOT_YET_UNBLINDED — zumbido 1999-2004 nunca cruzado com AUX no repo (16 e 34 só descrevem a variável; 23 não foi estendido)"
+          code: "scripts/34_tinnitus_reexamination.py --unblind-harmonized; definições em scripts/_nhanes_survey.py; testes em tests/test_nhanes_survey.py"
+          already_seen_descriptive_only: "Prevalência harmonizada por ciclo, sem audiograma: mensal+ ponderada ~15% (1999-2004) vs ~16% AUQ191 (2011-2016) na amostra 20-69 com peso; na coorte ANY25, ~20% vs ~22%."
+          fixed_in_code_before_unblinding: "Unidade |z| > 2 da assimetria (z com DP da coorte inteira); quintis de pta_high DENTRO de cada era; mesma função decide_verdict do bloco AUQ191 (MH OR > 1, p < 0,05, IC95 inferior > 1); RNG por definição independente do bloco original."
+          open_choices_to_freeze_before_flag:
+            - "Qual leitura é a primária: pooled_5cycles_era_x_quintile (mistura 2011-16, que já foi visto) ou era_1999_2004_only (a única parte nova)?"
+            - "Poder: a cauda |z| > 2 em 1999-2004 tem 166 pessoas antes de tirar ausentes no zumbido (|z| > 3: 64; |z| > 4: 31); declarar antes o que conta como 'não replicou' vs 'sem poder' (ex.: IC95 do MH só-1999-2004 que inclui 1,43 e 1,0 = inconclusivo)."
+            - "Ponderação: o teste é não ponderado (como o bloco original); taxas ponderadas só descritivas — confirmar."
 
       - id: "R1_LEGAL_ASYMMETRY_PARTIAL_ISOMORPHISM"
         note: >

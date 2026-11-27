@@ -16,9 +16,23 @@ Input: data/processed/frequencia_feature_matrix_v1.csv (AUQ191 já presente — 
        frequencia_bruto.csv do script 16 não é necessário).
 Output: outputs/json/34_tinnitus_reexamination.json
 Run: .venv/Scripts/python.exe scripts/34_tinnitus_reexamination.py
+
+Zumbido 1999-2004 (AUQ190 + AUQ200, harmonizado em scripts/_nhanes_survey.py):
+  - Por padrão o script só DESCREVE a variável harmonizada (prevalência por ciclo,
+    ponderada e não ponderada). Nenhuma linha cruza o zumbido de 1999-2004 com a
+    assimetria ou a severidade do audiograma.
+  - O cruzamento (lockbox_v1: R1_TINNITUS_CONSTRUCT_HARMONIZATION) só roda com
+    --unblind-harmonized. Esses ~3 mil adultos (cauda |z|>2: 166) nunca foram cruzados com o AUX no
+    repo; olhar antes de congelar a regra queima a única amostra que não viu a
+    alegação. A regra é a MESMA função de veredito do bloco AUQ191, com estratos
+    auq_era x quintil de severidade (quintis dentro da era), mais o MH só de
+    1999-2004 como leitura separada.
+  - O bloco AUQ191 original (2011-2016) é calculado antes, com o mesmo RNG e a
+    mesma ordem de chamadas: os números dele não mudam com esta alteração.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -30,6 +44,10 @@ from scipy import stats
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from _shape_space import load_cohort, shape_embed, R_COLS, L_COLS, lib_versions  # noqa: E402
+from _nhanes_survey import (  # noqa: E402
+    ERA_AUQ190, TINNITUS_DEFINITIONS, build_5cycle_aux_weight,
+    tinnitus_from_auq191, tinnitus_harmonized, weighted_rate,
+)
 
 import hdbscan  # noqa: E402
 
@@ -38,12 +56,6 @@ RANDOM_STATE = 42
 B_BOOT = 2000
 B_PERM = 2000
 Z_LEVELS = [2.0, 3.0, 4.0]
-
-
-def tinnitus_from_auq191(series: pd.Series) -> np.ndarray:
-    """AUQ191: 1=yes, 2=no (same coding as scripts/16_tinnitus_audit.py). Else NaN."""
-    auq = pd.to_numeric(series, errors="coerce")
-    return np.select([auq == 1, auq == 2], [1.0, 0.0], default=np.nan).astype("float64")
 
 
 def rate(mask_group: np.ndarray, t: np.ndarray) -> dict:
@@ -153,37 +165,13 @@ def perm_null(in_tail: np.ndarray, t: np.ndarray, rng: np.random.Generator) -> d
     return {"observed_diff": float(obs), "p_emp": (ge + 1) / (B_PERM + 1)}
 
 
-def main() -> None:
-    rng = np.random.default_rng(RANDOM_STATE)
-    df, thr = load_cohort()
-    emb = shape_embed(thr)
-
-    # --- tinnitus variable (from the same aligned cohort frame) ---
-    if "AUQ191" not in df.columns:
-        raise SystemExit("AUQ191 ausente na feature matrix — não dá para reexaminar tinnitus.")
-    t = tinnitus_from_auq191(df["AUQ191"])
-    n_nonmissing = int(np.isfinite(t).sum())
-
-    # --- (1) reproduce the cluster-based number (HDBSCAN canônico, mesmo config do contract test) ---
-    labels = hdbscan.HDBSCAN(
-        min_cluster_size=10, min_samples=5, metric="euclidean",
-        cluster_selection_method="eom", core_dist_n_jobs=-1,
-    ).fit_predict(emb.X_pca)
-    sizes = {int(c): int((labels == c).sum()) for c in np.unique(labels[labels != -1])}
-    minority_lbl = min(sizes, key=sizes.get)
-    dominant_lbl = max(sizes, key=sizes.get)
-    cluster_based = {
-        "hdbscan_sizes": {str(k): v for k, v in sizes.items()},
-        "minority": rate(labels == minority_lbl, t),
-        "dominant": rate(labels == dominant_lbl, t),
-        "noise": rate(labels == -1, t),
-        "note": "Original v1-v4 claim was cluster-based; the cluster is hyperparameter-"
-                "fragile (audit_06), so this is reported for provenance, not as the test.",
-    }
-
-    # --- defensible unit: |z| asymmetry tail (contrast = mean(R)-mean(L)) ---
-    c_contrast = thr[R_COLS].mean(axis=1).to_numpy() - thr[L_COLS].mean(axis=1).to_numpy()
-    z = np.abs(c_contrast) / np.nanstd(c_contrast)
+def asymmetry_and_severity(df: pd.DataFrame, t: np.ndarray, z: np.ndarray,
+                           rng: np.random.Generator, era: np.ndarray | None = None):
+    """Testes na unidade defensável: cauda |z| (Fisher + bootstrap + permutação) e
+    gradiente de severidade com MH ajustado. Com era=None os estratos do MH são
+    quintis de severidade (bloco AUQ191 original, saída idêntica à versão anterior).
+    Com era, os estratos são auq_era x quintil de severidade DENTRO da era
+    (lockbox_v1: pooling_constraint de R1_TINNITUS_CONSTRUCT_HARMONIZATION)."""
     asym = {}
     for lv in Z_LEVELS:
         in_tail = z > lv
@@ -193,7 +181,6 @@ def main() -> None:
             "permutation_null": perm_null(in_tail, t, rng),
         }
 
-    # --- severity gradient: does tinnitus track continuous high-freq severity? ---
     sev = None
     if "pta_high_mean_binaural" in df.columns:
         pta = pd.to_numeric(df["pta_high_mean_binaural"], errors="coerce").to_numpy()
@@ -211,11 +198,26 @@ def main() -> None:
         # The question the dropped claim was actually about: does the ASYMMETRY tail carry
         # elevated tinnitus AFTER adjusting for severity? Use severity QUINTILES (more
         # strata, better residual-confound control) and pool with Mantel-Haenszel.
+        if era is None:
+            squint = pd.qcut(pta[fin], 5, labels=False, duplicates="drop")
+            keys = [(None, int(k)) for k in sorted(np.unique(squint))]
+            labels = [(None, int(k)) for k in squint]
+        else:
+            era_fin = era[fin]
+            labels = [None] * int(fin.sum())
+            keys = []
+            for e in sorted(np.unique(era_fin)):
+                me = np.where(era_fin == e)[0]
+                qe = pd.qcut(pta[fin][me], 5, labels=False, duplicates="drop")
+                for i, k in zip(me, qe):
+                    labels[i] = (str(e), int(k))
+                keys += [(str(e), int(k)) for k in sorted(np.unique(qe))]
+        lab_arr = np.empty(len(labels), dtype=object)
+        lab_arr[:] = labels
         strata, mh_cells = [], []
-        squint = pd.qcut(pta[fin], 5, labels=False, duplicates="drop")
         z_fin = z[fin]
-        for k in sorted(np.unique(squint)):
-            m = squint == k
+        for key in keys:
+            m = np.array([lab == key for lab in lab_arr], dtype=bool)
             in_tail_s = (z_fin > 2.0) & m
             in_body_s = (z_fin <= 2.0) & m
             a = int(np.nansum(tv[in_tail_s])); b = int(in_tail_s.sum() - a)
@@ -223,13 +225,15 @@ def main() -> None:
             mh_cells.append((a, b, c, d))
             rt = (a / (a + b)) if (a + b) else None
             rb = (c / (c + d)) if (c + d) else None
-            strata.append({
-                "severity_quintile": int(k),
+            row = {} if key[0] is None else {"auq_era": key[0]}
+            row.update({
+                "severity_quintile": key[1],
                 "pta_high_range": [float(pta[fin][m].min()), float(pta[fin][m].max())],
                 "tail_n": int(a + b), "tail_rate": rt,
                 "body_n": int(c + d), "body_rate": rb,
                 "ratio": (float(rt / rb) if (rt is not None and rb) else None),
             })
+            strata.append(row)
         mh = mantel_haenszel(mh_cells)
         sev = {
             "pointbiserial_tinnitus_vs_pta_high": {"r": float(pb.statistic), "p": float(pb.pvalue),
@@ -239,8 +243,11 @@ def main() -> None:
             "asymmetry_within_severity_quintiles": strata,
             "asymmetry_severity_adjusted_mantel_haenszel": mh,
         }
+    return asym, sev
 
-    # --- verdict (two effects kept SEPARATE) ---
+
+def decide_verdict(n_nonmissing: int, sev: dict | None) -> str:
+    """Regra de veredito (inalterada; agora função para valer igual nos dois blocos)."""
     # (1) severity main-effect: real but NON-NOVEL; reported, never the headline.
     sev_sig = bool(sev and sev["pointbiserial_tinnitus_vs_pta_high"]["p"] < 0.05
                    and sev["pointbiserial_tinnitus_vs_pta_high"]["r"] > 0)
@@ -251,15 +258,101 @@ def main() -> None:
         and mh.get("chi2_p") is not None and mh["chi2_p"] < 0.05
         and mh.get("ci95") and mh["ci95"][0] > 1.0)
     if n_nonmissing < 200:
-        verdict = "data_insufficient"
-    elif asym_adjusted_sig:
+        return "data_insufficient"
+    if asym_adjusted_sig:
         # asymmetry survives adjustment -> reinstate, but as MODEST/severity-adjusted, not the 2.48
-        verdict = "asymmetry_assoc_survives_severity_adjusted"
-    elif sev_sig:
+        return "asymmetry_assoc_survives_severity_adjusted"
+    if sev_sig:
         # only the non-novel severity correlation survives; the asymmetry-specific claim does not
-        verdict = "only_severity_gradient_survives_asymmetry_confounded"
-    else:
-        verdict = "does_not_survive"
+        return "only_severity_gradient_survives_asymmetry_confounded"
+    return "does_not_survive"
+
+
+def harmonized_descriptive(df: pd.DataFrame) -> dict:
+    """Só a variável de zumbido, sem audiograma: prevalência por ciclo e por era,
+    ponderada (peso composto NCHS 5 ciclos) e não ponderada, nas 3 definições."""
+    w = build_5cycle_aux_weight(df)
+    cyc = df["cycle"].astype(str).to_numpy()
+    era = np.where(np.isin(cyc, ERA_AUQ190), "1999-2004", "2011-2016")
+    out = {}
+    for name in TINNITUS_DEFINITIONS:
+        t = tinnitus_harmonized(df, name)
+        out[name] = {
+            "by_cycle": {c: weighted_rate(t, w, cyc == c) for c in sorted(np.unique(cyc))},
+            "by_era": {e: weighted_rate(t, w, era == e) for e in sorted(np.unique(era))},
+        }
+    out["note"] = ("2011-2016 é AUQ191 nas três definições; só 1999-2004 muda. "
+                   "Taxas condicionais à coorte canônica (20-69, >=10/14, ANY25), "
+                   "não prevalência populacional geral.")
+    return out
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--unblind-harmonized", action="store_true",
+                    help="Cruza o zumbido harmonizado de 1999-2004 com assimetria/severidade. "
+                         "Só depois de congelar a regra no lockbox.")
+    args = ap.parse_args()
+
+    rng = np.random.default_rng(RANDOM_STATE)
+    df, thr = load_cohort()
+    emb = shape_embed(thr)
+
+    # --- tinnitus variable (from the same aligned cohort frame) ---
+    if "AUQ191" not in df.columns:
+        raise SystemExit("AUQ191 ausente na feature matrix — não dá para reexaminar tinnitus.")
+    t = tinnitus_from_auq191(df["AUQ191"])
+    n_nonmissing = int(np.isfinite(t).sum())
+
+    # --- (1) reproduce the cluster-based number (HDBSCAN canônico, mesmo config do contract test) ---
+    labels = hdbscan.HDBSCAN(
+        min_cluster_size=10, min_samples=5, metric="euclidean",
+        cluster_selection_method="eom", core_dist_n_jobs=-1,
+    ).fit_predict(emb.X_pca)
+    sizes = {int(c): int((labels == c).sum()) for c in np.unique(labels[labels != -1])}
+    # sem cluster nenhum (dado sintético/degenerado): reporta vazio em vez de quebrar
+    minority_lbl = min(sizes, key=sizes.get) if sizes else None
+    dominant_lbl = max(sizes, key=sizes.get) if sizes else None
+    cluster_based = {
+        "hdbscan_sizes": {str(k): v for k, v in sizes.items()},
+        "minority": rate(labels == minority_lbl, t) if sizes else None,
+        "dominant": rate(labels == dominant_lbl, t) if sizes else None,
+        "noise": rate(labels == -1, t),
+        "note": "Original v1-v4 claim was cluster-based; the cluster is hyperparameter-"
+                "fragile (audit_06), so this is reported for provenance, not as the test.",
+    }
+
+    # --- defensible unit: |z| asymmetry tail (contrast = mean(R)-mean(L)) ---
+    c_contrast = thr[R_COLS].mean(axis=1).to_numpy() - thr[L_COLS].mean(axis=1).to_numpy()
+    z = np.abs(c_contrast) / np.nanstd(c_contrast)
+    asym, sev = asymmetry_and_severity(df, t, z, rng)
+    verdict = decide_verdict(n_nonmissing, sev)
+
+    # --- zumbido harmonizado 1999-2004: descrição sempre; cruzamento só sob flag ---
+    harmonized = {"descriptive": harmonized_descriptive(df), "unblinded": bool(args.unblind_harmonized)}
+    if args.unblind_harmonized:
+        cyc = df["cycle"].astype(str).to_numpy()
+        era = np.where(np.isin(cyc, ERA_AUQ190), "1999-2004", "2011-2016")
+        old = era == "1999-2004"
+        runs = {}
+        for i, name in enumerate(TINNITUS_DEFINITIONS):
+            th = tinnitus_harmonized(df, name)
+            # RNG próprio por definição: não depende da ordem nem mexe no bloco original
+            a_p, s_p = asymmetry_and_severity(df, th, z, np.random.default_rng([RANDOM_STATE, 1, i]), era=era)
+            sub = df[old].reset_index(drop=True)
+            a_o, s_o = asymmetry_and_severity(sub, th[old], z[old], np.random.default_rng([RANDOM_STATE, 2, i]))
+            runs[name] = {
+                "pooled_5cycles_era_x_quintile": {
+                    "tinnitus_nonmissing_n": int(np.isfinite(th).sum()),
+                    "asymmetry_tail_test": a_p, "severity_gradient_test": s_p,
+                    "verdict": decide_verdict(int(np.isfinite(th).sum()), s_p)},
+                "era_1999_2004_only": {
+                    "tinnitus_nonmissing_n": int(np.isfinite(th[old]).sum()),
+                    "asymmetry_tail_test": a_o, "severity_gradient_test": s_o,
+                    "verdict": decide_verdict(int(np.isfinite(th[old]).sum()), s_o)},
+            }
+        harmonized["crossed"] = runs
+        harmonized["primary_definition"] = "monthly"
 
     out = {
         "script": "34_tinnitus_reexamination.py",
@@ -273,6 +366,7 @@ def main() -> None:
         "asymmetry_tail_test": asym,
         "severity_gradient_test": sev,
         "verdict": verdict,
+        "harmonized_tinnitus_1999_2004": harmonized,
         "lib_versions": lib_versions(),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -280,8 +374,9 @@ def main() -> None:
 
     print(f"cohort N={len(thr)}  tinnitus non-missing={n_nonmissing}  "
           f"overall rate={out['tinnitus_overall_rate']}")
-    print(f"cluster-based: minority {cluster_based['minority']['rate']} "
-          f"vs dominant {cluster_based['dominant']['rate']} (noise {cluster_based['noise']['rate']})")
+    if sizes:
+        print(f"cluster-based: minority {cluster_based['minority']['rate']} "
+              f"vs dominant {cluster_based['dominant']['rate']} (noise {cluster_based['noise']['rate']})")
     for k, v in asym.items():
         print(f"  {k}: tail rate={v['tail']['rate']} body rate={v['body']['rate']} "
               f"ratio={v['rate_ratio_tail_over_body']} fisher_p={v['fisher_p_greater']:.4g} "
@@ -293,6 +388,18 @@ def main() -> None:
         print(f"  asymmetry severity-ADJUSTED (Mantel-Haenszel): OR={mh['mh_or']} "
               f"CI95={mh['ci95']} chi2_p={mh['chi2_p']}")
     print(f"VERDICT: {verdict}")
+    for name, d in harmonized["descriptive"].items():
+        if name == "note":
+            continue
+        e = d["by_era"]
+        print(f"  harmonized[{name}] prevalence by era (weighted): "
+              + ", ".join(f"{k}={v['rate_weighted']:.4f} (n={v['n']})" for k, v in e.items()))
+    if args.unblind_harmonized:
+        for name, r in harmonized["crossed"].items():
+            print(f"  UNBLINDED[{name}] pooled: {r['pooled_5cycles_era_x_quintile']['verdict']} | "
+                  f"1999-2004 only: {r['era_1999_2004_only']['verdict']}")
+    else:
+        print("  (zumbido 1999-2004 NÃO cruzado com audiograma; use --unblind-harmonized após congelar)")
     print(f"Output: {OUT}")
 
 
