@@ -2,6 +2,10 @@
 """
 Nome: 23_session5_tinnitus_clusters.py
 Tarefa: Cruzar tinnitus AUQ191 com os clusters da Sessão 4.
+Nota (nov/2026): de propósito NÃO estendido para o zumbido de 1999-2004 (AUQ190+AUQ200).
+      Cruzar cluster x zumbido nessa era é olhar o mesmo desfecho da replicação travada
+      em 34 --unblind-harmonized (lockbox_v1: R1_TINNITUS_CONSTRUCT_HARMONIZATION).
+      Script legado (cluster rebaixado a cauda de contínuo); a unidade defensável vive no 34.
 Input: outputs/json/session4_assignments_any25.csv, data/processed/frequencia_feature_matrix_v1.csv
 Output: outputs/json/23_tinnitus_clusters.json
 """

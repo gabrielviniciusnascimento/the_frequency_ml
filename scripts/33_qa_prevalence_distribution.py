@@ -38,18 +38,11 @@ import hdbscan
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _shape_space import load_cohort, shape_embed, lib_versions, FREQ_COLS_14
+from _nhanes_survey import REQUIRED_WEIGHT_COLS, build_5cycle_aux_weight  # noqa: E402
 
 RANDOM_STATE = 42
 HDBSCAN_MCS = 10
 HDBSCAN_MS = 5
-REQUIRED_WEIGHT_COLS = ("WTSAU4YR", "WTSAU2YR", "WTMEC2YR")
-POOLING_SPEC_5CYCLES = {
-    "1999-2000": ("WTSAU4YR", 2.0 / 5.0),
-    "2001-2002": ("WTSAU4YR", 2.0 / 5.0),
-    "2003-2004": ("WTSAU2YR", 1.0 / 5.0),
-    "2011-2012": ("WTMEC2YR", 1.0 / 5.0),
-    "2015-2016": ("WTMEC2YR", 1.0 / 5.0),
-}
 OUTPUT = ROOT / "outputs" / "json" / "33_qa_prevalence_distribution.json"
 LOG = ROOT / "outputs" / "logs" / "33_qa_prevalence_distribution.log"
 
@@ -60,21 +53,6 @@ logging.basicConfig(
     handlers=[logging.FileHandler(LOG, encoding="utf-8"), logging.StreamHandler()],
 )
 log = logging.getLogger(__name__)
-
-
-def build_5cycle_aux_weight(df) -> np.ndarray:
-    """Constrói o peso composto NCHS para os 5 ciclos de audiometria 20-69 anos."""
-    cycles = df["cycle"].astype(str)
-    unknown = sorted(set(cycles.unique()) - set(POOLING_SPEC_5CYCLES))
-    if unknown:
-        raise ValueError(f"Ciclos fora da especificação 20-69 de 5 ciclos: {unknown}")
-    w = np.zeros(len(df), dtype=np.float64)
-    for cyc, (col, factor) in POOLING_SPEC_5CYCLES.items():
-        mask = (cycles == cyc).to_numpy()
-        if mask.any():
-            vals = df.loc[mask, col].astype(float).fillna(0.0).to_numpy()
-            w[mask] = vals * factor
-    return w
 
 
 def weighted_prevalence(df, labels):
